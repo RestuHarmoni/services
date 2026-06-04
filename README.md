@@ -14,4 +14,4 @@ Fail utama:
 Nota:
 - Service worker sudah dibump ke `rh-services-v2.2.0` supaya browser refresh cache.
 - Fokus website: RH Website Factory untuk SME servis Malaysia.
-- Primary CTA: WhatsApp +60 18-461 1625.
+- Primary butang tindakan: WhatsApp +60 18-461 1625.
