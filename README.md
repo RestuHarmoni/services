@@ -1,20 +1,15 @@
-# Services Restu Harmoni v1.00
+# Services RestuHarmoni v2.00 Premium
 
-Single-page premium sales website for services.restuharmoni.com.
+Production-ready static landing page for services.restuharmoni.com.
 
-## Stack
-- HTML
-- CSS
-- JavaScript
-- Google Fonts: Montserrat + Inter
+## Files
+- index.html
+- style.css
+- app.js
+- assets/rh-logo.png
 
-## Brand Direction
-- Modern Premium Service Brand
-- Dark Navy + Gold Accent
-- Conversion-focused WhatsApp lead funnel
+## Deploy
+Upload all files to the `rh-services` GitHub repository root, then deploy with Cloudflare Pages.
 
-## To Edit
-1. Replace all WhatsApp numbers `60123456789` with official RH WhatsApp.
-2. Replace `hello@restuharmoni.com` with official email.
-3. Replace portfolio demo cards with real preview URLs later.
-4. Deploy to GitHub Pages or Cloudflare Pages.
+## Important
+Replace WhatsApp placeholder number `60123456789` with the official Restu Harmoni WhatsApp number before production launch.

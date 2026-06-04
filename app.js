@@ -1,24 +1,12 @@
-const menuToggle = document.querySelector('.rh-menu-toggle');
-const navMenu = document.querySelector('.rh-nav-menu');
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
 
-if (menuToggle && navMenu) {
+if (menuToggle && navLinks) {
   menuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
+    navLinks.classList.toggle('open');
   });
 
-  navMenu.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => navMenu.classList.remove('active'));
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
   });
 }
-
-const revealItems = document.querySelectorAll('section, article');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('rh-visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.1 });
-
-revealItems.forEach((item) => observer.observe(item));

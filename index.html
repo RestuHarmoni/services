@@ -3,171 +3,278 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Restu Harmoni Digital Solutions | Website, AI & Automation</title>
-  <meta name="description" content="Restu Harmoni Digital Solutions membantu SME Malaysia membina website profesional, AI automation dan sistem digital moden." />
+  <title>Restu Harmoni Digital Solutions | Website Untuk Bisnes Servis</title>
+  <meta name="description" content="Website profesional untuk bisnes servis di Malaysia. Sesuai untuk aircond, plumbing, renovation, kontraktor, homestay dan SME." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="rh-navbar">
-    <a href="#home" class="rh-logo"><span>RH</span> Restu Harmoni</a>
-    <button class="rh-menu-toggle" aria-label="Open menu">☰</button>
-    <nav class="rh-nav-menu">
+  <header class="site-header">
+    <nav class="nav-shell">
+      <a href="#home" class="brand">
+        <img src="assets/rh-logo.png" alt="Restu Harmoni Logo" onerror="this.style.display='none'">
+        <span>
+          <strong>RESTU HARMONI</strong>
+          <small>Digital Solutions</small>
+        </span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Buka menu">☰</button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#process">Process</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a class="nav-cta" href="https://wa.me/60123456789?text=Saya%20berminat%20dengan%20servis%20website%20Restu%20Harmoni">WhatsApp Kami</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Website • AI • Automation</p>
+          <h1>Website Profesional Yang Membantu Bisnes Servis Mendapatkan Lebih Ramai Pelanggan</h1>
+          <p class="hero-text">
+            Direka khas untuk bisnes servis di Malaysia yang mahu meningkatkan kepercayaan pelanggan, nampak lebih profesional dan menjana lebih banyak pertanyaan melalui WhatsApp.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-gold" href="https://wa.me/60123456789?text=Saya%20nak%20website%20untuk%20bisnes%20saya">WhatsApp Kami</a>
+            <a class="btn btn-outline" href="#portfolio">Lihat Portfolio</a>
+          </div>
+          <div class="hero-trust">
+            <span>✓ Mobile Friendly</span>
+            <span>✓ Domain & Hosting</span>
+            <span>✓ Siap 3–7 Hari</span>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Business service website visual">
+          <div class="visual-card">
+            <div class="visual-image"></div>
+            <div class="visual-badge">Premium Service Website</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="floating-services" id="services">
+        <article>
+          <span>01</span>
+          <h3>Website Bisnes Servis</h3>
+          <p>Aircond, plumbing, electrical, cleaning dan kontraktor.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Website Korporat</h3>
+          <p>Untuk SME, syarikat dan bisnes yang mahu nampak profesional.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Website Homestay</h3>
+          <p>Galeri, lokasi, fasiliti dan WhatsApp booking.</p>
+        </article>
+        <article>
+          <span>04</span>
+          <h3>Digital Solutions</h3>
+          <p>Automation, lead form dan sistem digital ringkas.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section why">
+      <div class="section-heading">
+        <p class="eyebrow dark">Kenapa Pilih RH</p>
+        <h2>Bukan sekadar website. Kami bina aset digital yang bantu pelanggan percaya.</h2>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>Nampak Lebih Profesional</h3>
+          <p>Website direka supaya bisnes anda kelihatan lebih dipercayai dan tersusun.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Mudah Dihubungi</h3>
+          <p>CTA WhatsApp jelas supaya prospek boleh terus hubungi anda tanpa pening.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Mobile Friendly</h3>
+          <p>Layout mesra telefon kerana kebanyakan pelanggan melihat melalui mobile.</p>
+        </div>
+        <div class="feature-card">
+          <h3>AI Assisted Workflow</h3>
+          <p>Content, struktur dan FAQ boleh disiapkan lebih cepat dengan bantuan AI.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section portfolio" id="portfolio">
+      <div class="section-heading left">
+        <p class="eyebrow dark">Portfolio Demo</p>
+        <h2>Contoh website yang sesuai untuk pasaran SME servis Malaysia.</h2>
+      </div>
+
+      <div class="portfolio-layout">
+        <article class="project-card featured">
+          <div class="project-image aircond"></div>
+          <div>
+            <span class="tag">Service Website</span>
+            <h3>CoolTech Aircond Services</h3>
+            <p>Website untuk servis cuci, repair, pemasangan dan gas topup aircond.</p>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-image renovation"></div>
+          <div>
+            <span class="tag">Contractor Website</span>
+            <h3>ProBuild Renovation</h3>
+            <p>Website premium untuk renovation, repair rumah dan kontraktor.</p>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-image homestay"></div>
+          <div>
+            <span class="tag">Booking Website</span>
+            <h3>StayNest Homestay</h3>
+            <p>Website untuk homestay, chalet, villa dan tempahan melalui WhatsApp.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section process" id="process">
+      <div class="section-heading">
+        <p class="eyebrow dark">Proses Kerja</p>
+        <h2>Dari idea ke website live dengan proses yang ringkas.</h2>
+      </div>
+      <div class="process-grid">
+        <div><span>01</span><h3>Consultation</h3><p>Kami fahamkan bisnes, servis dan objektif anda.</p></div>
+        <div><span>02</span><h3>Content Collection</h3><p>Hantar nama bisnes, servis, lokasi, logo dan gambar.</p></div>
+        <div><span>03</span><h3>Development</h3><p>Website dibina menggunakan framework RH yang premium.</p></div>
+        <div><span>04</span><h3>Launch</h3><p>Domain, hosting, SSL dan link WhatsApp disediakan.</p></div>
+      </div>
+    </section>
+
+    <section class="section pricing" id="pricing">
+      <div class="section-heading">
+        <p class="eyebrow dark">Pakej Website</p>
+        <h2>Pilih pakej mengikut tahap keperluan bisnes anda.</h2>
+      </div>
+
+      <div class="pricing-grid">
+        <article class="price-card">
+          <h3>Starter</h3>
+          <p class="price">RM699</p>
+          <ul>
+            <li>1 landing page</li>
+            <li>Domain & hosting 1 tahun</li>
+            <li>WhatsApp button</li>
+            <li>Mobile responsive</li>
+          </ul>
+          <a class="btn btn-dark" href="https://wa.me/60123456789?text=Saya%20berminat%20dengan%20pakej%20Starter%20RM699">Pilih Starter</a>
+        </article>
+
+        <article class="price-card popular">
+          <div class="popular-label">Popular</div>
+          <h3>Business</h3>
+          <p class="price">RM1,299</p>
+          <ul>
+            <li>Multi-section website</li>
+            <li>Portfolio / gallery</li>
+            <li>Google Map</li>
+            <li>SEO basic</li>
+            <li>Domain & hosting 1 tahun</li>
+          </ul>
+          <a class="btn btn-gold" href="https://wa.me/60123456789?text=Saya%20berminat%20dengan%20pakej%20Business%20RM1299">Pilih Business</a>
+        </article>
+
+        <article class="price-card">
+          <h3>Premium</h3>
+          <p class="price">RM1,999</p>
+          <ul>
+            <li>Business package</li>
+            <li>AI-assisted content</li>
+            <li>Advanced lead section</li>
+            <li>Priority support</li>
+            <li>Premium visual polish</li>
+          </ul>
+          <a class="btn btn-dark" href="https://wa.me/60123456789?text=Saya%20berminat%20dengan%20pakej%20Premium%20RM1999">Pilih Premium</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section faq" id="faq">
+      <div class="section-heading left">
+        <p class="eyebrow dark">FAQ</p>
+        <h2>Soalan biasa sebelum mula.</h2>
+      </div>
+
+      <div class="faq-list">
+        <details>
+          <summary>Berapa lama website siap?</summary>
+          <p>Biasanya 3–7 hari bekerja bergantung kepada pakej dan kelengkapan bahan daripada client.</p>
+        </details>
+        <details>
+          <summary>Domain dan hosting termasuk?</summary>
+          <p>Ya, pakej termasuk domain, hosting dan SSL untuk tahun pertama.</p>
+        </details>
+        <details>
+          <summary>Adakah saya perlu sediakan content penuh?</summary>
+          <p>Tidak semestinya. Anda hanya perlu beri maklumat asas, selebihnya kami boleh bantu susun dan kemaskan.</p>
+        </details>
+        <details>
+          <summary>Boleh update website kemudian?</summary>
+          <p>Boleh. Update kecil boleh dibuat melalui request WhatsApp atau pakej maintenance.</p>
+        </details>
+        <details>
+          <summary>Website boleh terus sambung ke WhatsApp?</summary>
+          <p>Ya. Semua CTA utama boleh diarahkan terus ke WhatsApp bisnes anda.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="final-cta" id="contact">
+      <div>
+        <p class="eyebrow">Ready To Grow</p>
+        <h2>Bersedia Untuk Meningkatkan Imej Profesional Bisnes Anda?</h2>
+        <p>Hubungi kami dan kami akan bantu pilih struktur website yang sesuai untuk bisnes anda.</p>
+      </div>
+      <a class="btn btn-gold" href="https://wa.me/60123456789?text=Saya%20nak%20tahu%20pakej%20website%20Restu%20Harmoni">WhatsApp Kami</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <a href="#home" class="brand footer-brand">
+        <img src="assets/rh-logo.png" alt="Restu Harmoni Logo" onerror="this.style.display='none'">
+        <span>
+          <strong>RESTU HARMONI</strong>
+          <small>Digital Solutions</small>
+        </span>
+      </a>
+      <p>Digital solutions for modern businesses.</p>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>hello@restuharmoni.com</p>
+      <p>sales@restuharmoni.com</p>
+      <p>support@restuharmoni.com</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
       <a href="#services">Services</a>
       <a href="#portfolio">Portfolio</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
-      <a href="#contact">Contact</a>
-      <a class="rh-nav-cta" href="https://wa.me/60123456789?text=Hi%20Restu%20Harmoni%2C%20saya%20berminat%20nak%20bina%20website%20bisnes." target="_blank" rel="noopener">WhatsApp Kami</a>
-    </nav>
-  </header>
-
-  <main>
-    <section id="home" class="rh-hero">
-      <div class="rh-hero-content">
-        <p class="rh-eyebrow">Website • AI • Automation</p>
-        <h1>Website Profesional Yang Membantu Perniagaan Anda Mendapatkan Lebih Ramai Pelanggan</h1>
-        <p class="rh-hero-text">Kami membantu SME Malaysia membina kehadiran digital yang profesional melalui website moden, automasi AI dan sistem digital yang mudah digunakan.</p>
-        <div class="rh-hero-actions">
-          <a class="rh-btn rh-btn-primary" href="https://wa.me/60123456789?text=Hi%20Restu%20Harmoni%2C%20saya%20berminat%20dengan%20pakej%20website." target="_blank" rel="noopener">WhatsApp Kami</a>
-          <a class="rh-btn rh-btn-secondary" href="#portfolio">Lihat Portfolio</a>
-        </div>
-      </div>
-      <div class="rh-hero-visual">
-        <div class="rh-visual-card main-card">
-          <div class="rh-browser-bar"><span></span><span></span><span></span></div>
-          <div class="rh-preview-hero"></div>
-          <div class="rh-preview-lines"><i></i><i></i><i></i></div>
-        </div>
-        <div class="rh-mini-card top">Fast Delivery<br><strong>3–7 Hari</strong></div>
-        <div class="rh-mini-card bottom">Lead Funnel<br><strong>WhatsApp Ready</strong></div>
-      </div>
-    </section>
-
-    <section id="services" class="rh-floating-services">
-      <article><span>01</span><h3>Website Development</h3><p>Landing page, company profile dan website SME yang nampak premium.</p></article>
-      <article><span>02</span><h3>AI Solutions</h3><p>AI assistant, FAQ bot dan customer support ringkas untuk website.</p></article>
-      <article><span>03</span><h3>Business Automation</h3><p>Lead form, Google Sheet, Telegram alert dan workflow automasi.</p></article>
-      <article><span>04</span><h3>Custom Systems</h3><p>Dashboard, sistem tempahan dan management system mengikut keperluan.</p></article>
-    </section>
-
-    <section class="rh-section rh-why">
-      <div class="rh-section-head">
-        <p class="rh-eyebrow dark">Why Choose RH</p>
-        <h2>Direka Untuk Bisnes Yang Mahu Nampak Lebih Profesional</h2>
-      </div>
-      <div class="rh-grid-4">
-        <article><h3>Premium Look</h3><p>Design moden yang membina kepercayaan pelanggan.</p></article>
-        <article><h3>Fast Delivery</h3><p>Proses template + AI content untuk delivery lebih pantas.</p></article>
-        <article><h3>SME Friendly</h3><p>Sesuai untuk aircond, renovation, contractor, homestay dan servis tempatan.</p></article>
-        <article><h3>Conversion Focus</h3><p>Setiap section disusun untuk membawa pelawat ke WhatsApp.</p></article>
-      </div>
-    </section>
-
-    <section id="portfolio" class="rh-section rh-portfolio">
-      <div class="rh-section-head">
-        <p class="rh-eyebrow dark">Portfolio Demo</p>
-        <h2>Contoh Website Yang Boleh Dibina Untuk Bisnes Anda</h2>
-      </div>
-      <div class="rh-portfolio-grid">
-        <article>
-          <div class="rh-project-img aircond"></div>
-          <div><h3>CoolTech Aircond Services</h3><p>Demo website untuk servis cuci, repair dan pemasangan aircond.</p></div>
-        </article>
-        <article>
-          <div class="rh-project-img renovation"></div>
-          <div><h3>ProBuild Renovation</h3><p>Demo website untuk renovation, contractor dan kerja ubah suai.</p></div>
-        </article>
-        <article>
-          <div class="rh-project-img homestay"></div>
-          <div><h3>StayNest Homestay</h3><p>Demo website untuk homestay, chalet dan booking lead.</p></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="rh-section rh-process">
-      <div class="rh-section-head">
-        <p class="rh-eyebrow dark">Process</p>
-        <h2>Proses Mudah Dari Idea Ke Website Live</h2>
-      </div>
-      <div class="rh-steps">
-        <article><span>1</span><h3>Consultation</h3><p>Kami semak jenis bisnes, objektif dan pakej sesuai.</p></article>
-        <article><span>2</span><h3>Planning</h3><p>Maklumat client disusun mengikut RH Website Framework.</p></article>
-        <article><span>3</span><h3>Development</h3><p>Website dibina menggunakan template premium dan content AI.</p></article>
-        <article><span>4</span><h3>Launch</h3><p>Website dipublish dengan domain, hosting, SSL dan WhatsApp CTA.</p></article>
-      </div>
-    </section>
-
-    <section id="pricing" class="rh-section rh-pricing">
-      <div class="rh-section-head light">
-        <p class="rh-eyebrow">Pricing</p>
-        <h2>Pakej Website Untuk SME Malaysia</h2>
-      </div>
-      <div class="rh-pricing-grid">
-        <article class="rh-price-card">
-          <h3>Starter</h3><p class="price">RM699</p><p>Sesuai untuk bisnes baru.</p>
-          <ul><li>1 Landing Page</li><li>Domain + Hosting</li><li>SSL</li><li>WhatsApp Button</li></ul>
-          <a href="https://wa.me/60123456789?text=Saya%20berminat%20dengan%20pakej%20Starter%20RM699" target="_blank" rel="noopener">Pilih Starter</a>
-        </article>
-        <article class="rh-price-card featured">
-          <div class="badge">Popular</div>
-          <h3>Business</h3><p class="price">RM1,299</p><p>Untuk SME yang mahu nampak lebih profesional.</p>
-          <ul><li>Multi Section Website</li><li>Gallery + Google Map</li><li>SEO Basic</li><li>Content AI</li></ul>
-          <a href="https://wa.me/60123456789?text=Saya%20berminat%20dengan%20pakej%20Business%20RM1299" target="_blank" rel="noopener">Pilih Business</a>
-        </article>
-        <article class="rh-price-card">
-          <h3>Premium</h3><p class="price">RM1,999</p><p>Website premium dengan AI assistant.</p>
-          <ul><li>Business Package</li><li>AI Assistant</li><li>Advanced Lead Form</li><li>Priority Support</li></ul>
-          <a href="https://wa.me/60123456789?text=Saya%20berminat%20dengan%20pakej%20Premium%20RM1999" target="_blank" rel="noopener">Pilih Premium</a>
-        </article>
-      </div>
-    </section>
-
-    <section id="faq" class="rh-section rh-faq">
-      <div class="rh-section-head">
-        <p class="rh-eyebrow dark">FAQ</p>
-        <h2>Soalan Lazim</h2>
-      </div>
-      <div class="rh-faq-list">
-        <details><summary>Berapa lama website boleh siap?</summary><p>Anggaran 3–7 hari bekerja bergantung kepada pakej dan kelengkapan maklumat client.</p></details>
-        <details><summary>Domain dan hosting termasuk?</summary><p>Ya, pakej utama termasuk domain, hosting dan SSL untuk tahun pertama.</p></details>
-        <details><summary>Adakah saya perlu sediakan semua content?</summary><p>Tidak. Client hanya beri maklumat asas, selebihnya boleh dibantu menggunakan AI content workflow RH.</p></details>
-        <details><summary>Boleh update website selepas siap?</summary><p>Ya, update minor boleh dibuat melalui support RH mengikut pakej atau caj update.</p></details>
-      </div>
-    </section>
-
-    <section id="contact" class="rh-final-cta">
-      <div>
-        <p class="rh-eyebrow">Ready To Start?</p>
-        <h2>Jadikan Bisnes Anda Lebih Mudah Ditemui Dan Dihubungi Pelanggan</h2>
-        <p>Hubungi Restu Harmoni hari ini dan kami bantu cadangkan pakej yang sesuai.</p>
-      </div>
-      <a class="rh-btn rh-btn-primary" href="https://wa.me/60123456789?text=Hi%20Restu%20Harmoni%2C%20saya%20nak%20mula%20bina%20website." target="_blank" rel="noopener">Mula Sekarang</a>
-    </section>
-  </main>
-
-  <footer class="rh-footer">
-    <div>
-      <h3>Restu Harmoni Digital Solutions</h3>
-      <p>Digital Solutions For Modern Businesses.</p>
     </div>
-    <div>
-      <h4>Services</h4>
-      <a href="#services">Website Development</a>
-      <a href="#services">AI Solutions</a>
-      <a href="#services">Business Automation</a>
-    </div>
-    <div>
-      <h4>Contact</h4>
-      <a href="https://wa.me/60123456789" target="_blank" rel="noopener">WhatsApp</a>
-      <a href="mailto:hello@restuharmoni.com">hello@restuharmoni.com</a>
-    </div>
-    <p class="rh-signature">Powered by Restu Harmoni Digital Solutions</p>
+    <div class="footer-bottom">Powered by Restu Harmoni Digital Solutions</div>
   </footer>
 
-  <a class="rh-whatsapp-float" href="https://wa.me/60123456789?text=Hi%20Restu%20Harmoni%2C%20saya%20berminat%20nak%20bina%20website." target="_blank" rel="noopener">WhatsApp</a>
+  <a class="whatsapp-float" href="https://wa.me/60123456789?text=Saya%20nak%20website%20untuk%20bisnes%20saya" aria-label="WhatsApp Restu Harmoni">WhatsApp</a>
 
   <script src="app.js"></script>
 </body>
