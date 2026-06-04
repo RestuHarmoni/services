@@ -19,3 +19,15 @@ Cloudflare Pages setting:
 ## Contact
 WhatsApp: +60 18-461 1625
 Email: sales@restuharmoni.com
+
+
+## Service Worker
+Included:
+- sw.js
+- version.js
+
+Current version: 2.1.1
+
+When updating files, bump version in:
+- version.js
+- sw.js cache name
