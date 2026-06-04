@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<defs>
+  <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+    <stop offset="0%" stop-color="#1d4ed8"/>
+    <stop offset="100%" stop-color="#0f172a"/>
+  </linearGradient>
+  <linearGradient id="hijab" x1="0" x2="1" y1="0" y2="1">
+    <stop offset="0%" stop-color="#facc15"/>
+    <stop offset="100%" stop-color="#f97316"/>
+  </linearGradient>
+</defs>
+<rect width="512" height="512" rx="128" fill="url(#bg)"/>
+<circle cx="256" cy="238" r="132" fill="url(#hijab)"/>
+<path d="M146 384c18-88 58-135 110-135s92 47 110 135c-61 42-159 42-220 0z" fill="#f8fafc"/>
+<ellipse cx="256" cy="236" rx="78" ry="88" fill="#f6d2b8"/>
+<path d="M170 236c18-100 76-150 169-95 27 24 40 55 43 95-45-38-95-57-151-57-25 0-45 19-61 57z" fill="#78350f" opacity=".35"/>
+<circle cx="226" cy="246" r="9" fill="#0f172a"/>
+<circle cx="286" cy="246" r="9" fill="#0f172a"/>
+<path d="M230 292c18 18 42 18 60 0" fill="none" stroke="#0f172a" stroke-width="10" stroke-linecap="round"/>
+<circle cx="360" cy="150" r="34" fill="#22c55e"/>
+<path d="M344 150l10 10 22-25" fill="none" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="256" y="462" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="800" fill="#fff">Aira</text>
+</svg>

@@ -1,4 +1,4 @@
-const RH_CACHE_NAME = 'services-restu-harmoni-v3.3.0';
+const RH_CACHE_NAME = 'services-restu-harmoni-v3.5.0';
 const RH_ASSETS=['./','./index.html',
   './templates/produk-online.html',
   './templates/corporate.html',
@@ -36,3 +36,11 @@ self.addEventListener('fetch',event=>{if(event.request.method!=='GET')return;eve
 ./templates/corporate.html
 ./templates/produk-online.html
 */
+
+/* RH_V3_4_FILES
+./assets/aira-avatar.webp
+./assets/aira-avatar.svg
+./assets/default-avatar.svg
+*/
+
+/* RH_V3_5_AIRA_LIVELY: CSS breathing avatar, online pulse, typing movement */
