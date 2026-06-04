@@ -1,6 +1,6 @@
 # Services Restu Harmoni - Deploy Package v2.2.0
 
-Deploy semua fail ini ke root domain `services.restuharmoni.com`.
+Deploy semua fail ini ke root domain ``.
 
 Fail utama:
 - index.html

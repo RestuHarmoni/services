@@ -55,10 +55,6 @@
 }
 </style>
 
-
-
-
-
 <style id="rh-v34-aira-popup-css">
 :root{
   --aira-navy:#0f172a;
@@ -219,10 +215,6 @@ body > #whatsappFloat{
   display:none!important;
 }
 </style>
-
-
-
-
 
 <style id="rh-v36-aira-scrolllock-css">
 body.rh-aira-open{
@@ -469,6 +461,85 @@ body.rh-aira-open .rh-aira-chat{
 }
 </style>
 
+
+<style id="rh-v38-launch-ready-css">
+/* Launch-ready cleanup */
+.rh-dev-note,
+.dev-note,
+.debug,
+.,
+.test-only,
+.version-badge,
+[data-dev],
+[data-debug]{
+  display:none!important;
+}
+.rh-v38-trust-strip{
+  padding:20px 0;
+  background:#ffffff;
+  border-bottom:1px solid #e2e8f0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+}
+.rh-v38-trust-inner{
+  width:min(1120px,92%);
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+.rh-v38-trust-item{
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:18px;
+  padding:14px 16px;
+  font-weight:900;
+  color:#0f172a;
+  text-align:center;
+}
+.rh-v38-final-cta{
+  padding:72px 0;
+  background:linear-gradient(135deg,#0f172a,#1d4ed8);
+  color:#fff;
+  text-align:center;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+}
+.rh-v38-final-cta .inner{
+  width:min(860px,92%);
+  margin:auto;
+}
+.rh-v38-final-cta h2{
+  font-size:clamp(30px,5vw,56px);
+  line-height:1;
+  letter-spacing:-.055em;
+  margin:0 0 14px;
+  color:#fff;
+}
+.rh-v38-final-cta p{
+  color:#dbeafe;
+  font-size:18px;
+  line-height:1.7;
+  margin:0 auto 24px;
+  max-width:720px;
+}
+.rh-v38-final-cta a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:#facc15;
+  color:#0f172a!important;
+  border-radius:999px;
+  padding:16px 24px;
+  font-weight:950;
+  text-decoration:none;
+}
+@media(max-width:760px){
+  .rh-v38-trust-inner{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .rh-v38-trust-inner{grid-template-columns:1fr}
+}
+</style>
+
 </head>
 <body>
 
@@ -487,12 +558,14 @@ body.rh-aira-open .rh-aira-chat{
   </div>
 </section>
 
-
-
-
-
-
-
+<section class="rh-v38-trust-strip" aria-label="Kelebihan website">
+  <div class="rh-v38-trust-inner">
+    <div class="rh-v38-trust-item">Siap 3–7 Hari</div>
+    <div class="rh-v38-trust-item">Mobile Responsive</div>
+    <div class="rh-v38-trust-item">WhatsApp Ready</div>
+    <div class="rh-v38-trust-item">SEO Basic</div>
+  </div>
+</section>
 
   <header class="site-header" id="top">
     <nav class="nav-shell" aria-label="Navigasi utama">
@@ -520,10 +593,10 @@ body.rh-aira-open .rh-aira-chat{
   <div class="rh-real-container">
     <div class="rh-real-copy">
       <p class="rh-real-eyebrow">CONTOH WEBSITE</p>
-      <h2>Nampak seperti website sebenar, bukan mockup kosong.</h2>
+      <h2>Nampak seperti website sebenar, bukan paparan kosong.</h2>
       <p>Auto slide 3 konsep website SME supaya prospek nampak sendiri bagaimana website mereka boleh kelihatan.</p>
     </div>
-    <div class="rh-slider-shell" aria-label="Contoh website auto slide">
+    <div class="rh-slider-shell" aria-label="Contoh website">
       <div class="rh-slider-track">
         <article class="rh-site-slide is-active"><div class="rh-browser-bar"><span></span><span></span><span></span><strong>warungkaksiti.my</strong></div><div class="rh-demo-page rh-food"><div class="rh-demo-badge">Kedai Makan</div><h3>Warung Kak Siti</h3><p>Masakan kampung panas-panas, menu harian dan tempahan terus melalui WhatsApp.</p><div class="rh-demo-buttons"><b>Lihat Menu</b><b>WhatsApp Tempahan</b></div><div class="rh-demo-stats"><span>4.9★ Review</span><span>Menu Harian</span><span>Google Map</span></div></div></article>
         <article class="rh-site-slide"><div class="rh-browser-bar"><span></span><span></span><span></span><strong>azhomestay.my</strong></div><div class="rh-demo-page rh-stay"><div class="rh-demo-badge">Homestay</div><h3>AZ Homestay Langkawi</h3><p>Galeri bilik, harga penginapan, lokasi dan semakan tarikh kosong melalui WhatsApp.</p><div class="rh-demo-buttons"><b>Lihat Bilik</b><b>Semak Tarikh</b></div><div class="rh-demo-stats"><span>2 Bilik</span><span>Family Friendly</span><span>Booking Ready</span></div></div></article>
@@ -531,11 +604,9 @@ body.rh-aira-open .rh-aira-chat{
       </div>
       <div class="rh-slider-dots"><i class="active"></i><i></i><i></i></div>
     </div>
-    <div class="rh-slider-cta"><a href="demo-generator.html" class="rh-demo-generator-btn">🚀 Cuba Dengan Nama Syarikat Anda</a></div>
+    <div class="rh-slider-cta"><a href="demo-generator.html" class="rh-demo-generator-btn">🚀 Lihat Contoh Dengan Nama Syarikat Anda</a></div>
   </div>
 </section>
-
-
 
     <section class="trust-bar container reveal" aria-label="Kelebihan utama">
       <div><strong>Malaysia Based</strong><span>Faham bisnes tempatan</span></div>
@@ -586,8 +657,6 @@ body.rh-aira-open .rh-aira-chat{
     </section>
 
     
-
-
 
 <section id="pricing" class="rh-v37-pricing-section">
   <div class="rh-v37-container">
@@ -672,7 +741,16 @@ body.rh-aira-open .rh-aira-chat{
     </section>
   </main>
 
-  <footer class="footer">
+  
+<section class="rh-v38-final-cta">
+  <div class="inner">
+    <h2>Sedia mula bina website bisnes anda?</h2>
+    <p>Gunakan Aira untuk dapatkan cadangan pakej dan contoh website yang sesuai dengan bisnes anda.</p>
+    <a href="#aira" id="rhV38AskAira">Tanya Aira Sekarang</a>
+  </div>
+</section>
+
+<footer class="footer">
     <div class="container footer-grid">
       <div><a class="brand footer-brand" href="#top"><img src="assets/rh-logo.png" alt="Logo Restu Harmoni" /><span><strong>RESTU HARMONI</strong><small>Digital Solutions</small></span></a><p>Website Development • AI Digital Solutions • Business Automation. Fokus awal: RH Website Factory untuk bisnes servis Malaysia.</p></div>
       <div><h4>Hubungi</h4><a href="mailto:"></a><a href="mailto:"></a><a href="https://wa.me/60184611625">+60 18-461 1625</a></div>
@@ -680,7 +758,7 @@ body.rh-aira-open .rh-aira-chat{
       <div><h4>Menu</h4><a href="#services">Servis</a><a href="#portfolio">Demo</a><a href="#pricing">Harga</a><a href="#faq">FAQ</a></div>
     </div>
     <div class="container footer-bottom">© <span id="year"></span> Restu Harmoni Digital Solutions. All rights reserved.</div>
-  </footer>
+  <div style="margin-top:12px">Email: <a href="mailto:sales@restuharmoni.com">sales@restuharmoni.com</a></div></footer>
   
   <script src="version.js"></script><script src="app.js"></script>
 
@@ -700,10 +778,6 @@ body.rh-aira-open .rh-aira-chat{
   setInterval(()=>show((current+1)%slides.length),3800);
 })();
 </script>
-
-
-
-
 
 <div class="rh-aira-toast" id="airaToast" role="dialog" aria-label="Aira greeting">
   <img src="assets/aira-avatar.webp" alt="Aira" onerror="this.onerror=null;this.src='assets/aira-avatar.svg';">
@@ -831,8 +905,8 @@ body.rh-aira-open .rh-aira-chat{
       wrap.appendChild(b);
     });
   }
-  function setInput(placeholder,onSubmit){
-    controls.innerHTML='<div class="rh-aira-input-row"><input id="airaInput" placeholder="'+placeholder+'"><button type="button">Hantar</button></div>';
+  function setInput(,onSubmit){
+    controls.innerHTML='<div class="rh-aira-input-row"><input id="airaInput" ="'++'"><button type="button">Hantar</button></div>';
     const input=controls.querySelector('input');
     const btn=controls.querySelector('button');
     const send=()=>{const val=input.value.trim(); if(!val){input.focus();return;} addMsg(val,'user'); onSubmit(val);};
@@ -868,16 +942,14 @@ body.rh-aira-open .rh-aira-chat{
     const waText=encodeURIComponent(`Hi Restu Harmoni.\n\nSaya telah menggunakan Aira.\n\nJenis Bisnes: ${data.business}\nNama Bisnes: ${data.company}\nTujuan Website: ${data.goal}\nCadangan Template: ${rec.template}\nPakej: ${packageName}\n\nSaya berminat untuk mendapatkan quotation.`);
     const wa=`https://wa.me/${phone}?text=${waText}`;
     const features=rec.features.map(f=>'✓ '+f).join('<br>');
-    typingThen(`<strong>Cadangan Aira</strong><br><br>Template: <strong>${rec.template}</strong><br>Pakej: <strong>${packageName}</strong><br><br>Sesuai untuk:<br>${features}<div class="rh-aira-result-actions"><a href="${demo}">🚀 Lihat Demo Saya</a><a class="rh-wa-icon" href="${wa}" target="_blank" rel="noopener">WhatsApp Sekarang</a></div>`,()=>{
+    typingThen(`<strong>Cadangan Aira</strong><br><br>Template: <strong>${rec.template}</strong><br>Pakej: <strong>${packageName}</strong><br><br>Sesuai untuk:<br>${features}<div class="rh-aira-result-actions"><a href="${demo}">🚀 Lihat Contoh Website Saya</a><a class="rh-wa-icon" href="${wa}" target="_blank" rel="noopener">WhatsApp Sekarang</a></div>`,()=>{
       setOptions(['Ulang semula'],()=>start());
     });
   }
 })();
 </script>
 
-<div style="position:absolute;left:-9999px">sales@restuharmoni.com</div>
-
-
+<div style="position:absolute;left:-9999px">sales@</div>
 
 <script id="rh-v37-pricing-js">
 (function(){
@@ -907,6 +979,21 @@ body.rh-aira-open .rh-aira-chat{
   document.querySelectorAll('a[href="#aira"]').forEach(a=>{
     a.addEventListener('click',function(e){
       const launcher=document.getElementById('airaLauncher');
+      if(launcher){
+        e.preventDefault();
+        launcher.click();
+      }
+    });
+  });
+})();
+</script>
+
+
+<script id="rh-v38-launch-ready-js">
+(function(){
+  document.querySelectorAll('a[href="#aira"], #rhV38AskAira').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var launcher=document.getElementById('airaLauncher');
       if(launcher){
         e.preventDefault();
         launcher.click();

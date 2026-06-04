@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Butik / Fashion Demo | Restu Harmoni</title>
-<meta name="description" content="Demo website Butik / Fashion oleh Restu Harmoni Digital Solutions.">
+<title>Butik / Fashion Contoh | Restu Harmoni</title>
+<meta name="description" content="Contoh website Butik / Fashion oleh Restu Harmoni Digital Solutions.">
 <style>
 :root{--accent:#be185d;--dark:#0f172a;--muted:#64748b;--soft:#f8fafc;--line:#e2e8f0}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:#0f172a;background:#fff}
@@ -32,12 +32,12 @@ section{padding:72px 0}.section-title{text-align:center;max-width:760px;margin:0
 <main>
 <section class="hero">
 <div class="container">
-<span class="badge">Demo Starter RM699 • Restu Harmoni Website Factory</span>
+<span class="badge">Website Starter RM699 • Restu Harmoni Website Factory</span>
 <h1><span data-company>Nama Syarikat Anda</span></h1>
 <p class="lead"><strong>Koleksi Fashion Eksklusif</strong><br>Website butik yang cantik untuk showcase koleksi, promosi dan order WhatsApp.</p>
 <div class="actions">
 <a class="btn primary" id="waTop" href="#">Saya Mahu Website Ini</a>
-<a class="btn ghost" href="../demo-generator.html">Cuba Nama Lain</a>
+<a class="btn ghost" href="../demo-generator.html">Cuba Nama Bisnes Lain</a>
 </div>
 <div class="trust">
 <div>Mobile Responsive</div><div>WhatsApp Ready</div><div>SEO Basic</div><div>Siap 3-7 Hari</div>
@@ -72,7 +72,7 @@ section{padding:72px 0}.section-title{text-align:center;max-width:760px;margin:0
 <div class="container">
 <div class="section-title">
 <h2>Pakej Starter RM699</h2>
-<p class="muted">Demo ini mewakili pakej basic. Untuk fungsi advance seperti booking system, payment, katalog besar, automation atau dashboard, kita bincang pakej Business/Premium.</p>
+<p class="muted">Contoh ini mewakili pakej basic. Untuk fungsi advance seperti booking system, payment, katalog besar, automation atau dashboard, kita bincang pakej Business/Premium.</p>
 </div>
 <div class="grid">
 <article class="card"><h3>Homepage</h3><p class="muted">Hero, servis, CTA dan trust section.</p></article>
@@ -102,9 +102,9 @@ const params = new URLSearchParams(location.search);
 const company = (params.get('company') || 'Nama Syarikat Anda').trim();
 const templateName = "Butik / Fashion";
 document.querySelectorAll('[data-company]').forEach(el => el.textContent = company);
-document.title = company + ' | Demo Website ' + templateName;
+document.title = company + ' | Contoh Website ' + templateName;
 const phone = '60184611625';
-const msg = encodeURIComponent(`Hi Restu Harmoni.\n\nSaya telah mencuba Demo Generator.\n\nNama Syarikat: ${company}\nTemplate: ${templateName}\nPakej: Starter RM699\n\nSaya berminat untuk buat website seperti demo ini.`);
+const msg = encodeURIComponent(`Hi Restu Harmoni.\n\nSaya telah mencuba Cadangan Website Percuma.\n\nNama Syarikat: ${company}\nTemplate: ${templateName}\nPakej: Starter RM699\n\nSaya berminat untuk buat website seperti demo ini.`);
 const wa = `https://wa.me/${phone}?text=${msg}`;
 document.getElementById('waTop').href = wa;
 document.getElementById('waFloat').href = wa;
