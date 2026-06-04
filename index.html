@@ -632,6 +632,43 @@ display:inline-flex!important;align-items:center!important;justify-content:cente
 @media(max-width:950px){.rh-v42-grid{grid-template-columns:1fr}.rh-v42-thumb{height:280px}}@media(max-width:560px){.rh-btn,.btn,.btn-primary,.btn-secondary,.rh-demo-generator-btn,.rh-v37-promo-cta,.rh-v37-price-card a,.rh-v38-final-cta a,.nav .cta,a.cta{width:100%;white-space:normal!important;text-align:center}}
 </style>
 
+
+<style id="rh-v44-demo-slider-css">
+.rh-v44-showcase{padding:86px 0;background:linear-gradient(180deg,#fff 0%,#f8fafc 100%);font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:#0f172a;overflow:hidden}
+.rh-v44-container{width:min(1120px,92%);margin:auto}
+.rh-v44-head{text-align:center;max-width:820px;margin:0 auto 34px}
+.rh-v44-eyebrow{font-size:13px;font-weight:950;letter-spacing:.16em;text-transform:uppercase;color:#b78300;margin:0 0 10px}
+.rh-v44-head h2{font-size:clamp(32px,5vw,58px);line-height:1;letter-spacing:-.06em;margin:0 0 14px}
+.rh-v44-head p{color:#64748b;font-size:18px;line-height:1.7;margin:0}
+.rh-v44-slider{position:relative;max-width:980px;margin:0 auto}
+.rh-v44-track{position:relative;min-height:610px}
+.rh-v44-slide{position:absolute;inset:0;opacity:0;transform:translateX(40px) scale(.985);transition:opacity .55s ease,transform .55s ease;pointer-events:none}
+.rh-v44-slide.active{opacity:1;transform:translateX(0) scale(1);pointer-events:auto}
+.rh-v44-card{background:#fff;border:1px solid #e2e8f0;border-radius:34px;overflow:hidden;box-shadow:0 28px 90px rgba(15,23,42,.14);display:grid;grid-template-columns:1.08fr .92fr;min-height:590px}
+.rh-v44-image{position:relative;background-size:cover;background-position:center;min-height:590px}
+.rh-v44-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,23,42,.04),rgba(15,23,42,.76))}
+.rh-v44-label{position:absolute;top:22px;left:22px;z-index:2;background:#facc15;color:#0f172a;border-radius:999px;padding:10px 14px;font-weight:950;font-size:13px;box-shadow:0 12px 30px rgba(15,23,42,.18)}
+.rh-v44-name{position:absolute;left:26px;right:26px;bottom:26px;z-index:2;color:#fff}
+.rh-v44-name span{display:inline-flex;background:rgba(255,255,255,.92);color:#0f172a;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:950;margin-bottom:12px}
+.rh-v44-name h3{font-size:clamp(36px,5vw,62px);line-height:.95;letter-spacing:-.06em;margin:0;color:#fff}
+.rh-v44-content{padding:34px;display:flex;flex-direction:column;justify-content:center;gap:18px}
+.rh-v44-content h4{font-size:clamp(28px,3.5vw,44px);line-height:1;letter-spacing:-.05em;margin:0}
+.rh-v44-content p{color:#64748b;line-height:1.65;font-size:17px;margin:0}
+.rh-v44-points{display:grid;gap:10px}
+.rh-v44-points div{background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:12px 14px;font-weight:850;color:#334155}
+.rh-v44-points div:before{content:"✓";color:#16a34a;font-weight:950;margin-right:8px}
+.rh-v44-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.rh-v44-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:14px 20px;border-radius:999px;text-decoration:none;font-weight:950}
+.rh-v44-actions a:first-child{background:#facc15;color:#0f172a}
+.rh-v44-actions a:last-child{background:#0f172a;color:#fff}
+.rh-v44-controls{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:22px}
+.rh-v44-controls button{width:44px;height:44px;border:0;border-radius:50%;background:#0f172a;color:#fff;font-size:20px;font-weight:950;cursor:pointer}
+.rh-v44-dots{display:flex;gap:8px}
+.rh-v44-dots i{width:10px;height:10px;border-radius:999px;background:#cbd5e1;display:block;transition:.2s}
+.rh-v44-dots i.active{width:30px;background:#0f172a}
+@media(max-width:850px){.rh-v44-track{min-height:760px}.rh-v44-card{grid-template-columns:1fr;min-height:740px}.rh-v44-image{min-height:330px}.rh-v44-content{padding:26px}.rh-v44-actions a{width:100%}}
+</style>
+
 </head>
 <body>
 
@@ -667,73 +704,91 @@ display:inline-flex!important;align-items:center!important;justify-content:cente
 
 
 
-    <section class="trust-bar container reveal" aria-label="Kelebihan utama">
-      <div><strong>Website Siap Dalam 3–7 Hari</strong><span>Proses pantas selepas bahan lengkap diterima.</span></div>
-      <div><strong>Sesuai Untuk Telefon & Tablet</strong><span>Paparan kemas untuk pelanggan yang melawat melalui telefon.</span></div>
-      <div><strong>Struktur Mesra Google</strong><span>Tajuk, susunan halaman dan kandungan asas lebih mudah difahami Google.</span></div>
-      <div><strong>Butang WhatsApp jelas</strong><span>Pelanggan boleh tekan butang dan terus hantar pertanyaan.</span></div>
-    </section>
+    
 
     
 
     
-<section id="contoh" class="rh-v42-showcase">
-  <div class="rh-v42-container">
-    <div class="rh-v42-head">
-      <p class="rh-v42-eyebrow">Website Siap Contoh</p>
-      <h2>Contoh website real untuk bisnes berbeza.</h2>
-      <p>Klik mana-mana contoh untuk buka page website sebenar yang sama digunakan oleh Cadangan Website Percuma.</p>
+
+
+
+<section id="contoh" class="rh-v44-showcase">
+  <div class="rh-v44-container">
+    <div class="rh-v44-head">
+      <p class="rh-v44-eyebrow">Contoh Website</p>
+      <h2>3 contoh website yang boleh terus dicuba.</h2>
+      <p>Setiap contoh di bawah ialah preview website sebenar. Klik untuk buka page penuh atau cuba dengan nama bisnes anda.</p>
     </div>
-    <div class="rh-v42-grid">
-      
-      <article class="rh-v42-card">
-        <div class="rh-v42-thumb" style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=80')">
-          <div class="rh-v42-mini">
+    <div class="rh-v44-slider">
+      <div class="rh-v44-track">
+    <article class="rh-v44-slide active">
+      <div class="rh-v44-card">
+        <div class="rh-v44-image" style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=80')">
+          <div class="rh-v44-label">Contoh Website</div>
+          <div class="rh-v44-name">
             <span>Kedai Makan</span>
             <h3>Warung Kak Siti</h3>
           </div>
         </div>
-        <div class="rh-v42-body">
-          <p>Masakan Kampung Panas-Panas Setiap Hari</p>
-          <div class="rh-v42-points"><div>Menu Harian</div><div>Tempahan Catering</div><div>Set Nasi Berlauk</div></div>
-          <div class="rh-v42-actions">
-            <a class="rh-btn rh-btn-primary" href="templates/kedai-makan.html?company=Warung%20Kak%20Siti">Lihat Website Ini</a>
+        <div class="rh-v44-content">
+          <h4>Masakan Kampung Panas-Panas Setiap Hari</h4>
+          <p>Menu harian, tempahan lauk dan catering kecil terus melalui WhatsApp.</p>
+          <div class="rh-v44-points"><div>Menu Harian</div><div>Tempahan Catering</div><div>Set Nasi Berlauk</div><div>Lokasi Google Maps</div></div>
+          <div class="rh-v44-actions">
+            <a href="templates/kedai-makan.html?company=Warung%20Kak%20Siti">Lihat Website Ini</a>
+            <a href="demo-generator.html">Cuba Nama Bisnes Saya</a>
           </div>
         </div>
-      </article>
+      </div>
+    </article>
     
-      <article class="rh-v42-card">
-        <div class="rh-v42-thumb" style="background-image:url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1400&q=80')">
-          <div class="rh-v42-mini">
+    <article class="rh-v44-slide ">
+      <div class="rh-v44-card">
+        <div class="rh-v44-image" style="background-image:url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1400&q=80')">
+          <div class="rh-v44-label">Contoh Website</div>
+          <div class="rh-v44-name">
             <span>Homestay</span>
             <h3>AZ Homestay Langkawi</h3>
           </div>
         </div>
-        <div class="rh-v42-body">
-          <p>Penginapan Selesa Untuk Keluarga</p>
-          <div class="rh-v42-points"><div>Galeri Bilik</div><div>Harga Penginapan</div><div>Kemudahan Keluarga</div></div>
-          <div class="rh-v42-actions">
-            <a class="rh-btn rh-btn-primary" href="templates/homestay.html?company=AZ%20Homestay%20Langkawi">Lihat Website Ini</a>
+        <div class="rh-v44-content">
+          <h4>Penginapan Selesa Untuk Keluarga</h4>
+          <p>Lihat bilik, kemudahan, lokasi dan semak tarikh kosong terus melalui WhatsApp.</p>
+          <div class="rh-v44-points"><div>Galeri Bilik</div><div>Harga Penginapan</div><div>Kemudahan Keluarga</div><div>Booking WhatsApp</div></div>
+          <div class="rh-v44-actions">
+            <a href="templates/homestay.html?company=AZ%20Homestay%20Langkawi">Lihat Website Ini</a>
+            <a href="demo-generator.html">Cuba Nama Bisnes Saya</a>
           </div>
         </div>
-      </article>
+      </div>
+    </article>
     
-      <article class="rh-v42-card">
-        <div class="rh-v42-thumb" style="background-image:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=80')">
-          <div class="rh-v42-mini">
+    <article class="rh-v44-slide ">
+      <div class="rh-v44-card">
+        <div class="rh-v44-image" style="background-image:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=80')">
+          <div class="rh-v44-label">Contoh Website</div>
+          <div class="rh-v44-name">
             <span>Kereta Sewa</span>
             <h3>Maju Car Rental</h3>
           </div>
         </div>
-        <div class="rh-v42-body">
-          <p>Kereta Sewa Harian & Bulanan</p>
-          <div class="rh-v42-points"><div>Kereta Ekonomi</div><div>MPV Keluarga</div><div>Pickup Airport</div></div>
-          <div class="rh-v42-actions">
-            <a class="rh-btn rh-btn-primary" href="templates/kereta-sewa.html?company=Maju%20Car%20Rental">Lihat Website Ini</a>
+        <div class="rh-v44-content">
+          <h4>Kereta Sewa Harian & Bulanan</h4>
+          <p>Pilih kereta, semak harga dan booking pickup melalui WhatsApp.</p>
+          <div class="rh-v44-points"><div>Kereta Ekonomi</div><div>MPV Keluarga</div><div>Pickup Airport</div><div>Sewa Harian/Bulanan</div></div>
+          <div class="rh-v44-actions">
+            <a href="templates/kereta-sewa.html?company=Maju%20Car%20Rental">Lihat Website Ini</a>
+            <a href="demo-generator.html">Cuba Nama Bisnes Saya</a>
           </div>
         </div>
-      </article>
-    
+      </div>
+    </article>
+    </div>
+      <div class="rh-v44-controls">
+        <button type="button" id="rhV44Prev" aria-label="Sebelum">‹</button>
+        <div class="rh-v44-dots"><i class="active"></i><i></i><i></i></div>
+        <button type="button" id="rhV44Next" aria-label="Seterusnya">›</button>
+      </div>
     </div>
   </div>
 </section>
@@ -812,7 +867,7 @@ display:inline-flex!important;align-items:center!important;justify-content:cente
         <ul class="rh-v37-list">
           <li>Website permulaan berasaskan template</li>
           <li>Paparan kemas di telefon</li>
-          <li>Butang WhatsApp jelas</li>
+          <li></li>
           <li>SEO asas</li>
           <li>Siap 3–7 hari bekerja</li>
         </ul>
@@ -959,7 +1014,7 @@ display:inline-flex!important;align-items:center!important;justify-content:cente
     'Renovation':{slug:'renovation',template:'Contractor Starter',features:['Portfolio projek','Servis utama','Quotation','bukti kepercayaan']},
     'Corporate':{slug:'corporate',template:'Company Profile Starter',features:['Profil syarikat','Servis utama','Portfolio','Contact page']},
     'Produk Online':{slug:'produk-online',template:'Produk Online Starter',features:['Produk pilihan','Harga & promosi','Testimoni','Order WhatsApp']},
-    'Lain-lain':{slug:'corporate',template:'Custom Starter',features:['Struktur basic','Butang WhatsApp jelas','Paparan kemas di telefon','SEO asas']}
+    'Lain-lain':{slug:'corporate',template:'Custom Starter',features:['Struktur basic','','Paparan kemas di telefon','SEO asas']}
   };
 
   function beep(){
@@ -1146,6 +1201,29 @@ display:inline-flex!important;align-items:center!important;justify-content:cente
     const showcaseP=document.querySelector('.rh-real-copy p'); if(showcaseP&&data.showcase.subtitle) showcaseP.textContent=data.showcase.subtitle;
   }
   loadSite();
+})();
+</script>
+
+
+<script id="rh-v44-demo-slider-js">
+(function(){
+  const slides=[...document.querySelectorAll('.rh-v44-slide')];
+  const dots=[...document.querySelectorAll('.rh-v44-dots i')];
+  if(!slides.length)return;
+  let current=0;
+  function show(i){
+    slides[current].classList.remove('active');
+    if(dots[current])dots[current].classList.remove('active');
+    current=(i+slides.length)%slides.length;
+    slides[current].classList.add('active');
+    if(dots[current])dots[current].classList.add('active');
+  }
+  const next=document.getElementById('rhV44Next');
+  const prev=document.getElementById('rhV44Prev');
+  if(next)next.onclick=()=>show(current+1);
+  if(prev)prev.onclick=()=>show(current-1);
+  dots.forEach((d,i)=>d.onclick=()=>show(i));
+  setInterval(()=>show(current+1),5200);
 })();
 </script>
 
