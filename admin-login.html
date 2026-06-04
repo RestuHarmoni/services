@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Login | Restu Harmoni</title>
+<style>
+body{margin:0;font-family:Inter,system-ui,Arial;background:linear-gradient(135deg,#0f172a,#1d4ed8);min-height:100vh;display:grid;place-items:center;color:#0f172a}.card{width:min(420px,92%);background:#fff;border-radius:28px;padding:28px;box-shadow:0 28px 90px rgba(0,0,0,.3)}h1{margin:0 0 10px;font-size:34px;letter-spacing:-.05em}p{color:#64748b}input,button{width:100%;padding:15px;border-radius:16px;border:1px solid #e2e8f0;font-size:16px;margin-top:10px}button{background:#2563eb;color:#fff;font-weight:900;cursor:pointer}.err{color:#dc2626;font-weight:800;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>Admin Restu Harmoni</h1>
+<p>Login untuk kemas kini promo, banner dan kandungan template demo.</p>
+<input id="user" placeholder="Username" autocomplete="username">
+<input id="pass" placeholder="Password" type="password" autocomplete="current-password">
+<button id="login">Login</button>
+<div class="err" id="err"></div>
+<p style="font-size:12px">Default: admin / RHadmin2026</p>
+</div>
+<script>
+document.getElementById('login').onclick=function(){
+ const u=document.getElementById('user').value.trim();
+ const p=document.getElementById('pass').value.trim();
+ if(u==='admin' && p==='RHadmin2026'){localStorage.setItem('rh_admin_auth','yes');location.href='admin.html'}
+ else document.getElementById('err').textContent='Login tidak sah.';
+}
+</script>
+</body></html>

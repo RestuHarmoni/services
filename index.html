@@ -632,14 +632,7 @@ footer a[href^="mailto"]{
   </div>
 </section>
 
-<section class="rh-v38-trust-strip" aria-label="Kelebihan website">
-  <div class="rh-v38-trust-inner">
-    <div class="rh-v38-trust-item">Siap 3–7 Hari</div>
-    <div class="rh-v38-trust-item">Mesra Telefon</div>
-    <div class="rh-v38-trust-item">WhatsApp Ready</div>
-    <div class="rh-v38-trust-item">SEO Asas</div>
-  </div>
-</section>
+
 
   <header class="site-header" id="top">
     <nav class="nav-shell" aria-label="Navigasi utama">
@@ -832,7 +825,7 @@ footer a[href^="mailto"]{
       <div><h4>Menu</h4><a href="#services">Servis</a><a href="#portfolio">Contoh</a><a href="#pricing">Harga</a><a href="#faq">FAQ</a></div>
     </div>
     <div class="container footer-bottom">© <span id="year"></span> Restu Harmoni Digital Solutions. All rights reserved.</div>
-  <div style="margin-top:12px">Email: <a href="mailto:sales@restuharmoni.com">sales@restuharmoni.com</a></div></footer>
+  <div style="margin-top:12px">Email: <a href="mailto:sales@restuharmoni.com">sales@restuharmoni.com</a></div><div style="margin-top:10px;font-size:12px;opacity:.55"><a href="admin-login.html" style="color:inherit">Admin</a></div></footer>
   
   <script src="version.js"></script><script src="app.js"></script>
 
@@ -1076,6 +1069,30 @@ footer a[href^="mailto"]{
       }
     });
   });
+})();
+</script>
+
+
+<script id="rh-v41-content-loader">
+(function(){
+  async function loadSite(){
+    let data=null;
+    try{
+      const local=localStorage.getItem('rh_site_content');
+      if(local) data=JSON.parse(local);
+    }catch(e){}
+    if(!data){
+      try{const res=await fetch('content/site-content.json',{cache:'no-store'}); if(res.ok)data=await res.json();}catch(e){}
+    }
+    if(!data)return;
+    const set=(sel,val)=>document.querySelectorAll(sel).forEach(el=>{if(val)el.textContent=val});
+    set('#promo-sale h3', data.promo.title);
+    const promoP=document.querySelector('#promo-sale p'); if(promoP&&data.promo.subtitle) promoP.textContent=data.promo.subtitle;
+    const promoCta=document.querySelector('#promo-sale a'); if(promoCta&&data.promo.cta) promoCta.textContent=data.promo.cta;
+    set('.rh-real-copy h2', data.showcase.title);
+    const showcaseP=document.querySelector('.rh-real-copy p'); if(showcaseP&&data.showcase.subtitle) showcaseP.textContent=data.showcase.subtitle;
+  }
+  loadSite();
 })();
 </script>
 

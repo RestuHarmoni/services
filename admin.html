@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Panel | Restu Harmoni</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial;background:#f8fafc;color:#0f172a}.top{position:sticky;top:0;background:#0f172a;color:#fff;z-index:10}.top .inner{width:min(1200px,94%);margin:auto;padding:16px 0;display:flex;justify-content:space-between;align-items:center}.wrap{width:min(1200px,94%);margin:28px auto;display:grid;grid-template-columns:280px 1fr;gap:20px}.side,.panel{background:#fff;border:1px solid #e2e8f0;border-radius:24px;box-shadow:0 18px 48px rgba(15,23,42,.06)}.side{padding:14px;height:max-content;position:sticky;top:80px}.side button{width:100%;text-align:left;background:#fff;border:0;border-radius:14px;padding:13px;font-weight:850;cursor:pointer}.side button.active{background:#dbeafe;color:#1d4ed8}.panel{padding:22px}h1,h2{letter-spacing:-.04em}label{display:block;font-weight:850;margin:14px 0 6px}input,textarea,select{width:100%;border:1px solid #e2e8f0;border-radius:14px;padding:12px;font-size:15px}textarea{min-height:86px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}button.primary,.btn{border:0;border-radius:14px;background:#2563eb;color:#fff;padding:12px 16px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-flex}.danger{background:#dc2626!important}.muted{color:#64748b}.preview{background:#f8fafc;border:1px dashed #cbd5e1;border-radius:18px;padding:14px;margin-top:12px}.service-row,.product-row{border:1px solid #e2e8f0;border-radius:16px;padding:12px;margin:10px 0;background:#fff}@media(max-width:900px){.wrap{grid-template-columns:1fr}.side{position:relative;top:0}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top"><div class="inner"><strong>RH Admin Panel</strong><div><a class="btn" href="index.html">Lihat Website</a> <button class="primary danger" id="logout">Logout</button></div></div></header>
+<div class="wrap">
+<aside class="side">
+<button data-tab="site" class="active">Services Page</button>
+<button data-tab="templates">Demo Templates</button>
+<button data-tab="export">Export / Backup</button>
+</aside>
+<main class="panel">
+<section id="tab-site">
+<h1>Edit Services Page</h1>
+<p class="muted">Kemas kini promo, banner dan maklumat asas website. Simpanan V1 menggunakan localStorage browser admin dahulu.</p>
+<div class="grid">
+<div><label>Promo Title</label><input id="promoTitle"></div>
+<div><label>Promo Subtitle</label><input id="promoSubtitle"></div>
+<div><label>Promo CTA</label><input id="promoCta"></div>
+<div><label>Countdown Jam</label><input id="promoHours" type="number"></div>
+<div><label>Hero Headline</label><input id="heroHeadline"></div>
+<div><label>Hero CTA</label><input id="heroCta"></div>
+</div>
+<label>Hero Subheadline</label><textarea id="heroSub"></textarea>
+<label>Showcase Title</label><input id="showcaseTitle">
+<label>Showcase Subtitle</label><textarea id="showcaseSubtitle"></textarea>
+<div class="actions"><button class="primary" id="saveSite">Simpan Services Page</button><button class="primary" id="resetSite">Reset Default</button></div>
+</section>
+
+<section id="tab-templates" style="display:none">
+<h1>Edit Demo Template</h1>
+<div class="grid"><div><label>Pilih Template</label><select id="tplSelect"></select></div><div><label>Warna Utama</label><input id="tplColor" type="color"></div></div>
+<div class="grid"><div><label>Nama Bisnes</label><input id="tplName"></div><div><label>Industri</label><input id="tplIndustry"></div></div>
+<label>Headline</label><input id="tplHeadline">
+<label>Subheadline</label><textarea id="tplSub"></textarea>
+<label>URL Gambar Hero / Service</label><input id="tplImage" placeholder="https://...">
+<div class="preview"><strong>Preview gambar:</strong><div id="imgPreview" style="margin-top:10px;height:190px;border-radius:16px;background:#e2e8f0;background-size:cover;background-position:center"></div></div>
+<label>Servis Utama (satu baris satu item)</label><textarea id="tplServices"></textarea>
+<label>Produk / Pakej (format: Tajuk | Harga | Description, satu baris satu item)</label><textarea id="tplProducts"></textarea>
+<label>Testimoni</label><textarea id="tplTestimonial"></textarea>
+<label>CTA Button</label><input id="tplCta">
+<div class="actions"><button class="primary" id="saveTpl">Simpan Template</button><a class="btn" id="previewTpl" target="_blank">Preview Template</a><button class="primary" id="resetTpl">Reset Template</button></div>
+</section>
+
+<section id="tab-export" style="display:none">
+<h1>Export / Backup</h1>
+<p class="muted">Untuk V1 static hosting, perubahan disimpan dalam browser admin. Copy JSON ini jika mahu saya masukkan semula ke source code sebagai default production.</p>
+<label>Site Content JSON</label><textarea id="exportSite" style="min-height:180px"></textarea>
+<label>Templates JSON</label><textarea id="exportTemplates" style="min-height:260px"></textarea>
+<div class="actions"><button class="primary" id="refreshExport">Refresh Export</button><button class="primary danger" id="clearAll">Clear Local Changes</button></div>
+</section>
+</main>
+</div>
+<script src="admin.js"></script>
+</body></html>
