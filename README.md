@@ -1,33 +1,17 @@
-# Services RestuHarmoni FINAL DEPLOY
+# Services Restu Harmoni - Deploy Package v2.2.0
 
-Final UI untuk deploy ke `services.restuharmoni.com`.
+Deploy semua fail ini ke root domain `services.restuharmoni.com`.
 
-## Deploy
-Upload semua isi folder ini ke GitHub repo `rh-services`.
-
-Cloudflare Pages setting:
-- Framework preset: None
-- Build command: kosong
-- Build output directory: /
-
-## Included
+Fail utama:
 - index.html
 - style.css
 - app.js
-- assets/rh-logo.png
-
-## Contact
-WhatsApp: +60 18-461 1625
-Email: sales@restuharmoni.com
-
-
-## Service Worker
-Included:
 - sw.js
 - version.js
+- manifest.webmanifest
+- assets/rh-logo.png
 
-Current version: 2.1.1
-
-When updating files, bump version in:
-- version.js
-- sw.js cache name
+Nota:
+- Service worker sudah dibump ke `rh-services-v2.2.0` supaya browser refresh cache.
+- Fokus website: RH Website Factory untuk SME servis Malaysia.
+- Primary CTA: WhatsApp +60 18-461 1625.

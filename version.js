@@ -1,2 +1,1 @@
-// Restu Harmoni Services Website Version
-const RH_APP_VERSION = "2.1.1";
+window.RH_SERVICES_VERSION = '2.2.0';
