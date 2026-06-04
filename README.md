@@ -1,15 +1,21 @@
-# Services RestuHarmoni v2.00 Premium
+# Services RestuHarmoni FINAL DEPLOY
 
-Production-ready static landing page for services.restuharmoni.com.
+Final UI untuk deploy ke `services.restuharmoni.com`.
 
-## Files
+## Deploy
+Upload semua isi folder ini ke GitHub repo `rh-services`.
+
+Cloudflare Pages setting:
+- Framework preset: None
+- Build command: kosong
+- Build output directory: /
+
+## Included
 - index.html
 - style.css
 - app.js
 - assets/rh-logo.png
 
-## Deploy
-Upload all files to the `rh-services` GitHub repository root, then deploy with Cloudflare Pages.
-
-## Important
-Replace WhatsApp placeholder number `60123456789` with the official Restu Harmoni WhatsApp number before production launch.
+## Contact
+WhatsApp: +60 18-461 1625
+Email: sales@restuharmoni.com
