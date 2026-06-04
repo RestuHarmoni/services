@@ -221,79 +221,7 @@ body > #whatsappFloat{
 </style>
 
 
-<style id="rh-v36-promo-css">
-.rh-promo-bar{
-  position:relative;
-  z-index:5;
-  background:linear-gradient(135deg,#0f172a,#1d4ed8 55%,#facc15);
-  color:#fff;
-  padding:16px 0;
-  font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;
-  box-shadow:0 18px 55px rgba(15,23,42,.18);
-}
-.rh-promo-inner{
-  width:min(1120px,92%);
-  margin:auto;
-  display:grid;
-  grid-template-columns:1fr auto auto;
-  gap:16px;
-  align-items:center;
-}
-.rh-promo-copy strong{
-  display:block;
-  font-size:clamp(18px,2.8vw,28px);
-  letter-spacing:-.03em;
-  line-height:1.1;
-}
-.rh-promo-copy span{
-  display:block;
-  color:#dbeafe;
-  margin-top:4px;
-  font-size:14px;
-}
-.rh-countdown{
-  display:flex;
-  gap:8px;
-}
-.rh-countdown div{
-  min-width:70px;
-  text-align:center;
-  background:rgba(255,255,255,.14);
-  border:1px solid rgba(255,255,255,.18);
-  border-radius:16px;
-  padding:10px 8px;
-}
-.rh-countdown b{
-  display:block;
-  font-size:24px;
-  line-height:1;
-}
-.rh-countdown small{
-  display:block;
-  color:#e2e8f0;
-  font-size:11px;
-  font-weight:800;
-  margin-top:4px;
-  text-transform:uppercase;
-}
-.rh-promo-cta{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  background:#facc15;
-  color:#0f172a;
-  border-radius:999px;
-  padding:13px 18px;
-  font-weight:950;
-  text-decoration:none;
-  white-space:nowrap;
-}
-@media(max-width:760px){
-  .rh-promo-inner{grid-template-columns:1fr;text-align:center}
-  .rh-countdown{justify-content:center}
-  .rh-promo-cta{width:100%}
-}
-</style>
+
 
 
 <style id="rh-v36-aira-scrolllock-css">
@@ -321,23 +249,247 @@ body.rh-aira-open .rh-aira-chat{
 }
 </style>
 
+
+<style id="rh-v37-pricing-css">
+.rh-v37-promo{
+  background:linear-gradient(135deg,#0f172a,#1d4ed8 55%,#facc15);
+  color:#fff;
+  padding:16px 0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+  position:relative;
+  z-index:8;
+  box-shadow:0 18px 55px rgba(15,23,42,.18);
+}
+.rh-v37-promo-inner{
+  width:min(1120px,92%);
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  gap:16px;
+  align-items:center;
+}
+.rh-v37-promo h3{
+  margin:0;
+  font-size:clamp(18px,2.8vw,28px);
+  letter-spacing:-.035em;
+  line-height:1.1;
+  color:#fff;
+}
+.rh-v37-promo p{
+  margin:5px 0 0;
+  color:#dbeafe;
+  font-size:14px;
+}
+.rh-v37-promo strong{
+  color:#facc15;
+}
+.rh-v37-countdown{
+  display:flex;
+  gap:8px;
+}
+.rh-v37-countdown div{
+  min-width:70px;
+  text-align:center;
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:16px;
+  padding:10px 8px;
+}
+.rh-v37-countdown b{
+  display:block;
+  font-size:24px;
+  line-height:1;
+  color:#fff;
+}
+.rh-v37-countdown small{
+  display:block;
+  color:#e2e8f0;
+  font-size:11px;
+  font-weight:800;
+  margin-top:4px;
+  text-transform:uppercase;
+}
+.rh-v37-promo-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:#facc15;
+  color:#0f172a!important;
+  border-radius:999px;
+  padding:13px 18px;
+  font-weight:950;
+  text-decoration:none;
+  white-space:nowrap;
+}
+.rh-v37-pricing-section{
+  padding:78px 0;
+  background:linear-gradient(180deg,#fff 0%,#f8fafc 100%);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+  color:#0f172a;
+}
+.rh-v37-container{
+  width:min(1120px,92%);
+  margin:auto;
+}
+.rh-v37-heading{
+  text-align:center;
+  max-width:780px;
+  margin:0 auto 34px;
+}
+.rh-v37-eyebrow{
+  color:#b78300;
+  font-weight:950;
+  letter-spacing:.16em;
+  font-size:13px;
+  text-transform:uppercase;
+  margin:0 0 10px;
+}
+.rh-v37-heading h2{
+  font-size:clamp(30px,5vw,56px);
+  line-height:1;
+  letter-spacing:-.055em;
+  margin:0 0 14px;
+}
+.rh-v37-heading p{
+  color:#64748b;
+  font-size:18px;
+  line-height:1.7;
+  margin:0;
+}
+.rh-v37-pricing-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  align-items:stretch;
+}
+.rh-v37-price-card{
+  position:relative;
+  border:1px solid #e2e8f0;
+  background:#fff;
+  border-radius:28px;
+  padding:26px;
+  box-shadow:0 18px 50px rgba(15,23,42,.07);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.rh-v37-price-card.popular{
+  border:2px solid #2563eb;
+  transform:translateY(-12px) scale(1.025);
+  box-shadow:0 28px 85px rgba(37,99,235,.2);
+}
+.rh-v37-badge{
+  display:inline-flex;
+  width:max-content;
+  background:#0f172a;
+  color:#fff;
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:12px;
+  font-weight:950;
+  letter-spacing:.04em;
+}
+.rh-v37-price-card.popular .rh-v37-badge{
+  background:#facc15;
+  color:#0f172a;
+}
+.rh-v37-title{
+  margin:0;
+  font-size:24px;
+  letter-spacing:-.03em;
+}
+.rh-v37-for{
+  color:#64748b;
+  margin:0;
+  line-height:1.5;
+}
+.rh-v37-old{
+  color:#94a3b8;
+  text-decoration:line-through;
+  font-weight:900;
+  font-size:18px;
+}
+.rh-v37-save{
+  display:inline-flex;
+  width:max-content;
+  background:#dcfce7;
+  color:#166534;
+  padding:8px 10px;
+  border-radius:999px;
+  font-weight:950;
+  font-size:13px;
+}
+.rh-v37-price{
+  font-size:clamp(38px,5vw,54px);
+  font-weight:1000;
+  letter-spacing:-.06em;
+  line-height:.95;
+  color:#2563eb;
+}
+.rh-v37-price small{
+  font-size:18px;
+  letter-spacing:0;
+}
+.rh-v37-list{
+  padding:0;
+  margin:6px 0 0;
+  list-style:none;
+  display:grid;
+  gap:10px;
+  color:#334155;
+  line-height:1.45;
+}
+.rh-v37-list li::before{
+  content:"✓";
+  color:#16a34a;
+  font-weight:950;
+  margin-right:8px;
+}
+.rh-v37-price-card a{
+  margin-top:auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:16px;
+  padding:15px 16px;
+  background:#0f172a;
+  color:#fff!important;
+  text-decoration:none;
+  font-weight:950;
+}
+.rh-v37-price-card.popular a{
+  background:#2563eb;
+}
+@media(max-width:900px){
+  .rh-v37-promo-inner{grid-template-columns:1fr;text-align:center}
+  .rh-v37-countdown{justify-content:center}
+  .rh-v37-promo-cta{width:100%}
+  .rh-v37-pricing-grid{grid-template-columns:1fr}
+  .rh-v37-price-card.popular{transform:none}
+}
+</style>
+
 </head>
 <body>
 
-<section id="promo-sale" class="rh-promo-bar" aria-label="Promo sale">
-  <div class="rh-promo-inner">
-    <div class="rh-promo-copy">
-      <strong>Promo Starter Website RM699</strong>
-      <span>Tempoh promo terhad. Sesuai untuk bisnes yang mahu mula dapatkan lead melalui WhatsApp.</span>
+<section id="promo-sale" class="rh-v37-promo" aria-label="Promo Website Factory">
+  <div class="rh-v37-promo-inner">
+    <div>
+      <h3>🔥 Website Factory Promo — <strong>35% OFF Semua Pakej</strong></h3>
+      <p>Starter RM699 • Business RM1,299 ⭐ Paling Popular ⭐ • Premium RM1,999+ — promo tamat dalam 42 jam.</p>
     </div>
-    <div class="rh-countdown" aria-label="Masa promo berakhir">
+    <div class="rh-v37-countdown" aria-label="Masa promo berakhir">
       <div><b id="promoHours">42</b><small>Jam</small></div>
       <div><b id="promoMinutes">00</b><small>Minit</small></div>
       <div><b id="promoSeconds">00</b><small>Saat</small></div>
     </div>
-    <a href="#aira" class="rh-promo-cta" id="promoAskAira">Tanya Aira Sekarang</a>
+    <a href="#pricing" class="rh-v37-promo-cta">Lihat Pakej Promo</a>
   </div>
 </section>
+
+
+
+
 
 
 
@@ -420,16 +572,7 @@ body.rh-aira-open .rh-aira-chat{
       </div>
     </section>
 
-    <section class="section-pad" id="pricing">
-      <div class="container">
-        <div class="section-heading reveal"><p class="eyebrow dark">Pakej Harga</p><h2>Mulakan dengan pakej yang sesuai untuk tahap bisnes anda.</h2><p>Harga boleh berubah mengikut scope, bilangan halaman, copywriting, integrasi bayaran dan automasi tambahan.</p></div>
-        <div class="pricing-grid">
-          <article class="price-card reveal"><h3>Starter</h3><p class="price">RM699</p><p class="sub">Landing page profesional untuk mula dapatkan lead.</p><ul><li>1 halaman landing page</li><li>Mobile responsive</li><li>CTA WhatsApp</li><li>SEO asas</li><li>Setup domain/hosting guidance</li></ul><a class="btn btn-dark" href="https://wa.me/60184611625?text=Assalamualaikum%20Restu%20Harmoni.%0A%0ASaya%20berminat%20nak%20buat%20website%20untuk%20bisnes%20saya.%0A%0ANama%20Bisnes%3A%0AJenis%20Bisnes%3A%0ALokasi%3A%0ANo.%20Telefon%3A%0A%0AMohon%20cadangan%20pakej%20yang%20sesuai.">Pilih Starter</a></article>
-          <article class="price-card popular reveal delay-1"><div class="badge">Paling Popular</div><h3>Business</h3><p class="price">RM1,299</p><p class="sub">Website lengkap untuk bisnes servis yang mahu nampak meyakinkan.</p><ul><li>Multi-section website</li><li>Servis & portfolio</li><li>Google Map section</li><li>FAQ & trust section</li><li>WhatsApp lead template</li><li>Basic speed & SEO check</li></ul><a class="btn btn-gold" href="https://wa.me/60184611625?text=Assalamualaikum%20Restu%20Harmoni.%0A%0ASaya%20berminat%20nak%20buat%20website%20untuk%20bisnes%20saya.%0A%0ANama%20Bisnes%3A%0AJenis%20Bisnes%3A%0ALokasi%3A%0ANo.%20Telefon%3A%0A%0AMohon%20cadangan%20pakej%20yang%20sesuai.">Pilih Business</a></article>
-          <article class="price-card reveal delay-2"><h3>Premium</h3><p class="price">RM1,999+</p><p class="sub">Untuk brand yang perlukan website lebih lengkap dan premium.</p><ul><li>Semua dalam Business</li><li>Copywriting lebih lengkap</li><li>Advanced section layout</li><li>Lead form / automation-ready</li><li>Priority revision</li></ul><a class="btn btn-dark" href="https://wa.me/60184611625?text=Assalamualaikum%20Restu%20Harmoni.%0A%0ASaya%20berminat%20nak%20buat%20website%20untuk%20bisnes%20saya.%0A%0ANama%20Bisnes%3A%0AJenis%20Bisnes%3A%0ALokasi%3A%0ANo.%20Telefon%3A%0A%0AMohon%20cadangan%20pakej%20yang%20sesuai.">Pilih Premium</a></article>
-        </div>
-      </div>
-    </section>
+    
 
     <section class="section-pad soft" id="reviews">
       <div class="container">
@@ -444,6 +587,70 @@ body.rh-aira-open .rh-aira-chat{
 
     
 
+
+
+<section id="pricing" class="rh-v37-pricing-section">
+  <div class="rh-v37-container">
+    <div class="rh-v37-heading">
+      <p class="rh-v37-eyebrow">Promo 35% OFF</p>
+      <h2>Pakej Website Untuk Mula Dapat Lead.</h2>
+      <p>Pilih pakej mengikut tahap bisnes. Starter untuk mula cepat, Business untuk pilihan paling berbaloi, Premium untuk fungsi dan presentation lebih kuat.</p>
+    </div>
+
+    <div class="rh-v37-pricing-grid">
+      <article class="rh-v37-price-card">
+        <span class="rh-v37-badge">UNTUK BISNES BARU</span>
+        <h3 class="rh-v37-title">Starter</h3>
+        <p class="rh-v37-for">Sesuai untuk bisnes kecil yang mahu website basic dan WhatsApp lead.</p>
+        <div class="rh-v37-old">Harga Asal RM1,075</div>
+        <span class="rh-v37-save">Jimat RM376</span>
+        <div class="rh-v37-price">RM699</div>
+        <ul class="rh-v37-list">
+          <li>Website template basic</li>
+          <li>Mobile responsive</li>
+          <li>WhatsApp CTA</li>
+          <li>SEO basic</li>
+          <li>Siap 3–7 hari bekerja</li>
+        </ul>
+        <a href="#aira">Tanya Aira</a>
+      </article>
+
+      <article class="rh-v37-price-card popular">
+        <span class="rh-v37-badge">⭐ PALING POPULAR</span>
+        <h3 class="rh-v37-title">Business</h3>
+        <p class="rh-v37-for">Pilihan utama untuk SME yang mahu website lebih kemas dan lebih meyakinkan.</p>
+        <div class="rh-v37-old">Harga Asal RM1,999</div>
+        <span class="rh-v37-save">Jimat RM700</span>
+        <div class="rh-v37-price">RM1,299</div>
+        <ul class="rh-v37-list">
+          <li>Layout lebih premium</li>
+          <li>Copywriting lebih lengkap</li>
+          <li>Portfolio / gallery section</li>
+          <li>Google Maps / Google Review ready</li>
+          <li>Lead-focused CTA</li>
+        </ul>
+        <a href="#aira">Pilih Business</a>
+      </article>
+
+      <article class="rh-v37-price-card">
+        <span class="rh-v37-badge">UNTUK GROWTH</span>
+        <h3 class="rh-v37-title">Premium</h3>
+        <p class="rh-v37-for">Untuk bisnes yang perlukan presentation lebih kuat atau fungsi custom.</p>
+        <div class="rh-v37-old">Harga Asal RM3,075</div>
+        <span class="rh-v37-save">Jimat RM1,076</span>
+        <div class="rh-v37-price">RM1,999<small>+</small></div>
+        <ul class="rh-v37-list">
+          <li>Custom section lebih advance</li>
+          <li>Multi-page structure</li>
+          <li>Advanced lead generation</li>
+          <li>Booking / form / automation discussion</li>
+          <li>Suitable for scale-up business</li>
+        </ul>
+        <a href="#aira">Bincang Premium</a>
+      </article>
+    </div>
+  </div>
+</section>
 
 <section class="section-pad" id="faq">
       <div class="container faq-wrap">
@@ -656,7 +863,7 @@ body.rh-aira-open .rh-aira-chat{
   function stepBudget(v){
     data.budget=v;
     const rec=templateMap[data.business]||templateMap['Lain-lain'];
-    const packageName=v==='RM699'?'Starter RM699':(v==='RM1299'?'Business RM1299':'Premium RM1999+');
+    const packageName=v==='RM699'?'Starter RM699':(v==='RM1299'?'Business RM1299 ⭐ Paling Popular':'Premium RM1999+');
     const demo=`templates/${rec.slug}.html?company=${encodeURIComponent(data.company)}`;
     const waText=encodeURIComponent(`Hi Restu Harmoni.\n\nSaya telah menggunakan Aira.\n\nJenis Bisnes: ${data.business}\nNama Bisnes: ${data.company}\nTujuan Website: ${data.goal}\nCadangan Template: ${rec.template}\nPakej: ${packageName}\n\nSaya berminat untuk mendapatkan quotation.`);
     const wa=`https://wa.me/${phone}?text=${waText}`;
@@ -669,42 +876,43 @@ body.rh-aira-open .rh-aira-chat{
 </script>
 
 <div style="position:absolute;left:-9999px">sales@restuharmoni.com</div>
-<script id="rh-v36-promo-js">
+
+
+
+<script id="rh-v37-pricing-js">
 (function(){
   const h=document.getElementById('promoHours');
   const m=document.getElementById('promoMinutes');
   const s=document.getElementById('promoSeconds');
-  if(!h||!m||!s)return;
-  const key='rhPromoEnd_v36';
-  let end=Number(localStorage.getItem(key));
-  const now=Date.now();
-  if(!end || end<now){
-    end=now+(42*60*60*1000);
-    localStorage.setItem(key,String(end));
+  if(h&&m&&s){
+    const key='rhPromoEnd_v37';
+    let end=Number(localStorage.getItem(key));
+    const now=Date.now();
+    if(!end || end<now){
+      end=now+(42*60*60*1000);
+      localStorage.setItem(key,String(end));
+    }
+    function pad(n){return String(n).padStart(2,'0')}
+    function tick(){
+      const left=Math.max(0,end-Date.now());
+      const total=Math.floor(left/1000);
+      h.textContent=pad(Math.floor(total/3600));
+      m.textContent=pad(Math.floor((total%3600)/60));
+      s.textContent=pad(total%60);
+    }
+    tick();
+    setInterval(tick,1000);
   }
-  function pad(n){return String(n).padStart(2,'0')}
-  function tick(){
-    const left=Math.max(0,end-Date.now());
-    const total=Math.floor(left/1000);
-    const hours=Math.floor(total/3600);
-    const mins=Math.floor((total%3600)/60);
-    const secs=total%60;
-    h.textContent=pad(hours);
-    m.textContent=pad(mins);
-    s.textContent=pad(secs);
-  }
-  tick();
-  setInterval(tick,1000);
-  const cta=document.getElementById('promoAskAira');
-  if(cta){
-    cta.addEventListener('click',function(e){
+
+  document.querySelectorAll('a[href="#aira"]').forEach(a=>{
+    a.addEventListener('click',function(e){
       const launcher=document.getElementById('airaLauncher');
       if(launcher){
         e.preventDefault();
         launcher.click();
       }
     });
-  }
+  });
 })();
 </script>
 
