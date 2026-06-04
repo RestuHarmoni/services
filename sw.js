@@ -1,4 +1,4 @@
-const RH_CACHE_NAME = 'services-restu-harmoni-v3.5.0';
+const RH_CACHE_NAME = 'services-restu-harmoni-v3.6.0';
 const RH_ASSETS=['./','./index.html',
   './templates/produk-online.html',
   './templates/corporate.html',
@@ -44,3 +44,5 @@ self.addEventListener('fetch',event=>{if(event.request.method!=='GET')return;eve
 */
 
 /* RH_V3_5_AIRA_LIVELY: CSS breathing avatar, online pulse, typing movement */
+
+/* RH_V3_6_PROMO_SCROLLFIX: removed old WA float, promo 42h countdown, Aira scroll lock */

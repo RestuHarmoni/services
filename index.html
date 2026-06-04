@@ -209,8 +209,137 @@
 }
 </style>
 
+
+<style id="rh-v36-hide-old-wa-css">
+body > .whatsapp,
+body > .floating-whatsapp,
+body > .wa-float,
+body > #waFloat,
+body > #whatsappFloat{
+  display:none!important;
+}
+</style>
+
+
+<style id="rh-v36-promo-css">
+.rh-promo-bar{
+  position:relative;
+  z-index:5;
+  background:linear-gradient(135deg,#0f172a,#1d4ed8 55%,#facc15);
+  color:#fff;
+  padding:16px 0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+  box-shadow:0 18px 55px rgba(15,23,42,.18);
+}
+.rh-promo-inner{
+  width:min(1120px,92%);
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  gap:16px;
+  align-items:center;
+}
+.rh-promo-copy strong{
+  display:block;
+  font-size:clamp(18px,2.8vw,28px);
+  letter-spacing:-.03em;
+  line-height:1.1;
+}
+.rh-promo-copy span{
+  display:block;
+  color:#dbeafe;
+  margin-top:4px;
+  font-size:14px;
+}
+.rh-countdown{
+  display:flex;
+  gap:8px;
+}
+.rh-countdown div{
+  min-width:70px;
+  text-align:center;
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:16px;
+  padding:10px 8px;
+}
+.rh-countdown b{
+  display:block;
+  font-size:24px;
+  line-height:1;
+}
+.rh-countdown small{
+  display:block;
+  color:#e2e8f0;
+  font-size:11px;
+  font-weight:800;
+  margin-top:4px;
+  text-transform:uppercase;
+}
+.rh-promo-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:#facc15;
+  color:#0f172a;
+  border-radius:999px;
+  padding:13px 18px;
+  font-weight:950;
+  text-decoration:none;
+  white-space:nowrap;
+}
+@media(max-width:760px){
+  .rh-promo-inner{grid-template-columns:1fr;text-align:center}
+  .rh-countdown{justify-content:center}
+  .rh-promo-cta{width:100%}
+}
+</style>
+
+
+<style id="rh-v36-aira-scrolllock-css">
+body.rh-aira-open{
+  overflow:hidden!important;
+  touch-action:none;
+}
+body.rh-aira-open .rh-aira-drawer{
+  touch-action:auto;
+}
+body.rh-aira-open .rh-aira-chat{
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+}
+.rh-aira-drawer{
+  display:flex!important;
+  flex-direction:column!important;
+}
+.rh-aira-chat{
+  flex:1 1 auto!important;
+  min-height:0!important;
+}
+.rh-aira-controls{
+  flex:0 0 auto!important;
+}
+</style>
+
 </head>
 <body>
+
+<section id="promo-sale" class="rh-promo-bar" aria-label="Promo sale">
+  <div class="rh-promo-inner">
+    <div class="rh-promo-copy">
+      <strong>Promo Starter Website RM699</strong>
+      <span>Tempoh promo terhad. Sesuai untuk bisnes yang mahu mula dapatkan lead melalui WhatsApp.</span>
+    </div>
+    <div class="rh-countdown" aria-label="Masa promo berakhir">
+      <div><b id="promoHours">42</b><small>Jam</small></div>
+      <div><b id="promoMinutes">00</b><small>Minit</small></div>
+      <div><b id="promoSeconds">00</b><small>Saat</small></div>
+    </div>
+    <a href="#aira" class="rh-promo-cta" id="promoAskAira">Tanya Aira Sekarang</a>
+  </div>
+</section>
+
+
 
 
   <header class="site-header" id="top">
@@ -233,37 +362,7 @@
   </header>
 
   <main>
-    <section class="hero section-pad">
-      <div class="hero-orb orb-a"></div><div class="hero-orb orb-b"></div>
-      <div class="container hero-grid">
-        <div class="hero-copy reveal">
-          <p class="eyebrow">RH Website Factory • Untuk SME Malaysia</p>
-          <h1>Kami bina website profesional yang buat pelanggan terus WhatsApp bisnes anda.</h1>
-          <p class="hero-text">Website siap untuk bisnes servis seperti aircond, plumbing, renovation, contractor, cleaning, pest control, CCTV, electrical dan syarikat SME. Kemas, mobile responsive, SEO asas dan fokus dapatkan lead.</p>
-          <div class="hero-actions">
-            <a class="btn btn-gold" href="https://wa.me/60184611625?text=Assalamualaikum%20Restu%20Harmoni.%0A%0ASaya%20berminat%20nak%20buat%20website%20untuk%20bisnes%20saya.%0A%0ANama%20Bisnes%3A%0AJenis%20Bisnes%3A%0ALokasi%3A%0ANo.%20Telefon%3A%0A%0AMohon%20cadangan%20pakej%20yang%20sesuai.">Dapatkan Cadangan Percuma</a>
-
-
-
-
-            <a class="btn btn-glass" href="#portfolio">Lihat Demo Website</a>
-          </div>
-          <div class="hero-trust">
-            <span>Harga bermula <b>RM699</b></span><span>Siap <b>3-7 Hari</b></span><span><b>WhatsApp Lead</b> Ready</span>
-          </div>
-        </div>
-        <div class="hero-visual reveal delay-1" aria-label="Preview website servis">
-          <div class="browser-card">
-            <div class="browser-top"><i></i><i></i><i></i><small>aircond-service.my</small></div>
-            <div class="mock-hero"><p>Servis Aircond Selangor & KL</p><h3>Cuci • Repair • Install</h3><a>Tempah Melalui WhatsApp</a></div>
-            <div class="mock-grid"><article><b>24 Jam</b><span>Response</span></article><article><b>4.9★</b><span>Review</span></article><article><b>SEO</b><span>Ready</span></article></div>
-            <div class="mock-list"><span></span><span></span><span></span></div>
-          </div>
-          <div class="floating-card lead"><b>Lead Masuk</b><span>Nama, lokasi & jenis servis</span></div>
-          <div class="floating-card speed"><b>3-7 Hari</b><span>Anggaran siap</span></div>
-        </div>
-      </div>
-    </section>
+    
 
 <section id="real-demo-slider" class="rh-real-slider-section">
   <div class="rh-real-container">
@@ -375,7 +474,7 @@
     </div>
     <div class="container footer-bottom">© <span id="year"></span> Restu Harmoni Digital Solutions. All rights reserved.</div>
   </footer>
-  <a class="whatsapp-float" aria-label="WhatsApp Restu Harmoni" href="https://wa.me/60184611625?text=Assalamualaikum%20Restu%20Harmoni.%0A%0ASaya%20berminat%20nak%20buat%20website%20untuk%20bisnes%20saya.%0A%0ANama%20Bisnes%3A%0AJenis%20Bisnes%3A%0ALokasi%3A%0ANo.%20Telefon%3A%0A%0AMohon%20cadangan%20pakej%20yang%20sesuai.">WhatsApp</a>
+  
   <script src="version.js"></script><script src="app.js"></script>
 
 <script id="rh-real-slider-js">
@@ -439,6 +538,15 @@
   const controls=document.getElementById('airaControls');
   if(!drawer||!launcher||!chat||!controls)return;
 
+
+  function stopAiraScrollBubble(e){
+    const chatBox=e.target.closest && e.target.closest('.rh-aira-chat');
+    const controlsBox=e.target.closest && e.target.closest('.rh-aira-controls');
+    if(chatBox || controlsBox){ e.stopPropagation(); }
+  }
+  drawer.addEventListener('wheel',stopAiraScrollBubble,{passive:true});
+  drawer.addEventListener('touchmove',stopAiraScrollBubble,{passive:true});
+
   const phone='60184611625';
   const data={business:null,company:'',goal:null,budget:null};
   const templateMap={
@@ -469,6 +577,7 @@
     }catch(e){}
   }
   function openAira(){
+    document.body.classList.add('rh-aira-open');
     drawer.classList.add('open');
     toast.classList.remove('show');
     launcher.style.opacity='0';
@@ -476,6 +585,7 @@
     if(!chat.dataset.started){start();}
   }
   function closeAira(){
+    document.body.classList.remove('rh-aira-open');
     drawer.classList.remove('open');
     launcher.style.opacity='1';
     launcher.style.pointerEvents='auto';
@@ -558,5 +668,45 @@
 })();
 </script>
 
-<div style="position:absolute;left:-9999px">sales@restuharmoni.com</div></body>
+<div style="position:absolute;left:-9999px">sales@restuharmoni.com</div>
+<script id="rh-v36-promo-js">
+(function(){
+  const h=document.getElementById('promoHours');
+  const m=document.getElementById('promoMinutes');
+  const s=document.getElementById('promoSeconds');
+  if(!h||!m||!s)return;
+  const key='rhPromoEnd_v36';
+  let end=Number(localStorage.getItem(key));
+  const now=Date.now();
+  if(!end || end<now){
+    end=now+(42*60*60*1000);
+    localStorage.setItem(key,String(end));
+  }
+  function pad(n){return String(n).padStart(2,'0')}
+  function tick(){
+    const left=Math.max(0,end-Date.now());
+    const total=Math.floor(left/1000);
+    const hours=Math.floor(total/3600);
+    const mins=Math.floor((total%3600)/60);
+    const secs=total%60;
+    h.textContent=pad(hours);
+    m.textContent=pad(mins);
+    s.textContent=pad(secs);
+  }
+  tick();
+  setInterval(tick,1000);
+  const cta=document.getElementById('promoAskAira');
+  if(cta){
+    cta.addEventListener('click',function(e){
+      const launcher=document.getElementById('airaLauncher');
+      if(launcher){
+        e.preventDefault();
+        launcher.click();
+      }
+    });
+  }
+})();
+</script>
+
+</body>
 </html>
