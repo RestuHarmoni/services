@@ -1,0 +1,26 @@
+{
+  "version": "v5.2-supabase",
+  "database": "supabase",
+  "table": "leads",
+  "fields": [
+    "business_type",
+    "objective",
+    "budget",
+    "timeline",
+    "name",
+    "phone"
+  ],
+  "statuses": [
+    "NEW",
+    "CONTACTED",
+    "QUOTATION_SENT",
+    "WON",
+    "LOST"
+  ],
+  "packages": {
+    "RH Starter": "RM699",
+    "RH Business": "RM999",
+    "RH Pro": "RM1499",
+    "Custom": "Quotation"
+  }
+}
