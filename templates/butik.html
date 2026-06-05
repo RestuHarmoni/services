@@ -101,9 +101,10 @@ window.RH_TEMPLATE_DATA = {"butik": {"name": "Alya Boutique", "industry": "Butik
 <a class="whatsapp" data-demo-button href="#">WhatsApp Order</a>
 <footer><div class="container">RESTU HARMONI DIGITAL SOLUTIONS<br>Website Development • Lead Generation • WhatsApp Order Ready</div></footer>
 
+<script src="../template-demo.js?v=5.3.1"></script>
 
 <script id="rh-v529-demo-buttons-only">
-document.querySelectorAll('a[href="#"]').forEach(function(a){
+document.querySelectorAll('a[href="#"]:not([data-demo-button])').forEach(function(a){
   a.addEventListener('click', function(e){ e.preventDefault(); });
 });
 </script>
