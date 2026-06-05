@@ -1,7 +1,7 @@
-const RH_CACHE_NAME = 'services-restu-harmoni-v5.3.4';
+const RH_CACHE_NAME = 'services-restu-harmoni-v5.3.5';
 const RH_ASSETS = [
   './', './index.html', './style.css', './app.js', './version.js', './manifest.webmanifest',
-  './supabase-config.js', './aira-lead-system.js', './admin-login.html', './admin.html', './admin.js', './admin-leads.html',
+  './supabase-config.js', './aira-lead-system.js', './admin-login.html', './admin.html', './admin.js', './admin-auth.js', './admin-leads.html',
   './template-demo.css', './template-demo.js', './content/templates-data.json', './assets/rh-logo.png', './assets/aira-avatar.svg', './assets/default-avatar.svg',
   './templates/aircond.html', './templates/renovation.html', './templates/kedai-makan.html', './templates/butik.html', './templates/homestay.html', './templates/kereta-sewa.html', './templates/corporate.html', './templates/produk-online.html'
 ];

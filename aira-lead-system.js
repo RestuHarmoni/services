@@ -33,7 +33,16 @@
   function featuresFor(pkg){const map={"RH Starter":["1 page landing page","Servis utama","Galeri asas","FAQ","Lead form Aira"],"RH Business":["Website lebih lengkap","Galeri premium","Booking enquiry","Testimoni","SEO asas"],"RH Pro":["Premium UI","Lead capture","Portfolio","Advanced section","SEO lebih lengkap"],"Custom":["Scope custom","Quotation ikut keperluan","Sesuai untuk sistem khas"]};return map[pkg]||map["RH Starter"];}
   function getLocalLeads(){try{return JSON.parse(localStorage.getItem("rh_leads")||"[]");}catch(e){return[];}}
   function saveLocalLead(lead){const list=getLocalLeads();list.unshift({...lead,id:"LOCAL-"+Date.now(),created_at:new Date().toISOString()});localStorage.setItem("rh_leads",JSON.stringify(list));}
-  async function saveLead(lead){const client=await initSupabase();if(!client){saveLocalLead(lead);return{ok:true,mode:"local"};}const {error}=await client.from("leads").insert([lead]);if(error){saveLocalLead(lead);return{ok:false,mode:"local",error:error.message};}return{ok:true,mode:"supabase"};}
+  async function saveLead(lead){
+    const last=Number(localStorage.getItem("rh_last_lead_submit")||0);
+    if(Date.now()-last<60000){return{ok:false,mode:"blocked",error:"Sila tunggu sebentar sebelum hantar semula."};}
+    localStorage.setItem("rh_last_lead_submit",String(Date.now()));
+    const client=await initSupabase();
+    if(!client){saveLocalLead(lead);return{ok:true,mode:"local"};}
+    const {error}=await client.from("leads").insert([lead]);
+    if(error){saveLocalLead(lead);return{ok:false,mode:"local",error:error.message};}
+    return{ok:true,mode:"supabase"};
+  }
   function matchFAQ(input){const q=String(input||"").toLowerCase();for(const item of BANK.faq){for(const trig of item.triggers){if(q.includes(trig.toLowerCase()))return item;}}return null;}
   function createLeadPayload(data){const recommended_package=packageFor(data);const lead_score=scoreLead(data);return{name:data.name,phone:normalizePhone(data.phone),business_type:data.business_type,objective:data.objective,budget:data.budget,timeline:data.timeline,recommended_package,lead_score,lead_temperature:tempFor(lead_score),status:"NEW",notes:data.notes||"",source:"Aira",page_url:location.href,user_agent:navigator.userAgent};}
   window.RH_AIRA_LEAD_SYSTEM={BANK,initSupabase,normalizePhone,validPhone,scoreLead,packageFor,priceFor,tempFor,featuresFor,getLocalLeads,saveLead,createLeadPayload,matchFAQ};

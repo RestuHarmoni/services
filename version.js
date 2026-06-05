@@ -1,1 +1,1 @@
-window.RH_SERVICES_VERSION='5.3.4-DEMO-SLIDER-SIZE-FIX';
+window.RH_VERSION = "5.3.5-security-v1";
