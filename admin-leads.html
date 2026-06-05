@@ -1,52 +1,26 @@
 <!doctype html>
-<html lang="ms">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Lead Management | Restu Harmoni</title>
+<html lang="ms"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lead Management</title>
 <script src="supabase-config.js"></script>
 <script src="aira-lead-system.js"></script>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial;background:#f8fafc;color:#0f172a}.top{background:#0f172a;color:#fff;padding:16px}.wrap{width:min(1200px,94%);margin:24px auto}.bar{display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap}.btn,button,select{border:0;border-radius:12px;padding:11px 14px;font-weight:850}.btn,button{background:#2563eb;color:#fff;cursor:pointer;text-decoration:none}select{border:1px solid #e2e8f0;background:#fff}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}.stat{background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:16px;box-shadow:0 12px 32px rgba(15,23,42,.05)}.stat b{font-size:26px}.table{background:#fff;border:1px solid #e2e8f0;border-radius:22px;overflow:auto;box-shadow:0 18px 48px rgba(15,23,42,.06)}table{width:100%;border-collapse:collapse;min-width:950px}th,td{padding:13px;border-bottom:1px solid #e2e8f0;text-align:left;vertical-align:top}th{background:#f1f5f9}.pill{display:inline-flex;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:900}.HOT{background:#fee2e2;color:#991b1b}.WARM{background:#fef3c7;color:#92400e}.COLD{background:#e0f2fe;color:#075985}.NEW{background:#dcfce7;color:#166534}.CONTACTED{background:#dbeafe;color:#1d4ed8}.QUOTATION_SENT{background:#fef3c7;color:#92400e}.WON{background:#dcfce7;color:#166534}.LOST{background:#fee2e2;color:#991b1b}@media(max-width:800px){.grid{grid-template-columns:1fr 1fr}}
-</style>
-</head>
-<body>
-<div class="top"><div class="bar"><strong>Lead Management</strong><div><a class="btn" href="admin.html">Admin</a> <a class="btn" href="index.html">Website</a></div></div></div>
+body{font-family:Inter,Arial;margin:0;background:#f8fafc}.top{background:#0f172a;color:#fff;padding:16px}
+.wrap{width:min(1200px,95%);margin:20px auto}.btn{background:#2563eb;color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none}
+table{width:100%;background:#fff;border-collapse:collapse}th,td{padding:10px;border:1px solid #ddd}
+</style></head><body>
+<div class="top"><a class="btn" href="admin.html">← Admin Panel</a></div>
 <div class="wrap">
-<div class="bar">
-<h1>Leads Aira</h1>
-<div><select id="statusFilter"><option value="">Semua Status</option><option>NEW</option><option>CONTACTED</option><option>QUOTATION_SENT</option><option>WON</option><option>LOST</option></select> <button id="refresh">Refresh</button></div>
-</div>
-<div class="grid"><div class="stat"><span>Total</span><br><b id="total">0</b></div><div class="stat"><span>Hot</span><br><b id="hot">0</b></div><div class="stat"><span>New</span><br><b id="new">0</b></div><div class="stat"><span>Won</span><br><b id="won">0</b></div></div>
-<div class="table"><table><thead><tr><th>Tarikh</th><th>Nama</th><th>WhatsApp</th><th>Bisnes</th><th>Objektif</th><th>Budget</th><th>Timeline</th><th>Pakej</th><th>Score</th><th>Status</th></tr></thead><tbody id="rows"></tbody></table></div>
-<p style="color:#64748b">Nota: Jika Supabase belum dikonfigurasi, lead yang dihantar dari browser ini akan dipaparkan melalui localStorage.</p>
+<h1>Lead Management</h1>
+<table><thead><tr><th>Nama</th><th>WhatsApp</th><th>Bisnes</th><th>Status</th></tr></thead><tbody id="rows"></tbody></table>
 </div>
 <script>
-const statuses=['NEW','CONTACTED','QUOTATION_SENT','WON','LOST'];
-async function loadLeads(){
-  let leads=[];
-  const client=await window.RH_AIRA_LEAD_SYSTEM.initSupabase();
-  if(client){
-    let q=client.from('leads').select('*').order('created_at',{ascending:false});
-    const f=document.getElementById('statusFilter').value;
-    if(f)q=q.eq('status',f);
-    const {data,error}=await q;
-    if(!error)leads=data||[];
-  }else{
-    leads=window.RH_AIRA_LEAD_SYSTEM.getLocalLeads();
-    const f=document.getElementById('statusFilter').value;
-    if(f)leads=leads.filter(x=>x.status===f);
-  }
-  render(leads);
-}
-function render(leads){
-  document.getElementById('total').textContent=leads.length;
-  document.getElementById('hot').textContent=leads.filter(x=>x.lead_temperature==='HOT').length;
-  document.getElementById('new').textContent=leads.filter(x=>x.status==='NEW').length;
-  document.getElementById('won').textContent=leads.filter(x=>x.status==='WON').length;
-  document.getElementById('rows').innerHTML=leads.map(x=>`<tr><td>${new Date(x.created_at).toLocaleString()}</td><td>${x.name}</td><td>${x.phone}</td><td>${x.business_type}</td><td>${x.objective}</td><td>${x.budget}</td><td>${x.timeline}</td><td>${x.recommended_package}</td><td><span class="pill ${x.lead_temperature}">${x.lead_score}/100 ${x.lead_temperature}</span></td><td><span class="pill ${x.status}">${x.status}</span></td></tr>`).join('');
-}
-document.getElementById('refresh').onclick=loadLeads;
-document.getElementById('statusFilter').onchange=loadLeads;
-loadLeads();
-</script>
-</body></html>
+(async()=>{
+const rows=document.getElementById('rows');
+if(!window.RH_AIRA_LEAD_SYSTEM){rows.innerHTML='<tr><td colspan=4>Lead system tidak dimuatkan</td></tr>';return;}
+const client=await window.RH_AIRA_LEAD_SYSTEM.initSupabase();
+if(!client){rows.innerHTML='<tr><td colspan=4>Supabase belum dikonfigurasi</td></tr>';return;}
+const {data,error}=await client.from('leads').select('*').order('created_at',{ascending:false});
+if(error){rows.innerHTML='<tr><td colspan=4>'+error.message+'</td></tr>';return;}
+rows.innerHTML=(data||[]).map(x=>`<tr><td>${x.name||''}</td><td>${x.phone||''}</td><td>${x.business_type||''}</td><td>${x.status||''}</td></tr>`).join('');
+})();
+</script></body></html>
