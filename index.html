@@ -1272,48 +1272,39 @@ window.AIRA_LEAD_FUNNEL_V52 = {
 
 
 
-<script id="rh-v526-single-aira-controller">
+
+
+
+<script id="rh-v527-aira-faq-consultant">
 (function(){
   function ready(fn){document.readyState!=='loading'?fn():document.addEventListener('DOMContentLoaded',fn)}
   ready(function(){
-    const launcher=document.getElementById('airaLauncher');
-    const drawer=document.getElementById('airaDrawer');
-    const closeBtn=document.getElementById('airaClose');
-    const toast=document.getElementById('airaToast');
-    const toastStart=document.getElementById('airaToastStart');
-    const toastClose=document.getElementById('airaToastClose');
-    const chat=document.getElementById('airaChat');
-    const controls=document.getElementById('airaControls');
-    if(!launcher||!drawer||!chat||!controls)return;
-
-    let started=false;
-    let data={};
-
-    function openAira(){drawer.classList.add('open');document.body.classList.add('rh-aira-open');if(toast)toast.classList.remove('show');launcher.style.opacity='0';launcher.style.pointerEvents='none';if(!started){started=true;start()}}
-    function closeAira(){drawer.classList.remove('open');document.body.classList.remove('rh-aira-open');launcher.style.opacity='1';launcher.style.pointerEvents='auto'}
+    const launcher=document.getElementById('airaLauncher'),drawer=document.getElementById('airaDrawer'),closeBtn=document.getElementById('airaClose'),toast=document.getElementById('airaToast'),toastStart=document.getElementById('airaToastStart'),toastClose=document.getElementById('airaToastClose'),chat=document.getElementById('airaChat'),controls=document.getElementById('airaControls');
+    if(!launcher||!drawer||!chat||!controls||!window.RH_AIRA_LEAD_SYSTEM)return;
+    let data={},askedTopics=[];const SYS=window.RH_AIRA_LEAD_SYSTEM;
+    function openAira(){drawer.classList.add('open');document.body.classList.add('rh-aira-open');if(toast)toast.classList.remove('show');launcher.style.opacity='0';launcher.style.pointerEvents='none';if(!chat.dataset.started){chat.dataset.started='1';startHome();}}
+    function closeAira(){drawer.classList.remove('open');document.body.classList.remove('rh-aira-open');launcher.style.opacity='1';launcher.style.pointerEvents='auto';}
     function beep(){try{const C=window.AudioContext||window.webkitAudioContext;const ctx=new C();const osc=ctx.createOscillator();const gain=ctx.createGain();osc.frequency.value=740;gain.gain.value=.035;osc.connect(gain);gain.connect(ctx.destination);osc.start();osc.stop(ctx.currentTime+.12)}catch(e){}}
-    function add(text,type='bot'){const el=document.createElement('div');el.className='rh-msg '+type;el.innerHTML=text;chat.appendChild(el);chat.scrollTop=chat.scrollHeight;if(type==='bot')beep()}
-    function typing(text,cb){const el=document.createElement('div');el.className='rh-typing';el.innerHTML='<i></i><i></i><i></i>';chat.appendChild(el);chat.scrollTop=chat.scrollHeight;setTimeout(()=>{el.remove();add(text,'bot');if(cb)cb()},520)}
-    function options(list,cb){controls.innerHTML='<div class="rh-aira-options"></div>';const wrap=controls.querySelector('.rh-aira-options');list.forEach(x=>{const b=document.createElement('button');b.type='button';b.textContent=x;b.onclick=()=>{add(x,'user');cb(x)};wrap.appendChild(b)})}
-    function input(label,placeholder,cb,validate){controls.innerHTML='<div class="rh-aira-input-row"><input id="airaInput" placeholder="'+placeholder+'"><button type="button">Hantar</button></div>';const inp=controls.querySelector('input'),btn=controls.querySelector('button');function send(){const val=inp.value.trim();if(!val){inp.focus();return}if(validate&&!validate(val)){alert(label+' tidak sah.');inp.focus();return}add(val,'user');cb(val)}btn.onclick=send;inp.addEventListener('keydown',e=>{if(e.key==='Enter')send()});inp.focus()}
-
-    function start(){data={};chat.innerHTML='';controls.innerHTML='';typing('Hai 👋 Saya <strong>Aira</strong>, AI Website Consultant. Saya akan cadangkan website yang sesuai untuk bisnes anda dalam masa kurang 2 minit.',()=>stepBusiness())}
-    function stepBusiness(){typing('Apakah jenis bisnes anda?',()=>options(window.RH_AIRA_LEAD_SYSTEM.BANK.businessOptions,v=>{data.business_type=v;stepObjective()}))}
-    function stepObjective(){typing('Apakah tujuan utama website anda?',()=>options(window.RH_AIRA_LEAD_SYSTEM.BANK.objectiveOptions,v=>{data.objective=v;stepBudget()}))}
-    function stepBudget(){typing('Anggaran budget anda?',()=>options(window.RH_AIRA_LEAD_SYSTEM.BANK.budgetOptions,v=>{data.budget=v;stepTimeline()}))}
-    function stepTimeline(){typing('Bilakah anda mahu website siap?',()=>options(window.RH_AIRA_LEAD_SYSTEM.BANK.timelineOptions,v=>{data.timeline=v;stepName()}))}
-    function stepName(){typing('Baik. Siapa nama anda?',()=>input('Nama','Contoh: Ahmad',v=>{data.name=v;stepPhone()}))}
-    function stepPhone(){typing('Nombor WhatsApp untuk kami hubungi? <br><small>Contoh: 0123456789</small>',()=>input('Nombor WhatsApp','0123456789',v=>{data.phone=window.RH_AIRA_LEAD_SYSTEM.normalizePhone(v);submitLead()},window.RH_AIRA_LEAD_SYSTEM.validPhone))}
-    async function submitLead(){const payload=window.RH_AIRA_LEAD_SYSTEM.createLeadPayload(data);const pkg=payload.recommended_package,price=window.RH_AIRA_LEAD_SYSTEM.priceFor(pkg),features=window.RH_AIRA_LEAD_SYSTEM.featuresFor(pkg).map(x=>'✓ '+x).join('<br>');typing('Terima kasih. Aira sedang rekodkan cadangan anda...',async()=>{const result=await window.RH_AIRA_LEAD_SYSTEM.saveLead(payload);typing(`<strong>Cadangan Aira</strong><br><br>Pakej: <strong>${pkg}</strong><br>Anggaran: <strong>${price}</strong><br>Lead Score: <strong>${payload.lead_score}/100 (${payload.lead_temperature})</strong><br><br>${features}<br><br>Maklumat anda telah direkodkan. Team kami akan semak dan hubungi anda semula.`,()=>{controls.innerHTML='<div class="rh-aira-options"><button type="button" id="airaRestart">Isi Semula</button><a href="admin-leads.html" style="display:none">Admin Leads</a></div>';document.getElementById('airaRestart').onclick=()=>start()})})}
-
-    launcher.onclick=openAira;
-    if(closeBtn)closeBtn.onclick=closeAira;
-    if(toastStart)toastStart.onclick=openAira;
-    if(toastClose)toastClose.onclick=()=>toast.classList.remove('show');
-    document.addEventListener('click',function(e){const t=e.target.closest&&e.target.closest('a[href="#aira-popup"],a[href="#aira"],.rh-open-aira,[data-open-aira]');if(!t)return;e.preventDefault();openAira()});
-    window.RH_OPEN_AIRA_POPUP=openAira;
-    if(location.hash==='#aira-popup')setTimeout(openAira,450);
-    setTimeout(()=>{if(toast&&!drawer.classList.contains('open'))toast.classList.add('show')},3000);
+    function add(text,type='bot'){const el=document.createElement('div');el.className='rh-msg '+type;el.innerHTML=text;chat.appendChild(el);chat.scrollTop=chat.scrollHeight;if(type==='bot')beep();}
+    function typing(text,cb){const el=document.createElement('div');el.className='rh-typing';el.innerHTML='<i></i><i></i><i></i>';chat.appendChild(el);chat.scrollTop=chat.scrollHeight;setTimeout(()=>{el.remove();add(text,'bot');if(cb)cb();},560);}
+    function options(list,cb){controls.innerHTML='<div class="rh-aira-options"></div>';const wrap=controls.querySelector('.rh-aira-options');list.forEach(x=>{const b=document.createElement('button');b.type='button';b.textContent=x;b.onclick=()=>{add(x,'user');cb(x)};wrap.appendChild(b)});}
+    function input(label,placeholder,cb,validate){controls.innerHTML='<div class="rh-aira-input-row"><input id="airaInput" placeholder="'+placeholder+'"><button type="button">Hantar</button></div>';const inp=controls.querySelector('input'),btn=controls.querySelector('button');function send(){const val=inp.value.trim();if(!val){inp.focus();return}if(validate&&!validate(val)){alert(label+' tidak sah.');inp.focus();return}add(val,'user');cb(val)}btn.onclick=send;inp.addEventListener('keydown',e=>{if(e.key==='Enter')send()});inp.focus();}
+    function quickMenu(){options(SYS.BANK.quickActions.concat(["Tanya Soalan Lain"]),handleQuick);}
+    function startHome(){data={};askedTopics=[];chat.innerHTML='';controls.innerHTML='';typing('Hai 👋 Saya <strong>Aira</strong>, AI Website Consultant.',()=>typing('Saya boleh cadangkan pakej website, jawab soalan harga, tempoh siap, domain, hosting, SEO dan contoh website.',()=>quickMenu()));}
+    function handleQuick(v){if(v==="Cadangkan Website Saya")return startLead();if(v==="Harga Pakej")return answerFAQ("harga pakej");if(v==="Lihat Contoh Website")return typing('Anda boleh lihat contoh website untuk Kedai Makan, Homestay, Kereta Sewa, Aircond, Renovation, Butik, Corporate dan Produk Online.',()=>options(["Buka Contoh Website","Cadangkan Website Saya","Tanya Soalan Lain"],x=>{if(x==="Buka Contoh Website")location.hash="contoh";else if(x==="Cadangkan Website Saya")startLead();else askFreeText();}));if(v==="Berapa Lama Siap?")return answerFAQ("berapa lama siap");if(v==="Domain & Hosting")return answerFAQ("domain hosting");if(v==="SEO Google")return answerFAQ("seo google");if(v==="Boleh Edit Sendiri?")return answerFAQ("boleh edit sendiri");if(v==="Saya Tiada Logo/Gambar")return answerFAQ("tak ada gambar logo");if(v==="Tanya Soalan Lain")return askFreeText();}
+    function askFreeText(){typing('Boleh. Taip soalan anda di bawah. Contoh: “domain termasuk?”, “berapa lama siap?”, “SEO ada?”',()=>input('Soalan','Tulis soalan anda...',q=>answerFAQ(q)));}
+    function answerFAQ(q){const item=SYS.matchFAQ(q);if(item)askedTopics.push(item.topic);typing(item?item.answer:'Saya boleh bantu tentang harga, tempoh siap, domain, hosting, SEO, proses kerja, contoh website dan gambar/logo.',()=>typing('Mahu saya cadangkan pakej website yang sesuai untuk bisnes anda?',()=>options(["Ya, cadangkan website saya","Saya ada soalan lain","Lihat pilihan utama"],x=>{if(x==="Ya, cadangkan website saya")startLead();else if(x==="Saya ada soalan lain")askFreeText();else quickMenu();})));} 
+    function startLead(){data={notes:"FAQ topics: "+askedTopics.join(", ")};typing('Baik. Saya akan tanya beberapa soalan ringkas supaya cadangan lebih tepat.',()=>stepBusiness());}
+    function stepBusiness(){typing('Apakah jenis bisnes anda?',()=>options(SYS.BANK.businessOptions,v=>{data.business_type=v;typing('Baik. Untuk '+v+', website biasanya perlu jelas dari segi servis, bukti kepercayaan dan cara pelanggan membuat pertanyaan.',()=>stepObjective())}))}
+    function stepObjective(){typing('Apakah tujuan utama website anda?',()=>options(SYS.BANK.objectiveOptions,v=>{data.objective=v;stepBudget()}))}
+    function stepBudget(){typing('Apakah anggaran budget anda?',()=>options(SYS.BANK.budgetOptions,v=>{data.budget=v;stepTimeline()}))}
+    function stepTimeline(){typing('Bilakah anda mahu website siap?',()=>options(SYS.BANK.timelineOptions,v=>{data.timeline=v;stepName()}))}
+    function stepName(){typing('Siapa nama anda?',()=>input('Nama','Contoh: Ahmad',v=>{data.name=v;stepPhone()}))}
+    function stepPhone(){typing('Nombor WhatsApp untuk kami hubungi? <br><small>Contoh: 0123456789</small>',()=>input('Nombor WhatsApp','0123456789',v=>{data.phone=SYS.normalizePhone(v);submitLead()},SYS.validPhone))}
+    async function submitLead(){const payload=SYS.createLeadPayload(data),pkg=payload.recommended_package,price=SYS.priceFor(pkg),features=SYS.featuresFor(pkg).map(x=>'✓ '+x).join('<br>');typing('Terima kasih. Aira sedang rekodkan cadangan anda...',async()=>{await SYS.saveLead(payload);typing(`<strong>Cadangan Aira</strong><br><br>Pakej: <strong>${pkg}</strong><br>Anggaran: <strong>${price}</strong><br>Lead Score: <strong>${payload.lead_score}/100 (${payload.lead_temperature})</strong><br><br>${features}<br><br>Maklumat anda telah direkodkan. Team kami akan semak dan hubungi anda semula.`,()=>options(["Ulang Semula","Tanya Soalan Lain"],x=>{if(x==="Ulang Semula")startHome();else askFreeText();}));});}
+    launcher.onclick=openAira;if(closeBtn)closeBtn.onclick=closeAira;if(toastStart)toastStart.onclick=openAira;if(toastClose)toastClose.onclick=()=>toast.classList.remove('show');
+    document.addEventListener('click',function(e){const t=e.target.closest&&e.target.closest('a[href="#aira-popup"],a[href="#aira"],.rh-open-aira,[data-open-aira]');if(!t)return;e.preventDefault();openAira();});
+    window.RH_OPEN_AIRA_POPUP=openAira;if(location.hash==='#aira-popup')setTimeout(openAira,450);setTimeout(()=>{if(toast&&!drawer.classList.contains('open'))toast.classList.add('show')},3000);
   });
 })();
 </script>

@@ -1,0 +1,125 @@
+{
+  "version": "v5.2.7",
+  "quickActions": [
+    "Cadangkan Website Saya",
+    "Harga Pakej",
+    "Lihat Contoh Website",
+    "Berapa Lama Siap?",
+    "Domain & Hosting",
+    "SEO Google",
+    "Boleh Edit Sendiri?",
+    "Saya Tiada Logo/Gambar"
+  ],
+  "faq": [
+    {
+      "topic": "harga",
+      "triggers": [
+        "harga",
+        "kos",
+        "price",
+        "pakej",
+        "package",
+        "bayaran",
+        "berapa"
+      ],
+      "answer": "Pakej website bermula daripada <strong>RH Starter RM699</strong>, <strong>RH Business RM999</strong>, dan <strong>RH Pro RM1499</strong>. Harga sebenar bergantung kepada jenis bisnes, fungsi dan tahap design."
+    },
+    {
+      "topic": "tempoh",
+      "triggers": [
+        "lama",
+        "siap",
+        "tempoh",
+        "berapa hari",
+        "duration",
+        "ready"
+      ],
+      "answer": "Kebanyakan website boleh siap dalam <strong>3–7 hari bekerja</strong> selepas bahan lengkap diterima. Projek custom mungkin mengambil masa lebih lama."
+    },
+    {
+      "topic": "domain",
+      "triggers": [
+        "domain",
+        ".com",
+        ".my",
+        "nama website"
+      ],
+      "answer": "Domain boleh disediakan atau dibantu setup. Contoh: <strong>namabisnes.com</strong> atau <strong>namabisnes.my</strong>."
+    },
+    {
+      "topic": "hosting",
+      "triggers": [
+        "hosting",
+        "server",
+        "online",
+        "publish"
+      ],
+      "answer": "Ya, kami bantu setup hosting supaya website boleh diakses secara online."
+    },
+    {
+      "topic": "seo",
+      "triggers": [
+        "seo",
+        "google",
+        "ranking",
+        "search",
+        "carian"
+      ],
+      "answer": "Website disediakan dengan <strong>SEO asas</strong>: meta title, meta description, mobile responsive, heading structure, sitemap dan Google-ready structure."
+    },
+    {
+      "topic": "edit",
+      "triggers": [
+        "edit",
+        "ubah",
+        "update",
+        "kemaskini",
+        "sendiri"
+      ],
+      "answer": "Boleh. Bergantung kepada pakej, kandungan boleh disusun supaya mudah dikemaskini. Maintenance tambahan juga boleh dibincangkan."
+    },
+    {
+      "topic": "logo_gambar",
+      "triggers": [
+        "logo",
+        "gambar",
+        "image",
+        "photo",
+        "tak ada gambar",
+        "tiada gambar"
+      ],
+      "answer": "Tiada masalah. Jika ada logo/gambar sendiri, kami boleh gunakan. Jika belum ada, kami boleh bantu cadangkan visual yang sesuai."
+    },
+    {
+      "topic": "contoh",
+      "triggers": [
+        "contoh",
+        "demo",
+        "portfolio",
+        "template",
+        "sample"
+      ],
+      "answer": "Kami ada contoh website untuk Kedai Makan, Homestay, Kereta Sewa, Aircond, Renovation, Butik, Corporate dan Produk Online."
+    },
+    {
+      "topic": "bayaran",
+      "triggers": [
+        "ansuran",
+        "deposit",
+        "bayar",
+        "installment"
+      ],
+      "answer": "Kaedah bayaran boleh dibincangkan mengikut scope projek. Biasanya projek dimulakan selepas maklumat asas dan pakej disahkan."
+    },
+    {
+      "topic": "proses",
+      "triggers": [
+        "proses",
+        "cara",
+        "macam mana",
+        "step"
+      ],
+      "answer": "Proses ringkas: Aira kumpul maklumat, kami cadangkan pakej, anda sediakan bahan, website dibina, semakan dan live."
+    }
+  ]
+}
