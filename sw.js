@@ -1,4 +1,4 @@
-const RH_CACHE_NAME = 'services-restu-harmoni-v5.2.8';
+const RH_CACHE_NAME = 'services-restu-harmoni-v5.2.9';
 const RH_ASSETS=['./','./index.html',
   './templates/produk-online.html',
   './templates/corporate.html',
@@ -74,3 +74,5 @@ self.addEventListener('fetch',event=>{if(event.request.method!=='GET')return;eve
 /* RH_V5_2_7_AIRA_FAQ_CONSULTANT */
 
 /* RH_V5_2_8_PUBLIC_CLEANUP */
+
+/* RH_V5_2_9_TEMPLATE_DEMO_BUTTONS */

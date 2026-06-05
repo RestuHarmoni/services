@@ -6,14 +6,14 @@
 <title>Website Template</title>
 <link rel="stylesheet" href="../template-demo.css">
 <script>
-window.RH_TEMPLATE_DATA = {"aircond": {"name": "Dingin Aircond Services", "industry": "Servis Aircond", "headline": "Cuci, Repair & Install Aircond", "subheadline": "Servis aircond rumah dan pejabat dengan temujanji melalui Mula Dengan Aira.", "image": "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1400&q=80", "color": "#2563eb", "services": ["Cuci Aircond", "Repair Aircond", "Install Aircond", "Maintenance Berkala"], "products": [{"title": "Cuci Aircond", "price": "RM80+", "desc": "Cuci indoor dan outdoor unit."}, {"title": "Repair Aircond", "price": "Quotation", "desc": "Troubleshoot masalah tidak sejuk/bocor."}, {"title": "Install Aircond", "price": "RM250+", "desc": "Pemasangan unit baru mengikut lokasi."}], "testimonial": "Website jelas tunjuk servis dan memudahkan pelanggan booking.", "cta": "Mula Dengan Aira"}};
+window.RH_TEMPLATE_DATA = {"aircond": {"name": "Dingin Aircond Services", "industry": "Servis Aircond", "headline": "Cuci, Repair & Install Aircond", "subheadline": "Servis aircond rumah dan pejabat dengan temujanji melalui WhatsApp Servis.", "image": "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1400&q=80", "color": "#2563eb", "services": ["Cuci Aircond", "Repair Aircond", "Install Aircond", "Maintenance Berkala"], "products": [{"title": "Cuci Aircond", "price": "RM80+", "desc": "Cuci indoor dan outdoor unit."}, {"title": "Repair Aircond", "price": "Quotation", "desc": "Troubleshoot masalah tidak sejuk/bocor."}, {"title": "Install Aircond", "price": "RM250+", "desc": "Pemasangan unit baru mengikut lokasi."}], "testimonial": "Website jelas tunjuk servis dan memudahkan pelanggan booking.", "cta": "WhatsApp Servis"}};
 </script>
 </head>
 <body data-template="aircond">
 <header class="topbar">
   <div class="container nav">
     <div class="brand" data-company>Nama Bisnes</div>
-    <a class="rh-btn rh-btn-dark" data-wa href="#">Mula Dengan Aira</a>
+    <a class="rh-btn rh-btn-dark" data-demo-button href="#">WhatsApp Servis</a>
   </div>
 </header>
 <main>
@@ -23,11 +23,11 @@ window.RH_TEMPLATE_DATA = {"aircond": {"name": "Dingin Aircond Services", "indus
     <h1 data-headline>Headline Website</h1>
     <p class="lead" data-subheadline>Subheadline website.</p>
     <div class="actions">
-      <a class="rh-btn rh-btn-primary" data-wa href="#"><span data-cta>Mula Dengan Aira</span></a>
+      <a class="rh-btn rh-btn-primary" data-demo-button href="#"><span data-cta>WhatsApp Servis</span></a>
       <a class="rh-btn rh-btn-dark" href="#services">Lihat Servis</a>
     </div>
     <div class="trust">
-      <div>Maklumat Jelas</div><div>Gambar Menarik</div><div>Testimoni</div><div>Mula Dengan Aira Booking</div>
+      <div>Maklumat Jelas</div><div>Gambar Menarik</div><div>Testimoni</div><div>WhatsApp Servis Booking</div>
     </div>
   </div>
 </section>
@@ -83,7 +83,7 @@ window.RH_TEMPLATE_DATA = {"aircond": {"name": "Dingin Aircond Services", "indus
       <h2>Soalan biasa dijawab awal.</h2>
     </div>
     <div class="faq">
-      <div><strong>Bagaimana pelanggan membuat tempahan?</strong><p class="muted">Tekan butang Mula Dengan Aira dan mesej akan dihantar terus kepada pemilik bisnes.</p></div>
+      <div><strong>Bagaimana pelanggan membuat tempahan?</strong><p class="muted">Tekan butang WhatsApp Servis dan mesej akan dihantar terus kepada pemilik bisnes.</p></div>
       <div><strong>Boleh tambah gambar sendiri?</strong><p class="muted">Boleh. Gambar produk, servis, lokasi atau portfolio boleh ditukar mengikut bisnes sebenar.</p></div>
       <div><strong>Boleh tambah fungsi advance?</strong><p class="muted">Boleh dibincangkan untuk pakej Business atau Premium.</p></div>
     </div>
@@ -94,12 +94,19 @@ window.RH_TEMPLATE_DATA = {"aircond": {"name": "Dingin Aircond Services", "indus
   <div class="container">
     <h2>Suka susunan website seperti ini?</h2>
     <p class="lead" style="margin:auto">Kami boleh sesuaikan nama, gambar, warna dan kandungan mengikut bisnes anda.</p>
-    <div class="actions" style="justify-content:center"><a class="rh-btn rh-btn-primary" data-wa href="#">Mula Dengan Aira</a></div>
+    <div class="actions" style="justify-content:center"><a class="rh-btn rh-btn-primary" data-demo-button href="#">WhatsApp Servis</a></div>
   </div>
 </section>
 </main>
-<a class="whatsapp" data-wa href="#">Mula Dengan Aira</a>
-<footer><div class="container">RESTU HARMONI DIGITAL SOLUTIONS<br>Website Development • Lead Generation • Mula Dengan Aira Ready</div></footer>
-<script src="../template-demo.js"></script>
+<a class="whatsapp" data-demo-button href="#">WhatsApp Servis</a>
+<footer><div class="container">RESTU HARMONI DIGITAL SOLUTIONS<br>Website Development • Lead Generation • WhatsApp Servis Ready</div></footer>
+
+
+<script id="rh-v529-demo-buttons-only">
+document.querySelectorAll('a[href="#"]').forEach(function(a){
+  a.addEventListener('click', function(e){ e.preventDefault(); });
+});
+</script>
+
 </body>
 </html>
