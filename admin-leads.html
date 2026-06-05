@@ -1,199 +1,30 @@
 <!doctype html>
 <html lang="ms">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Lead Management | Restu Harmoni</title>
 <script src="supabase-config.js"></script>
 <script src="aira-lead-system.js"></script>
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter,system-ui,Arial;background:#f8fafc;color:#0f172a}
-.top{position:sticky;top:0;z-index:10;background:#0f172a;color:#fff}
-.top .inner{width:min(1200px,94%);margin:auto;padding:16px 0;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
-.wrap{width:min(1200px,94%);margin:24px auto}
-.btn,button,select,input{border-radius:12px;padding:11px 14px;font-weight:850}
-.btn,button{border:0;background:#2563eb;color:#fff;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
-.btn.dark{background:#334155}.btn.danger{background:#dc2626}
-select,input{border:1px solid #e2e8f0;background:#fff}
-.bar{display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:16px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}
-.stat{background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:16px;box-shadow:0 12px 32px rgba(15,23,42,.05)}
-.stat span{color:#64748b}.stat b{font-size:28px}
-.notice{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:16px;padding:14px;margin:14px 0;display:none}
-.ok{background:#ecfdf5;border-color:#bbf7d0;color:#166534}
-.table{background:#fff;border:1px solid #e2e8f0;border-radius:22px;overflow:auto;box-shadow:0 18px 48px rgba(15,23,42,.06)}
-table{width:100%;border-collapse:collapse;min-width:1100px}
-th,td{padding:13px;border-bottom:1px solid #e2e8f0;text-align:left;vertical-align:top}
-th{background:#f1f5f9;font-size:13px;text-transform:uppercase;color:#475569}
-.pill{display:inline-flex;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:900}
-.HOT{background:#fee2e2;color:#991b1b}.WARM{background:#fef3c7;color:#92400e}.COLD{background:#e0f2fe;color:#075985}
-.NEW{background:#dcfce7;color:#166534}.CONTACTED{background:#dbeafe;color:#1d4ed8}.QUOTATION_SENT{background:#fef3c7;color:#92400e}.WON{background:#dcfce7;color:#166534}.LOST{background:#fee2e2;color:#991b1b}
-.empty{text-align:center;padding:30px;color:#64748b}
-@media(max-width:800px){.grid{grid-template-columns:1fr 1fr}.top .inner{align-items:flex-start}}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial;background:#f8fafc;color:#0f172a}.top{position:sticky;top:0;z-index:10;background:#0f172a;color:#fff}.top .inner{width:min(1200px,94%);margin:auto;padding:16px 0;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.wrap{width:min(1200px,94%);margin:24px auto}.btn,button,select,input{border-radius:12px;padding:11px 14px;font-weight:850}.btn,button{border:0;background:#2563eb;color:#fff;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}.btn.dark{background:#334155}.bar{display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:16px}select,input{border:1px solid #e2e8f0;background:#fff}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}.stat{background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:16px;box-shadow:0 12px 32px rgba(15,23,42,.05)}.stat span{color:#64748b}.stat b{font-size:28px}.notice{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:16px;padding:14px;margin:14px 0;display:none}.ok{background:#ecfdf5;border-color:#bbf7d0;color:#166534}.table{background:#fff;border:1px solid #e2e8f0;border-radius:22px;overflow:auto;box-shadow:0 18px 48px rgba(15,23,42,.06)}table{width:100%;border-collapse:collapse;min-width:1120px}th,td{padding:13px;border-bottom:1px solid #e2e8f0;text-align:left;vertical-align:top}th{background:#f1f5f9;font-size:13px;text-transform:uppercase;color:#475569}.pill{display:inline-flex;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:900}.HOT{background:#fee2e2;color:#991b1b}.WARM{background:#fef3c7;color:#92400e}.COLD{background:#e0f2fe;color:#075985}.NEW{background:#dcfce7;color:#166534}.CONTACTED{background:#dbeafe;color:#1d4ed8}.QUOTATION_SENT{background:#fef3c7;color:#92400e}.WON{background:#dcfce7;color:#166534}.LOST{background:#fee2e2;color:#991b1b}.empty{text-align:center;padding:30px;color:#64748b}@media(max-width:800px){.grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
-<header class="top">
-  <div class="inner">
-    <strong>RH Lead Management</strong>
-    <div>
-      <a class="btn dark" href="admin.html">← Admin Panel</a>
-      <a class="btn dark" href="index.html">Website</a>
-      <button id="refreshTop">Refresh</button>
-    </div>
-  </div>
-</header>
-
+<header class="top"><div class="inner"><strong>RH Lead Management</strong><div><a class="btn dark" href="admin.html">← Admin Panel</a><a class="btn dark" href="index.html">Website</a><button id="refreshTop">Refresh</button></div></div></header>
 <main class="wrap">
-  <div class="bar">
-    <div>
-      <h1>Leads Aira</h1>
-      <p style="color:#64748b;margin-top:-8px">Data dibaca terus daripada Supabase table <strong>leads</strong>.</p>
-    </div>
-    <div>
-      <input id="search" placeholder="Cari nama / telefon / bisnes">
-      <select id="statusFilter">
-        <option value="">Semua Status</option>
-        <option>NEW</option>
-        <option>CONTACTED</option>
-        <option>QUOTATION_SENT</option>
-        <option>WON</option>
-        <option>LOST</option>
-      </select>
-      <button id="refresh">Refresh</button>
-    </div>
-  </div>
-
-  <div id="notice" class="notice"></div>
-
-  <div class="grid">
-    <div class="stat"><span>Total Leads</span><br><b id="total">0</b></div>
-    <div class="stat"><span>Hot Leads</span><br><b id="hot">0</b></div>
-    <div class="stat"><span>New</span><br><b id="new">0</b></div>
-    <div class="stat"><span>Won</span><br><b id="won">0</b></div>
-  </div>
-
-  <div class="table">
-    <table>
-      <thead>
-        <tr>
-          <th>Tarikh</th><th>Nama</th><th>WhatsApp</th><th>Bisnes</th><th>Objektif</th><th>Budget</th><th>Timeline</th><th>Pakej</th><th>Score</th><th>Status</th><th>Action</th>
-        </tr>
-      </thead>
-      <tbody id="rows"><tr><td colspan="11" class="empty">Loading...</td></tr></tbody>
-    </table>
-  </div>
+<div class="bar"><div><h1>Leads Aira</h1><p style="color:#64748b;margin-top:-8px">Data dibaca terus daripada Supabase table <strong>leads</strong>.</p></div><div><input id="search" placeholder="Cari nama / telefon / bisnes"><select id="statusFilter"><option value="">Semua Status</option><option>NEW</option><option>CONTACTED</option><option>QUOTATION_SENT</option><option>WON</option><option>LOST</option></select><button id="refresh">Refresh</button></div></div>
+<div id="notice" class="notice"></div>
+<div class="grid"><div class="stat"><span>Total Leads</span><br><b id="total">0</b></div><div class="stat"><span>Hot Leads</span><br><b id="hot">0</b></div><div class="stat"><span>New</span><br><b id="new">0</b></div><div class="stat"><span>Won</span><br><b id="won">0</b></div></div>
+<div class="table"><table><thead><tr><th>Tarikh</th><th>Nama</th><th>WhatsApp</th><th>Bisnes</th><th>Objektif</th><th>Budget</th><th>Timeline</th><th>Pakej</th><th>Score</th><th>Status</th><th>Action</th></tr></thead><tbody id="rows"><tr><td colspan="11" class="empty">Loading...</td></tr></tbody></table></div>
 </main>
-
 <script>
-let allLeads=[];
-let supa=null;
-
-function showNotice(msg,type){
-  const n=document.getElementById('notice');
-  n.textContent=msg;
-  n.className='notice'+(type==='ok'?' ok':'');
-  n.style.display='block';
-}
+let allLeads=[],supa=null;
+function showNotice(msg,type){const n=document.getElementById('notice');n.textContent=msg;n.className='notice'+(type==='ok'?' ok':'');n.style.display='block'}
 function hideNotice(){document.getElementById('notice').style.display='none'}
-
-async function getClient(){
-  if(supa) return supa;
-  if(!window.RH_AIRA_LEAD_SYSTEM){
-    showNotice('aira-lead-system.js tidak dimuatkan. Semak fail aira-lead-system.js.', 'err');
-    return null;
-  }
-  supa = await window.RH_AIRA_LEAD_SYSTEM.initSupabase();
-  if(!supa){
-    showNotice('Supabase belum connect. Semak supabase-config.js atau internet/CDN Supabase.', 'err');
-    return null;
-  }
-  return supa;
-}
-
-async function loadLeads(){
-  hideNotice();
-  const client=await getClient();
-  if(!client){
-    const local=window.RH_AIRA_LEAD_SYSTEM ? window.RH_AIRA_LEAD_SYSTEM.getLocalLeads() : [];
-    allLeads=local;
-    render();
-    return;
-  }
-  const {data,error}=await client.from('leads').select('*').order('created_at',{ascending:false});
-  if(error){
-    showNotice('Supabase error: '+error.message+'. Jika RLS block SELECT, jalankan policy admin read di SQL Editor.', 'err');
-    allLeads=[];
-  }else{
-    allLeads=data||[];
-    showNotice('Connected to Supabase. '+allLeads.length+' lead ditemui.', 'ok');
-  }
-  render();
-}
-
-function filtered(){
-  const s=document.getElementById('statusFilter').value;
-  const q=document.getElementById('search').value.trim().toLowerCase();
-  return allLeads.filter(x=>{
-    const okStatus=!s || x.status===s;
-    const blob=[x.name,x.phone,x.business_type,x.objective,x.budget,x.timeline,x.recommended_package,x.status].join(' ').toLowerCase();
-    return okStatus && (!q || blob.includes(q));
-  });
-}
-
-function render(){
-  const leads=filtered();
-  document.getElementById('total').textContent=allLeads.length;
-  document.getElementById('hot').textContent=allLeads.filter(x=>x.lead_temperature==='HOT').length;
-  document.getElementById('new').textContent=allLeads.filter(x=>x.status==='NEW').length;
-  document.getElementById('won').textContent=allLeads.filter(x=>x.status==='WON').length;
-
-  const rows=document.getElementById('rows');
-  if(!leads.length){
-    rows.innerHTML='<tr><td colspan="11" class="empty">Tiada lead untuk filter ini.</td></tr>';
-    return;
-  }
-
-  rows.innerHTML=leads.map(x=>{
-    const date=x.created_at?new Date(x.created_at).toLocaleString('ms-MY'):'-';
-    const temp=x.lead_temperature||'WARM';
-    const status=x.status||'NEW';
-    return `<tr>
-      <td>${date}</td>
-      <td><strong>${x.name||''}</strong></td>
-      <td>${x.phone||''}</td>
-      <td>${x.business_type||''}</td>
-      <td>${x.objective||''}</td>
-      <td>${x.budget||''}</td>
-      <td>${x.timeline||''}</td>
-      <td>${x.recommended_package||''}</td>
-      <td><span class="pill ${temp}">${x.lead_score||0}/100 ${temp}</span></td>
-      <td><span class="pill ${status}">${status}</span></td>
-      <td>
-        <select data-id="${x.id}" class="statusSelect">
-          ${['NEW','CONTACTED','QUOTATION_SENT','WON','LOST'].map(st=>`<option ${st===status?'selected':''}>${st}</option>`).join('')}
-        </select>
-      </td>
-    </tr>`;
-  }).join('');
-
-  document.querySelectorAll('.statusSelect').forEach(sel=>{
-    sel.onchange=async()=>{
-      const client=await getClient();
-      if(!client){showNotice('Tidak boleh update kerana Supabase belum connect.','err');return;}
-      const {error}=await client.from('leads').update({status:sel.value}).eq('id',sel.dataset.id);
-      if(error) showNotice('Update status gagal: '+error.message,'err');
-      else {showNotice('Status lead dikemaskini.','ok'); loadLeads();}
-    };
-  });
-}
-
-document.getElementById('refresh').onclick=loadLeads;
-document.getElementById('refreshTop').onclick=loadLeads;
-document.getElementById('statusFilter').onchange=render;
-document.getElementById('search').oninput=render;
-loadLeads();
+async function getClient(){if(supa)return supa;if(!window.RH_AIRA_LEAD_SYSTEM){showNotice('aira-lead-system.js tidak dimuatkan.','err');return null}supa=await window.RH_AIRA_LEAD_SYSTEM.initSupabase();if(!supa){showNotice('Supabase belum connect. Semak supabase-config.js.','err');return null}return supa}
+async function loadLeads(){hideNotice();const client=await getClient();if(!client){allLeads=window.RH_AIRA_LEAD_SYSTEM?window.RH_AIRA_LEAD_SYSTEM.getLocalLeads():[];render();return}const {data,error}=await client.from('leads').select('*').order('created_at',{ascending:false});if(error){showNotice('Supabase error: '+error.message,'err');allLeads=[]}else{allLeads=data||[];showNotice('Connected to Supabase. '+allLeads.length+' lead ditemui.','ok')}render()}
+function filtered(){const s=document.getElementById('statusFilter').value,q=document.getElementById('search').value.trim().toLowerCase();return allLeads.filter(x=>{const blob=[x.name,x.phone,x.business_type,x.objective,x.budget,x.timeline,x.recommended_package,x.status].join(' ').toLowerCase();return(!s||x.status===s)&&(!q||blob.includes(q))})}
+function render(){const leads=filtered();document.getElementById('total').textContent=allLeads.length;document.getElementById('hot').textContent=allLeads.filter(x=>x.lead_temperature==='HOT').length;document.getElementById('new').textContent=allLeads.filter(x=>x.status==='NEW').length;document.getElementById('won').textContent=allLeads.filter(x=>x.status==='WON').length;const rows=document.getElementById('rows');if(!leads.length){rows.innerHTML='<tr><td colspan="11" class="empty">Tiada lead.</td></tr>';return}rows.innerHTML=leads.map(x=>{const date=x.created_at?new Date(x.created_at).toLocaleString('ms-MY'):'-';const temp=x.lead_temperature||'WARM',status=x.status||'NEW';return `<tr><td>${date}</td><td><strong>${x.name||''}</strong></td><td>${x.phone||''}</td><td>${x.business_type||''}</td><td>${x.objective||''}</td><td>${x.budget||''}</td><td>${x.timeline||''}</td><td>${x.recommended_package||''}</td><td><span class="pill ${temp}">${x.lead_score||0}/100 ${temp}</span></td><td><span class="pill ${status}">${status}</span></td><td><select data-id="${x.id}" class="statusSelect">${['NEW','CONTACTED','QUOTATION_SENT','WON','LOST'].map(st=>`<option ${st===status?'selected':''}>${st}</option>`).join('')}</select></td></tr>`}).join('');document.querySelectorAll('.statusSelect').forEach(sel=>{sel.onchange=async()=>{const client=await getClient();if(!client)return;const {error}=await client.from('leads').update({status:sel.value}).eq('id',sel.dataset.id);if(error)showNotice('Update gagal: '+error.message,'err');else loadLeads()}})}
+document.getElementById('refresh').onclick=loadLeads;document.getElementById('refreshTop').onclick=loadLeads;document.getElementById('statusFilter').onchange=render;document.getElementById('search').oninput=render;loadLeads();
 </script>
-</body>
-</html>
+</body></html>

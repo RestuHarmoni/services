@@ -1,13 +1,20 @@
 
 (function(){
-  const SUPABASE_CDN = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
-  const cfg = window.RH_SUPABASE_CONFIG || {};
-  let supabaseClient = null;
+  const SUPABASE_CDN="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+  const cfg=window.RH_SUPABASE_CONFIG||{};
+  let supabaseClient=null;
+
+  const BANK={
+    businessOptions:["Aircond","Homestay","Kereta Sewa","Kedai Makan","Kontraktor","Butik","Hartanah","Klinik","Produk Online","Lain-lain"],
+    objectiveOptions:["Dapatkan pelanggan","Booking","Company Profile","Jual Produk","Landing Page","Custom"],
+    budgetOptions:["RM699 – RM999","RM1000 – RM2000","RM2000+","Belum pasti"],
+    timelineOptions:["Segera","1–2 Minggu","1 Bulan","Belum pasti"]
+  };
 
   function loadSupabase(){
-    return new Promise((resolve)=>{
-      if(window.supabase){ resolve(true); return; }
-      const s=document.createElement('script');
+    return new Promise(resolve=>{
+      if(window.supabase){resolve(true);return;}
+      const s=document.createElement("script");
       s.src=SUPABASE_CDN;
       s.onload=()=>resolve(true);
       s.onerror=()=>resolve(false);
@@ -16,43 +23,57 @@
   }
 
   async function initSupabase(){
-    if(supabaseClient) return supabaseClient;
-    if(!cfg.url || !cfg.anonKey || cfg.url.includes("PASTE_")) return null;
-    const ok = await loadSupabase();
-    if(!ok || !window.supabase) return null;
-    supabaseClient = window.supabase.createClient(cfg.url, cfg.anonKey);
+    if(supabaseClient)return supabaseClient;
+    if(!cfg.url||!cfg.anonKey||cfg.url.includes("PASTE_"))return null;
+    const ok=await loadSupabase();
+    if(!ok||!window.supabase)return null;
+    supabaseClient=window.supabase.createClient(cfg.url,cfg.anonKey);
     return supabaseClient;
   }
 
+  function normalizePhone(v){return String(v||"").replace(/[\s-]/g,"");}
+  function validPhone(v){return /^(\+?6?01)[0-9]{7,10}$/.test(normalizePhone(v));}
+
   function scoreLead(data){
     let score=40;
-    if(data.budget==="RM2000+") score+=30;
-    else if(data.budget==="RM1000 – RM2000") score+=20;
-    else if(data.budget==="RM699 – RM999") score+=10;
-
-    if(data.timeline==="Segera") score+=25;
-    else if(data.timeline==="1–2 Minggu") score+=15;
-    else if(data.timeline==="1 Bulan") score+=8;
-
-    if(["Corporate","Klinik","Hartanah"].includes(data.business_type)) score+=10;
-    if(["Booking","Company Profile","Jual Produk"].includes(data.objective)) score+=8;
-
+    if(data.budget==="RM2000+")score+=30;
+    else if(data.budget==="RM1000 – RM2000")score+=20;
+    else if(data.budget==="RM699 – RM999")score+=10;
+    if(data.timeline==="Segera")score+=25;
+    else if(data.timeline==="1–2 Minggu")score+=15;
+    else if(data.timeline==="1 Bulan")score+=8;
+    if(["Corporate","Klinik","Hartanah"].includes(data.business_type))score+=10;
+    if(["Booking","Company Profile","Jual Produk"].includes(data.objective))score+=8;
     return Math.min(score,100);
   }
 
   function packageFor(data){
-    if(data.budget==="RM2000+") return "RH Pro";
-    if(data.budget==="RM1000 – RM2000") return "RH Business";
-    if(data.objective==="Custom") return "Custom";
-    if(data.business_type==="Corporate" || data.business_type==="Klinik") return "RH Pro";
-    if(["Homestay","Kereta Sewa","Kedai Makan","Kontraktor","Butik"].includes(data.business_type)) return "RH Business";
+    if(data.objective==="Custom")return "Custom";
+    if(data.budget==="RM2000+")return "RH Pro";
+    if(["Klinik","Hartanah"].includes(data.business_type))return "RH Pro";
+    if(data.budget==="RM1000 – RM2000")return "RH Business";
+    if(["Homestay","Kereta Sewa","Kedai Makan","Kontraktor","Butik","Produk Online"].includes(data.business_type))return "RH Business";
     return "RH Starter";
   }
 
+  function priceFor(pkg){
+    return pkg==="RH Starter"?"RM699":pkg==="RH Business"?"RM999":pkg==="RH Pro"?"RM1499":"Quotation";
+  }
+
   function tempFor(score){
-    if(score>=80) return "HOT";
-    if(score>=60) return "WARM";
+    if(score>=80)return "HOT";
+    if(score>=60)return "WARM";
     return "COLD";
+  }
+
+  function featuresFor(pkg){
+    const map={
+      "RH Starter":["1 page landing page","Servis utama","Galeri asas","FAQ","Lead form Aira"],
+      "RH Business":["Website lebih lengkap","Galeri premium","Booking enquiry","Testimoni","SEO asas"],
+      "RH Pro":["Premium UI","Lead capture","Portfolio","Advanced section","SEO lebih lengkap"],
+      "Custom":["Scope custom","Quotation ikut keperluan","Sesuai untuk sistem khas"]
+    };
+    return map[pkg]||map["RH Starter"];
   }
 
   function getLocalLeads(){
@@ -66,40 +87,35 @@
   }
 
   async function saveLead(lead){
-    const client = await initSupabase();
-    if(!client){
-      saveLocalLead(lead);
-      return {ok:true, mode:"local"};
-    }
-    const {error} = await client.from("leads").insert([lead]);
-    if(error){
-      saveLocalLead(lead);
-      return {ok:false, mode:"local", error:error.message};
-    }
-    return {ok:true, mode:"supabase"};
+    const client=await initSupabase();
+    if(!client){saveLocalLead(lead);return{ok:true,mode:"local"};}
+    const {error}=await client.from("leads").insert([lead]);
+    if(error){saveLocalLead(lead);return{ok:false,mode:"local",error:error.message};}
+    return{ok:true,mode:"supabase"};
   }
 
-  window.RH_AIRA_LEAD_SYSTEM = {
-    scoreLead, packageFor, tempFor, saveLead, getLocalLeads, initSupabase,
-    createLeadPayload(data){
-      const recommended_package=packageFor(data);
-      const lead_score=scoreLead(data);
-      const lead_temperature=tempFor(lead_score);
-      return {
-        name:data.name,
-        phone:data.phone,
-        business_type:data.business_type,
-        objective:data.objective,
-        budget:data.budget,
-        timeline:data.timeline,
-        recommended_package,
-        lead_score,
-        lead_temperature,
-        status:"NEW",
-        source:"Aira",
-        page_url:location.href,
-        user_agent:navigator.userAgent
-      };
-    }
+  function createLeadPayload(data){
+    const recommended_package=packageFor(data);
+    const lead_score=scoreLead(data);
+    return{
+      name:data.name,
+      phone:normalizePhone(data.phone),
+      business_type:data.business_type,
+      objective:data.objective,
+      budget:data.budget,
+      timeline:data.timeline,
+      recommended_package,
+      lead_score,
+      lead_temperature:tempFor(lead_score),
+      status:"NEW",
+      source:"Aira",
+      page_url:location.href,
+      user_agent:navigator.userAgent
+    };
+  }
+
+  window.RH_AIRA_LEAD_SYSTEM={
+    BANK,initSupabase,normalizePhone,validPhone,scoreLead,packageFor,priceFor,tempFor,featuresFor,
+    getLocalLeads,saveLead,createLeadPayload
   };
 })();

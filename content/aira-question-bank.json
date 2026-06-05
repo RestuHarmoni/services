@@ -1,0 +1,132 @@
+{
+  "version": "v5.2.6",
+  "assistantName": "Aira",
+  "positioning": "AI Website Consultant",
+  "steps": [
+    {
+      "key": "business_type",
+      "question": "Apakah jenis bisnes anda?",
+      "options": [
+        "Aircond",
+        "Homestay",
+        "Kereta Sewa",
+        "Kedai Makan",
+        "Kontraktor",
+        "Butik",
+        "Hartanah",
+        "Klinik",
+        "Produk Online",
+        "Lain-lain"
+      ]
+    },
+    {
+      "key": "objective",
+      "question": "Apakah tujuan utama website anda?",
+      "options": [
+        "Dapatkan pelanggan",
+        "Booking",
+        "Company Profile",
+        "Jual Produk",
+        "Landing Page",
+        "Custom"
+      ]
+    },
+    {
+      "key": "budget",
+      "question": "Anggaran budget anda?",
+      "options": [
+        "RM699 – RM999",
+        "RM1000 – RM2000",
+        "RM2000+",
+        "Belum pasti"
+      ]
+    },
+    {
+      "key": "timeline",
+      "question": "Bilakah anda mahu website siap?",
+      "options": [
+        "Segera",
+        "1–2 Minggu",
+        "1 Bulan",
+        "Belum pasti"
+      ]
+    },
+    {
+      "key": "name",
+      "question": "Siapa nama anda?",
+      "input": true,
+      "placeholder": "Contoh: Ahmad"
+    },
+    {
+      "key": "phone",
+      "question": "Nombor WhatsApp untuk kami hubungi?",
+      "input": true,
+      "placeholder": "Contoh: 0123456789",
+      "required": true
+    }
+  ],
+  "packages": {
+    "RH Starter": {
+      "price": "RM699",
+      "bestFor": [
+        "Aircond",
+        "Plumbing",
+        "Elektrik",
+        "Servis kecil"
+      ],
+      "features": [
+        "1 page landing page",
+        "Servis utama",
+        "Galeri asas",
+        "FAQ",
+        "Lead form Aira"
+      ]
+    },
+    "RH Business": {
+      "price": "RM999",
+      "bestFor": [
+        "Homestay",
+        "Kereta Sewa",
+        "Kedai Makan",
+        "Kontraktor",
+        "Butik"
+      ],
+      "features": [
+        "Website lebih lengkap",
+        "Galeri premium",
+        "Booking enquiry",
+        "Testimoni",
+        "SEO asas"
+      ]
+    },
+    "RH Pro": {
+      "price": "RM1499",
+      "bestFor": [
+        "Corporate",
+        "Klinik",
+        "Hartanah",
+        "Syarikat"
+      ],
+      "features": [
+        "Premium UI",
+        "Lead capture",
+        "Portfolio",
+        "Advanced section",
+        "SEO lebih lengkap"
+      ]
+    },
+    "Custom": {
+      "price": "Quotation",
+      "bestFor": [
+        "Sistem khas",
+        "Dashboard",
+        "Portal",
+        "Automation"
+      ],
+      "features": [
+        "Scope custom",
+        "Quotation ikut keperluan"
+      ]
+    }
+  }
+}
