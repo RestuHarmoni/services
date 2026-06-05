@@ -9,10 +9,10 @@ let templates = JSON.parse(localStorage.getItem('rh_templates_data')||'null') ||
 
 document.getElementById('logout').onclick=()=>window.RH_ADMIN_AUTH.signOut();
 
-document.querySelectorAll('.side button').forEach(btn=>btn.onclick=()=>{
+document.querySelectorAll('.side button[data-tab]').forEach(btn=>btn.onclick=()=>{
  document.querySelectorAll('.side button').forEach(b=>b.classList.remove('active')); btn.classList.add('active');
- ['site','templates','export'].forEach(t=>$('tab-'+t).style.display=(btn.dataset.tab===t?'block':'none'));
- if(btn.dataset.tab==='export') refreshExport();
+ ['dashboard','site','templates','blog','export'].forEach(t=>{const el=$('tab-'+t); if(el) el.style.display=(btn.dataset.tab===t?'block':'none');});
+ if(btn.dataset.tab==='export') refreshExport(); if(btn.dataset.tab==='blog' && window.RH_BLOG_ADMIN){window.RH_BLOG_ADMIN.refreshPosts();}
 });
 
 function loadSite(){
@@ -56,3 +56,6 @@ $('refreshExport').onclick=refreshExport;
 $('clearAll').onclick=()=>{if(confirm('Padam semua local changes?')){localStorage.removeItem('rh_site_content');localStorage.removeItem('rh_templates_data');site=structuredClone(DEFAULT_SITE);templates=structuredClone(DEFAULT_TEMPLATES);loadSite();fillSelect();loadTpl();refreshExport();}};
 
 loadSite(); fillSelect(); loadTpl();
+
+
+document.querySelectorAll('[data-jump-blog]').forEach(btn=>btn.addEventListener('click',()=>{const b=document.querySelector('.side button[data-tab=\"blog\"]'); if(b) b.click(); if(window.RH_BLOG_ADMIN) window.RH_BLOG_ADMIN.newPost();}));

@@ -4,61 +4,48 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Admin Panel | Restu Harmoni</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial;background:#f8fafc;color:#0f172a}.top{position:sticky;top:0;background:#0f172a;color:#fff;z-index:10}.top .inner{width:min(1200px,94%);margin:auto;padding:16px 0;display:flex;justify-content:space-between;align-items:center}.wrap{width:min(1200px,94%);margin:28px auto;display:grid;grid-template-columns:280px 1fr;gap:20px}.side,.panel{background:#fff;border:1px solid #e2e8f0;border-radius:24px;box-shadow:0 18px 48px rgba(15,23,42,.06)}.side{padding:14px;height:max-content;position:sticky;top:80px}.side button{width:100%;text-align:left;background:#fff;border:0;border-radius:14px;padding:13px;font-weight:850;cursor:pointer}.side button.active,.side a.active{background:#dbeafe;color:#1d4ed8}.side a{display:block;width:100%;text-align:left;background:#fff;border:0;border-radius:14px;padding:13px;font-weight:850;cursor:pointer;text-decoration:none;color:#0f172a;margin-top:4px}.panel{padding:22px}h1,h2{letter-spacing:-.04em}label{display:block;font-weight:850;margin:14px 0 6px}input,textarea,select{width:100%;border:1px solid #e2e8f0;border-radius:14px;padding:12px;font-size:15px}textarea{min-height:86px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}button.primary,.btn{border:0;border-radius:14px;background:#2563eb;color:#fff;padding:12px 16px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-flex}.danger{background:#dc2626!important}.muted{color:#64748b}.preview{background:#f8fafc;border:1px dashed #cbd5e1;border-radius:18px;padding:14px;margin-top:12px}.service-row,.product-row{border:1px solid #e2e8f0;border-radius:16px;padding:12px;margin:10px 0;background:#fff}@media(max-width:900px){.wrap{grid-template-columns:1fr}.side{position:relative;top:0}.grid{grid-template-columns:1fr}}
+:root{--bg:#f6f8fc;--card:#fff;--text:#0f172a;--muted:#64748b;--line:#e2e8f0;--blue:#2563eb;--blue2:#dbeafe;--green:#16a34a;--red:#dc2626;--amber:#f59e0b;--shadow:0 22px 70px rgba(15,23,42,.08)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,#e0f2fe 0,#f8fafc 34%,#f6f8fc 100%);color:var(--text)}a{color:inherit}.top{position:sticky;top:0;background:rgba(15,23,42,.96);color:#fff;z-index:10;backdrop-filter:blur(16px);box-shadow:0 12px 40px rgba(15,23,42,.18)}.top .inner{width:min(1220px,94%);margin:auto;padding:14px 0;display:flex;justify-content:space-between;align-items:center;gap:12px}.brand-admin{display:flex;align-items:center;gap:10px;font-weight:950;letter-spacing:-.03em}.brand-dot{width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg,#38bdf8,#2563eb);display:grid;place-items:center}.top-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.wrap{width:min(1220px,94%);margin:26px auto;display:grid;grid-template-columns:280px 1fr;gap:20px}.side,.panel{background:rgba(255,255,255,.92);border:1px solid rgba(226,232,240,.9);border-radius:26px;box-shadow:var(--shadow)}.side{padding:12px;height:max-content;position:sticky;top:82px}.side-title{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:950;margin:8px 10px 12px}.side button,.side a{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:transparent;border:0;border-radius:16px;padding:13px 12px;font-weight:900;cursor:pointer;text-decoration:none;color:#0f172a;margin:3px 0}.side button.active,.side a.active{background:var(--blue2);color:#1d4ed8}.side small{margin-left:auto;color:#94a3b8}.panel{padding:24px;min-height:620px}.section-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:18px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--blue);font-weight:950}h1,h2,h3{letter-spacing:-.045em;margin:0 0 8px}h1{font-size:clamp(26px,4vw,40px)}p{line-height:1.65}.muted{color:var(--muted)}label{display:block;font-weight:900;margin:14px 0 7px}input,textarea,select{width:100%;border:1px solid var(--line);border-radius:16px;padding:13px 14px;font-size:15px;background:#fff;outline:none}input:focus,textarea:focus,select:focus{border-color:#60a5fa;box-shadow:0 0 0 4px #dbeafe}textarea{min-height:96px;resize:vertical}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.stat-card{background:linear-gradient(180deg,#fff,#f8fafc);border:1px solid var(--line);border-radius:22px;padding:18px}.stat-card strong{font-size:28px;letter-spacing:-.05em}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn,button.primary{border:0;border-radius:15px;background:var(--blue);color:#fff;padding:12px 16px;font-weight:950;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 12px 30px rgba(37,99,235,.18)}.btn.soft{background:#eef6ff;color:#1d4ed8;box-shadow:none}.danger{background:var(--red)!important}.success{background:var(--green)!important}.warning{background:var(--amber)!important;color:#111827!important}.preview{background:#f8fafc;border:1px dashed #cbd5e1;border-radius:20px;padding:14px;margin-top:12px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:20px;background:#fff}.blog-table{width:100%;border-collapse:collapse;min-width:780px}.blog-table th,.blog-table td{text-align:left;border-bottom:1px solid #eef2f7;padding:14px;vertical-align:top}.blog-table th{font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:.08em;background:#f8fafc}.badge{display:inline-flex;align-items:center;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:950}.badge.publish{background:#dcfce7;color:#166534}.badge.draft{background:#fef3c7;color:#92400e}.editor-card{border:1px solid var(--line);border-radius:22px;padding:18px;background:#fff;margin-top:16px}.slug-row{display:flex;gap:8px;align-items:center}.slug-row span{color:#64748b;background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:13px}.help{font-size:13px;color:#64748b;margin-top:6px}.article-editor{min-height:260px;font-family:Inter,system-ui,Arial;line-height:1.65}.hidden{display:none!important}@media(max-width:900px){.top .inner{align-items:flex-start}.wrap{grid-template-columns:1fr}.side{position:relative;top:0}.grid,.grid-3{grid-template-columns:1fr}.section-head{display:block}.top-actions .btn,.top-actions button{padding:10px 12px}.panel{padding:18px}.side{display:grid;grid-template-columns:1fr 1fr;gap:6px}.side-title{grid-column:1/-1}.side button,.side a{margin:0}.slug-row{display:block}.slug-row span{display:block;margin-bottom:8px}}@media(max-width:540px){.side{grid-template-columns:1fr}.top .inner{width:92%}.wrap{width:92%;margin:18px auto}.top-actions{width:100%}.top-actions .btn,.top-actions button{flex:1}.grid-3{gap:10px}.stat-card{padding:14px}}
 </style>
 </head>
 <body>
-<header class="top"><div class="inner"><strong>RH Admin Panel</strong><div><a class="btn" href="index.html">Lihat Website</a> <a class="btn" href="admin-leads.html">Lead Management</a> <button class="primary danger" id="logout">Logout</button></div></div></header>
+<header class="top"><div class="inner"><div class="brand-admin"><span class="brand-dot">RH</span><span>RH Admin Panel<br><small style="color:#cbd5e1;font-weight:700">Website Factory Control</small></span></div><div class="top-actions"><a class="btn soft" href="index.html">Lihat Website</a><a class="btn soft" href="admin-leads.html">Leads</a><button class="primary danger" id="logout">Logout</button></div></div></header>
 <div class="wrap">
 <aside class="side">
-<button data-tab="site" class="active">Services Page</button>
-<button data-tab="templates">Demo Templates</button>
-<a href="admin-leads.html">Lead Management</a>
-<button data-tab="export">Export / Backup</button>
+<div class="side-title">Menu Admin</div>
+<button data-tab="dashboard" class="active">📊 Dashboard</button>
+<button data-tab="site">🏠 Services Page</button>
+<button data-tab="templates">🖼️ Demo Templates</button>
+<button data-tab="blog">📝 Blog CMS <small>SEO</small></button>
+<a href="admin-leads.html">👥 Lead Management</a>
+<button data-tab="export">📦 Export / Backup</button>
 </aside>
 <main class="panel">
-<section id="tab-site">
-<h1>Edit Services Page</h1>
-<p class="muted">Kemas kini promo, banner dan maklumat asas website. Simpanan V1 menggunakan localStorage browser admin dahulu.</p>
-<div class="grid">
-<div><label>Promo Title</label><input id="promoTitle"></div>
-<div><label>Promo Subtitle</label><input id="promoSubtitle"></div>
-<div><label>Promo CTA</label><input id="promoCta"></div>
-<div><label>Countdown Jam</label><input id="promoHours" type="number"></div>
-<div><label>Hero Headline</label><input id="heroHeadline"></div>
-<div><label>Hero CTA</label><input id="heroCta"></div>
-</div>
-<label>Hero Subheadline</label><textarea id="heroSub"></textarea>
-<label>Showcase Title</label><input id="showcaseTitle">
-<label>Showcase Subtitle</label><textarea id="showcaseSubtitle"></textarea>
-<div class="actions"><button class="primary" id="saveSite">Simpan Services Page</button><button class="primary" id="resetSite">Reset Default</button></div>
+<section id="tab-dashboard">
+<div class="section-head"><div><div class="eyebrow">Overview</div><h1>Admin Dashboard</h1><p class="muted">Urus website, template demo, lead dan artikel SEO dari satu panel.</p></div><a href="blog.html" class="btn soft" target="_blank">Lihat Blog</a></div>
+<div class="grid-3"><div class="stat-card"><span class="muted">Artikel Published</span><br><strong id="statPublished">0</strong></div><div class="stat-card"><span class="muted">Artikel Draft</span><br><strong id="statDraft">0</strong></div><div class="stat-card"><span class="muted">Template Demo</span><br><strong id="statTemplates">8</strong></div></div>
+<div class="editor-card"><h2>Cadangan Mingguan</h2><p class="muted">Tambah 1–2 artikel seminggu untuk bantu Google faham servis Restu Harmoni. Fokus keyword seperti <b>buat website bisnes kecil</b>, <b>harga website Malaysia</b>, dan <b>website murah Selangor</b>.</p><div class="actions"><button class="primary" data-jump-blog="1">+ Tulis Artikel Baru</button><a class="btn soft" href="blog.html" target="_blank">Preview Blog</a></div></div>
 </section>
-
+<section id="tab-site" style="display:none">
+<div class="section-head"><div><div class="eyebrow">Landing Page</div><h1>Edit Services Page</h1><p class="muted">Kemas kini promo, banner dan maklumat asas website.</p></div></div>
+<div class="grid"><div><label>Promo Title</label><input id="promoTitle"></div><div><label>Promo Subtitle</label><input id="promoSubtitle"></div><div><label>Promo CTA</label><input id="promoCta"></div><div><label>Countdown Jam</label><input id="promoHours" type="number"></div><div><label>Hero Headline</label><input id="heroHeadline"></div><div><label>Hero CTA</label><input id="heroCta"></div></div>
+<label>Hero Subheadline</label><textarea id="heroSub"></textarea><label>Showcase Title</label><input id="showcaseTitle"><label>Showcase Subtitle</label><textarea id="showcaseSubtitle"></textarea><div class="actions"><button class="primary" id="saveSite">Simpan Services Page</button><button class="primary warning" id="resetSite">Reset Default</button></div>
+</section>
 <section id="tab-templates" style="display:none">
-<h1>Edit Demo Template</h1>
-<div class="grid"><div><label>Pilih Template</label><select id="tplSelect"></select></div><div><label>Warna Utama</label><input id="tplColor" type="color"></div></div>
-<div class="grid"><div><label>Nama Bisnes</label><input id="tplName"></div><div><label>Industri</label><input id="tplIndustry"></div></div>
-<label>Headline</label><input id="tplHeadline">
-<label>Subheadline</label><textarea id="tplSub"></textarea>
-<label>URL Gambar Hero / Service</label><input id="tplImage" placeholder="https://...">
-<div class="preview"><strong>Preview gambar:</strong><div id="imgPreview" style="margin-top:10px;height:190px;border-radius:16px;background:#e2e8f0;background-size:cover;background-position:center"></div></div>
-<label>Servis Utama (satu baris satu item)</label><textarea id="tplServices"></textarea>
-<label>Produk / Pakej (format: Tajuk | Harga | Description, satu baris satu item)</label><textarea id="tplProducts"></textarea>
-<label>Testimoni</label><textarea id="tplTestimonial"></textarea>
-<label>CTA Button</label><input id="tplCta">
-<div class="actions"><button class="primary" id="saveTpl">Simpan Template</button><a class="btn" id="previewTpl" target="_blank">Lihat Website Ini</a><button class="primary" id="resetTpl">Reset Template</button></div>
+<div class="section-head"><div><div class="eyebrow">Portfolio Demo</div><h1>Edit Demo Template</h1><p class="muted">Samakan gaya dan kandungan contoh website.</p></div></div>
+<div class="grid"><div><label>Pilih Template</label><select id="tplSelect"></select></div><div><label>Warna Utama</label><input id="tplColor" type="color"></div></div><div class="grid"><div><label>Nama Bisnes</label><input id="tplName"></div><div><label>Industri</label><input id="tplIndustry"></div></div><label>Headline</label><input id="tplHeadline"><label>Subheadline</label><textarea id="tplSub"></textarea><label>URL Gambar Hero / Service</label><input id="tplImage" placeholder="https://..."><div class="preview"><strong>Preview gambar:</strong><div id="imgPreview" style="margin-top:10px;height:190px;border-radius:18px;background:#e2e8f0;background-size:cover;background-position:center"></div></div><label>Servis Utama (satu baris satu item)</label><textarea id="tplServices"></textarea><label>Produk / Pakej (format: Tajuk | Harga | Description, satu baris satu item)</label><textarea id="tplProducts"></textarea><label>Testimoni</label><textarea id="tplTestimonial"></textarea><label>CTA Button</label><input id="tplCta"><div class="actions"><button class="primary" id="saveTpl">Simpan Template</button><a class="btn soft" id="previewTpl" target="_blank">Lihat Website Ini</a><button class="primary warning" id="resetTpl">Reset Template</button></div>
 </section>
-
-<section id="tab-export" style="display:none">
-<h1>Export / Backup</h1>
-<p class="muted">Untuk V1 static hosting, perubahan disimpan dalam browser admin. Copy JSON ini jika mahu saya masukkan semula ke source code sebagai default production.</p>
-<label>Site Content JSON</label><textarea id="exportSite" style="min-height:180px"></textarea>
-<label>Templates JSON</label><textarea id="exportTemplates" style="min-height:260px"></textarea>
-<div class="actions"><button class="primary" id="refreshExport">Refresh Export</button><button class="primary danger" id="clearAll">Clear Local Changes</button></div>
+<section id="tab-blog" style="display:none">
+<div class="section-head"><div><div class="eyebrow">SEO Engine</div><h1>Blog CMS</h1><p class="muted">Tulis artikel dari admin panel. Artikel published akan keluar di halaman Blog.</p></div><button class="primary" id="newPostBtn">+ Artikel Baru</button></div>
+<div class="grid-3"><div class="stat-card"><span class="muted">Published</span><br><strong id="blogPublished">0</strong></div><div class="stat-card"><span class="muted">Draft</span><br><strong id="blogDraft">0</strong></div><div class="stat-card"><span class="muted">Total Artikel</span><br><strong id="blogTotal">0</strong></div></div>
+<div class="editor-card hidden" id="blogEditor"><h2 id="editorTitle">Artikel Baru</h2><input type="hidden" id="postId"><div class="grid"><div><label>Tajuk Artikel</label><input id="postTitle" placeholder="Contoh: Cara Buat Website Untuk Bisnes Kecil"></div><div><label>Kategori</label><input id="postCategory" value="SEO"></div></div><label>Slug URL</label><div class="slug-row"><span>services.restuharmoni.com/article.html?slug=</span><input id="postSlug" placeholder="cara-buat-website-bisnes-kecil"></div><div class="help">Slug auto dijana dari tajuk, tetapi boleh edit manual.</div><label>Cover Image URL</label><input id="postCover" placeholder="https://images.unsplash.com/..."><div class="grid"><div><label>Meta Title</label><input id="postMetaTitle"></div><div><label>Keywords</label><input id="postKeywords" placeholder="website murah selangor, buat website bisnes"></div></div><label>Meta Description</label><textarea id="postMetaDesc" style="min-height:72px"></textarea><label>Isi Artikel</label><textarea id="postContent" class="article-editor" placeholder="Tulis artikel di sini. Gunakan perenggan yang pendek dan jelas."></textarea><div class="grid"><div><label>Status</label><select id="postStatus"><option value="draft">Draft</option><option value="published">Publish</option></select></div><div><label>Tarikh Publish</label><input id="postPublishedAt" type="datetime-local"></div></div><div class="actions"><button class="primary success" id="savePostBtn">Simpan Artikel</button><button class="btn soft" id="cancelPostBtn">Batal</button><button class="primary danger hidden" id="deletePostBtn">Delete</button><a class="btn soft hidden" id="previewPostBtn" target="_blank">Preview Artikel</a></div></div>
+<div class="editor-card"><h2>Senarai Artikel</h2><div class="table-wrap"><table class="blog-table"><thead><tr><th>Artikel</th><th>Status</th><th>Kategori</th><th>Slug</th><th>Tindakan</th></tr></thead><tbody id="postsTbody"><tr><td colspan="5" class="muted">Memuatkan artikel...</td></tr></tbody></table></div></div>
 </section>
+<section id="tab-export" style="display:none"><div class="section-head"><div><div class="eyebrow">Backup</div><h1>Export / Backup</h1><p class="muted">Copy JSON ini jika mahu saya masukkan semula ke source code sebagai default production.</p></div></div><label>Site Content JSON</label><textarea id="exportSite" style="min-height:180px"></textarea><label>Templates JSON</label><textarea id="exportTemplates" style="min-height:260px"></textarea><div class="actions"><button class="primary" id="refreshExport">Refresh Export</button><button class="primary danger" id="clearAll">Clear Local Changes</button></div></section>
 </main>
 </div>
-<script src="supabase-config.js?v=5.3.5"></script>
-<script src="admin-auth.js?v=5.3.5"></script>
-<script src="admin.js?v=5.3.5"></script>
-<script>console.log("Lead Management: admin-leads.html");</script></body></html>
+<script src="supabase-config.js?v=5.4.0"></script>
+<script src="admin-auth.js?v=5.4.0"></script>
+<script src="admin.js?v=5.4.0"></script>
+<script src="admin-blog.js?v=5.4.0"></script>
+</body></html>

@@ -20,3 +20,10 @@ Schema: `SUPABASE_LEADS_SCHEMA.sql`
 - Allow Cloudflare Insights beacon script in CSP.
 - Allow jsDelivr source-map/devtools connection to avoid console CSP noise.
 - Bumped version.js and service worker cache.
+
+
+## v5.4.0 Blog CMS
+- Admin Panel now includes Blog CMS with clean responsive UI.
+- Public Blog page: blog.html
+- Public Article page: article.html?slug=your-slug
+- Run SUPABASE_BLOG_CMS_V1.sql before using Blog CMS.
