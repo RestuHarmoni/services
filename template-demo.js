@@ -2,7 +2,7 @@
 (function(){
   const params=new URLSearchParams(location.search);
   const slug=document.body.dataset.template || 'kedai-makan';
-  const phone='60184611625';
+  const phone='';
   function fallback(){
     return window.RH_TEMPLATE_DATA && window.RH_TEMPLATE_DATA[slug] ? window.RH_TEMPLATE_DATA[slug] : null;
   }
@@ -29,7 +29,7 @@
     setText('[data-headline]',data.headline);
     setText('[data-subheadline]',data.subheadline);
     setText('[data-testimonial]',data.testimonial);
-    setText('[data-cta]',data.cta || 'WhatsApp Sekarang');
+    setText('[data-cta]',data.cta || 'Mula Dengan Aira');
     const services=document.getElementById('servicesGrid');
     if(services){
       services.innerHTML=(data.services||[]).map(s=>`<article class="card"><h3>${s}</h3><p>Disusun jelas supaya pelanggan faham dan terus hubungi anda.</p></article>`).join('');
@@ -39,7 +39,7 @@
       products.innerHTML=(data.products||[]).map(p=>`<article class="product"><div class="product-img">${p.title}</div><div class="product-body"><h3>${p.title}</h3><div class="price">${p.price}</div><p class="muted">${p.desc}</p></div></article>`).join('');
     }
     const waText=encodeURIComponent(`Hi Restu Harmoni.\n\nSaya berminat dengan website seperti contoh ini.\n\nNama Bisnes: ${company}\nTemplate: ${data.industry}\n\nMohon cadangan pakej yang sesuai.`);
-    document.querySelectorAll('[data-wa]').forEach(a=>a.href=`https://wa.me/${phone}?text=${waText}`);
+    document.querySelectorAll('[data-wa]').forEach(a=>a.href=`#aira-popup
   }
   loadData().then(render);
 })();

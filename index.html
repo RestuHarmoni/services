@@ -48,7 +48,7 @@
 
 <style id="rh-wa-logo-css">
 .whatsapp,.floating-whatsapp,.wa-float{display:inline-flex!important;align-items:center!important;gap:9px!important}
-.whatsapp::before,.floating-whatsapp::before,.wa-float::before{
+.:before,.floating-:before,.wa-float::before{
   content:"";width:22px;height:22px;display:inline-block;background:#fff;border-radius:50%;
   -webkit-mask:url("data:image/svg+xml,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16 3C8.82 3 3 8.82 3 16c0 2.28.6 4.5 1.73 6.46L3.5 29l6.7-1.76A12.9 12.9 0 0 0 16 29c7.18 0 13-5.82 13-13S23.18 3 16 3zm0 23.7c-1.95 0-3.84-.52-5.5-1.5l-.4-.24-3.98 1.04 1.06-3.88-.26-.4A10.6 10.6 0 1 1 16 26.7zm5.78-7.93c-.32-.16-1.86-.92-2.15-1.02-.29-.11-.5-.16-.71.16-.21.31-.82 1.02-1 1.23-.18.21-.37.24-.68.08-.32-.16-1.34-.49-2.55-1.57-.94-.84-1.58-1.88-1.76-2.2-.18-.31-.02-.48.14-.64.14-.14.32-.37.47-.55.16-.18.21-.31.32-.52.11-.21.05-.39-.03-.55-.08-.16-.71-1.72-.97-2.36-.26-.62-.52-.54-.71-.55h-.6c-.21 0-.55.08-.84.39-.29.31-1.1 1.08-1.1 2.62s1.13 3.04 1.29 3.25c.16.21 2.22 3.39 5.38 4.76.75.32 1.34.52 1.8.66.76.24 1.45.21 2 .13.61-.09 1.86-.76 2.12-1.5.26-.73.26-1.36.18-1.5-.08-.13-.29-.21-.61-.37z'/%3E%3C/svg%3E") center/contain no-repeat;
   mask:url("data:image/svg+xml,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16 3C8.82 3 3 8.82 3 16c0 2.28.6 4.5 1.73 6.46L3.5 29l6.7-1.76A12.9 12.9 0 0 0 16 29c7.18 0 13-5.82 13-13S23.18 3 16 3zm0 23.7c-1.95 0-3.84-.52-5.5-1.5l-.4-.24-3.98 1.04 1.06-3.88-.26-.4A10.6 10.6 0 1 1 16 26.7zm5.78-7.93c-.32-.16-1.86-.92-2.15-1.02-.29-.11-.5-.16-.71.16-.21.31-.82 1.02-1 1.23-.18.21-.37.24-.68.08-.32-.16-1.34-.49-2.55-1.57-.94-.84-1.58-1.88-1.76-2.2-.18-.31-.02-.48.14-.64.14-.14.32-.37.47-.55.16-.18.21-.31.32-.52.11-.21.05-.39-.03-.55-.08-.16-.71-1.72-.97-2.36-.26-.62-.52-.54-.71-.55h-.6c-.21 0-.55.08-.84.39-.29.31-1.1 1.08-1.1 2.62s1.13 3.04 1.29 3.25c.16.21 2.22 3.39 5.38 4.76.75.32 1.34.52 1.8.66.76.24 1.45.21 2 .13.61-.09 1.86-.76 2.12-1.5.26-.73.26-1.36.18-1.5-.08-.13-.29-.21-.61-.37z'/%3E%3C/svg%3E") center/contain no-repeat;
@@ -692,6 +692,62 @@ display:inline-flex!important;align-items:center!important;justify-content:cente
 ]}
 </script>
 
+
+<style id="rh-v528-ui-cleanup">
+/* v5.2.8.8 public cleanup */
+a[href="#aira-popup"], .rh-open-aira, [data-open-aira]{
+  cursor:pointer;
+}
+.rh-aira-open{
+  overflow:hidden!important;
+}
+.rh-aira-drawer, #airaDrawer{
+  max-height:min(760px,92vh)!important;
+  height:min(760px,92vh)!important;
+}
+#airaChat{
+  min-height:0!important;
+  overflow-y:auto!important;
+  scroll-behavior:smooth;
+  padding-bottom:12px!important;
+}
+#airaControls{
+  flex-shrink:0!important;
+  max-height:38vh;
+  overflow-y:auto;
+  padding-top:10px!important;
+}
+.rh-aira-options{
+  display:grid!important;
+  grid-template-columns:1fr 1fr;
+  gap:10px!important;
+}
+.rh-aira-options button{
+  min-height:44px!important;
+  padding:10px 12px!important;
+  font-size:14px!important;
+  line-height:1.25!important;
+  border-radius:16px!important;
+}
+.rh-aira-input-row input{
+  min-height:48px!important;
+}
+.rh-aira-input-row button{
+  min-height:48px!important;
+}
+.rh-msg{
+  line-height:1.55!important;
+}
+@media(max-width:560px){
+  .rh-aira-options{grid-template-columns:1fr!important}
+  #airaControls{max-height:42vh}
+  .rh-aira-drawer, #airaDrawer{
+    height:92vh!important;
+    max-height:92vh!important;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -777,7 +833,7 @@ display:inline-flex!important;align-items:center!important;justify-content:cente
         <div class="rh-v44-content">
           <h4>Penginapan Selesa Untuk Keluarga</h4>
           <p>Lihat bilik, kemudahan, lokasi dan semak tarikh kosong terus melalui WhatsApp.</p>
-          <div class="rh-v44-points"><div>Galeri Bilik</div><div>Harga Penginapan</div><div>Kemudahan Keluarga</div><div>Booking WhatsApp</div></div>
+          <div class="rh-v44-points"><div>Galeri Bilik</div><div>Harga Penginapan</div><div>Kemudahan Keluarga</div><div>Booking melalui Aira</div></div>
           <div class="rh-v44-actions">
             <a href="templates/homestay.html?company=AZ%20Homestay%20Langkawi">Lihat Website Ini</a>
             <a href="demo-generator.html">Cuba Nama Bisnes Saya</a>
@@ -941,7 +997,7 @@ display:inline-flex!important;align-items:center!important;justify-content:cente
           <details open><summary>Berapa lama website boleh siap?</summary><p>Biasanya 3-7 hari bekerja selepas bahan asas lengkap seperti logo, servis, lokasi, gambar dan nombor WhatsApp diterima.</p></details>
           <details><summary>Domain dan hosting termasuk?</summary><p>Boleh disediakan atau dibantu setup mengikut pakej. Jika client sudah ada domain, website boleh disambungkan ke domain tersebut.</p></details>
           <details><summary>Saya belum ada logo, boleh buat website?</summary><p>Boleh. Kami boleh gunakan wordmark asas dahulu atau bantu cadangkan logo ringkas untuk permulaan.</p></details>
-          <details><summary>Boleh letak ToyyibPay?</summary><p>Boleh jika website perlu terima bayaran online. Untuk website servis biasa, CTA WhatsApp sudah mencukupi pada fasa awal.</p></details>
+          <details><summary>Boleh letak ToyyibPay?</summary><p>Boleh jika website perlu terima bayaran online. Untuk website servis biasa, CTA Aira sudah mencukupi pada fasa awal.</p></details>
           <details><summary>Boleh update website selepas siap?</summary><p>Boleh. Update kecil atau penambahan section boleh dibuat mengikut keperluan dan scope support.</p></details>
           <details><summary>Website sesuai untuk iklan?</summary><p>Ya. Landing page boleh digunakan sebagai link utama untuk Facebook Ads, TikTok Ads, Google Ads, Google Business Profile dan media sosial.</p></details>
         </div>
@@ -1030,13 +1086,13 @@ display:inline-flex!important;align-items:center!important;justify-content:cente
   const data={business:null,company:'',goal:null,budget:null};
   const templateMap={
     'Kedai Makan / Cafe':{slug:'kedai-makan',template:'Kedai Makan Starter',features:['Menu digital','WhatsApp tempahan','Lokasi Google Maps','Promosi harian']},
-    'Homestay / Chalet':{slug:'homestay',template:'Homestay Starter',features:['Galeri bilik','Harga penginapan','WhatsApp booking','Google Maps']},
-    'Kereta Sewa':{slug:'kereta-sewa',template:'Car Rental Starter',features:['Senarai kereta','Harga harian','Booking WhatsApp','Pickup info']},
-    'Butik / Fashion':{slug:'butik',template:'Butik Fashion Starter',features:['Katalog koleksi','Promosi','Order WhatsApp','Size guide']},
-    'Aircond':{slug:'aircond',template:'Aircond Service Starter',features:['Senarai servis','Harga asas','WhatsApp booking','Kawasan servis']},
+    'Homestay / Chalet':{slug:'homestay',template:'Homestay Starter',features:['Galeri bilik','Harga penginapan','booking melalui Aira','Google Maps']},
+    'Kereta Sewa':{slug:'kereta-sewa',template:'Car Rental Starter',features:['Senarai kereta','Harga harian','Booking melalui Aira','Pickup info']},
+    'Butik / Fashion':{slug:'butik',template:'Butik Fashion Starter',features:['Katalog koleksi','Promosi','Order melalui Aira','Size guide']},
+    'Aircond':{slug:'aircond',template:'Aircond Service Starter',features:['Senarai servis','Harga asas','booking melalui Aira','Kawasan servis']},
     'Renovation':{slug:'renovation',template:'Contractor Starter',features:['Portfolio projek','Servis utama','Quotation','bukti kepercayaan']},
     'Corporate':{slug:'corporate',template:'Company Profile Starter',features:['Profil syarikat','Servis utama','Portfolio','Contact page']},
-    'Produk Online':{slug:'produk-online',template:'Produk Online Starter',features:['Produk pilihan','Harga & promosi','Testimoni','Order WhatsApp']},
+    'Produk Online':{slug:'produk-online',template:'Produk Online Starter',features:['Produk pilihan','Harga & promosi','Testimoni','Order melalui Aira']},
     'Lain-lain':{slug:'corporate',template:'Custom Starter',features:['Struktur basic','','Paparan kemas di telefon','SEO asas']}
   };
 
@@ -1140,7 +1196,7 @@ display:inline-flex!important;align-items:center!important;justify-content:cente
     const packageName=v==='RM699'?'Starter RM699':(v==='RM1299'?'Business RM1299 ⭐ Paling Popular':'Premium RM1999+');
     const contoh=`templates/${rec.slug}.html?company=${encodeURIComponent(data.company)}`;
     const waText=encodeURIComponent(`Hi Restu Harmoni.\n\nSaya telah menggunakan Aira.\n\nJenis Bisnes: ${data.business}\nNama Bisnes: ${data.company}\nTujuan Website: ${data.goal}\nCadangan Template: ${rec.template}\nPakej: ${packageName}\n\nSaya berminat untuk mendapatkan quotation.`);
-    const wa=`https://wa.me/${phone}?text=${waText}`;
+    const wa=`#aira-popup
     const features=rec.features.map(f=>'✓ '+f).join('<br>');
     typingThen(`<strong>Cadangan Aira</strong><br><br>Template: <strong>${rec.template}</strong><br>Pakej: <strong>${packageName}</strong><br><br>Sesuai untuk:<br>${features}<div class="rh-aira-result-actions"><a href="${contoh}">🚀 Lihat Website Saya</a><a class="rh-wa-icon" href="${wa}" target="_blank" rel="noopener">Mula Dengan Aira</a></div>`,()=>{
       setOptions(['Ulang semula'],()=>start());
@@ -1275,7 +1331,10 @@ window.AIRA_LEAD_FUNNEL_V52 = {
 
 
 
-<script id="rh-v527-aira-faq-consultant">
+
+
+
+<script id="rh-v528-aira-faq-consultant">
 (function(){
   function ready(fn){document.readyState!=='loading'?fn():document.addEventListener('DOMContentLoaded',fn)}
   ready(function(){
@@ -1291,7 +1350,7 @@ window.AIRA_LEAD_FUNNEL_V52 = {
     function input(label,placeholder,cb,validate){controls.innerHTML='<div class="rh-aira-input-row"><input id="airaInput" placeholder="'+placeholder+'"><button type="button">Hantar</button></div>';const inp=controls.querySelector('input'),btn=controls.querySelector('button');function send(){const val=inp.value.trim();if(!val){inp.focus();return}if(validate&&!validate(val)){alert(label+' tidak sah.');inp.focus();return}add(val,'user');cb(val)}btn.onclick=send;inp.addEventListener('keydown',e=>{if(e.key==='Enter')send()});inp.focus();}
     function quickMenu(){options(SYS.BANK.quickActions.concat(["Tanya Soalan Lain"]),handleQuick);}
     function startHome(){data={};askedTopics=[];chat.innerHTML='';controls.innerHTML='';typing('Hai 👋 Saya <strong>Aira</strong>, AI Website Consultant.',()=>typing('Saya boleh cadangkan pakej website, jawab soalan harga, tempoh siap, domain, hosting, SEO dan contoh website.',()=>quickMenu()));}
-    function handleQuick(v){if(v==="Cadangkan Website Saya")return startLead();if(v==="Harga Pakej")return answerFAQ("harga pakej");if(v==="Lihat Contoh Website")return typing('Anda boleh lihat contoh website untuk Kedai Makan, Homestay, Kereta Sewa, Aircond, Renovation, Butik, Corporate dan Produk Online.',()=>options(["Buka Contoh Website","Cadangkan Website Saya","Tanya Soalan Lain"],x=>{if(x==="Buka Contoh Website")location.hash="contoh";else if(x==="Cadangkan Website Saya")startLead();else askFreeText();}));if(v==="Berapa Lama Siap?")return answerFAQ("berapa lama siap");if(v==="Domain & Hosting")return answerFAQ("domain hosting");if(v==="SEO Google")return answerFAQ("seo google");if(v==="Boleh Edit Sendiri?")return answerFAQ("boleh edit sendiri");if(v==="Saya Tiada Logo/Gambar")return answerFAQ("tak ada gambar logo");if(v==="Tanya Soalan Lain")return askFreeText();}
+    function handleQuick(v){if(v==="Cadangkan Website Saya")return startLead();if(v==="Harga Pakej")return answerFAQ("harga pakej");if(v==="Lihat Contoh Website")return typing('Anda boleh lihat contoh website untuk Kedai Makan, Homestay, Kereta Sewa, Aircond, Renovation, Butik, Corporate dan Produk Online.',()=>options(["Buka Contoh Website","Cadangkan Website Saya","Tanya Soalan Lain"],x=>{if(x==="Buka Contoh Website"){location.hash="contoh";closeAira();}else if(x==="Cadangkan Website Saya")startLead();else askFreeText();}));if(v==="Berapa Lama Siap?")return answerFAQ("berapa lama siap");if(v==="Domain & Hosting")return answerFAQ("domain hosting");if(v==="SEO Google")return answerFAQ("seo google");if(v==="Boleh Edit Sendiri?")return answerFAQ("boleh edit sendiri");if(v==="Saya Tiada Logo/Gambar")return answerFAQ("tak ada gambar logo");if(v==="Tanya Soalan Lain")return askFreeText();}
     function askFreeText(){typing('Boleh. Taip soalan anda di bawah. Contoh: “domain termasuk?”, “berapa lama siap?”, “SEO ada?”',()=>input('Soalan','Tulis soalan anda...',q=>answerFAQ(q)));}
     function answerFAQ(q){const item=SYS.matchFAQ(q);if(item)askedTopics.push(item.topic);typing(item?item.answer:'Saya boleh bantu tentang harga, tempoh siap, domain, hosting, SEO, proses kerja, contoh website dan gambar/logo.',()=>typing('Mahu saya cadangkan pakej website yang sesuai untuk bisnes anda?',()=>options(["Ya, cadangkan website saya","Saya ada soalan lain","Lihat pilihan utama"],x=>{if(x==="Ya, cadangkan website saya")startLead();else if(x==="Saya ada soalan lain")askFreeText();else quickMenu();})));} 
     function startLead(){data={notes:"FAQ topics: "+askedTopics.join(", ")};typing('Baik. Saya akan tanya beberapa soalan ringkas supaya cadangan lebih tepat.',()=>stepBusiness());}

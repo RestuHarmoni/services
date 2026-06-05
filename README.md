@@ -1,17 +1,16 @@
-# Services Restu Harmoni - Deploy Package v2.2.0
+# Services Restu Harmoni
 
-Deploy semua fail ini ke root domain ``.
+Production static website for Services Restu Harmoni.
 
-Fail utama:
-- index.html
-- style.css
-- app.js
-- sw.js
-- version.js
-- manifest.webmanifest
-- assets/rh-logo.png
+## Public Lead Flow
+- Public website does not expose direct WhatsApp number.
+- All public CTA buttons open the Aira popup.
+- Aira answers FAQ, qualifies leads, collects client WhatsApp, and saves to Supabase `leads`.
 
-Nota:
-- Service worker sudah dibump ke `rh-services-v2.2.0` supaya browser refresh cache.
-- Fokus website: RH Website Factory untuk SME servis Malaysia.
-- Primary CTA: WhatsApp +60 18-461 1625.
+## Admin
+- `admin.html` = content/template admin
+- `admin-leads.html` = Supabase lead management
+
+## Supabase
+Config: `supabase-config.js`
+Schema: `SUPABASE_LEADS_SCHEMA.sql`
