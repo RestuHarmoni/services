@@ -14,3 +14,9 @@ Production static website for Services Restu Harmoni.
 ## Supabase
 Config: `supabase-config.js`
 Schema: `SUPABASE_LEADS_SCHEMA.sql`
+
+
+## v5.3.6 CSP Hotfix
+- Allow Cloudflare Insights beacon script in CSP.
+- Allow jsDelivr source-map/devtools connection to avoid console CSP noise.
+- Bumped version.js and service worker cache.
