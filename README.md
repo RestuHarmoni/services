@@ -27,3 +27,15 @@ Schema: `SUPABASE_LEADS_SCHEMA.sql`
 - Public Blog page: blog.html
 - Public Article page: article.html?slug=your-slug
 - Run SUPABASE_BLOG_CMS_V1.sql before using Blog CMS.
+
+
+## Blog Image Upload
+- Run `SUPABASE_BLOG_IMAGE_STORAGE_V1.sql` once in Supabase SQL Editor to enable Admin Panel image upload for article cover images.
+- Bucket used: `blog-images`. Max upload: 5MB. Supported: JPG, PNG, WebP, GIF.
+
+
+## v5.4.3 Blog Image Display Fix
+- Service worker cache bumped to v5.4.3.
+- CSP img-src updated to allow blob preview images in Admin Panel.
+- Blog and article cover images now render using <img> fallback instead of CSS background only.
+- Admin preview now shows clear fallback/error message if Supabase Storage URL cannot load.

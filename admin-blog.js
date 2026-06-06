@@ -10,9 +10,16 @@
   function escapeHtml(s){return String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
   function setCoverPreview(url){
     const preview=$('postCoverPreview');
-    if(preview) preview.style.backgroundImage=url?`url('${String(url).replace(/'/g,"%27")}')`:'';
+    const safeUrl=String(url||'').trim();
+    if(preview){
+      if(safeUrl){
+        preview.innerHTML=`<img src="${escapeHtml(safeUrl)}" alt="Preview gambar artikel" style="width:100%;height:190px;object-fit:cover;display:block;border-radius:18px" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=&quot;muted&quot;>Gambar tidak dapat dipaparkan. Semak Storage URL / policy Supabase.</span>'">`;
+      }else{
+        preview.innerHTML='<span class="muted">Belum ada gambar dipilih</span>';
+      }
+    }
     const status=$('postCoverStatus');
-    if(status) status.textContent=url?'Gambar cover tersedia.':'Belum ada gambar dipilih.';
+    if(status) status.textContent=safeUrl?'Gambar cover tersedia.':'Belum ada gambar dipilih.';
   }
   function setCoverStatus(msg){const status=$('postCoverStatus'); if(status) status.textContent=msg||'';}
 

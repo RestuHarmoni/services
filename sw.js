@@ -1,4 +1,4 @@
-const RH_CACHE_NAME = 'services-restu-harmoni-v5.4.1';
+const RH_CACHE_NAME = 'services-restu-harmoni-v5.4.3';
 const RH_ASSETS = [
   './', './index.html', './style.css', './app.js', './version.js', './manifest.webmanifest',
   './supabase-config.js', './aira-lead-system.js', './admin-login.html', './admin.html', './admin.js', './admin-auth.js', './admin-leads.html', './admin-blog.js', './blog.html', './article.html',
