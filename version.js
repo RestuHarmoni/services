@@ -1,1 +1,1 @@
-window.RH_VERSION='5.4.3';
+window.RH_VERSION = '6.0.0-blog-seo-static-og';
