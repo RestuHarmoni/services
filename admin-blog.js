@@ -76,7 +76,7 @@
   function renderPosts(){
     const tb=$('postsTbody'); if(!tb)return;
     if(!posts.length){tb.innerHTML='<tr><td colspan="5" class="muted">Belum ada artikel. Klik + Artikel Baru.</td></tr>';return;}
-    tb.innerHTML=posts.map(p=>`<tr><td><strong>${escapeHtml(p.title)}</strong><div class="muted">${escapeHtml((p.meta_description||'').slice(0,100))}</div></td><td><span class="badge ${p.status==='published'?'publish':'draft'}">${p.status==='published'?'Published':'Draft'}</span></td><td>${escapeHtml(p.category||'SEO')}</td><td><code>${escapeHtml(p.slug)}</code></td><td><div class="actions" style="margin:0"><button class="btn soft" data-edit="${p.id}">Edit</button><a class="btn soft" href="blog/${encodeURIComponent(p.slug)}.html" target="_blank">View</a></div></td></tr>`).join('');
+    tb.innerHTML=posts.map(p=>`<tr><td data-label="Artikel"><strong>${escapeHtml(p.title)}</strong><div class="muted">${escapeHtml((p.meta_description||'').slice(0,100))}</div></td><td data-label="Status"><span class="badge ${p.status==='published'?'publish':'draft'}">${p.status==='published'?'Published':'Draft'}</span></td><td data-label="Kategori">${escapeHtml(p.category||'SEO')}</td><td data-label="Slug"><code>${escapeHtml(p.slug)}</code></td><td data-label="Tindakan"><div class="actions" style="margin:0"><button class="btn soft" data-edit="${p.id}">Edit</button><a class="btn soft" href="blog/${encodeURIComponent(p.slug)}.html" target="_blank">View</a></div></td></tr>`).join('');
     tb.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>editPost(b.dataset.edit));
   }
   async function uploadCoverIfNeeded(slug){
