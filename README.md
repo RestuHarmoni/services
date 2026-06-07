@@ -39,3 +39,11 @@ Schema: `SUPABASE_LEADS_SCHEMA.sql`
 - CSP img-src updated to allow blob preview images in Admin Panel.
 - Blog and article cover images now render using <img> fallback instead of CSS background only.
 - Admin preview now shows clear fallback/error message if Supabase Storage URL cannot load.
+
+## v6.1.0 Auto Publish Blog OG
+- Added Cloudflare Pages Worker `_worker.js`.
+- `/blog/{slug}.html` is generated dynamically from Supabase `blog_posts`.
+- Facebook/WhatsApp OG tags now use `cover_image`, `meta_title`, and `meta_description` directly from Supabase.
+- `/article.html?slug=...` redirects to `/blog/{slug}.html`.
+- `/sitemap.xml` is generated dynamically with published blog posts.
+- Admin Blog CMS no longer requires manual SEO ZIP export for daily publishing.
