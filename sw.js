@@ -1,4 +1,4 @@
-const RH_VERSION = '6.5.1-google-reviews-slider';
+const RH_VERSION = '6.6.1-demo-slider-mobile-fix';
 const RH_CACHE_NAME = `services-restu-harmoni-${RH_VERSION}`;
 const RH_CRITICAL_EXTENSIONS = ['.html', '.js', '.css', '.json', '.webmanifest'];
 
