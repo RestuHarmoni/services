@@ -1,4 +1,4 @@
-const RH_VERSION = '6.4.10-trust-cleanup-rls';
+const RH_VERSION = '6.5.0-trust-spacing-fix';
 const RH_CACHE_NAME = `services-restu-harmoni-${RH_VERSION}`;
 const RH_CRITICAL_EXTENSIONS = ['.html', '.js', '.css', '.json', '.webmanifest'];
 

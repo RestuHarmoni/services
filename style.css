@@ -113,31 +113,60 @@
 }
 
 
-/* v6.4.10 trust cleanup from RLS lead fix base */
-.rh-social-inner-clean{
-  gap:12px!important;
-  align-items:center;
-}
-.rh-social-inner-clean .rh-social-tagline{
-  color:#475569;
-  font-weight:700;
-}
-@media (min-width: 641px){
-  .rh-social-inner-clean .rh-social-tagline::before{
-    content:"•";
-    color:#0f172a;
-    margin:0 12px 0 2px;
+/* v6.5.0 desktop trust spacing cleanup - UI only */
+@media (min-width: 1021px){
+  .rh-social-proof{
+    padding: 28px 0 34px !important;
+    background: #fff !important;
+    position: relative !important;
+    z-index: 4 !important;
+  }
+  .rh-social-inner{
+    width: min(760px, calc(100% - 48px));
+    margin: 0 auto;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px 12px !important;
+    flex-wrap: wrap !important;
+    line-height: 1.25 !important;
+    text-align: center !important;
+    padding: 12px 20px !important;
+    border: 1px solid rgba(220,231,243,.92);
+    border-radius: 999px;
+    background: rgba(255,255,255,.94);
+    box-shadow: 0 16px 42px rgba(5,23,42,.07);
+  }
+  .rh-social-stars{
+    display: inline-flex !important;
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+  .rh-social-inner strong{
+    display: inline-flex !important;
+    white-space: nowrap;
+    font-weight: 900 !important;
+  }
+  .rh-social-desc{
+    display: inline-flex !important;
+    color: #617084;
+    font-weight: 750;
+    white-space: nowrap;
+  }
+  .rh-social-desc:before{
+    content: "•";
+    color: #94a3b8;
+    margin-right: 12px;
+  }
+  .rh-pro-trust{
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    position: relative !important;
+    z-index: 3 !important;
   }
 }
-@media (max-width: 640px){
-  .rh-social-inner-clean{
-    flex-direction:column!important;
-    gap:6px!important;
-    padding:0 18px!important;
-  }
-  .rh-social-inner-clean .rh-social-tagline{
-    display:block!important;
-    max-width:300px;
-    line-height:1.45;
-  }
+
+@media (min-width: 641px) and (max-width: 1020px){
+  .rh-social-proof{padding: 26px 0 24px !important;}
+  .rh-pro-trust{margin-top: 0 !important;}
 }

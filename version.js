@@ -1,1 +1,1 @@
-window.RH_APP_VERSION = 'v6.4.10-trust-cleanup-rls';
+window.RH_APP_VERSION = 'v6.5.0-trust-spacing-fix';
