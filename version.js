@@ -1,1 +1,1 @@
-window.RH_VERSION = '6.1.6-cache-bust-aira';
+window.RH_VERSION='6.3.0-supabase-aira';
