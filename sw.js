@@ -1,4 +1,4 @@
-const RH_VERSION = '6.4.1-pc-cache-lead-fix';
+const RH_VERSION = '6.4.5-auto-sw-lead-retry';
 const RH_CACHE_NAME = `services-restu-harmoni-${RH_VERSION}`;
 const RH_CRITICAL_EXTENSIONS = ['.html', '.js', '.css', '.json', '.webmanifest'];
 
@@ -10,6 +10,9 @@ self.addEventListener('message', event => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
+  if (event.data && event.data.type === 'CLEAR_RH_CACHE') {
+    event.waitUntil(caches.keys().then(keys => Promise.all(keys.map(key => caches.delete(key)))));
+  }
 });
 
 self.addEventListener('activate', event => {
@@ -19,6 +22,8 @@ self.addEventListener('activate', event => {
         if (key !== RH_CACHE_NAME) return caches.delete(key);
       })))
       .then(() => self.clients.claim())
+      .then(() => self.clients.matchAll({ type: 'window', includeUncontrolled: true }))
+      .then(clients => clients.forEach(client => client.postMessage({ type: 'RH_SW_UPDATED', version: RH_VERSION })))
   );
 });
 

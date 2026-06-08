@@ -2,7 +2,7 @@
   const SUPABASE_CDN="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
   const cfg=window.RH_SUPABASE_CONFIG||{};
   let supabaseClient=null;
-  const DEFAULT_QUESTION_BANK={"version": "v6.4.1-pc-cache-lead-fix", "assistantName": "Aira", "positioning": "AI Website Consultant", "intro": ["Hai 👋 Saya <strong>Aira</strong>, AI Website Consultant.", "Saya boleh bantu cadangkan struktur website, pakej dan langkah seterusnya mengikut jenis bisnes anda."], "steps": [{"key": "business_type", "question": "Apakah kategori perniagaan yang ingin anda bina website?", "type": "choice", "required": true, "options": ["Servis Aircond", "Homestay", "Kereta Sewa", "Kontraktor & Renovasi", "Kedai Makan", "Butik / Fashion", "Produk Online", "Company Profile", "Klinik / Profesional", "Lain-lain"]}, {"key": "objective", "question": "Apakah matlamat utama website ini?", "type": "choice", "required": true, "options": ["Dapatkan lebih banyak pertanyaan pelanggan", "Paparkan servis & portfolio", "Tempahan / booking enquiry", "Company profile yang lebih dipercayai", "Jual produk / katalog online", "Landing page untuk iklan"]}, {"key": "has_website", "question": "Adakah anda sudah mempunyai website sekarang?", "type": "choice", "required": false, "options": ["Belum ada website", "Ada, tetapi mahu upgrade", "Ada domain sahaja", "Belum pasti"]}, {"key": "has_domain", "question": "Adakah anda sudah mempunyai domain sendiri?", "type": "choice", "required": false, "options": ["Ya, sudah ada domain", "Belum ada domain", "Perlu bantuan beli domain", "Belum pasti"]}, {"key": "content_ready", "question": "Bahan website sudah tersedia?", "type": "choice", "required": false, "options": ["Logo & gambar sudah ada", "Ada sebahagian bahan", "Belum ada bahan", "Perlu bantuan susun content"]}, {"key": "industry_detail", "question": "Maklumat tambahan yang penting untuk kategori bisnes anda?", "type": "choice", "required": false, "conditional": true, "conditions": {"Homestay": ["1 unit homestay", "2–5 unit homestay", "Lebih 5 unit", "Perlu galeri & kemudahan"], "Kereta Sewa": ["1–5 kenderaan", "6–20 kenderaan", "Lebih 20 kenderaan", "Perlu senarai harga & booking"], "Kontraktor & Renovasi": ["Ada portfolio projek", "Belum ada portfolio", "Perlu quotation form", "Perlu paparan servis lengkap"], "Servis Aircond": ["Servis rumah", "Servis pejabat", "Ada kawasan liputan tertentu", "Perlu jadual servis/booking"], "Kedai Makan": ["Menu harian", "Catering", "Tempahan WhatsApp", "Lokasi Google Maps"], "Produk Online": ["1 produk utama", "Katalog banyak produk", "Perlu testimoni", "Order melalui WhatsApp"]}}, {"key": "budget", "question": "Anggaran bajet yang selesa untuk projek ini?", "type": "choice", "required": true, "options": ["RM699 – RM999", "RM1000 – RM2000", "RM2000+", "Belum pasti"]}, {"key": "timeline", "question": "Bila anda mahu website mula siap atau dilancarkan?", "type": "choice", "required": true, "options": ["Segera", "1–2 minggu", "Dalam 1 bulan", "Belum pasti"]}, {"key": "name", "question": "Boleh saya tahu nama anda?", "type": "input", "input": true, "placeholder": "Contoh: Ahmad", "required": true}, {"key": "phone", "question": "Nombor WhatsApp untuk team kami hubungi?", "type": "input", "input": true, "placeholder": "Contoh: 0123456789", "required": true, "validation": "phone"}], "packages": {"RH Starter": {"price": "RM699", "bestFor": ["Aircond", "Plumbing", "Elektrik", "Servis kecil"], "features": ["1 page landing page", "Servis utama", "Galeri asas", "FAQ", "Lead form Aira"]}, "RH Business": {"price": "RM999", "bestFor": ["Homestay", "Kereta Sewa", "Kedai Makan", "Kontraktor", "Butik"], "features": ["Website lebih lengkap", "Galeri premium", "Booking enquiry", "Testimoni", "SEO asas"]}, "RH Pro": {"price": "RM1499", "bestFor": ["Corporate", "Klinik", "Hartanah", "Syarikat"], "features": ["Premium UI", "Lead capture", "Portfolio", "Advanced section", "SEO lebih lengkap"]}, "Custom": {"price": "Quotation", "bestFor": ["Sistem khas", "Dashboard", "Portal", "Automation"], "features": ["Scope custom", "Quotation ikut keperluan"]}}};
+  const DEFAULT_QUESTION_BANK={"version": "v6.4.5-auto-sw-lead-retry", "assistantName": "Aira", "positioning": "AI Website Consultant", "intro": ["Hai 👋 Saya <strong>Aira</strong>, AI Website Consultant.", "Saya boleh bantu cadangkan struktur website, pakej dan langkah seterusnya mengikut jenis bisnes anda."], "steps": [{"key": "business_type", "question": "Apakah kategori perniagaan yang ingin anda bina website?", "type": "choice", "required": true, "options": ["Servis Aircond", "Homestay", "Kereta Sewa", "Kontraktor & Renovasi", "Kedai Makan", "Butik / Fashion", "Produk Online", "Company Profile", "Klinik / Profesional", "Lain-lain"]}, {"key": "objective", "question": "Apakah matlamat utama website ini?", "type": "choice", "required": true, "options": ["Dapatkan lebih banyak pertanyaan pelanggan", "Paparkan servis & portfolio", "Tempahan / booking enquiry", "Company profile yang lebih dipercayai", "Jual produk / katalog online", "Landing page untuk iklan"]}, {"key": "has_website", "question": "Adakah anda sudah mempunyai website sekarang?", "type": "choice", "required": false, "options": ["Belum ada website", "Ada, tetapi mahu upgrade", "Ada domain sahaja", "Belum pasti"]}, {"key": "has_domain", "question": "Adakah anda sudah mempunyai domain sendiri?", "type": "choice", "required": false, "options": ["Ya, sudah ada domain", "Belum ada domain", "Perlu bantuan beli domain", "Belum pasti"]}, {"key": "content_ready", "question": "Bahan website sudah tersedia?", "type": "choice", "required": false, "options": ["Logo & gambar sudah ada", "Ada sebahagian bahan", "Belum ada bahan", "Perlu bantuan susun content"]}, {"key": "industry_detail", "question": "Maklumat tambahan yang penting untuk kategori bisnes anda?", "type": "choice", "required": false, "conditional": true, "conditions": {"Homestay": ["1 unit homestay", "2–5 unit homestay", "Lebih 5 unit", "Perlu galeri & kemudahan"], "Kereta Sewa": ["1–5 kenderaan", "6–20 kenderaan", "Lebih 20 kenderaan", "Perlu senarai harga & booking"], "Kontraktor & Renovasi": ["Ada portfolio projek", "Belum ada portfolio", "Perlu quotation form", "Perlu paparan servis lengkap"], "Servis Aircond": ["Servis rumah", "Servis pejabat", "Ada kawasan liputan tertentu", "Perlu jadual servis/booking"], "Kedai Makan": ["Menu harian", "Catering", "Tempahan WhatsApp", "Lokasi Google Maps"], "Produk Online": ["1 produk utama", "Katalog banyak produk", "Perlu testimoni", "Order melalui WhatsApp"]}}, {"key": "budget", "question": "Anggaran bajet yang selesa untuk projek ini?", "type": "choice", "required": true, "options": ["RM699 – RM999", "RM1000 – RM2000", "RM2000+", "Belum pasti"]}, {"key": "timeline", "question": "Bila anda mahu website mula siap atau dilancarkan?", "type": "choice", "required": true, "options": ["Segera", "1–2 minggu", "Dalam 1 bulan", "Belum pasti"]}, {"key": "name", "question": "Boleh saya tahu nama anda?", "type": "input", "input": true, "placeholder": "Contoh: Ahmad", "required": true}, {"key": "phone", "question": "Nombor WhatsApp untuk team kami hubungi?", "type": "input", "input": true, "placeholder": "Contoh: 0123456789", "required": true, "validation": "phone"}], "packages": {"RH Starter": {"price": "RM699", "bestFor": ["Aircond", "Plumbing", "Elektrik", "Servis kecil"], "features": ["1 page landing page", "Servis utama", "Galeri asas", "FAQ", "Lead form Aira"]}, "RH Business": {"price": "RM999", "bestFor": ["Homestay", "Kereta Sewa", "Kedai Makan", "Kontraktor", "Butik"], "features": ["Website lebih lengkap", "Galeri premium", "Booking enquiry", "Testimoni", "SEO asas"]}, "RH Pro": {"price": "RM1499", "bestFor": ["Corporate", "Klinik", "Hartanah", "Syarikat"], "features": ["Premium UI", "Lead capture", "Portfolio", "Advanced section", "SEO lebih lengkap"]}, "Custom": {"price": "Quotation", "bestFor": ["Sistem khas", "Dashboard", "Portal", "Automation"], "features": ["Scope custom", "Quotation ikut keperluan"]}}};
   window.RH_AIRA_DEFAULT_QUESTION_BANK = DEFAULT_QUESTION_BANK;
   const DEFAULT_FAQ_BANK={"version": "v6.2.0-admin-flex", "quickActions": ["Dapatkan Cadangan Website", "Harga Pakej", "Lihat Contoh Website", "Berapa Lama Siap?", "Domain & Hosting", "SEO Google", "Website atau Facebook?", "Maintenance & Support"], "faq": [{"topic": "harga", "triggers": ["harga", "kos", "price", "pakej", "package", "bayaran", "berapa"], "answer": "Pakej website bermula daripada <strong>RH Starter RM699</strong>, <strong>RH Business RM999</strong>, dan <strong>RH Pro RM1499</strong>. Harga sebenar bergantung kepada jenis bisnes, fungsi dan tahap design."}, {"topic": "tempoh", "triggers": ["lama", "siap", "tempoh", "berapa hari", "duration", "ready"], "answer": "Kebanyakan website boleh siap dalam <strong>3–7 hari bekerja</strong> selepas bahan lengkap diterima. Projek custom mungkin mengambil masa lebih lama."}, {"topic": "domain", "triggers": ["domain", ".com", ".my", "nama website"], "answer": "Domain boleh disediakan atau dibantu setup. Contoh: <strong>namabisnes.com</strong> atau <strong>namabisnes.my</strong>."}, {"topic": "hosting", "triggers": ["hosting", "server", "online", "publish"], "answer": "Ya, kami bantu setup hosting supaya website boleh diakses secara online."}, {"topic": "seo", "triggers": ["seo", "google", "ranking", "search", "carian"], "answer": "Website disediakan dengan <strong>SEO asas</strong>: meta title, meta description, mobile responsive, heading structure, sitemap dan Google-ready structure."}, {"topic": "edit", "triggers": ["edit", "ubah", "update", "kemaskini", "sendiri"], "answer": "Boleh. Bergantung kepada pakej, kandungan boleh disusun supaya mudah dikemaskini. Maintenance tambahan juga boleh dibincangkan."}, {"topic": "logo_gambar", "triggers": ["logo", "gambar", "image", "photo", "tak ada gambar", "tiada gambar"], "answer": "Tiada masalah. Jika ada logo/gambar sendiri, kami boleh gunakan. Jika belum ada, kami boleh bantu cadangkan visual yang sesuai."}, {"topic": "contoh", "triggers": ["contoh", "demo", "portfolio", "template", "sample"], "answer": "Kami ada contoh website untuk Kedai Makan, Homestay, Kereta Sewa, Aircond, Renovation, Butik, Corporate dan Produk Online."}, {"topic": "bayaran", "triggers": ["ansuran", "deposit", "bayar", "installment"], "answer": "Kaedah bayaran boleh dibincangkan mengikut scope projek. Biasanya projek dimulakan selepas maklumat asas dan pakej disahkan."}, {"topic": "proses", "triggers": ["proses", "cara", "macam mana", "step"], "answer": "Proses ringkas: Aira kumpul maklumat, kami cadangkan pakej, anda sediakan bahan, website dibina, semakan dan live."}, {"topic": "website_vs_facebook", "triggers": ["facebook", "fb", "website atau facebook", "perlu website", "instagram"], "answer": "Facebook dan Instagram bagus untuk promosi harian. Website pula berfungsi sebagai pusat rujukan rasmi untuk servis, portfolio, testimoni, harga permulaan dan maklumat bisnes supaya pelanggan lebih yakin sebelum menghubungi anda."}, {"topic": "google_business", "triggers": ["google business", "gmb", "google map", "google maps", "map"], "answer": "Website boleh disusun supaya serasi dengan Google Business Profile. Ini membantu pelanggan melihat maklumat lengkap selepas mereka jumpa bisnes anda di Google Search atau Google Maps."}, {"topic": "whatsapp_integration", "triggers": ["whatsapp", "wa", "chat", "butang whatsapp", "link whatsapp"], "answer": "Ya, website boleh disambungkan dengan butang WhatsApp, borang lead dan flow Aira supaya pertanyaan pelanggan lebih tersusun sebelum anda follow-up."}, {"topic": "maintenance", "triggers": ["maintenance", "support", "jaga website", "kemaskini bulanan", "update website"], "answer": "Maintenance boleh dibincangkan mengikut keperluan. Contohnya kemaskini gambar, servis, harga, artikel SEO atau penambahbaikan kecil selepas website live."}, {"topic": "ownership", "triggers": ["hak milik", "owner", "siapa punya website", "milik saya", "akses"], "answer": "Butiran hak milik, akses domain, hosting dan fail website boleh disahkan semasa quotation supaya kedua-dua pihak jelas dari awal."}]};
   function safeJson(raw,fallback){try{return raw?JSON.parse(raw):fallback;}catch(e){return fallback;}}
@@ -51,6 +51,54 @@
   function tempFor(score){return score>=80?"HOT":score>=60?"WARM":"COLD";}
   function featuresFor(pkg){const p=BANK.packages&&BANK.packages[pkg];if(p&&Array.isArray(p.features))return p.features;const map={"RH Starter":["1 page landing page","Servis utama","Galeri asas","FAQ","Lead form Aira"],"RH Business":["Website lebih lengkap","Galeri premium","Booking enquiry","Testimoni","SEO asas"],"RH Pro":["Premium UI","Lead capture","Portfolio","Advanced section","SEO lebih lengkap"],"Custom":["Scope custom","Quotation ikut keperluan","Sesuai untuk sistem khas"]};return map[pkg]||map["RH Starter"];}
   function getLocalLeads(){try{return JSON.parse(localStorage.getItem("rh_leads")||"[]");}catch(e){return[];}}
+  function getRetryQueue(){try{return JSON.parse(localStorage.getItem("rh_lead_retry_queue")||"[]");}catch(e){return[];}}
+  function setRetryQueue(list){localStorage.setItem("rh_lead_retry_queue",JSON.stringify(Array.isArray(list)?list.slice(0,50):[]));}
+  function enqueueLeadRetry(lead,reason){
+    const q=getRetryQueue();
+    const clientRef=lead.client_ref||("RH-"+Date.now()+"-"+Math.random().toString(16).slice(2));
+    const item={...lead,client_ref:clientRef,_retry_reason:reason||"pending",_retry_count:lead._retry_count||0,_queued_at:lead._queued_at||new Date().toISOString(),_last_try:null};
+    const next=[item,...q.filter(x=>x.client_ref!==clientRef)];
+    setRetryQueue(next);
+    return item;
+  }
+  function removeRetry(clientRef){if(!clientRef)return;setRetryQueue(getRetryQueue().filter(x=>x.client_ref!==clientRef));}
+  async function insertLeadSupabase(client,lead){
+    const row=stripLeadForInsert(lead);
+    const ins=await client.from("leads").insert([row]).select("id").single();
+    if(ins.error)return{ok:false,error:ins.error};
+    const inserted=ins.data;
+    const answers=Array.isArray(lead.answers)?lead.answers:[];
+    if(inserted&&inserted.id&&answers.length){
+      const answerRows=answers.map(a=>({
+        lead_id:inserted.id,
+        question_key:a.question_key,
+        question:a.question,
+        answer:String(a.answer??''),
+        sort_order:a.sort_order||0,
+        answer_type:a.type||'choice'
+      }));
+      const ans=await client.from("lead_answers").insert(answerRows);
+      if(ans.error)return{ok:true,warning:"Lead saved, tetapi jawapan detail gagal disimpan: "+ans.error.message};
+    }
+    return{ok:true};
+  }
+  async function retryQueuedLeads(){
+    const client=await initSupabase();
+    if(!client||!navigator.onLine)return{ok:false,mode:'offline'};
+    const q=getRetryQueue();
+    if(!q.length)return{ok:true,count:0};
+    const remain=[]; let sent=0;
+    for(const item of q){
+      const last=item._last_try?new Date(item._last_try).getTime():0;
+      if(Date.now()-last<30000){remain.push(item);continue;}
+      const next={...item,_retry_count:(item._retry_count||0)+1,_last_try:new Date().toISOString()};
+      const res=await insertLeadSupabase(client,next);
+      if(res.ok){sent++;}
+      else{remain.push(next);}
+    }
+    setRetryQueue(remain);
+    return{ok:true,count:sent,remaining:remain.length};
+  }
   function saveLocalLead(lead){const list=getLocalLeads();list.unshift({...lead,id:"LOCAL-"+Date.now(),created_at:new Date().toISOString()});localStorage.setItem("rh_leads",JSON.stringify(list));}
   function buildAnswerSnapshot(data){
     const steps=(BANK&&Array.isArray(BANK.steps))?BANK.steps:[];
@@ -77,44 +125,36 @@
     return answers;
   }
   function stripLeadForInsert(lead){
-    const {answers,answer_snapshot,answers_json,...row}=lead||{};
+    const {answers,answer_snapshot,answers_json,client_ref,_retry_reason,_retry_count,_queued_at,_last_try,...row}=lead||{};
     return row;
   }
   async function saveLead(lead){
     const now=Date.now();
     const last=Number(localStorage.getItem("rh_last_lead_submit")||0);
     if(Date.now()-last<15000){return{ok:false,mode:"blocked",error:"Sila tunggu sebentar sebelum hantar semula."};}
+    lead={...lead,client_ref:lead.client_ref||("RH-"+Date.now()+"-"+Math.random().toString(16).slice(2))};
     const client=await initSupabase();
-    if(!client){saveLocalLead(lead);localStorage.setItem("rh_last_lead_submit",String(now));return{ok:true,mode:"local"};}
-    const row=stripLeadForInsert(lead);
-    let inserted=null;
-    const ins=await client.from("leads").insert([row]).select("id").single();
-    if(ins.error){
-      console.error("Aira lead Supabase insert failed:",ins.error);
+    if(!client){
       saveLocalLead(lead);
-      return{ok:false,mode:"local",error:ins.error.message};
+      enqueueLeadRetry(lead,"Supabase belum tersedia / offline");
+      localStorage.setItem("rh_last_lead_submit",String(now));
+      return{ok:true,mode:"queued",warning:"Maklumat disimpan sementara dan akan dihantar semula automatik."};
     }
-    inserted=ins.data;
-    const answers=Array.isArray(lead.answers)?lead.answers:[];
-    if(inserted&&inserted.id&&answers.length){
-      const answerRows=answers.map(a=>({
-        lead_id:inserted.id,
-        question_key:a.question_key,
-        question:a.question,
-        answer:String(a.answer??''),
-        sort_order:a.sort_order||0,
-        answer_type:a.type||'choice'
-      }));
-      const ans=await client.from("lead_answers").insert(answerRows);
-      if(ans.error){
-        console.warn("Aira lead_answers insert failed:",ans.error);
-        localStorage.setItem("rh_last_lead_submit",String(now));
-        return{ok:true,mode:"supabase",warning:"Lead saved, tetapi jawapan detail gagal disimpan: "+ans.error.message};
-      }
+    const res=await insertLeadSupabase(client,lead);
+    if(!res.ok){
+      console.error("Aira lead Supabase insert failed:",res.error);
+      saveLocalLead(lead);
+      enqueueLeadRetry(lead,res.error&&res.error.message?res.error.message:"Insert failed");
+      localStorage.setItem("rh_last_lead_submit",String(now));
+      return{ok:false,mode:"queued",error:(res.error&&res.error.message)||"Supabase insert failed",warning:"Maklumat disimpan sementara dan akan retry automatik."};
     }
+    removeRetry(lead.client_ref);
     localStorage.setItem("rh_last_lead_submit",String(now));
-    return{ok:true,mode:"supabase"};
+    return{ok:true,mode:"supabase",warning:res.warning};
   }
+  window.addEventListener('online',()=>{retryQueuedLeads().catch(()=>{});});
+  setTimeout(()=>{retryQueuedLeads().catch(()=>{});},2500);
+
   function matchFAQ(input){const q=String(input||"").toLowerCase();for(const item of BANK.faq){for(const trig of (item.triggers||[])){if(q.includes(String(trig).toLowerCase()))return item;}}return null;}
   function createLeadPayload(data){
     const recommended_package=packageFor(data),lead_score=scoreLead(data),answers=buildAnswerSnapshot(data);
@@ -122,5 +162,5 @@
     const notes=[data.notes||"",compact?"Aira Answers: "+compact:""];
     return{name:data.name,phone:normalizePhone(data.phone),business_type:data.business_type,objective:data.objective,budget:data.budget,timeline:data.timeline,recommended_package,lead_score,lead_temperature:tempFor(lead_score),status:"NEW",notes:notes.filter(Boolean).join(" | "),source:"Aira",page_url:location.href,user_agent:navigator.userAgent,answers};
   }
-  window.RH_AIRA_LEAD_SYSTEM={BANK,DEFAULT_QUESTION_BANK,DEFAULT_FAQ_BANK,loadRemoteBank,initSupabase,normalizePhone,validPhone,scoreLead,packageFor,priceFor,tempFor,featuresFor,getLocalLeads,saveLead,createLeadPayload,buildAnswerSnapshot,matchFAQ};
+  window.RH_AIRA_LEAD_SYSTEM={BANK,DEFAULT_QUESTION_BANK,DEFAULT_FAQ_BANK,loadRemoteBank,initSupabase,normalizePhone,validPhone,scoreLead,packageFor,priceFor,tempFor,featuresFor,getLocalLeads,getRetryQueue,retryQueuedLeads,saveLead,createLeadPayload,buildAnswerSnapshot,matchFAQ};
 })();

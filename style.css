@@ -70,3 +70,44 @@
 .rh-testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
 .rh-testi-card{background:#fff;padding:24px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.06)}
 .rh-testi-card p{margin:12px 0;color:#475569}
+
+
+/* v6.4.3 mobile trust/rating spacing fix - keep Aira launcher style unchanged */
+.rh-social-proof{position:relative;z-index:4;}
+.rh-social-inner{position:relative;z-index:4;line-height:1.6;text-align:center;}
+.rh-pro-trust{position:relative;z-index:3;}
+
+@media (max-width: 640px){
+  .rh-social-proof{
+    padding:26px 0 14px!important;
+    background:#fff!important;
+    overflow:visible!important;
+  }
+  .rh-social-inner{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:6px!important;
+    font-size:14px!important;
+    line-height:1.45!important;
+    padding:0 14px!important;
+  }
+  .rh-social-inner > span{display:block!important;}
+  .rh-social-inner > span:nth-of-type(1),
+  .rh-social-inner > span:nth-of-type(3){display:none!important;}
+  .rh-social-inner strong{display:block!important;}
+  .rh-pro-trust{
+    margin-top:14px!important;
+    padding-top:0!important;
+    z-index:2!important;
+  }
+  .rh-pro-trust-grid{
+    border-radius:24px!important;
+  }
+}
+
+@media (min-width:641px) and (max-width:1020px){
+  .rh-social-proof{padding:22px 0 18px!important;}
+  .rh-pro-trust{margin-top:12px!important;}
+}
