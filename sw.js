@@ -1,4 +1,4 @@
-const RH_VERSION = '6.4.5-auto-sw-lead-retry';
+const RH_VERSION = '6.4.10-trust-cleanup-rls';
 const RH_CACHE_NAME = `services-restu-harmoni-${RH_VERSION}`;
 const RH_CRITICAL_EXTENSIONS = ['.html', '.js', '.css', '.json', '.webmanifest'];
 

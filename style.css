@@ -111,3 +111,33 @@
   .rh-social-proof{padding:22px 0 18px!important;}
   .rh-pro-trust{margin-top:12px!important;}
 }
+
+
+/* v6.4.10 trust cleanup from RLS lead fix base */
+.rh-social-inner-clean{
+  gap:12px!important;
+  align-items:center;
+}
+.rh-social-inner-clean .rh-social-tagline{
+  color:#475569;
+  font-weight:700;
+}
+@media (min-width: 641px){
+  .rh-social-inner-clean .rh-social-tagline::before{
+    content:"•";
+    color:#0f172a;
+    margin:0 12px 0 2px;
+  }
+}
+@media (max-width: 640px){
+  .rh-social-inner-clean{
+    flex-direction:column!important;
+    gap:6px!important;
+    padding:0 18px!important;
+  }
+  .rh-social-inner-clean .rh-social-tagline{
+    display:block!important;
+    max-width:300px;
+    line-height:1.45;
+  }
+}
