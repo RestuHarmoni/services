@@ -40,7 +40,7 @@
     const client=await initSupabase();
     if(!client){saveLocalLead(lead);return{ok:true,mode:"local"};}
     const {error}=await client.from("leads").insert([lead]);
-    if(error){saveLocalLead(lead);return{ok:false,mode:"local",error:error.message};}
+    if(error){console.error("Aira lead Supabase insert failed:",error);saveLocalLead(lead);return{ok:false,mode:"local",error:error.message};}
     return{ok:true,mode:"supabase"};
   }
   function matchFAQ(input){const q=String(input||"").toLowerCase();for(const item of BANK.faq){for(const trig of item.triggers){if(q.includes(trig.toLowerCase()))return item;}}return null;}
