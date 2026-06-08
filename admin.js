@@ -14,13 +14,14 @@ let site = JSON.parse(localStorage.getItem('rh_site_content')||'null') || DEFAUL
 let templates = JSON.parse(localStorage.getItem('rh_templates_data')||'null') || DEFAULT_TEMPLATES;
 let airaQuestions = JSON.parse(localStorage.getItem('rh_aira_question_bank')||'null') || structuredClone(DEFAULT_AIRA_QUESTIONS);
 let airaFaq = JSON.parse(localStorage.getItem('rh_aira_faq_bank')||'null') || structuredClone(DEFAULT_AIRA_FAQ);
+let googleReviews = (window.RH_GOOGLE_REVIEWS_SERVICE&&window.RH_GOOGLE_REVIEWS_SERVICE.readLocal?window.RH_GOOGLE_REVIEWS_SERVICE.readLocal():{version:'1.0.0',title:'Apa Kata Customer Kami',subtitle:'Antara pengalaman pelanggan yang pernah berurusan dengan Restu Harmoni.',googleReviewUrl:'https://g.page/r/CTOjpXjmtEJwEAI/review',googleProfileUrl:'https://g.page/r/CTOjpXjmtEJwEAI',reviews:[]});
 
 document.getElementById('logout').onclick=()=>window.RH_ADMIN_AUTH.signOut();
 
 document.querySelectorAll('.side button[data-tab]').forEach(btn=>btn.onclick=()=>{
  document.querySelectorAll('.side button').forEach(b=>b.classList.remove('active')); btn.classList.add('active');
- ['dashboard','site','templates','blog','aira','export'].forEach(t=>{const el=$('tab-'+t); if(el) el.style.display=(btn.dataset.tab===t?'block':'none');});
- if(btn.dataset.tab==='export') refreshExport(); if(btn.dataset.tab==='aira') renderAiraAdmin(); if(btn.dataset.tab==='blog' && window.RH_BLOG_ADMIN){window.RH_BLOG_ADMIN.refreshPosts();}
+ ['dashboard','site','templates','blog','aira','reviews','export'].forEach(t=>{const el=$('tab-'+t); if(el) el.style.display=(btn.dataset.tab===t?'block':'none');});
+ if(btn.dataset.tab==='export') refreshExport(); if(btn.dataset.tab==='aira') renderAiraAdmin(); if(btn.dataset.tab==='reviews') renderGoogleReviewsAdmin(); if(btn.dataset.tab==='blog' && window.RH_BLOG_ADMIN){window.RH_BLOG_ADMIN.refreshPosts();}
 });
 
 function loadSite(){
@@ -61,7 +62,7 @@ $('resetTpl').onclick=()=>{const k=$('tplSelect').value; templates[k]=structured
 
 function refreshExport(){ $('exportSite').value=JSON.stringify(site,null,2); $('exportTemplates').value=JSON.stringify(templates,null,2); if($('airaQuestionExport')) $('airaQuestionExport').value=JSON.stringify(airaQuestions,null,2); if($('airaFaqExport')) $('airaFaqExport').value=JSON.stringify(airaFaq,null,2); }
 $('refreshExport').onclick=refreshExport;
-$('clearAll').onclick=()=>{if(confirm('Padam semua local changes?')){localStorage.removeItem('rh_site_content');localStorage.removeItem('rh_templates_data');localStorage.removeItem('rh_aira_question_bank');localStorage.removeItem('rh_aira_faq_bank');site=structuredClone(DEFAULT_SITE);templates=structuredClone(DEFAULT_TEMPLATES);airaQuestions=structuredClone(DEFAULT_AIRA_QUESTIONS);airaFaq=structuredClone(DEFAULT_AIRA_FAQ);loadSite();fillSelect();loadTpl();renderAiraAdmin();refreshExport();}};
+$('clearAll').onclick=()=>{if(confirm('Padam semua local changes?')){localStorage.removeItem('rh_site_content');localStorage.removeItem('rh_templates_data');localStorage.removeItem('rh_aira_question_bank');localStorage.removeItem('rh_aira_faq_bank');localStorage.removeItem('rh_google_reviews_bank');site=structuredClone(DEFAULT_SITE);templates=structuredClone(DEFAULT_TEMPLATES);airaQuestions=structuredClone(DEFAULT_AIRA_QUESTIONS);airaFaq=structuredClone(DEFAULT_AIRA_FAQ);googleReviews=(window.RH_GOOGLE_REVIEWS_SERVICE&&window.RH_GOOGLE_REVIEWS_SERVICE.defaults?window.RH_GOOGLE_REVIEWS_SERVICE.defaults():googleReviews);loadSite();fillSelect();loadTpl();renderAiraAdmin();renderGoogleReviewsAdmin();refreshExport();}};
 
 
 
@@ -105,3 +106,88 @@ loadSite(); fillSelect(); loadTpl(); loadAiraFromSource();
 
 
 document.querySelectorAll('[data-jump-blog]').forEach(btn=>btn.addEventListener('click',()=>{const b=document.querySelector('.side button[data-tab=\"blog\"]'); if(b) b.click(); if(window.RH_BLOG_ADMIN) window.RH_BLOG_ADMIN.newPost();}));
+
+
+/* Google Reviews Manager */
+function setGoogleReviewStatus(msg,type='info'){
+ const el=$('googleReviewStatus'); if(!el)return;
+ el.textContent=msg;
+ el.style.borderColor=type==='ok'?'#bbf7d0':type==='warn'?'#fde68a':'#e2e8f0';
+ el.style.background=type==='ok'?'#f0fdf4':type==='warn'?'#fffbeb':'#f8fafc';
+}
+function saveGoogleReviewsLocal(){
+ googleReviews.title=$('grTitle')?$('grTitle').value:googleReviews.title;
+ googleReviews.subtitle=$('grSubtitle')?$('grSubtitle').value:googleReviews.subtitle;
+ googleReviews.googleProfileUrl=$('grProfileUrl')?$('grProfileUrl').value:googleReviews.googleProfileUrl;
+ googleReviews.googleReviewUrl=$('grReviewUrl')?$('grReviewUrl').value:googleReviews.googleReviewUrl;
+ googleReviews.version='1.0.1';
+ if(window.RH_GOOGLE_REVIEWS_SERVICE) window.RH_GOOGLE_REVIEWS_SERVICE.writeLocal(googleReviews);
+ localStorage.setItem('rh_google_reviews_bank',JSON.stringify(googleReviews));
+ setGoogleReviewStatus('Draft review disimpan dalam browser admin. Klik Publish ke Supabase untuk live semua device.','warn');
+ renderGoogleReviewsAdmin(false);
+}
+async function loadGoogleReviewsFromSource(){
+ if(!window.RH_GOOGLE_REVIEWS_SERVICE){setGoogleReviewStatus('Feedback Customer Service tidak dimuatkan.','warn');return;}
+ const res=await window.RH_GOOGLE_REVIEWS_SERVICE.loadAll();
+ googleReviews=res.reviews||googleReviews;
+ setGoogleReviewStatus(res.source==='supabase'?'Feedback Customer sedang digunakan dari Supabase.':'Feedback Customer guna localStorage fallback. '+(res.warning||''),res.source==='supabase'?'ok':'warn');
+ renderGoogleReviewsAdmin(false);
+}
+async function publishGoogleReviewsToSupabase(){
+ saveGoogleReviewsLocal();
+ if(!window.RH_GOOGLE_REVIEWS_SERVICE){setGoogleReviewStatus('Feedback Customer Service tidak dimuatkan.','warn');return;}
+ const res=await window.RH_GOOGLE_REVIEWS_SERVICE.publishAll(googleReviews);
+ if(res.ok){setGoogleReviewStatus('Berjaya publish Feedback Customer ke Supabase. Slider website akan baca data live.','ok');alert('Feedback Customer berjaya publish ke Supabase.');}
+ else {setGoogleReviewStatus('Gagal publish ke Supabase: '+res.error,'warn');alert('Gagal publish. Draft masih local. Error: '+res.error);}
+}
+function renderGoogleReviewsAdmin(selectFirst=true){
+ if(!$('googleReviewList'))return;
+ $('grTitle').value=googleReviews.title||'';
+ $('grSubtitle').value=googleReviews.subtitle||'';
+ $('grProfileUrl').value=googleReviews.googleProfileUrl||'';
+ $('grReviewUrl').value=googleReviews.googleReviewUrl||'';
+ const list=[...(googleReviews.reviews||[])].sort((a,b)=>(Number(a.order||0)-Number(b.order||0)));
+ $('googleReviewList').innerHTML=list.map((r,i)=>`<div class="review-admin-card"><h3>${escAdmin(r.name||'Tanpa nama')} ${r.active?'<span class="badge publish">Aktif</span>':'<span class="badge draft">Draft</span>'}</h3><p>${'★'.repeat(Number(r.rating||5))}</p><p>${escAdmin((r.text||'').slice(0,130))}${(r.text||'').length>130?'...':''}</p><div class="mini-actions"><button class="dark" onclick="editGoogleReview(${i})">Edit</button><button onclick="moveGoogleReview(${i},-1)">↑</button><button onclick="moveGoogleReview(${i},1)">↓</button></div></div>`).join('');
+ if(selectFirst && list.length) editGoogleReview(0); else renderGoogleReviewPreview();
+}
+window.editGoogleReview=function(i){
+ const list=[...(googleReviews.reviews||[])].sort((a,b)=>(Number(a.order||0)-Number(b.order||0)));
+ const r=list[i]; if(!r)return;
+ const realIndex=(googleReviews.reviews||[]).indexOf(r);
+ $('grIndex').value=realIndex;
+ $('grName').value=r.name||'';
+ $('grRating').value=String(r.rating||5);
+ $('grText').value=r.text||'';
+ $('grSource').value=r.source||'Feedback Customer';
+ $('grOrder').value=r.order||i+1;
+ $('grActive').checked=!!r.active;
+ renderGoogleReviewPreview();
+}
+function renderGoogleReviewPreview(){
+ const el=$('googleReviewPreview'); if(!el)return;
+ const rating=Number($('grRating')?$('grRating').value:5)||5;
+ const name=$('grName')?$('grName').value:'Nama Pelanggan';
+ const text=$('grText')?$('grText').value:'Review Google sebenar akan dipaparkan di sini.';
+ const source=$('grSource')?$('grSource').value:'Google Review';
+ el.innerHTML=`<div class="review-preview-stars">${'★'.repeat(rating)}</div><blockquote>“${escAdmin(text)}”</blockquote><div class="review-preview-meta"><strong>${escAdmin(name)}</strong><span class="review-preview-source">${escAdmin(source)}</span></div>`;
+}
+['grName','grRating','grText','grSource','grOrder','grActive'].forEach(id=>document.addEventListener('input',e=>{if(e.target&&e.target.id===id)renderGoogleReviewPreview();}));
+if($('saveGoogleReviewItem')) $('saveGoogleReviewItem').onclick=()=>{
+ const idx=$('grIndex').value===''?-1:Number($('grIndex').value);
+ const item={name:$('grName').value.trim()||'Nama Pelanggan',rating:Number($('grRating').value||5),text:$('grText').value.trim(),source:$('grSource').value.trim()||'Feedback Customer',order:Number($('grOrder').value||1),active:$('grActive').checked};
+ if(!item.text){alert('Masukkan teks review sebenar dahulu.');return;}
+ if(idx>=0) googleReviews.reviews[idx]=item; else googleReviews.reviews.push(item);
+ saveGoogleReviewsLocal();
+};
+if($('deleteGoogleReviewItem')) $('deleteGoogleReviewItem').onclick=()=>{const idx=Number($('grIndex').value);if(idx>=0&&confirm('Delete review ini?')){googleReviews.reviews.splice(idx,1);saveGoogleReviewsLocal();}};
+if($('addGoogleReview')) $('addGoogleReview').onclick=()=>{googleReviews.reviews.push({name:'',rating:5,text:'',source:'Feedback Customer',active:false,order:(googleReviews.reviews||[]).length+1});saveGoogleReviewsLocal();editGoogleReview((googleReviews.reviews||[]).length-1);};
+window.moveGoogleReview=function(i,dir){
+ const list=[...(googleReviews.reviews||[])].sort((a,b)=>(Number(a.order||0)-Number(b.order||0)));
+ const j=i+dir;if(j<0||j>=list.length)return;
+ const a=list[i],b=list[j],oa=a.order||i+1; a.order=b.order||j+1; b.order=oa;
+ saveGoogleReviewsLocal();
+};
+if($('saveGoogleReviews')) $('saveGoogleReviews').onclick=saveGoogleReviewsLocal;
+if($('publishGoogleReviews')) $('publishGoogleReviews').onclick=publishGoogleReviewsToSupabase;
+if($('reloadGoogleReviews')) $('reloadGoogleReviews').onclick=loadGoogleReviewsFromSource;
+setTimeout(()=>{if($('googleReviewList'))loadGoogleReviewsFromSource();},700);

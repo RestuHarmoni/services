@@ -18,6 +18,9 @@ label{display:block;font-weight:950;margin:14px 0 7px}input,textarea,select{widt
 .mobile-admin-tip{display:none}.quick-mobile{display:none}
 @media(max-width:900px){body{background:#f8fafc}.top .inner{align-items:flex-start;flex-direction:column;width:92%;padding:12px 0}.brand-admin{font-size:15px}.brand-dot{width:36px;height:36px}.top-actions{width:100%;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.top-actions .btn,.top-actions button{padding:11px 9px;font-size:13px;min-height:44px}.wrap{grid-template-columns:1fr;width:92%;margin:16px auto 84px;gap:14px}.side{position:sticky;top:92px;z-index:20;border-radius:20px;padding:10px;display:flex;gap:8px;overflow-x:auto;box-shadow:0 12px 32px rgba(15,23,42,.1);scrollbar-width:none}.side::-webkit-scrollbar{display:none}.side-title{display:none}.side button,.side a{white-space:nowrap;width:auto;min-width:max-content;margin:0;padding:12px 13px;border-radius:14px;font-size:14px;background:#f8fafc;border:1px solid #eef2f7}.side button.active,.side a.active{background:#dbeafe;border-color:#bfdbfe}.panel{padding:16px;border-radius:22px;min-height:auto}.section-head{display:block}.section-head .btn,.section-head button{width:100%;margin-top:10px}.grid,.grid-3{grid-template-columns:1fr;gap:10px}.stat-card{padding:15px}.stat-card strong{font-size:26px}.editor-card{padding:15px;border-radius:20px}.slug-row{display:block}.slug-row span{display:block;margin-bottom:8px;white-space:normal;word-break:break-word}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.actions .btn,.actions button{width:100%;padding-left:10px;padding-right:10px}.mobile-admin-tip{display:block;background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe;border-radius:18px;padding:12px 14px;margin:0 0 14px;font-weight:800;line-height:1.45}.quick-mobile{position:fixed;left:12px;right:12px;bottom:12px;z-index:40;display:grid;grid-template-columns:1fr 1fr;gap:10px}.quick-mobile a,.quick-mobile button{border:0;border-radius:16px;padding:13px 12px;min-height:48px;text-decoration:none;text-align:center;font-weight:950;box-shadow:0 18px 45px rgba(15,23,42,.2)}.quick-mobile .write{background:#2563eb;color:#fff}.quick-mobile .view{background:#fff;color:#1d4ed8;border:1px solid #dbeafe}.table-wrap{border:0;background:transparent;overflow:visible}.blog-table{min-width:0}.blog-table thead{display:none}.blog-table,.blog-table tbody,.blog-table tr,.blog-table td{display:block;width:100%}.blog-table tr{background:#fff;border:1px solid var(--line);border-radius:18px;margin-bottom:12px;padding:12px;box-shadow:0 10px 26px rgba(15,23,42,.04)}.blog-table td{border-bottom:0;padding:7px 2px}.blog-table td[data-label]:before{content:attr(data-label);display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;font-weight:950;margin-bottom:4px}.blog-table td:last-child .actions{grid-template-columns:1fr 1fr;margin-top:4px}.article-editor{min-height:340px}}
 @media(max-width:540px){h1{font-size:30px}.top-actions{grid-template-columns:1fr 1fr}.top-actions button{grid-column:1/-1}.wrap{width:94%;margin-top:12px}.panel{padding:14px;border-radius:20px}.side{top:120px}.actions{grid-template-columns:1fr}.blog-table td:last-child .actions{grid-template-columns:1fr 1fr}input,textarea,select{font-size:16px;border-radius:15px}.preview #postCoverPreview,.preview #imgPreview{min-height:170px!important;height:170px!important}.quick-mobile{left:10px;right:10px;bottom:10px}.quick-mobile a,.quick-mobile button{font-size:14px;padding:12px 10px}.grid-3{gap:9px}}
+
+/* Google Reviews Admin */
+.review-admin-shell{display:grid;grid-template-columns:minmax(320px,42%) minmax(360px,58%);gap:16px;align-items:start;min-width:0}.review-list{height:min(70vh,680px);overflow:auto;display:grid;gap:10px;padding-right:4px}.review-admin-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 10px 26px rgba(15,23,42,.04)}.review-admin-card h3{margin:0 0 6px;font-size:16px}.review-preview-card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:0 18px 42px rgba(15,23,42,.08);max-width:520px}.review-preview-stars{color:#f59e0b;font-size:22px;letter-spacing:2px}.review-preview-card blockquote{font-size:18px;line-height:1.65;margin:16px 0;color:#0f172a}.review-preview-meta{display:flex;justify-content:space-between;gap:12px;align-items:center;color:#64748b;font-weight:800}.review-preview-source{background:#eef6ff;color:#1d4ed8;border-radius:999px;padding:7px 10px;font-size:12px}@media(max-width:980px){.review-admin-shell{grid-template-columns:1fr}.review-list{height:auto;max-height:70vh}}
 </style>
 </head>
 <body>
@@ -30,6 +33,7 @@ label{display:block;font-weight:950;margin:14px 0 7px}input,textarea,select{widt
 <button data-tab="templates">🖼️ Demo Templates</button>
 <button data-tab="blog">📝 Blog CMS <small>SEO</small></button>
 <button data-tab="aira">🤖 Aira Manager <small>AI</small></button>
+<button data-tab="reviews">⭐ Feedback Customer <small>Slider</small></button>
 <a href="admin-leads.html">👥 Lead Management</a>
 <button data-tab="export">📦 Export / Backup</button>
 </aside>
@@ -84,13 +88,31 @@ Kereta Sewa: 1–5 kenderaan, 6–20 kenderaan"></textarea></div><div class="act
 </div>
 </section>
 
+
+<section id="tab-reviews" style="display:none">
+  <div class="section-head"><div><div class="eyebrow">Social Proof</div><h1>Google Review Slider</h1><p class="muted">Urus 5 review Google terbaik untuk dipaparkan di website. Review aktif sahaja akan keluar dalam slider.</p></div><button class="primary" id="saveGoogleReviews">Simpan Draft</button></div>
+  <div class="notice" id="googleReviewStatus">Feedback Customer: sedang semak sumber data...</div>
+  <div class="aira-toolbar"><button class="primary success" id="publishGoogleReviews">Publish ke Supabase</button><button class="btn soft" id="reloadGoogleReviews">Reload dari Supabase</button><button class="btn soft" id="addGoogleReview">+ Tambah Review</button></div>
+  <div class="review-admin-shell">
+    <div>
+      <div class="editor-card" style="margin-top:0"><h2>Setting Slider</h2><label>Tajuk Seksyen</label><input id="grTitle"><label>Subtajuk</label><textarea id="grSubtitle"></textarea><label>Link rujukan review (optional)</label><input id="grProfileUrl"><label>Link tulis review (optional)</label><input id="grReviewUrl"><div class="help">Link ini hanya untuk simpanan admin. Website tidak paparkan button review.</div></div>
+      <div class="editor-card"><h2>Senarai Review</h2><p class="muted">Masukkan review Google sebenar. Jangan tanda aktif untuk teks placeholder.</p><div class="review-list" id="googleReviewList"></div></div>
+    </div>
+    <div>
+      <div class="editor-card" style="margin-top:0"><h2>Edit Review</h2><input type="hidden" id="grIndex"><div class="grid"><div><label>Nama Reviewer</label><input id="grName" placeholder="Contoh: Ahmad Z."></div><div><label>Rating</label><select id="grRating"><option value="5">5 Bintang</option><option value="4">4 Bintang</option></select></div></div><label>Teks Review</label><textarea id="grText" placeholder="Copy review Google sebenar di sini"></textarea><div class="grid"><div><label>Sumber</label><input id="grSource" value="Google Review"></div><div><label>Susunan</label><input id="grOrder" type="number" min="1" value="1"></div></div><label><input id="grActive" type="checkbox" style="width:auto;min-height:auto"> Aktif / Papar di Website</label><div class="actions"><button class="primary success" id="saveGoogleReviewItem">Simpan Review</button><button class="primary danger" id="deleteGoogleReviewItem">Delete</button></div></div>
+      <div class="editor-card"><h2>Preview Card</h2><div id="googleReviewPreview" class="review-preview-card"></div></div>
+    </div>
+  </div>
+</section>
+
 <section id="tab-export" style="display:none"><div class="section-head"><div><div class="eyebrow">Backup</div><h1>Export / Backup</h1><p class="muted">Copy JSON ini jika mahu saya masukkan semula ke source code sebagai default production.</p></div></div><label>Site Content JSON</label><textarea id="exportSite" style="min-height:180px"></textarea><label>Templates JSON</label><textarea id="exportTemplates" style="min-height:260px"></textarea><div class="actions"><button class="primary" id="refreshExport">Refresh Export</button><button class="primary danger" id="clearAll">Clear Local Changes</button></div></section>
 </main>
 </div>
 <div class="quick-mobile"><button class="write" data-jump-blog="1">+ Tulis Artikel</button><a class="view" href="blog.html" target="_blank">Lihat Blog</a></div>
-<script src="supabase-config.js?v=6.1.2"></script>
-<script src="aira-data-service.js?v=6.4.5-auto-sw-lead-retry"></script>
-<script src="admin-auth.js?v=6.1.2"></script>
-<script src="admin.js?v=6.4.5-auto-sw-lead-retry"></script>
-<script src="admin-blog.js?v=6.1.2"></script>
+<script src="supabase-config.js?v=6.5.1-google-reviews-slider"></script>
+<script src="aira-data-service.js?v=6.5.1-google-reviews-slider"></script>
+<script src="google-reviews-service.js?v=6.5.1-google-reviews-slider"></script>
+<script src="admin-auth.js?v=6.5.1-google-reviews-slider"></script>
+<script src="admin.js?v=6.5.1-google-reviews-slider"></script>
+<script src="admin-blog.js?v=6.5.1-google-reviews-slider"></script>
 </body></html>

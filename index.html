@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=6.4.5-auto-sw-lead-retry" />
+  <link rel="stylesheet" href="style.css?v=6.5.1-google-reviews-slider" />
 
 <style id="rh-real-slider-css">
 .rh-real-slider-section{padding:72px 0;background:linear-gradient(180deg,#f8fafc 0%,#eef6ff 100%);color:#0f172a}
@@ -49,6 +49,8 @@
 .rh-slider-dots{display:flex;justify-content:center;gap:9px;margin-top:16px}.rh-slider-dots i{width:10px;height:10px;border-radius:50%;background:#94a3b8}.rh-slider-dots i.active{background:#0f172a;width:28px;border-radius:999px}
 .rh-slider-cta{text-align:center;margin-top:24px}.rh-contoh-generator-btn{display:inline-flex;align-items:center;justify-content:center;background:#facc15;color:#0f172a;border-radius:999px;padding:16px 26px;font-weight:950;text-decoration:none;box-shadow:0 18px 45px rgba(250,204,21,.28)}
 @media(max-width:640px){.rh-real-slider-section{padding:54px 0}.rh-slider-shell{padding:10px;border-radius:26px}.rh-slider-track{min-height:500px}.rh-browser-bar{height:48px;border-radius:18px 18px 0 0;padding:0 14px}.rh-browser-bar strong{font-size:12px}.rh-browser-bar span{width:10px;height:10px}.rh-contoh-page{min-height:452px;padding:28px 22px;border-radius:0 0 18px 18px}.rh-contoh-stats{grid-template-columns:1fr}.rh-contoh-buttons b{width:100%;text-align:center}.rh-contoh-generator-btn{width:100%;padding:16px}}
+
+.rh-google-review-shell{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;margin-top:28px}.rh-google-review-window{overflow:hidden;min-width:0}.rh-google-review-track{display:flex;gap:18px;transition:transform .45s ease;will-change:transform}.rh-google-review-card{min-width:calc((100% - 36px)/3);background:#fff;border:1px solid #dce7f3;border-radius:28px;padding:28px;box-shadow:0 18px 50px rgba(5,23,42,.075);display:flex;flex-direction:column;gap:13px;min-height:270px}.rh-google-review-card p{font-size:16px;line-height:1.65;color:#334155;margin:0;flex:1}.rh-google-review-card strong{font-family:Montserrat;color:#0f172a}.rh-google-review-card span{color:#64748b;font-weight:800;font-size:13px}.rh-google-stars{color:#f59e0b;letter-spacing:2px;font-size:21px}.rh-review-nav{width:44px;height:44px;border:1px solid #dce7f3;background:#fff;border-radius:999px;box-shadow:0 12px 30px rgba(15,23,42,.08);font-size:28px;font-weight:900;color:#0f172a;cursor:pointer}.rh-google-review-dots{display:flex;justify-content:center;gap:8px;margin-top:18px}.rh-google-review-dots button{width:9px;height:9px;border-radius:999px;border:0;background:#cbd5e1;cursor:pointer;padding:0}.rh-google-review-dots button.active{width:28px;background:#1d4ed8}.rh-google-review-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}.rh-review-empty{border-style:dashed;background:#f8fafc}@media(max-width:980px){.rh-google-review-card{min-width:calc((100% - 18px)/2)}}@media(max-width:760px){.rh-google-review-shell{grid-template-columns:1fr}.rh-review-nav{display:none}.rh-google-review-card{min-width:100%;min-height:auto}.rh-google-review-actions .btn{width:100%;justify-content:center}}
 </style>
 
 
@@ -917,15 +919,29 @@ a[href="#aira-popup"], .rh-open-aira, [data-open-aira]{
 </section>
 
 
-<section class="rh-testimonials section-pad">
-<div class="container">
-<div class="rh-pro-section-head"><span>TESTIMONI PELANGGAN</span><h2>Dipercayai oleh pelbagai bisnes servis.</h2></div>
-<div class="rh-testi-grid">
-<div class="rh-testi-card"><div>⭐⭐⭐⭐⭐</div><p>"Website lebih kemas dan pelanggan terus faham servis yang kami tawarkan."</p><b>Bisnes Servis Aircond</b></div>
-<div class="rh-testi-card"><div>⭐⭐⭐⭐⭐</div><p>"Portfolio projek lebih tersusun dan mudah dikongsi kepada pelanggan baharu."</p><b>Kontraktor</b></div>
-<div class="rh-testi-card"><div>⭐⭐⭐⭐⭐</div><p>"Template moden, mesra telefon dan mudah digunakan untuk promosi."</p><b>Homestay</b></div>
-</div>
-</div>
+<section class="rh-testimonials section-pad" id="testimonis">
+  <div class="container">
+    <div class="rh-pro-section-head">
+      <span>FEEDBACK CUSTOMER</span>
+      <h2 id="googleReviewsTitle">Apa Kata Customer Kami</h2>
+      <p id="googleReviewsSubtitle">Antara pengalaman pelanggan yang pernah berurusan dengan Restu Harmoni.</p>
+    </div>
+    <div class="rh-google-review-shell">
+      <button class="rh-review-nav" type="button" id="googleReviewPrev" aria-label="Review sebelumnya">‹</button>
+      <div class="rh-google-review-window">
+        <div class="rh-google-review-track" id="googleReviewTrack">
+          <article class="rh-google-review-card rh-review-empty">
+            <div class="rh-google-stars">★★★★★</div>
+            <p>Feedback customer akan dipaparkan di sini.</p>
+            <strong>Feedback Customer</strong>
+            <span>Belum ada feedback</span>
+          </article>
+        </div>
+      </div>
+      <button class="rh-review-nav" type="button" id="googleReviewNext" aria-label="Review seterusnya">›</button>
+    </div>
+    <div class="rh-google-review-dots" id="googleReviewDots"></div>
+  </div>
 </section>
 <section id="services" class="rh-pro-services section-pad">
   <div class="container">
@@ -1077,16 +1093,9 @@ a[href="#aira-popup"], .rh-open-aira, [data-open-aira]{
 
     
 
-    <section class="section-pad soft" id="testimonis">
-      <div class="container">
-        <div class="section-heading split reveal"><div><p class="eyebrow dark">Testimoni Pelanggan</p><h2>Apa Kata Pelanggan</h2></div><p>Pelanggan lebih mudah yakin apabila servis, contoh kerja dan cara hubungi disusun dengan jelas.</p></div>
-        <div class="testimoni-grid">
-          <article class="testimoni-card reveal"><div class="stars">★★★★★</div><p>“Website lebih jelas dan mudah untuk pelanggan faham servis yang ditawarkan.”</p><strong>Ahmad — Homestay</strong></article>
-          <article class="testimoni-card reveal delay-1"><div class="stars">★★★★★</div><p>“Butang WhatsApp dan struktur servis memudahkan prospek terus hantar detail kerja.”</p><strong>Hafiz — Servis Aircond</strong></article>
-          
-        </div>
-      </div>
-    </section>
+
+    <!-- Legacy dummy testimonial section removed: Google Reviews slider is used above. -->
+
 
     
 
@@ -1231,7 +1240,7 @@ a[href="#aira-popup"], .rh-open-aira, [data-open-aira]{
     </div>
   </footer>
   
-  <script src="version.js?v=6.4.5-auto-sw-lead-retry"></script><script src="app.js?v=6.4.5-auto-sw-lead-retry"></script>
+  <script src="version.js?v=6.5.1-google-reviews-slider"></script><script src="app.js?v=6.5.1-google-reviews-slider"></script>
 
 
 
@@ -1374,9 +1383,10 @@ window.AIRA_LEAD_FUNNEL_V52 = {
  statuses:["NEW","CONTACTED","QUOTATION SENT","WON","LOST"]
 };
 </script>
-<script src="supabase-config.js?v=6.1.6"></script>
-<script src="aira-data-service.js?v=6.4.5-auto-sw-lead-retry"></script>
-<script src="aira-lead-system.js?v=6.4.5-auto-sw-lead-retry"></script>
+<script src="supabase-config.js?v=6.5.1-google-reviews-slider"></script>
+<script src="aira-data-service.js?v=6.5.1-google-reviews-slider"></script>
+<script src="google-reviews-service.js?v=6.5.1-google-reviews-slider"></script>
+<script src="aira-lead-system.js?v=6.5.1-google-reviews-slider"></script>
 
 
 
@@ -1395,6 +1405,35 @@ window.AIRA_LEAD_FUNNEL_V52 = {
 
 
 
+
+
+<script id="rh-google-reviews-slider">
+(function(){
+  function ready(fn){document.readyState!=='loading'?fn():document.addEventListener('DOMContentLoaded',fn)}
+  function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+  ready(async function(){
+    const track=document.getElementById('googleReviewTrack'); if(!track||!window.RH_GOOGLE_REVIEWS_SERVICE)return;
+    const title=document.getElementById('googleReviewsTitle'),subtitle=document.getElementById('googleReviewsSubtitle'),dots=document.getElementById('googleReviewDots'),prev=document.getElementById('googleReviewPrev'),next=document.getElementById('googleReviewNext');
+    const res=await window.RH_GOOGLE_REVIEWS_SERVICE.loadAll();
+    const bank=res.reviews||{};
+    if(title&&bank.title)title.textContent=bank.title;
+    if(subtitle&&bank.subtitle)subtitle.textContent=bank.subtitle;
+    const reviews=(bank.reviews||[]).filter(r=>r&&r.active&&r.text).sort((a,b)=>(Number(a.order||0)-Number(b.order||0))).slice(0,12);
+    if(!reviews.length){return;}
+    track.innerHTML=reviews.map(r=>`<article class="rh-google-review-card"><div class="rh-google-stars">${'★'.repeat(Math.max(4,Math.min(5,Number(r.rating||5))))}</div><p>“${esc(r.text)}”</p><strong>${esc(r.name||'Customer')}</strong><span>${esc(r.source||'Feedback Customer')}</span></article>`).join('');
+    let index=0;
+    function perView(){if(matchMedia('(max-width:760px)').matches)return 1;if(matchMedia('(max-width:980px)').matches)return 2;return 3;}
+    function maxIndex(){return Math.max(0,reviews.length-perView());}
+    function renderDots(){if(!dots)return;dots.innerHTML='';for(let i=0;i<=maxIndex();i++){const b=document.createElement('button');b.type='button';b.className=i===index?'active':'';b.onclick=()=>{index=i;update();};dots.appendChild(b);}}
+    function update(){index=Math.max(0,Math.min(index,maxIndex()));const cards=track.querySelectorAll('.rh-google-review-card');if(!cards.length)return;const card=cards[0];const gap=18;const shift=index*(card.getBoundingClientRect().width+gap);track.style.transform=`translateX(${-shift}px)`;renderDots();}
+    if(prev)prev.onclick=()=>{index=index<=0?maxIndex():index-1;update();};
+    if(next)next.onclick=()=>{index=index>=maxIndex()?0:index+1;update();};
+    window.addEventListener('resize',update);
+    setInterval(()=>{if(document.hidden)return;index=index>=maxIndex()?0:index+1;update();},6500);
+    setTimeout(update,80);
+  });
+})();
+</script>
 
 <script id="rh-v528-aira-faq-consultant">
 (function(){
