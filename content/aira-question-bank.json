@@ -1,118 +1,39 @@
 {
-  "version": "v6.2.0-admin-flex",
+  "version": "v5.2.6",
   "assistantName": "Aira",
   "positioning": "AI Website Consultant",
-  "intro": [
-    "Hai 👋 Saya <strong>Aira</strong>, AI Website Consultant.",
-    "Saya boleh bantu cadangkan struktur website, pakej dan langkah seterusnya mengikut jenis bisnes anda."
-  ],
   "steps": [
     {
       "key": "business_type",
-      "question": "Apakah kategori perniagaan yang ingin anda bina website?",
-      "type": "choice",
-      "required": true,
+      "question": "Apakah jenis bisnes anda?",
       "options": [
-        "Servis Aircond",
+        "Aircond",
         "Homestay",
         "Kereta Sewa",
-        "Kontraktor & Renovasi",
         "Kedai Makan",
-        "Butik / Fashion",
+        "Kontraktor",
+        "Butik",
+        "Hartanah",
+        "Klinik",
         "Produk Online",
-        "Company Profile",
-        "Klinik / Profesional",
         "Lain-lain"
       ]
     },
     {
       "key": "objective",
-      "question": "Apakah matlamat utama website ini?",
-      "type": "choice",
-      "required": true,
+      "question": "Apakah tujuan utama website anda?",
       "options": [
-        "Dapatkan lebih banyak pertanyaan pelanggan",
-        "Paparkan servis & portfolio",
-        "Tempahan / booking enquiry",
-        "Company profile yang lebih dipercayai",
-        "Jual produk / katalog online",
-        "Landing page untuk iklan"
+        "Dapatkan pelanggan",
+        "Booking",
+        "Company Profile",
+        "Jual Produk",
+        "Landing Page",
+        "Custom"
       ]
-    },
-    {
-      "key": "has_website",
-      "question": "Adakah anda sudah mempunyai website sekarang?",
-      "type": "choice",
-      "required": false,
-      "options": [
-        "Belum ada website",
-        "Ada, tetapi mahu upgrade",
-        "Ada domain sahaja",
-        "Belum pasti"
-      ]
-    },
-    {
-      "key": "content_ready",
-      "question": "Bahan website sudah tersedia?",
-      "type": "choice",
-      "required": false,
-      "options": [
-        "Logo & gambar sudah ada",
-        "Ada sebahagian bahan",
-        "Belum ada bahan",
-        "Perlu bantuan susun content"
-      ]
-    },
-    {
-      "key": "industry_detail",
-      "question": "Maklumat tambahan yang penting untuk kategori bisnes anda?",
-      "type": "choice",
-      "required": false,
-      "conditional": true,
-      "conditions": {
-        "Homestay": [
-          "1 unit homestay",
-          "2–5 unit homestay",
-          "Lebih 5 unit",
-          "Perlu galeri & kemudahan"
-        ],
-        "Kereta Sewa": [
-          "1–5 kenderaan",
-          "6–20 kenderaan",
-          "Lebih 20 kenderaan",
-          "Perlu senarai harga & booking"
-        ],
-        "Kontraktor & Renovasi": [
-          "Ada portfolio projek",
-          "Belum ada portfolio",
-          "Perlu quotation form",
-          "Perlu paparan servis lengkap"
-        ],
-        "Servis Aircond": [
-          "Servis rumah",
-          "Servis pejabat",
-          "Ada kawasan liputan tertentu",
-          "Perlu jadual servis/booking"
-        ],
-        "Kedai Makan": [
-          "Menu harian",
-          "Catering",
-          "Tempahan WhatsApp",
-          "Lokasi Google Maps"
-        ],
-        "Produk Online": [
-          "1 produk utama",
-          "Katalog banyak produk",
-          "Perlu testimoni",
-          "Order melalui WhatsApp"
-        ]
-      }
     },
     {
       "key": "budget",
-      "question": "Anggaran bajet yang selesa untuk projek ini?",
-      "type": "choice",
-      "required": true,
+      "question": "Anggaran budget anda?",
       "options": [
         "RM699 – RM999",
         "RM1000 – RM2000",
@@ -122,32 +43,26 @@
     },
     {
       "key": "timeline",
-      "question": "Bila anda mahu website mula siap atau dilancarkan?",
-      "type": "choice",
-      "required": true,
+      "question": "Bilakah anda mahu website siap?",
       "options": [
         "Segera",
-        "1–2 minggu",
-        "Dalam 1 bulan",
+        "1–2 Minggu",
+        "1 Bulan",
         "Belum pasti"
       ]
     },
     {
       "key": "name",
-      "question": "Boleh saya tahu nama anda?",
-      "type": "input",
+      "question": "Siapa nama anda?",
       "input": true,
-      "placeholder": "Contoh: Ahmad",
-      "required": true
+      "placeholder": "Contoh: Ahmad"
     },
     {
       "key": "phone",
-      "question": "Nombor WhatsApp untuk team kami hubungi?",
-      "type": "input",
+      "question": "Nombor WhatsApp untuk kami hubungi?",
       "input": true,
       "placeholder": "Contoh: 0123456789",
-      "required": true,
-      "validation": "phone"
+      "required": true
     }
   ],
   "packages": {

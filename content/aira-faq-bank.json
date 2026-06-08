@@ -1,14 +1,14 @@
 {
-  "version": "v6.2.0-admin-flex",
+  "version": "v5.2.7",
   "quickActions": [
-    "Dapatkan Cadangan Website",
+    "Cadangkan Website Saya",
     "Harga Pakej",
     "Lihat Contoh Website",
     "Berapa Lama Siap?",
     "Domain & Hosting",
     "SEO Google",
-    "Website atau Facebook?",
-    "Maintenance & Support"
+    "Boleh Edit Sendiri?",
+    "Saya Tiada Logo/Gambar"
   ],
   "faq": [
     {
@@ -120,61 +120,6 @@
         "step"
       ],
       "answer": "Proses ringkas: Aira kumpul maklumat, kami cadangkan pakej, anda sediakan bahan, website dibina, semakan dan live."
-    },
-    {
-      "topic": "website_vs_facebook",
-      "triggers": [
-        "facebook",
-        "fb",
-        "website atau facebook",
-        "perlu website",
-        "instagram"
-      ],
-      "answer": "Facebook dan Instagram bagus untuk promosi harian. Website pula berfungsi sebagai pusat rujukan rasmi untuk servis, portfolio, testimoni, harga permulaan dan maklumat bisnes supaya pelanggan lebih yakin sebelum menghubungi anda."
-    },
-    {
-      "topic": "google_business",
-      "triggers": [
-        "google business",
-        "gmb",
-        "google map",
-        "google maps",
-        "map"
-      ],
-      "answer": "Website boleh disusun supaya serasi dengan Google Business Profile. Ini membantu pelanggan melihat maklumat lengkap selepas mereka jumpa bisnes anda di Google Search atau Google Maps."
-    },
-    {
-      "topic": "whatsapp_integration",
-      "triggers": [
-        "whatsapp",
-        "wa",
-        "chat",
-        "butang whatsapp",
-        "link whatsapp"
-      ],
-      "answer": "Ya, website boleh disambungkan dengan butang WhatsApp, borang lead dan flow Aira supaya pertanyaan pelanggan lebih tersusun sebelum anda follow-up."
-    },
-    {
-      "topic": "maintenance",
-      "triggers": [
-        "maintenance",
-        "support",
-        "jaga website",
-        "kemaskini bulanan",
-        "update website"
-      ],
-      "answer": "Maintenance boleh dibincangkan mengikut keperluan. Contohnya kemaskini gambar, servis, harga, artikel SEO atau penambahbaikan kecil selepas website live."
-    },
-    {
-      "topic": "ownership",
-      "triggers": [
-        "hak milik",
-        "owner",
-        "siapa punya website",
-        "milik saya",
-        "akses"
-      ],
-      "answer": "Butiran hak milik, akses domain, hosting dan fail website boleh disahkan semasa quotation supaya kedua-dua pihak jelas dari awal."
     }
   ]
 }
