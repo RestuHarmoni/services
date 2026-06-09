@@ -3,69 +3,113 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cadangan Website Percuma | Restu Harmoni</title>
+<title>Demo Generator Aira | Restu Harmoni</title>
+<meta name="description" content="Masukkan nama bisnes dan pilih servis. Aira akan padankan pakej RH serta template UI yang sesuai.">
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:#f8fafc;color:#0f172a}.container{width:min(1120px,92%);margin:auto}
-.hero{padding:76px 0 44px;text-align:center;background:linear-gradient(135deg,#eff6ff,#fff)}h1{font-size:clamp(36px,6vw,68px);line-height:.95;letter-spacing:-.06em;margin:0 0 14px}p{color:#64748b;line-height:1.65}.box{background:#fff;border:1px solid #e2e8f0;border-radius:28px;padding:18px;box-shadow:0 22px 70px rgba(15,23,42,.12);display:grid;grid-template-columns:1.4fr 1fr auto;gap:10px;max-width:900px;margin:26px auto 0}input,select,button{border:1px solid #e2e8f0;border-radius:16px;padding:15px;font-size:16px}button{background:#2563eb;color:#fff;font-weight:950;cursor:pointer}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding:52px 0}.dg-card{background:#fff;border:1px solid #e2e8f0;border-radius:26px;overflow:hidden;box-shadow:0 18px 48px rgba(15,23,42,.07)}.dg-img{height:160px;background-size:cover;background-position:center}.dg-body{padding:20px}.dg-body h3{margin:0 0 8px}.dg-body p{min-height:76px;margin:0 0 14px}.dg-body button{width:100%;background:#0f172a}footer{background:#020617;color:#e2e8f0;text-align:center;padding:34px}@media(max-width:900px){.box,.grid{grid-template-columns:1fr}}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:#f8fafc;color:#0f172a}.container{width:min(1140px,92%);margin:auto}.hero{padding:76px 0 44px;text-align:center;background:radial-gradient(circle at top left,#dbeafe,transparent 34%),linear-gradient(135deg,#eff6ff,#fff)}.eyebrow{display:inline-flex;gap:8px;align-items:center;background:#fff;border:1px solid #dbeafe;border-radius:999px;padding:8px 13px;color:#1d4ed8;font-weight:900;margin-bottom:16px}h1{font-size:clamp(36px,6vw,68px);line-height:.95;letter-spacing:-.06em;margin:0 0 14px}p{color:#64748b;line-height:1.65}.box{background:#fff;border:1px solid #e2e8f0;border-radius:28px;padding:18px;box-shadow:0 22px 70px rgba(15,23,42,.12);display:grid;grid-template-columns:1.15fr 1fr .9fr auto;gap:10px;max-width:1060px;margin:26px auto 0}input,select,button{border:1px solid #e2e8f0;border-radius:16px;padding:15px;font-size:16px;background:#fff}button,.btn{background:#2563eb;color:#fff;font-weight:950;cursor:pointer;text-decoration:none;display:inline-flex;justify-content:center;align-items:center;border:0}.btn.dark{background:#0f172a}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:42px 0}.dg-card{background:#fff;border:1px solid #e2e8f0;border-radius:26px;overflow:hidden;box-shadow:0 18px 48px rgba(15,23,42,.07);display:flex;flex-direction:column}.dg-img{height:170px;background-size:cover;background-position:center;position:relative}.badge{position:absolute;left:14px;top:14px;background:#fff;border:1px solid #e2e8f0;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:950}.dg-body{padding:20px;display:flex;flex-direction:column;gap:12px;flex:1}.dg-body h3{margin:0}.dg-body p{margin:0;min-height:72px}.meta{display:flex;gap:8px;flex-wrap:wrap}.tag{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:800;color:#334155}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto}.empty{grid-column:1/-1;background:#fff;border:1px dashed #cbd5e1;border-radius:24px;padding:28px;text-align:center;color:#64748b}.preview-panel{display:grid;grid-template-columns:320px 1fr;gap:16px;background:#fff;border:1px solid #e2e8f0;border-radius:28px;padding:16px;margin:24px 0 0;box-shadow:0 18px 48px rgba(15,23,42,.08)}.preview-info{padding:10px}.preview-frame-wrap{height:620px;border:1px solid #e2e8f0;border-radius:22px;overflow:hidden;background:#f1f5f9}.preview-frame{width:100%;height:100%;border:0;background:#fff}.small-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px}footer{background:#020617;color:#e2e8f0;text-align:center;padding:34px}.note{font-size:14px;color:#64748b;margin-top:12px}@media(max-width:960px){.box,.grid,.preview-panel{grid-template-columns:1fr}.actions{grid-template-columns:1fr}.preview-frame-wrap{height:560px}}
 </style>
 </head>
 <body>
 <section class="hero">
   <div class="container">
-    <h1>Lihat Website Anda Dalam 10 Saat.</h1>
-    <p>Masukkan nama bisnes dan pilih industri. Anda akan lihat website yang sama seperti preview di landing page dengan gambar, servis, pakej dan butang WhatsApp.</p>
+    <div class="eyebrow">Aira Demo Generator · RH v2</div>
+    <h1>Lihat Cadangan Website Anda Dalam 10 Saat.</h1>
+    <p>Masukkan nama bisnes dan pilih servis. Aira akan padankan servis anda dengan pakej RH serta template UI yang sesuai.</p>
     <form id="form" class="box">
-      <input id="company" required placeholder="Contoh: Warung Kak Siti / AZ Homestay / Maju Car Rental">
-      <select id="template"><option value="kedai-makan">Kedai Makan</option>
-<option value="homestay">Homestay</option>
-<option value="kereta-sewa">Kereta Sewa</option>
-<option value="aircond">Servis Aircond</option>
-<option value="renovation">Renovation / Contractor</option>
-<option value="butik">Butik / Fashion</option>
-<option value="corporate">Company Profile</option>
-<option value="produk-online">Produk Online</option></select>
-      <button>Jana Website Saya</button>
+      <input id="company" required placeholder="Contoh: AZ Aircond Services">
+      <select id="service" required><option value="">Pilih servis / industri</option></select>
+      <input id="location" placeholder="Lokasi, contoh: Shah Alam">
+      <button>Jana Demo</button>
     </form>
+    <div class="note">Pakej rasmi: RH Basic · RH Standard · RH Professional · RH Premium</div>
   </div>
 </section>
-<main class="container grid"><article class="dg-card">
-  <div class="dg-img" style="background-image:linear-gradient(135deg,rgba(15,23,42,.25),rgba(15,23,42,.6)),url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=80')"></div>
-  <div class="dg-body"><h3>Kedai Makan</h3><p>Masakan Kampung Panas-Panas Setiap Hari</p><button type="button" data-template="kedai-makan">Lihat Website Ini</button></div>
-</article>
-<article class="dg-card">
-  <div class="dg-img" style="background-image:linear-gradient(135deg,rgba(15,23,42,.25),rgba(15,23,42,.6)),url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1400&q=80')"></div>
-  <div class="dg-body"><h3>Homestay</h3><p>Penginapan Selesa Untuk Keluarga</p><button type="button" data-template="homestay">Lihat Website Ini</button></div>
-</article>
-<article class="dg-card">
-  <div class="dg-img" style="background-image:linear-gradient(135deg,rgba(15,23,42,.25),rgba(15,23,42,.6)),url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=80')"></div>
-  <div class="dg-body"><h3>Kereta Sewa</h3><p>Kereta Sewa Harian & Bulanan</p><button type="button" data-template="kereta-sewa">Lihat Website Ini</button></div>
-</article>
-<article class="dg-card">
-  <div class="dg-img" style="background-image:linear-gradient(135deg,rgba(15,23,42,.25),rgba(15,23,42,.6)),url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1400&q=80')"></div>
-  <div class="dg-body"><h3>Servis Aircond</h3><p>Cuci, Repair & Install Aircond</p><button type="button" data-template="aircond">Lihat Website Ini</button></div>
-</article>
-<article class="dg-card">
-  <div class="dg-img" style="background-image:linear-gradient(135deg,rgba(15,23,42,.25),rgba(15,23,42,.6)),url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1400&q=80')"></div>
-  <div class="dg-body"><h3>Renovation / Contractor</h3><p>Kontraktor Renovation Rumah & Premis</p><button type="button" data-template="renovation">Lihat Website Ini</button></div>
-</article>
-<article class="dg-card">
-  <div class="dg-img" style="background-image:linear-gradient(135deg,rgba(15,23,42,.25),rgba(15,23,42,.6)),url('https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1400&q=80')"></div>
-  <div class="dg-body"><h3>Butik / Fashion</h3><p>Koleksi Fashion Eksklusif Untuk Setiap Gaya</p><button type="button" data-template="butik">Lihat Website Ini</button></div>
-</article>
-<article class="dg-card">
-  <div class="dg-img" style="background-image:linear-gradient(135deg,rgba(15,23,42,.25),rgba(15,23,42,.6)),url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80')"></div>
-  <div class="dg-body"><h3>Company Profile</h3><p>Profil Syarikat Profesional & Meyakinkan</p><button type="button" data-template="corporate">Lihat Website Ini</button></div>
-</article>
-<article class="dg-card">
-  <div class="dg-img" style="background-image:linear-gradient(135deg,rgba(15,23,42,.25),rgba(15,23,42,.6)),url('https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1400&q=80')"></div>
-  <div class="dg-body"><h3>Produk Online</h3><p>Jual Produk Dengan Lebih Profesional</p><button type="button" data-template="produk-online">Lihat Website Ini</button></div>
-</article></main>
-<footer>RESTU HARMONI DIGITAL SOLUTIONS<br>WhatsApp:  • Email: sales@restuharmoni.com</footer>
+<main class="container">
+  <div id="resultMeta" class="note" style="padding-top:28px">Pilih servis untuk lihat template cadangan Aira.</div>
+  <section id="livePreview" class="preview-panel" hidden>
+    <div class="preview-info">
+      <span class="tag" id="previewPkg">RH Basic</span>
+      <h2 id="previewName" style="margin:12px 0 8px">Preview Template</h2>
+      <p id="previewDesc">Pilih template untuk lihat preview sebenar.</p>
+      <div class="small-actions">
+        <a class="btn" id="previewCustomize">Customize Template Ini</a>
+        <a class="btn dark" id="previewOpen" target="_blank">Open Full Preview</a>
+      </div>
+    </div>
+    <div class="preview-frame-wrap"><iframe id="previewFrame" class="preview-frame" title="Template UI preview"></iframe></div>
+  </section>
+  <section id="grid" class="grid"></section>
+</main>
+<footer>RESTU HARMONI DIGITAL SOLUTIONS<br>sales@restuharmoni.com</footer>
 <script>
-const form=document.getElementById('form'), company=document.getElementById('company'), tpl=document.getElementById('template');
-function go(slug){ if(!company.value.trim()){company.focus();return} location.href=`./templates/${slug}.html?company=${encodeURIComponent(company.value.trim())}`; }
-form.addEventListener('submit',e=>{e.preventDefault();go(tpl.value)});
-document.querySelectorAll('[data-template]').forEach(btn=>btn.addEventListener('click',()=>{tpl.value=btn.dataset.template;company.focus();window.scrollTo({top:0,behavior:'smooth'})}));
+const $=id=>document.getElementById(id);
+const grid=$('grid'), service=$('service'), company=$('company'), locationInput=$('location'), resultMeta=$('resultMeta');
+const livePreview=$('livePreview'), previewFrame=$('previewFrame'), previewName=$('previewName'), previewDesc=$('previewDesc'), previewPkg=$('previewPkg'), previewCustomize=$('previewCustomize'), previewOpen=$('previewOpen');
+const packageOf=id=> id.includes('RH_Basic')?'RH Basic':id.includes('RH_Standard')?'RH Standard':id.includes('RH_Professional')?'RH Professional':'RH Premium';
+const packageLimit=p=> p==='RH Basic'?'10 Template UI':p==='RH Standard'?'20 Template UI':p==='RH Professional'?'30 Template UI':'40 Template UI + Custom';
+const normalize=v=>String(v||'').toLowerCase().trim();
+const fallbackIds=['RH_Basic_01_Classic_Service','RH_Standard_01_Corporate_Profile','RH_Professional_01_Lead_Generation'];
+let templates={}, serviceMap={}, currentPreview='';
+function rootUrl(path){ return new URL(path, location.origin + '/').toString(); }
+function customizerUrl(id){
+  const q=new URLSearchParams({template:id,company:company.value.trim(),service:service.value,location:locationInput.value.trim()});
+  return rootUrl(`template-customizer.html?${q.toString()}`);
+}
+function previewUrl(id){
+  const q=new URLSearchParams({company:company.value.trim(),service:service.value,location:locationInput.value.trim()});
+  return rootUrl(`templates/${id}.html?${q.toString()}`);
+}
+function showPreview(id){
+  if(!id || !templates[id]) return;
+  currentPreview=id;
+  const t=templates[id]||{}, pkg=packageOf(id), url=previewUrl(id);
+  livePreview.hidden=false;
+  previewPkg.textContent=pkg;
+  previewName.textContent=t.name||id.replaceAll('_',' ');
+  previewDesc.textContent=t.subheadline||t.headline||'Preview template UI Restu Harmoni.';
+  previewCustomize.href=customizerUrl(id);
+  previewOpen.href=url;
+  previewFrame.src=url;
+}
+function card(id){
+  const t=templates[id]||{}, pkg=packageOf(id);
+  return `<article class="dg-card">
+    <div class="dg-img" style="background-image:linear-gradient(135deg,rgba(15,23,42,.16),rgba(15,23,42,.45)),url('${t.image||''}')"><span class="badge">${pkg}</span></div>
+    <div class="dg-body">
+      <h3>${t.name||id.replaceAll('_',' ')}</h3>
+      <div class="meta"><span class="tag">${packageLimit(pkg)}</span><span class="tag">${t.industry||'Multi industri'}</span></div>
+      <p>${t.subheadline||t.headline||'Template UI Restu Harmoni yang boleh disesuaikan mengikut bisnes anda.'}</p>
+      <div class="actions"><a class="btn" href="${customizerUrl(id)}">Customize</a><button class="btn dark" type="button" data-preview="${id}">Preview</button></div>
+    </div>
+  </article>`;
+}
+function recommendedIds(){
+  const key=normalize(service.value);
+  let hit=serviceMap[key] || Object.entries(serviceMap).find(([k])=>key && (key.includes(k)||k.includes(key)))?.[1];
+  let ids=hit && hit.templates ? hit.templates.slice(0,6) : [];
+  if(!ids.length) ids=fallbackIds;
+  return ids.filter(id=>templates[id]);
+}
+function render(){
+  const ids=recommendedIds();
+  const selected=service.value || 'servis anda';
+  const pkg=ids[0]?packageOf(ids[0]):'RH Basic';
+  resultMeta.textContent=`Cadangan Aira untuk ${selected}: ${pkg} · ${ids.length} template dipaparkan`;
+  grid.innerHTML=ids.length?ids.map(card).join(''):'<div class="empty">Data template belum ditemui.</div>';
+  const next = currentPreview && ids.includes(currentPreview) ? currentPreview : ids[0];
+  if(next) showPreview(next);
+}
+document.getElementById('form').addEventListener('submit',e=>{e.preventDefault(); const first=recommendedIds()[0]; if(first) location.href=customizerUrl(first);});
+grid.addEventListener('click',e=>{ const btn=e.target.closest('[data-preview]'); if(btn) showPreview(btn.dataset.preview); });
+service.addEventListener('change',render); company.addEventListener('input',()=>{ if(currentPreview) showPreview(currentPreview); }); locationInput.addEventListener('input',()=>{ if(currentPreview) showPreview(currentPreview); });
+Promise.all([
+  fetch(rootUrl('content/templates-data.json?v=9.2.0'),{cache:'no-store'}).then(r=>r.json()),
+  fetch(rootUrl('content/template-service-map.json?v=9.2.0'),{cache:'no-store'}).then(r=>r.json())
+]).then(([t,m])=>{
+  templates=t; serviceMap=m;
+  service.innerHTML='<option value="">Pilih servis / industri</option>'+Object.keys(m).sort().map(k=>`<option value="${k}">${k.replace(/\b\w/g,c=>c.toUpperCase())}</option>`).join('');
+  render();
+}).catch(err=>{ console.error(err); grid.innerHTML='<div class="empty">Data Aira/template gagal dibaca. Sila semak folder content.</div>'; });
 </script>
 </body>
 </html>
