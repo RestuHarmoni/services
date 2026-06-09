@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://services.restuharmoni.com/sitemap.xml
