@@ -1,13 +1,14 @@
-window.RH_APP_VERSION = 'v8.9.0-office-functional';
+window.RH_APP_VERSION = 'v8.9.3-admin-fit-polish';
 window.RH_VERSION = window.RH_APP_VERSION;
 window.RH_VERSION_META = {
-  version: 'v8.9.0-office-functional',
-  name: 'RH Office Suite Functional Frontend',
+  version: 'v8.9.3-admin-fit-polish',
+  name: 'RH Office Suite Exclusive Fit UIX',
   releaseDate: '2026-06-09',
   notes: [
-    'Activated Customers, Quotations, Invoices, Payments and Projects modules using localStorage frontend data',
-    'Added Restu Harmoni logo into admin header and quotation/invoice preview templates',
-    'Quotation can convert to invoice; invoices can be marked paid; payment and project registers are active',
-    'Aira and original Lead Management remain untouched'
+    'Unified admin.html with exclusive office dashboard layout',
+    'Added collapsible sidebar groups for CRM, Sales, Operations, Website & AI and Control',
+    'Added embedded Leads workspace without modifying original Lead Management or AIRA',
+    'Added full-width desktop workspace, better mobile drawer, KPI dashboard and quotation kanban pipeline',
+    'Kept quotation, invoice, payment, project and document localStorage front-end functionality active'
   ]
 };
