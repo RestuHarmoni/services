@@ -1,1 +1,1 @@
-window.RH_APP_VERSION = 'v6.6.1-demo-slider-mobile-fix';
+window.RH_APP_VERSION = 'v7.0.0-rh-live-customizer-sw';

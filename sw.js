@@ -1,6 +1,7 @@
-const RH_VERSION = '6.6.1-demo-slider-mobile-fix';
+const RH_VERSION = 'v7.0.0-rh-live-customizer-sw';
 const RH_CACHE_NAME = `services-restu-harmoni-${RH_VERSION}`;
 const RH_CRITICAL_EXTENSIONS = ['.html', '.js', '.css', '.json', '.webmanifest'];
+const RH_NETWORK_FIRST_PATHS = ['/content/', '/engine/', '/mapping/'];
 
 self.addEventListener('install', event => {
   self.skipWaiting();
@@ -37,14 +38,15 @@ self.addEventListener('fetch', event => {
   const isCriticalFile =
     pathname === '/' ||
     pathname.endsWith('/') ||
-    RH_CRITICAL_EXTENSIONS.some(ext => pathname.endsWith(ext));
+    RH_CRITICAL_EXTENSIONS.some(ext => pathname.endsWith(ext)) ||
+    RH_NETWORK_FIRST_PATHS.some(path => pathname.includes(path));
 
   if (isCriticalFile) {
     event.respondWith(
-      fetch(new Request(event.request, { cache: 'reload' }))
+      fetch(new Request(event.request, { cache: 'no-store' }))
         .then(response => {
           const copy = response.clone();
-          caches.open(RH_CACHE_NAME).then(cache => cache.put(event.request, copy));
+          if (response && response.ok) caches.open(RH_CACHE_NAME).then(cache => cache.put(event.request, copy));
           return response;
         })
         .catch(() => caches.match(event.request))
@@ -56,7 +58,7 @@ self.addEventListener('fetch', event => {
     caches.match(event.request).then(cached => {
       const fetchPromise = fetch(event.request).then(response => {
         const copy = response.clone();
-        caches.open(RH_CACHE_NAME).then(cache => cache.put(event.request, copy));
+        if (response && response.ok) caches.open(RH_CACHE_NAME).then(cache => cache.put(event.request, copy));
         return response;
       }).catch(() => cached);
       return cached || fetchPromise;
