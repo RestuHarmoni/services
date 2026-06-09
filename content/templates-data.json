@@ -1,266 +1,1622 @@
 {
-  "kedai-makan": {
-    "name": "Warung Kak Siti",
-    "industry": "Kedai Makan",
-    "headline": "Masakan Kampung Panas-Panas Setiap Hari",
-    "subheadline": "Menu harian, tempahan lauk dan catering kecil terus melalui WhatsApp.",
-    "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=80",
-    "color": "#dc2626",
-    "services": [
-      "Menu Harian",
-      "Tempahan Catering",
-      "Set Nasi Berlauk",
-      "Lokasi Google Maps"
-    ],
-    "products": [
-      {
-        "title": "Nasi Ayam Special",
-        "price": "RM8.90",
-        "desc": "Set lengkap dengan sup dan sambal."
-      },
-      {
-        "title": "Ikan Bakar",
-        "price": "RM15+",
-        "desc": "Pilihan ikan segar ikut stok harian."
-      },
-      {
-        "title": "Set Keluarga",
-        "price": "RM39+",
-        "desc": "Sesuai untuk 4-5 orang."
-      }
-    ],
-    "testimonial": "Makanan sedap, mudah tengok menu dan terus WhatsApp untuk tempahan.",
-    "cta": "Mula Dengan Aira"
-  },
-  "homestay": {
-    "name": "AZ Homestay Langkawi",
-    "industry": "Homestay",
-    "headline": "Penginapan Selesa Untuk Keluarga",
-    "subheadline": "Lihat bilik, kemudahan, lokasi dan semak tarikh kosong terus melalui WhatsApp.",
-    "image": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1400&q=80",
-    "color": "#059669",
-    "services": [
-      "Galeri Bilik",
-      "Harga Penginapan",
-      "Kemudahan Keluarga",
-      "Booking melalui Aira"
-    ],
-    "products": [
-      {
-        "title": "Bilik Keluarga",
-        "price": "RM180/malam",
-        "desc": "Sesuai untuk keluarga kecil."
-      },
-      {
-        "title": "Pakej Hujung Minggu",
-        "price": "RM350+",
-        "desc": "2 hari 1 malam, tertakluk tarikh kosong."
-      },
-      {
-        "title": "Kemudahan",
-        "price": "Percuma",
-        "desc": "Parking, WiFi dan ruang santai."
-      }
-    ],
-    "testimonial": "Senang semak info homestay dan terus booking melalui WhatsApp.",
-    "cta": "Semak Tarikh Kosong"
-  },
-  "kereta-sewa": {
-    "name": "Maju Car Rental",
-    "industry": "Kereta Sewa",
-    "headline": "Kereta Sewa Harian & Bulanan",
-    "subheadline": "Pilih kereta, semak harga dan booking pickup melalui WhatsApp.",
-    "image": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=80",
-    "color": "#0f766e",
-    "services": [
-      "Kereta Ekonomi",
-      "MPV Keluarga",
-      "Pickup Airport",
-      "Sewa Harian/Bulanan"
-    ],
-    "products": [
-      {
-        "title": "Perodua Axia",
-        "price": "RM90/hari",
-        "desc": "Jimat minyak untuk kegunaan bandar."
-      },
-      {
-        "title": "Perodua Bezza",
-        "price": "RM120/hari",
-        "desc": "Sesuai untuk kerja dan keluarga kecil."
-      },
-      {
-        "title": "Perodua Alza",
-        "price": "RM180/hari",
-        "desc": "MPV untuk keluarga dan trip jauh."
-      }
-    ],
-    "testimonial": "Mudah tengok pilihan kereta dan terus buat tempahan.",
-    "cta": "Booking Kereta"
-  },
-  "aircond": {
-    "name": "Dingin Aircond Services",
-    "industry": "Servis Aircond",
-    "headline": "Cuci, Repair & Install Aircond",
-    "subheadline": "Servis aircond rumah dan pejabat dengan temujanji melalui WhatsApp.",
+  "RH_Basic_01_Classic_Service": {
+    "name": "RH Basic 01 — Classic Service",
+    "industry": "Servis Aircond / Plumbing / Elektrik",
+    "headline": "Classic Service Website UI Untuk Servis Aircond",
+    "subheadline": "Template classic one-page service layout dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Servis Aircond / Plumbing / Elektrik.",
     "image": "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1400&q=80",
     "color": "#2563eb",
     "services": [
-      "Cuci Aircond",
-      "Repair Aircond",
-      "Install Aircond",
-      "Maintenance Berkala"
+      "Hero section",
+      "About ringkas",
+      "Service cards",
+      "Trust badge",
+      "WhatsApp CTA"
     ],
     "products": [
       {
-        "title": "Cuci Aircond",
-        "price": "RM80+",
-        "desc": "Cuci indoor dan outdoor unit."
+        "title": "Pakej",
+        "price": "RH Basic",
+        "desc": "Website asas untuk bisnes kecil yang perlukan profil, servis dan CTA WhatsApp jelas."
       },
       {
-        "title": "Repair Aircond",
-        "price": "Quotation",
-        "desc": "Troubleshoot masalah tidak sejuk/bocor."
+        "title": "Jenis Template",
+        "price": "Classic Service",
+        "desc": "Classic one-page service layout"
       },
       {
-        "title": "Install Aircond",
-        "price": "RM250+",
-        "desc": "Pemasangan unit baru mengikut lokasi."
+        "title": "Sesuai Untuk",
+        "price": "Servis Aircond / Plumbing / Elektrik",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
       }
     ],
-    "testimonial": "Website jelas tunjuk servis dan memudahkan pelanggan booking.",
-    "cta": "Tempah Servis"
+    "testimonial": "Classic Service membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Classic Service",
+    "package": "RH_Basic",
+    "templateCode": "RH_Basic_01_Classic_Service",
+    "className": "tpl-basic-01",
+    "uiConcept": "Classic one-page service layout",
+    "suitableFor": "Servis Aircond / Plumbing / Elektrik"
   },
-  "renovation": {
-    "name": "Bina Reka Renovation",
-    "industry": "Renovation / Contractor",
-    "headline": "Kontraktor Renovation Rumah & Premis",
-    "subheadline": "Paparkan portfolio projek, servis dan permintaan quotation secara tersusun.",
-    "image": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1400&q=80",
+  "RH_Basic_02_Modern_Split": {
+    "name": "RH Basic 02 — Modern Split",
+    "industry": "Cleaning / Repair / Servis kecil",
+    "headline": "Modern Split Website UI Untuk Cleaning",
+    "subheadline": "Template split hero with clean cards dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Cleaning / Repair / Servis kecil.",
+    "image": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1400&q=80",
+    "color": "#0f766e",
+    "services": [
+      "Hero section",
+      "About ringkas",
+      "Service cards",
+      "Trust badge",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Basic",
+        "desc": "Website asas untuk bisnes kecil yang perlukan profil, servis dan CTA WhatsApp jelas."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Modern Split",
+        "desc": "Split hero with clean cards"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Cleaning / Repair / Servis kecil",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Modern Split membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Modern Split",
+    "package": "RH_Basic",
+    "templateCode": "RH_Basic_02_Modern_Split",
+    "className": "tpl-basic-02",
+    "uiConcept": "Split hero with clean cards",
+    "suitableFor": "Cleaning / Repair / Servis kecil"
+  },
+  "RH_Basic_03_WhatsApp_CTA": {
+    "name": "RH Basic 03 — WhatsApp CTA",
+    "industry": "Pest Control / Mobile Service",
+    "headline": "WhatsApp CTA Website UI Untuk Pest Control",
+    "subheadline": "Template direct enquiry focused landing dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Pest Control / Mobile Service.",
+    "image": "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1400&q=80",
+    "color": "#16a34a",
+    "services": [
+      "Hero section",
+      "About ringkas",
+      "Service cards",
+      "Trust badge",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Basic",
+        "desc": "Website asas untuk bisnes kecil yang perlukan profil, servis dan CTA WhatsApp jelas."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "WhatsApp CTA",
+        "desc": "Direct enquiry focused landing"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Pest Control / Mobile Service",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "WhatsApp CTA membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih WhatsApp CTA",
+    "package": "RH_Basic",
+    "templateCode": "RH_Basic_03_WhatsApp_CTA",
+    "className": "tpl-basic-03",
+    "uiConcept": "Direct enquiry focused landing",
+    "suitableFor": "Pest Control / Mobile Service"
+  },
+  "RH_Basic_04_Compact_Profile": {
+    "name": "RH Basic 04 — Compact Profile",
+    "industry": "Personal Brand / NGO",
+    "headline": "Compact Profile Website UI Untuk Personal Brand",
+    "subheadline": "Template simple profile + trust badges dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Personal Brand / NGO.",
+    "image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80",
+    "color": "#7c3aed",
+    "services": [
+      "Hero section",
+      "About ringkas",
+      "Service cards",
+      "Trust badge",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Basic",
+        "desc": "Website asas untuk bisnes kecil yang perlukan profil, servis dan CTA WhatsApp jelas."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Compact Profile",
+        "desc": "Simple profile + trust badges"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Personal Brand / NGO",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Compact Profile membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Compact Profile",
+    "package": "RH_Basic",
+    "templateCode": "RH_Basic_04_Compact_Profile",
+    "className": "tpl-basic-04",
+    "uiConcept": "Simple profile + trust badges",
+    "suitableFor": "Personal Brand / NGO"
+  },
+  "RH_Basic_05_Local_Business": {
+    "name": "RH Basic 05 — Local Business",
+    "industry": "Bengkel / Kedai Servis",
+    "headline": "Local Business Website UI Untuk Bengkel",
+    "subheadline": "Template local sme storefront style dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Bengkel / Kedai Servis.",
+    "image": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80",
     "color": "#ea580c",
     "services": [
-      "Renovation Rumah",
-      "Kitchen Cabinet",
-      "Extension Rumah",
-      "Kerja Plaster Ceiling"
+      "Hero section",
+      "About ringkas",
+      "Service cards",
+      "Trust badge",
+      "WhatsApp CTA"
     ],
     "products": [
       {
-        "title": "Renovation Rumah",
-        "price": "Quotation",
-        "desc": "Kerja ubahsuai mengikut bajet dan scope."
+        "title": "Pakej",
+        "price": "RH Basic",
+        "desc": "Website asas untuk bisnes kecil yang perlukan profil, servis dan CTA WhatsApp jelas."
       },
       {
-        "title": "Kitchen Cabinet",
-        "price": "RM3,000+",
-        "desc": "Design dan pemasangan kabinet dapur."
+        "title": "Jenis Template",
+        "price": "Local Business",
+        "desc": "Local SME storefront style"
       },
       {
-        "title": "Extension Rumah",
-        "price": "Site Visit",
-        "desc": "Perlu semakan tapak untuk anggaran tepat."
+        "title": "Sesuai Untuk",
+        "price": "Bengkel / Kedai Servis",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
       }
     ],
-    "testimonial": "Portfolio lebih mudah dilihat dan pelanggan senang minta quotation.",
-    "cta": "Mula Dengan Aira"
+    "testimonial": "Local Business membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Local Business",
+    "package": "RH_Basic",
+    "templateCode": "RH_Basic_05_Local_Business",
+    "className": "tpl-basic-05",
+    "uiConcept": "Local SME storefront style",
+    "suitableFor": "Bengkel / Kedai Servis"
   },
-  "butik": {
-    "name": "Alya Boutique",
-    "industry": "Butik / Fashion",
-    "headline": "Koleksi Fashion Eksklusif Untuk Setiap Gaya",
-    "subheadline": "Paparkan katalog, promosi dan order WhatsApp dengan lebih profesional.",
-    "image": "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1400&q=80",
-    "color": "#be185d",
+  "RH_Basic_06_Clean_Cards": {
+    "name": "RH Basic 06 — Clean Cards",
+    "industry": "Spa / Beauty / Cleaning",
+    "headline": "Clean Cards Website UI Untuk Spa",
+    "subheadline": "Template card-based service listing dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Spa / Beauty / Cleaning.",
+    "image": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1400&q=80",
+    "color": "#db2777",
     "services": [
-      "Katalog Produk",
-      "Promosi Musim",
-      "Panduan Saiz",
-      "Order melalui Aira"
+      "Hero section",
+      "About ringkas",
+      "Service cards",
+      "Trust badge",
+      "WhatsApp CTA"
     ],
     "products": [
       {
-        "title": "Kurung Modern",
-        "price": "RM129+",
-        "desc": "Rekaan kemas untuk kerja dan majlis."
+        "title": "Pakej",
+        "price": "RH Basic",
+        "desc": "Website asas untuk bisnes kecil yang perlukan profil, servis dan CTA WhatsApp jelas."
       },
       {
-        "title": "Blouse Premium",
-        "price": "RM79+",
-        "desc": "Material selesa dan mudah digayakan."
+        "title": "Jenis Template",
+        "price": "Clean Cards",
+        "desc": "Card-based service listing"
       },
       {
-        "title": "Set Raya",
-        "price": "RM159+",
-        "desc": "Koleksi promosi mengikut musim."
+        "title": "Sesuai Untuk",
+        "price": "Spa / Beauty / Cleaning",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
       }
     ],
-    "testimonial": "Katalog nampak kemas dan pelanggan mudah pilih sebelum WhatsApp.",
-    "cta": "Lihat Koleksi"
+    "testimonial": "Clean Cards membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Clean Cards",
+    "package": "RH_Basic",
+    "templateCode": "RH_Basic_06_Clean_Cards",
+    "className": "tpl-basic-06",
+    "uiConcept": "Card-based service listing",
+    "suitableFor": "Spa / Beauty / Cleaning"
   },
-  "corporate": {
-    "name": "Maju Jaya Holdings",
+  "RH_Basic_07_Bold_Hero": {
+    "name": "RH Basic 07 — Bold Hero",
+    "industry": "Kontraktor kecil / Repair",
+    "headline": "Bold Hero Website UI Untuk Kontraktor kecil",
+    "subheadline": "Template large typography and simple cta dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Kontraktor kecil / Repair.",
+    "image": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1400&q=80",
+    "color": "#111827",
+    "services": [
+      "Hero section",
+      "About ringkas",
+      "Service cards",
+      "Trust badge",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Basic",
+        "desc": "Website asas untuk bisnes kecil yang perlukan profil, servis dan CTA WhatsApp jelas."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Bold Hero",
+        "desc": "Large typography and simple CTA"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Kontraktor kecil / Repair",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Bold Hero membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Bold Hero",
+    "package": "RH_Basic",
+    "templateCode": "RH_Basic_07_Bold_Hero",
+    "className": "tpl-basic-07",
+    "uiConcept": "Large typography and simple CTA",
+    "suitableFor": "Kontraktor kecil / Repair"
+  },
+  "RH_Basic_08_Service_Menu": {
+    "name": "RH Basic 08 — Service Menu",
+    "industry": "Servis berkala / pakej asas",
+    "headline": "Service Menu Website UI Untuk Servis berkala",
+    "subheadline": "Template price/service menu layout dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Servis berkala / pakej asas.",
+    "image": "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1400&q=80",
+    "color": "#0891b2",
+    "services": [
+      "Hero section",
+      "About ringkas",
+      "Service cards",
+      "Trust badge",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Basic",
+        "desc": "Website asas untuk bisnes kecil yang perlukan profil, servis dan CTA WhatsApp jelas."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Service Menu",
+        "desc": "Price/service menu layout"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Servis berkala / pakej asas",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Service Menu membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Service Menu",
+    "package": "RH_Basic",
+    "templateCode": "RH_Basic_08_Service_Menu",
+    "className": "tpl-basic-08",
+    "uiConcept": "Price/service menu layout",
+    "suitableFor": "Servis berkala / pakej asas"
+  },
+  "RH_Basic_09_Mini_Portfolio": {
+    "name": "RH Basic 09 — Mini Portfolio",
+    "industry": "Portfolio kerja kecil",
+    "headline": "Mini Portfolio Website UI Untuk Portfolio kerja kecil",
+    "subheadline": "Template small gallery + proof layout dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Portfolio kerja kecil.",
+    "image": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1400&q=80",
+    "color": "#4f46e5",
+    "services": [
+      "Hero section",
+      "About ringkas",
+      "Service cards",
+      "Trust badge",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Basic",
+        "desc": "Website asas untuk bisnes kecil yang perlukan profil, servis dan CTA WhatsApp jelas."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Mini Portfolio",
+        "desc": "Small gallery + proof layout"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Portfolio kerja kecil",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Mini Portfolio membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Mini Portfolio",
+    "package": "RH_Basic",
+    "templateCode": "RH_Basic_09_Mini_Portfolio",
+    "className": "tpl-basic-09",
+    "uiConcept": "Small gallery + proof layout",
+    "suitableFor": "Portfolio kerja kecil"
+  },
+  "RH_Basic_10_Starter_Brand": {
+    "name": "RH Basic 10 — Starter Brand",
+    "industry": "Bisnes baru mula",
+    "headline": "Starter Brand Website UI Untuk Bisnes baru mula",
+    "subheadline": "Template brand intro for new business dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Bisnes baru mula.",
+    "image": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=80",
+    "color": "#0f172a",
+    "services": [
+      "Hero section",
+      "About ringkas",
+      "Service cards",
+      "Trust badge",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Basic",
+        "desc": "Website asas untuk bisnes kecil yang perlukan profil, servis dan CTA WhatsApp jelas."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Starter Brand",
+        "desc": "Brand intro for new business"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Bisnes baru mula",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Starter Brand membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Starter Brand",
+    "package": "RH_Basic",
+    "templateCode": "RH_Basic_10_Starter_Brand",
+    "className": "tpl-basic-10",
+    "uiConcept": "Brand intro for new business",
+    "suitableFor": "Bisnes baru mula"
+  },
+  "RH_Standard_01_Corporate_Profile": {
+    "name": "RH Standard 01 — Corporate Profile",
     "industry": "Company Profile",
-    "headline": "Profil Syarikat Profesional & Meyakinkan",
-    "subheadline": "Perkenalkan syarikat, servis, pengalaman dan cara hubungi dalam satu laman kemas.",
+    "headline": "Corporate Profile Website UI Untuk Company Profile",
+    "subheadline": "Template corporate profile with credibility blocks dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Company Profile.",
     "image": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80",
     "color": "#1d4ed8",
     "services": [
-      "Profil Syarikat",
-      "Servis Utama",
-      "Portfolio",
-      "Contact Page"
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
     ],
     "products": [
       {
-        "title": "Company Profile",
-        "price": "Lengkap",
-        "desc": "Pengenalan, visi, servis dan kekuatan syarikat."
+        "title": "Pakej",
+        "price": "RH Standard",
+        "desc": "Website bisnes lengkap dengan portfolio, katalog ringkas, bukti sosial dan flow enquiry."
       },
       {
-        "title": "Portfolio",
-        "price": "Tersusun",
-        "desc": "Paparan projek atau pengalaman kerja."
+        "title": "Jenis Template",
+        "price": "Corporate Profile",
+        "desc": "Corporate profile with credibility blocks"
       },
       {
-        "title": "Contact",
-        "price": "Mudah",
-        "desc": "Butang WhatsApp, email dan lokasi."
+        "title": "Sesuai Untuk",
+        "price": "Company Profile",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
       }
     ],
-    "testimonial": "Website nampak lebih korporat dan sesuai untuk rujukan pelanggan.",
-    "cta": "Hubungi Syarikat"
+    "testimonial": "Corporate Profile membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Corporate Profile",
+    "package": "RH_Standard",
+    "templateCode": "RH_Standard_01_Corporate_Profile",
+    "className": "tpl-standard-01",
+    "uiConcept": "Corporate profile with credibility blocks",
+    "suitableFor": "Company Profile"
   },
-  "produk-online": {
-    "name": "Sihat Natura",
+  "RH_Standard_02_Homestay_Booking": {
+    "name": "RH Standard 02 — Homestay Booking",
+    "industry": "Homestay / Villa",
+    "headline": "Homestay Booking Website UI Untuk Homestay",
+    "subheadline": "Template booking-style gallery layout dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Homestay / Villa.",
+    "image": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1400&q=80",
+    "color": "#0d9488",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Standard",
+        "desc": "Website bisnes lengkap dengan portfolio, katalog ringkas, bukti sosial dan flow enquiry."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Homestay Booking",
+        "desc": "Booking-style gallery layout"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Homestay / Villa",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Homestay Booking membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Homestay Booking",
+    "package": "RH_Standard",
+    "templateCode": "RH_Standard_02_Homestay_Booking",
+    "className": "tpl-standard-02",
+    "uiConcept": "Booking-style gallery layout",
+    "suitableFor": "Homestay / Villa"
+  },
+  "RH_Standard_03_Car_Rental": {
+    "name": "RH Standard 03 — Car Rental",
+    "industry": "Kereta Sewa",
+    "headline": "Car Rental Website UI Untuk Kereta Sewa",
+    "subheadline": "Template fleet cards and booking cta dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Kereta Sewa.",
+    "image": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=80",
+    "color": "#dc2626",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Standard",
+        "desc": "Website bisnes lengkap dengan portfolio, katalog ringkas, bukti sosial dan flow enquiry."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Car Rental",
+        "desc": "Fleet cards and booking CTA"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Kereta Sewa",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Car Rental membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Car Rental",
+    "package": "RH_Standard",
+    "templateCode": "RH_Standard_03_Car_Rental",
+    "className": "tpl-standard-03",
+    "uiConcept": "Fleet cards and booking CTA",
+    "suitableFor": "Kereta Sewa"
+  },
+  "RH_Standard_04_Restaurant_Menu": {
+    "name": "RH Standard 04 — Restaurant Menu",
+    "industry": "Kedai Makan / Restoran",
+    "headline": "Restaurant Menu Website UI Untuk Kedai Makan",
+    "subheadline": "Template menu showcase + reservation cta dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Kedai Makan / Restoran.",
+    "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=80",
+    "color": "#b45309",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Standard",
+        "desc": "Website bisnes lengkap dengan portfolio, katalog ringkas, bukti sosial dan flow enquiry."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Restaurant Menu",
+        "desc": "Menu showcase + reservation CTA"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Kedai Makan / Restoran",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Restaurant Menu membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Restaurant Menu",
+    "package": "RH_Standard",
+    "templateCode": "RH_Standard_04_Restaurant_Menu",
+    "className": "tpl-standard-04",
+    "uiConcept": "Menu showcase + reservation CTA",
+    "suitableFor": "Kedai Makan / Restoran"
+  },
+  "RH_Standard_05_Boutique_Catalog": {
+    "name": "RH Standard 05 — Boutique Catalog",
+    "industry": "Butik / Fashion",
+    "headline": "Boutique Catalog Website UI Untuk Butik",
+    "subheadline": "Template fashion catalog cards dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Butik / Fashion.",
+    "image": "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1400&q=80",
+    "color": "#be185d",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Standard",
+        "desc": "Website bisnes lengkap dengan portfolio, katalog ringkas, bukti sosial dan flow enquiry."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Boutique Catalog",
+        "desc": "Fashion catalog cards"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Butik / Fashion",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Boutique Catalog membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Boutique Catalog",
+    "package": "RH_Standard",
+    "templateCode": "RH_Standard_05_Boutique_Catalog",
+    "className": "tpl-standard-05",
+    "uiConcept": "Fashion catalog cards",
+    "suitableFor": "Butik / Fashion"
+  },
+  "RH_Standard_06_Product_Online": {
+    "name": "RH Standard 06 — Product Online",
     "industry": "Produk Online",
-    "headline": "Jual Produk Dengan Lebih Profesional",
-    "subheadline": "Showcase produk, manfaat, testimoni dan order WhatsApp tanpa sistem rumit.",
-    "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1400&q=80",
+    "headline": "Product Online Website UI Untuk Produk Online",
+    "subheadline": "Template product landing and catalog preview dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Produk Online.",
+    "image": "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1400&q=80",
+    "color": "#9333ea",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Standard",
+        "desc": "Website bisnes lengkap dengan portfolio, katalog ringkas, bukti sosial dan flow enquiry."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Product Online",
+        "desc": "Product landing and catalog preview"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Produk Online",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Product Online membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Product Online",
+    "package": "RH_Standard",
+    "templateCode": "RH_Standard_06_Product_Online",
+    "className": "tpl-standard-06",
+    "uiConcept": "Product landing and catalog preview",
+    "suitableFor": "Produk Online"
+  },
+  "RH_Standard_07_Renovation_Grid": {
+    "name": "RH Standard 07 — Renovation Grid",
+    "industry": "Renovation / Kontraktor",
+    "headline": "Renovation Grid Website UI Untuk Renovation",
+    "subheadline": "Template before-after portfolio grid dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Renovation / Kontraktor.",
+    "image": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1400&q=80",
+    "color": "#475569",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Standard",
+        "desc": "Website bisnes lengkap dengan portfolio, katalog ringkas, bukti sosial dan flow enquiry."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Renovation Grid",
+        "desc": "Before-after portfolio grid"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Renovation / Kontraktor",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Renovation Grid membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Renovation Grid",
+    "package": "RH_Standard",
+    "templateCode": "RH_Standard_07_Renovation_Grid",
+    "className": "tpl-standard-07",
+    "uiConcept": "Before-after portfolio grid",
+    "suitableFor": "Renovation / Kontraktor"
+  },
+  "RH_Standard_08_Education_Course": {
+    "name": "RH Standard 08 — Education Course",
+    "industry": "Pusat Tuisyen / Kelas",
+    "headline": "Education Course Website UI Untuk Pusat Tuisyen",
+    "subheadline": "Template course and class registration layout dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Pusat Tuisyen / Kelas.",
+    "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1400&q=80",
+    "color": "#2563eb",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Standard",
+        "desc": "Website bisnes lengkap dengan portfolio, katalog ringkas, bukti sosial dan flow enquiry."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Education Course",
+        "desc": "Course and class registration layout"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Pusat Tuisyen / Kelas",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Education Course membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Education Course",
+    "package": "RH_Standard",
+    "templateCode": "RH_Standard_08_Education_Course",
+    "className": "tpl-standard-08",
+    "uiConcept": "Course and class registration layout",
+    "suitableFor": "Pusat Tuisyen / Kelas"
+  },
+  "RH_Standard_09_Event_Planner": {
+    "name": "RH Standard 09 — Event Planner",
+    "industry": "Wedding / Event",
+    "headline": "Event Planner Website UI Untuk Wedding",
+    "subheadline": "Template elegant event service presentation dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Wedding / Event.",
+    "image": "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1400&q=80",
+    "color": "#c026d3",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Standard",
+        "desc": "Website bisnes lengkap dengan portfolio, katalog ringkas, bukti sosial dan flow enquiry."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Event Planner",
+        "desc": "Elegant event service presentation"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Wedding / Event",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Event Planner membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Event Planner",
+    "package": "RH_Standard",
+    "templateCode": "RH_Standard_09_Event_Planner",
+    "className": "tpl-standard-09",
+    "uiConcept": "Elegant event service presentation",
+    "suitableFor": "Wedding / Event"
+  },
+  "RH_Standard_10_Interior_Design": {
+    "name": "RH Standard 10 — Interior Design",
+    "industry": "Interior Design",
+    "headline": "Interior Design Website UI Untuk Interior Design",
+    "subheadline": "Template visual-heavy interior showcase dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Interior Design.",
+    "image": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=80",
+    "color": "#a16207",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Standard",
+        "desc": "Website bisnes lengkap dengan portfolio, katalog ringkas, bukti sosial dan flow enquiry."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Interior Design",
+        "desc": "Visual-heavy interior showcase"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Interior Design",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Interior Design membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Interior Design",
+    "package": "RH_Standard",
+    "templateCode": "RH_Standard_10_Interior_Design",
+    "className": "tpl-standard-10",
+    "uiConcept": "Visual-heavy interior showcase",
+    "suitableFor": "Interior Design"
+  },
+  "RH_Professional_01_Lead_Generation": {
+    "name": "RH Professional 01 — Lead Generation",
+    "industry": "Servis high-ticket",
+    "headline": "Lead Generation Website UI Untuk Servis high-ticket",
+    "subheadline": "Template conversion-focused lead capture dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Servis high-ticket.",
+    "image": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=80",
+    "color": "#0f766e",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Professional",
+        "desc": "Website lebih strategik untuk lead generation, kredibiliti profesional dan conversion."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Lead Generation",
+        "desc": "Conversion-focused lead capture"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Servis high-ticket",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Lead Generation membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Lead Generation",
+    "package": "RH_Professional",
+    "templateCode": "RH_Professional_01_Lead_Generation",
+    "className": "tpl-professional-01",
+    "uiConcept": "Conversion-focused lead capture",
+    "suitableFor": "Servis high-ticket"
+  },
+  "RH_Professional_02_Consultant": {
+    "name": "RH Professional 02 — Consultant",
+    "industry": "Consultant / Coach",
+    "headline": "Consultant Website UI Untuk Consultant",
+    "subheadline": "Template authority layout for consultants dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Consultant / Coach.",
+    "image": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1400&q=80",
+    "color": "#4338ca",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Professional",
+        "desc": "Website lebih strategik untuk lead generation, kredibiliti profesional dan conversion."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Consultant",
+        "desc": "Authority layout for consultants"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Consultant / Coach",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Consultant membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Consultant",
+    "package": "RH_Professional",
+    "templateCode": "RH_Professional_02_Consultant",
+    "className": "tpl-professional-02",
+    "uiConcept": "Authority layout for consultants",
+    "suitableFor": "Consultant / Coach"
+  },
+  "RH_Professional_03_Clinic": {
+    "name": "RH Professional 03 — Clinic",
+    "industry": "Klinik / Kesihatan",
+    "headline": "Clinic Website UI Untuk Klinik",
+    "subheadline": "Template appointment and trust layout dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Klinik / Kesihatan.",
+    "image": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1400&q=80",
+    "color": "#0284c7",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Professional",
+        "desc": "Website lebih strategik untuk lead generation, kredibiliti profesional dan conversion."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Clinic",
+        "desc": "Appointment and trust layout"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Klinik / Kesihatan",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Clinic membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Clinic",
+    "package": "RH_Professional",
+    "templateCode": "RH_Professional_03_Clinic",
+    "className": "tpl-professional-03",
+    "uiConcept": "Appointment and trust layout",
+    "suitableFor": "Klinik / Kesihatan"
+  },
+  "RH_Professional_04_Dental": {
+    "name": "RH Professional 04 — Dental Clinic",
+    "industry": "Dental Clinic",
+    "headline": "Dental Clinic Website UI Untuk Dental Clinic",
+    "subheadline": "Template clean healthcare service layout dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Dental Clinic.",
+    "image": "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=1400&q=80",
+    "color": "#0891b2",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Professional",
+        "desc": "Website lebih strategik untuk lead generation, kredibiliti profesional dan conversion."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Dental Clinic",
+        "desc": "Clean healthcare service layout"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Dental Clinic",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Dental Clinic membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Dental Clinic",
+    "package": "RH_Professional",
+    "templateCode": "RH_Professional_04_Dental",
+    "className": "tpl-professional-04",
+    "uiConcept": "Clean healthcare service layout",
+    "suitableFor": "Dental Clinic"
+  },
+  "RH_Professional_05_Law_Firm": {
+    "name": "RH Professional 05 — Law Firm",
+    "industry": "Law Firm",
+    "headline": "Law Firm Website UI Untuk Law Firm",
+    "subheadline": "Template professional firm credibility layout dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Law Firm.",
+    "image": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1400&q=80",
+    "color": "#1e293b",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Professional",
+        "desc": "Website lebih strategik untuk lead generation, kredibiliti profesional dan conversion."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Law Firm",
+        "desc": "Professional firm credibility layout"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Law Firm",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Law Firm membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Law Firm",
+    "package": "RH_Professional",
+    "templateCode": "RH_Professional_05_Law_Firm",
+    "className": "tpl-professional-05",
+    "uiConcept": "Professional firm credibility layout",
+    "suitableFor": "Law Firm"
+  },
+  "RH_Professional_06_Accounting": {
+    "name": "RH Professional 06 — Accounting Firm",
+    "industry": "Accounting Firm",
+    "headline": "Accounting Firm Website UI Untuk Accounting Firm",
+    "subheadline": "Template trust and advisory service layout dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Accounting Firm.",
+    "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1400&q=80",
+    "color": "#334155",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Professional",
+        "desc": "Website lebih strategik untuk lead generation, kredibiliti profesional dan conversion."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Accounting Firm",
+        "desc": "Trust and advisory service layout"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Accounting Firm",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Accounting Firm membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Accounting Firm",
+    "package": "RH_Professional",
+    "templateCode": "RH_Professional_06_Accounting",
+    "className": "tpl-professional-06",
+    "uiConcept": "Trust and advisory service layout",
+    "suitableFor": "Accounting Firm"
+  },
+  "RH_Professional_07_Property_Agent": {
+    "name": "RH Professional 07 — Property Agent",
+    "industry": "Hartanah / Property",
+    "headline": "Property Agent Website UI Untuk Hartanah",
+    "subheadline": "Template listing + enquiry flow dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Hartanah / Property.",
+    "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1400&q=80",
+    "color": "#0369a1",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Professional",
+        "desc": "Website lebih strategik untuk lead generation, kredibiliti profesional dan conversion."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Property Agent",
+        "desc": "Listing + enquiry flow"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Hartanah / Property",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Property Agent membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Property Agent",
+    "package": "RH_Professional",
+    "templateCode": "RH_Professional_07_Property_Agent",
+    "className": "tpl-professional-07",
+    "uiConcept": "Listing + enquiry flow",
+    "suitableFor": "Hartanah / Property"
+  },
+  "RH_Professional_08_Training_Centre": {
+    "name": "RH Professional 08 — Training Centre",
+    "industry": "Training Centre",
+    "headline": "Training Centre Website UI Untuk Training Centre",
+    "subheadline": "Template program showcase and signup dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Training Centre.",
+    "image": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1400&q=80",
     "color": "#7c3aed",
     "services": [
-      "Produk Pilihan",
-      "Harga & Promosi",
-      "Testimoni",
-      "Order melalui Aira"
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
     ],
     "products": [
       {
-        "title": "Produk Utama",
-        "price": "RM59+",
-        "desc": "Paparkan manfaat dan cara guna."
+        "title": "Pakej",
+        "price": "RH Professional",
+        "desc": "Website lebih strategik untuk lead generation, kredibiliti profesional dan conversion."
       },
       {
-        "title": "Set Promosi",
-        "price": "RM99+",
-        "desc": "Bundle untuk tingkatkan nilai order."
+        "title": "Jenis Template",
+        "price": "Training Centre",
+        "desc": "Program showcase and signup"
       },
       {
-        "title": "Testimoni",
-        "price": "Trust",
-        "desc": "Bina keyakinan sebelum pelanggan membeli."
+        "title": "Sesuai Untuk",
+        "price": "Training Centre",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
       }
     ],
-    "testimonial": "Lebih mudah terangkan produk dan terima order melalui WhatsApp.",
-    "cta": "Order Sekarang"
+    "testimonial": "Training Centre membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Training Centre",
+    "package": "RH_Professional",
+    "templateCode": "RH_Professional_08_Training_Centre",
+    "className": "tpl-professional-08",
+    "uiConcept": "Program showcase and signup",
+    "suitableFor": "Training Centre"
+  },
+  "RH_Professional_09_Security_Service": {
+    "name": "RH Professional 09 — Security Service",
+    "industry": "Security Service",
+    "headline": "Security Service Website UI Untuk Security Service",
+    "subheadline": "Template corporate security solution layout dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Security Service.",
+    "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1400&q=80",
+    "color": "#111827",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Professional",
+        "desc": "Website lebih strategik untuk lead generation, kredibiliti profesional dan conversion."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Security Service",
+        "desc": "Corporate security solution layout"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Security Service",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Security Service membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Security Service",
+    "package": "RH_Professional",
+    "templateCode": "RH_Professional_09_Security_Service",
+    "className": "tpl-professional-09",
+    "uiConcept": "Corporate security solution layout",
+    "suitableFor": "Security Service"
+  },
+  "RH_Professional_10_Engineering": {
+    "name": "RH Professional 10 — Engineering Firm",
+    "industry": "Engineering Firm",
+    "headline": "Engineering Firm Website UI Untuk Engineering Firm",
+    "subheadline": "Template technical project portfolio layout dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Engineering Firm.",
+    "image": "https://images.unsplash.com/photo-1581091870622-3d247d44a3cc?auto=format&fit=crop&w=1400&q=80",
+    "color": "#0f172a",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Professional",
+        "desc": "Website lebih strategik untuk lead generation, kredibiliti profesional dan conversion."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Engineering Firm",
+        "desc": "Technical project portfolio layout"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Engineering Firm",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Engineering Firm membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Engineering Firm",
+    "package": "RH_Professional",
+    "templateCode": "RH_Professional_10_Engineering",
+    "className": "tpl-professional-10",
+    "uiConcept": "Technical project portfolio layout",
+    "suitableFor": "Engineering Firm"
+  },
+  "RH_Premium_01_Luxury_Corporate": {
+    "name": "RH Premium 01 — Luxury Corporate",
+    "industry": "Corporate premium",
+    "headline": "Luxury Corporate Website UI Untuk Corporate premium",
+    "subheadline": "Template premium corporate brand experience dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Corporate premium.",
+    "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=80",
+    "color": "#020617",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Premium",
+        "desc": "Website premium untuk jenama high-end, showcase besar, multi-section dan custom direction."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Luxury Corporate",
+        "desc": "Premium corporate brand experience"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Corporate premium",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Luxury Corporate membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Luxury Corporate",
+    "package": "RH_Premium",
+    "templateCode": "RH_Premium_01_Luxury_Corporate",
+    "className": "tpl-premium-01",
+    "uiConcept": "Premium corporate brand experience",
+    "suitableFor": "Corporate premium"
+  },
+  "RH_Premium_02_Hotel_Resort": {
+    "name": "RH Premium 02 — Hotel Resort",
+    "industry": "Hotel & Resort",
+    "headline": "Hotel Resort Website UI Untuk Hotel & Resort",
+    "subheadline": "Template immersive hospitality showcase dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Hotel & Resort.",
+    "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1400&q=80",
+    "color": "#92400e",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Premium",
+        "desc": "Website premium untuk jenama high-end, showcase besar, multi-section dan custom direction."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Hotel Resort",
+        "desc": "Immersive hospitality showcase"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Hotel & Resort",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Hotel Resort membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Hotel Resort",
+    "package": "RH_Premium",
+    "templateCode": "RH_Premium_02_Hotel_Resort",
+    "className": "tpl-premium-02",
+    "uiConcept": "Immersive hospitality showcase",
+    "suitableFor": "Hotel & Resort"
+  },
+  "RH_Premium_03_Developer_Project": {
+    "name": "RH Premium 03 — Developer Project",
+    "industry": "Developer Project",
+    "headline": "Developer Project Website UI Untuk Developer Project",
+    "subheadline": "Template property development launch page dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Developer Project.",
+    "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=80",
+    "color": "#1e40af",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Premium",
+        "desc": "Website premium untuk jenama high-end, showcase besar, multi-section dan custom direction."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Developer Project",
+        "desc": "Property development launch page"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Developer Project",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Developer Project membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Developer Project",
+    "package": "RH_Premium",
+    "templateCode": "RH_Premium_03_Developer_Project",
+    "className": "tpl-premium-03",
+    "uiConcept": "Property development launch page",
+    "suitableFor": "Developer Project"
+  },
+  "RH_Premium_04_Medical_Group": {
+    "name": "RH Premium 04 — Medical Group",
+    "industry": "Medical Group",
+    "headline": "Medical Group Website UI Untuk Medical Group",
+    "subheadline": "Template multi-branch medical group layout dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Medical Group.",
+    "image": "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1400&q=80",
+    "color": "#0e7490",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Premium",
+        "desc": "Website premium untuk jenama high-end, showcase besar, multi-section dan custom direction."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Medical Group",
+        "desc": "Multi-branch medical group layout"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Medical Group",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Medical Group membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Medical Group",
+    "package": "RH_Premium",
+    "templateCode": "RH_Premium_04_Medical_Group",
+    "className": "tpl-premium-04",
+    "uiConcept": "Multi-branch medical group layout",
+    "suitableFor": "Medical Group"
+  },
+  "RH_Premium_05_Manufacturing": {
+    "name": "RH Premium 05 — Manufacturing",
+    "industry": "Manufacturing",
+    "headline": "Manufacturing Website UI Untuk Manufacturing",
+    "subheadline": "Template industrial capability showcase dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Manufacturing.",
+    "image": "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1400&q=80",
+    "color": "#374151",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Premium",
+        "desc": "Website premium untuk jenama high-end, showcase besar, multi-section dan custom direction."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Manufacturing",
+        "desc": "Industrial capability showcase"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Manufacturing",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Manufacturing membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Manufacturing",
+    "package": "RH_Premium",
+    "templateCode": "RH_Premium_05_Manufacturing",
+    "className": "tpl-premium-05",
+    "uiConcept": "Industrial capability showcase",
+    "suitableFor": "Manufacturing"
+  },
+  "RH_Premium_06_Franchise": {
+    "name": "RH Premium 06 — Franchise Business",
+    "industry": "Franchise Business",
+    "headline": "Franchise Business Website UI Untuk Franchise Business",
+    "subheadline": "Template expansion and opportunity layout dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Franchise Business.",
+    "image": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=80",
+    "color": "#ea580c",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Premium",
+        "desc": "Website premium untuk jenama high-end, showcase besar, multi-section dan custom direction."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Franchise Business",
+        "desc": "Expansion and opportunity layout"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Franchise Business",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Franchise Business membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Franchise Business",
+    "package": "RH_Premium",
+    "templateCode": "RH_Premium_06_Franchise",
+    "className": "tpl-premium-06",
+    "uiConcept": "Expansion and opportunity layout",
+    "suitableFor": "Franchise Business"
+  },
+  "RH_Premium_07_Multi_Branch": {
+    "name": "RH Premium 07 — Multi Branch",
+    "industry": "Multi-Branch Business",
+    "headline": "Multi Branch Website UI Untuk Multi-Branch Business",
+    "subheadline": "Template location and branch network layout dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Multi-Branch Business.",
+    "image": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1400&q=80",
+    "color": "#0f766e",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Premium",
+        "desc": "Website premium untuk jenama high-end, showcase besar, multi-section dan custom direction."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Multi Branch",
+        "desc": "Location and branch network layout"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Multi-Branch Business",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Multi Branch membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Multi Branch",
+    "package": "RH_Premium",
+    "templateCode": "RH_Premium_07_Multi_Branch",
+    "className": "tpl-premium-07",
+    "uiConcept": "Location and branch network layout",
+    "suitableFor": "Multi-Branch Business"
+  },
+  "RH_Premium_08_Creative_Agency": {
+    "name": "RH Premium 08 — Creative Agency",
+    "industry": "Creative Agency",
+    "headline": "Creative Agency Website UI Untuk Creative Agency",
+    "subheadline": "Template bold portfolio agency layout dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Creative Agency.",
+    "image": "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1400&q=80",
+    "color": "#7e22ce",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Premium",
+        "desc": "Website premium untuk jenama high-end, showcase besar, multi-section dan custom direction."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Creative Agency",
+        "desc": "Bold portfolio agency layout"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Creative Agency",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Creative Agency membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Creative Agency",
+    "package": "RH_Premium",
+    "templateCode": "RH_Premium_08_Creative_Agency",
+    "className": "tpl-premium-08",
+    "uiConcept": "Bold portfolio agency layout",
+    "suitableFor": "Creative Agency"
+  },
+  "RH_Premium_09_Travel_Agency": {
+    "name": "RH Premium 09 — Travel Agency",
+    "industry": "Travel Agency",
+    "headline": "Travel Agency Website UI Untuk Travel Agency",
+    "subheadline": "Template destination package showcase dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Travel Agency.",
+    "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1400&q=80",
+    "color": "#0284c7",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Premium",
+        "desc": "Website premium untuk jenama high-end, showcase besar, multi-section dan custom direction."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Travel Agency",
+        "desc": "Destination package showcase"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Travel Agency",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Travel Agency membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Travel Agency",
+    "package": "RH_Premium",
+    "templateCode": "RH_Premium_09_Travel_Agency",
+    "className": "tpl-premium-09",
+    "uiConcept": "Destination package showcase",
+    "suitableFor": "Travel Agency"
+  },
+  "RH_Premium_10_Custom_Portal": {
+    "name": "RH Premium 10 — Custom Portal",
+    "industry": "Custom System / Portal",
+    "headline": "Custom Portal Website UI Untuk Custom System",
+    "subheadline": "Template system/portal concept showcase dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Custom System / Portal.",
+    "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1400&q=80",
+    "color": "#111827",
+    "services": [
+      "Hero section",
+      "About / credibility",
+      "Service cards",
+      "Portfolio / gallery",
+      "Testimonial",
+      "FAQ",
+      "WhatsApp CTA"
+    ],
+    "products": [
+      {
+        "title": "Pakej",
+        "price": "RH Premium",
+        "desc": "Website premium untuk jenama high-end, showcase besar, multi-section dan custom direction."
+      },
+      {
+        "title": "Jenis Template",
+        "price": "Custom Portal",
+        "desc": "System/portal concept showcase"
+      },
+      {
+        "title": "Sesuai Untuk",
+        "price": "Custom System / Portal",
+        "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+      }
+    ],
+    "testimonial": "Custom Portal membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+    "cta": "Pilih Custom Portal",
+    "package": "RH_Premium",
+    "templateCode": "RH_Premium_10_Custom_Portal",
+    "className": "tpl-premium-10",
+    "uiConcept": "System/portal concept showcase",
+    "suitableFor": "Custom System / Portal"
   }
 }

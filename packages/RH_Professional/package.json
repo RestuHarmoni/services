@@ -1,0 +1,17 @@
+{
+  "code": "RH_Professional",
+  "name": "RH Professional",
+  "templateCount": 10,
+  "templates": [
+    "RH_Professional_01_Lead_Generation",
+    "RH_Professional_02_Consultant",
+    "RH_Professional_03_Clinic",
+    "RH_Professional_04_Dental",
+    "RH_Professional_05_Law_Firm",
+    "RH_Professional_06_Accounting",
+    "RH_Professional_07_Property_Agent",
+    "RH_Professional_08_Training_Centre",
+    "RH_Professional_09_Security_Service",
+    "RH_Professional_10_Engineering"
+  ]
+}

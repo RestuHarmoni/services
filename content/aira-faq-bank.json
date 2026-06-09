@@ -1,5 +1,5 @@
 {
-  "version": "v6.2.0-admin-flex",
+  "version": "v7.0.0-rh-package-template-alignment",
   "quickActions": [
     "Dapatkan Cadangan Website",
     "Harga Pakej",
@@ -22,7 +22,7 @@
         "bayaran",
         "berapa"
       ],
-      "answer": "Pakej website bermula daripada <strong>RH Starter RM699</strong>, <strong>RH Business RM999</strong>, dan <strong>RH Pro RM1499</strong>. Harga sebenar bergantung kepada jenis bisnes, fungsi dan tahap design."
+      "answer": "Pakej website Restu Harmoni disusun kepada <strong>RH Basic</strong>, <strong>RH Standard</strong>, <strong>RH Professional</strong> dan <strong>RH Premium</strong>. Setiap pakej ada 10 konsep template UI, dengan cadangan harga bermula sekitar RM699 bergantung kepada scope."
     },
     {
       "topic": "tempoh",
@@ -99,7 +99,7 @@
         "template",
         "sample"
       ],
-      "answer": "Kami ada contoh website untuk Kedai Makan, Homestay, Kereta Sewa, Aircond, Renovation, Butik, Corporate dan Produk Online."
+      "answer": "Kami susun demo template mengikut pakej: RH Basic, RH Standard, RH Professional dan RH Premium. Setiap pakej dirancang mempunyai 10 pilihan UI untuk jenis bisnes berbeza."
     },
     {
       "topic": "bayaran",

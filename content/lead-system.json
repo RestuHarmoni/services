@@ -22,5 +22,11 @@
     "RH Business": "RM999",
     "RH Pro": "RM1499",
     "Custom": "Quotation"
+  },
+  "package_prices": {
+    "RH Basic": "RM699 – RM999",
+    "RH Standard": "RM1000 – RM2000",
+    "RH Professional": "RM2000 – RM3500",
+    "RH Premium": "RM3500+ / Quotation"
   }
 }
