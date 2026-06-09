@@ -1,1 +1,1 @@
-window.RH_APP_VERSION = 'v8.3.0-rh-industry-copy-icons';
+window.RH_APP_VERSION = 'v8.4.0-rh-google-testimonials-polish';

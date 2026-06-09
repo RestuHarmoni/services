@@ -9,8 +9,8 @@
   function safeJson(raw,fallback){try{return raw?JSON.parse(raw):fallback;}catch(e){return fallback;}}
   function defaults(){return clone(window.RH_DEFAULT_GOOGLE_REVIEWS||{
     version:'1.0.0',
-    title:'Apa Kata Pelanggan Google',
-    subtitle:'Review sebenar boleh diurus dari Admin dan dipaparkan sebagai slider premium.',
+    title:'Apa Kata Pelanggan Kami',
+    subtitle:'Pelanggan menghargai proses yang mudah, komunikasi yang jelas dan website yang kemas.',
     googleReviewUrl:'https://g.page/r/CTOjpXjmtEJwEAI/review',
     googleProfileUrl:'https://g.page/r/CTOjpXjmtEJwEAI',
     reviews:[

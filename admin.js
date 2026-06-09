@@ -14,7 +14,7 @@ let site = JSON.parse(localStorage.getItem('rh_site_content')||'null') || DEFAUL
 let templates = JSON.parse(localStorage.getItem('rh_templates_data')||'null') || DEFAULT_TEMPLATES;
 let airaQuestions = JSON.parse(localStorage.getItem('rh_aira_question_bank')||'null') || structuredClone(DEFAULT_AIRA_QUESTIONS);
 let airaFaq = JSON.parse(localStorage.getItem('rh_aira_faq_bank')||'null') || structuredClone(DEFAULT_AIRA_FAQ);
-let googleReviews = (window.RH_GOOGLE_REVIEWS_SERVICE&&window.RH_GOOGLE_REVIEWS_SERVICE.readLocal?window.RH_GOOGLE_REVIEWS_SERVICE.readLocal():{version:'1.0.0',title:'Apa Kata Customer Kami',subtitle:'Antara pengalaman pelanggan yang pernah berurusan dengan Restu Harmoni.',googleReviewUrl:'https://g.page/r/CTOjpXjmtEJwEAI/review',googleProfileUrl:'https://g.page/r/CTOjpXjmtEJwEAI',reviews:[]});
+let googleReviews = (window.RH_GOOGLE_REVIEWS_SERVICE&&window.RH_GOOGLE_REVIEWS_SERVICE.readLocal?window.RH_GOOGLE_REVIEWS_SERVICE.readLocal():{version:'1.0.0',title:'Apa Kata Pelanggan Kami',subtitle:'Pelanggan menghargai proses yang mudah, komunikasi yang jelas dan website yang kemas.',googleReviewUrl:'https://g.page/r/CTOjpXjmtEJwEAI/review',googleProfileUrl:'https://g.page/r/CTOjpXjmtEJwEAI',reviews:[]});
 
 document.getElementById('logout').onclick=()=>window.RH_ADMIN_AUTH.signOut();
 

@@ -225,7 +225,7 @@
 @media(prefers-reduced-motion:reduce){.rh-service-card-incoming{opacity:1;transform:none;filter:none}.rh-service-premium-grid article,.rh-service-icon{transition:none!important}}
 
 
-/* RH v8.3 - Industry section polish */
+/* RH v8.4 - Industry and testimonials polish */
 .rh-industry-section .section-heading{max-width:900px}
 .rh-industry-section .section-heading h2{max-width:820px}
 .rh-industry-section .section-heading p{max-width:790px}
