@@ -1,13 +1,13 @@
-window.RH_APP_VERSION = 'v8.8.0-exclusive-admin';
+window.RH_APP_VERSION = 'v8.9.0-office-functional';
 window.RH_VERSION = window.RH_APP_VERSION;
 window.RH_VERSION_META = {
-  version: 'v8.8.0-exclusive-admin',
-  name: 'RH Office Suite',
+  version: 'v8.9.0-office-functional',
+  name: 'RH Office Suite Functional Frontend',
   releaseDate: '2026-06-09',
   notes: [
-    'Unified admin.html into an exclusive Office Suite UIX',
-    'Added Dashboard, CRM, Customers, Quotations, Invoices, Payments, Projects, Documents, Reports and Settings sections',
-    'Kept existing Aira Manager and Blog Management modules intact',
-    'Lead Management remains on admin-leads.html and is linked as the live CRM lead source'
+    'Activated Customers, Quotations, Invoices, Payments and Projects modules using localStorage frontend data',
+    'Added Restu Harmoni logo into admin header and quotation/invoice preview templates',
+    'Quotation can convert to invoice; invoices can be marked paid; payment and project registers are active',
+    'Aira and original Lead Management remain untouched'
   ]
 };
