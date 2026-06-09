@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RH Office Suite | Restu Harmoni</title>
+<link rel="stylesheet" href="admin-office.css?v=v8.6.0-rh-office-suite">
+</head>
+<body>
+<div class="office-shell">
+  <aside class="office-sidebar" id="officeSidebar">
+    <div class="office-brand">
+      <img src="assets/rh-logo.png" alt="Restu Harmoni">
+      <div><strong>RH Office Suite</strong><span>Admin Operation System</span></div>
+    </div>
+    <nav class="office-nav">
+      <div class="office-nav-group"><div class="office-nav-title">Main Office</div>
+        <button data-nav="dashboard" data-title="Dashboard Overview" class="active"><span class="nav-icon">D</span>Dashboard</button>
+      </div>
+      <div class="office-nav-group"><div class="office-nav-title">CRM</div>
+        <button data-nav="leads" data-title="Lead Management"><span class="nav-icon">L</span>Leads <span class="nav-count">12</span></button>
+        <button data-nav="customers" data-title="Customer Filing"><span class="nav-icon">C</span>Customers</button>
+      </div>
+      <div class="office-nav-group"><div class="office-nav-title">Sales & Finance</div>
+        <button data-nav="quotations" data-title="Quotation Filing"><span class="nav-icon">Q</span>Quotations <span class="nav-count">6</span></button>
+        <button data-nav="invoices" data-title="Invoice Filing"><span class="nav-icon">I</span>Invoices <span class="nav-count">3</span></button>
+        <button data-nav="payments" data-title="Payment Tracking"><span class="nav-icon">P</span>Payments</button>
+      </div>
+      <div class="office-nav-group"><div class="office-nav-title">Delivery</div>
+        <button data-nav="projects" data-title="Project Office"><span class="nav-icon">PR</span>Projects</button>
+        <button data-nav="documents" data-title="Document Filing"><span class="nav-icon">F</span>Documents</button>
+      </div>
+      <div class="office-nav-group"><div class="office-nav-title">System</div>
+        <a href="admin.html"><span class="nav-icon">W</span>Website Admin</a>
+        <button data-nav="settings" data-title="Office Settings"><span class="nav-icon">S</span>Settings</button>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="office-main">
+    <header class="office-topbar">
+      <button class="btn soft mobile-menu" data-mobile-menu>Menu</button>
+      <div class="office-search"><span>Search</span><input placeholder="Customer, quotation, invoice, project..."></div>
+      <div class="office-user"><div><strong>Admin Office</strong><div class="small-muted">Restu Harmoni</div></div><div class="office-avatar">RH</div></div>
+    </header>
+
+    <div class="office-content">
+      <section data-section="dashboard">
+        <div class="office-page-head">
+          <div><div class="office-eyebrow">Executive Office</div><h1 id="pageTitle">Dashboard Overview</h1><p>Ringkasan operasi harian: lead, quotation, invoice, payment dan project delivery.</p></div>
+          <div class="office-actions"><button class="btn soft">Export Report</button><button class="btn gold">New Quotation</button><button class="btn primary">New Invoice</button></div>
+        </div>
+        <div class="kpi-grid" id="kpiGrid"></div>
+        <div class="office-grid">
+          <div class="office-card"><div class="office-card-head"><h2>Recent Leads</h2><button class="btn soft" data-nav="leads">View CRM</button></div><div class="table-scroll"><table class="office-table"><thead><tr><th>Client</th><th>Service</th><th>Status</th><th>Date</th></tr></thead><tbody id="recentLeads"></tbody></table></div></div>
+          <div class="office-card"><div class="office-card-head"><h2>Active Projects</h2><button class="btn soft" data-nav="projects">Manage</button></div><div class="office-card-body"><div class="progress-list" id="projectProgress"></div></div></div>
+          <div class="office-card"><div class="office-card-head"><h2>Pending Quotations</h2><button class="btn soft" data-nav="quotations">Open</button></div><div class="table-scroll"><table class="office-table"><thead><tr><th>Quotation</th><th>Customer</th><th class="right">Amount</th><th>Status</th></tr></thead><tbody id="pendingQuotations"></tbody></table></div></div>
+          <div class="office-card"><div class="office-card-head"><h2>Outstanding Invoices</h2><button class="btn soft" data-nav="invoices">Open</button></div><div class="table-scroll"><table class="office-table"><thead><tr><th>Invoice</th><th class="right">Amount</th><th>Status</th></tr></thead><tbody id="outstandingInvoices"></tbody></table></div></div>
+        </div>
+      </section>
+
+      <section data-section="leads" class="hidden"><div class="office-page-head"><div><div class="office-eyebrow">CRM</div><h1>Lead Management</h1><p>Failkan semua inquiry daripada website, WhatsApp dan Aira sebelum convert kepada customer.</p></div><button class="btn primary">Add Lead</button></div><div class="module-grid"><div class="module-card"><h3>New Leads</h3><p>Senarai inquiry baru yang belum dihubungi.</p><ul><li>Assign follow-up date</li><li>Qualification status</li><li>Convert to customer</li></ul></div><div class="module-card"><h3>Follow-up</h3><p>Lead yang perlu WhatsApp/call semula.</p><ul><li>Warm lead</li><li>Proposal pending</li><li>Lost reason</li></ul></div><div class="module-card"><h3>Aira Leads</h3><p>Data yang dikutip daripada AI assistant.</p><ul><li>Service interest</li><li>Budget range</li><li>Business type</li></ul></div></div></section>
+      <section data-section="customers" class="hidden"><div class="office-page-head"><div><div class="office-eyebrow">Filing</div><h1>Customer Filing</h1><p>Satu profile pelanggan untuk quotation, invoice, payment, project dan dokumen.</p></div><button class="btn primary">New Customer</button></div><div class="office-card"><div class="office-card-head"><h2>Customer File Structure</h2></div><div class="office-card-body"><div class="file-list"><div class="file-item"><span class="file-icon">CUS</span><div><strong>CUS-2026-0001 / Customer Profile</strong><span class="small-muted">Company info, contact person, billing address</span></div></div><div class="file-item"><span class="file-icon">QT</span><div><strong>Quotations Folder</strong><span class="small-muted">Draft, sent, approved, rejected</span></div></div><div class="file-item"><span class="file-icon">INV</span><div><strong>Invoices Folder</strong><span class="small-muted">Unpaid, partial, paid, overdue</span></div></div><div class="file-item"><span class="file-icon">PRJ</span><div><strong>Project Folder</strong><span class="small-muted">Assets, content, revisions, delivery notes</span></div></div></div></div></div></section>
+      <section data-section="quotations" class="hidden"><div class="office-page-head"><div><div class="office-eyebrow">Sales</div><h1>Quotation Filing</h1><p>Generate, send, approve dan convert quotation kepada invoice.</p></div><button class="btn gold">Create Quotation</button></div><div class="office-card"><div class="table-scroll"><table class="office-table"><thead><tr><th>No</th><th>Customer</th><th>Package</th><th class="right">Amount</th><th>Status</th></tr></thead><tbody id="quotationTableFull"></tbody></table></div></div></section>
+      <section data-section="invoices" class="hidden"><div class="office-page-head"><div><div class="office-eyebrow">Finance</div><h1>Invoice Filing</h1><p>Track unpaid, paid, partial dan overdue invoices.</p></div><button class="btn primary">Create Invoice</button></div><div class="office-card"><div class="table-scroll"><table class="office-table"><thead><tr><th>Invoice</th><th class="right">Amount</th><th>Status</th></tr></thead><tbody id="invoiceTableFull"></tbody></table></div></div></section>
+      <section data-section="payments" class="hidden"><div class="office-page-head"><div><div class="office-eyebrow">Finance</div><h1>Payment Tracking</h1><p>Verify receipt, update invoice status dan simpan bukti bayaran.</p></div><button class="btn primary">Record Payment</button></div><div class="module-grid"><div class="module-card"><h3>Bank Transfer</h3><p>Manual verification untuk receipt pelanggan.</p></div><div class="module-card"><h3>DuitNow / FPX</h3><p>Ready untuk integrasi payment gateway.</p></div><div class="module-card"><h3>Receipt Filing</h3><p>Auto link receipt kepada invoice dan customer file.</p></div></div></section>
+      <section data-section="projects" class="hidden"><div class="office-page-head"><div><div class="office-eyebrow">Delivery</div><h1>Project Office</h1><p>Convert invoice paid kepada project dan track progress delivery.</p></div><button class="btn primary">Create Project</button></div><div class="office-card"><div class="office-card-head"><h2>Project Progress</h2></div><div class="office-card-body"><div class="progress-list" id="projectProgressFull"></div></div></div></section>
+      <section data-section="documents" class="hidden"><div class="office-page-head"><div><div class="office-eyebrow">Filing Cabinet</div><h1>Document Filing</h1><p>Template, contract, proposal, invoice PDF, quotation PDF dan client assets.</p></div><button class="btn primary">Upload Document</button></div><div class="module-grid"><div class="module-card"><h3>Contracts</h3><p>Service agreement dan terms.</p></div><div class="module-card"><h3>Templates</h3><p>Invoice, quotation, proposal, project brief.</p></div><div class="module-card"><h3>Client Files</h3><p>Logo, content, image, domain info.</p></div></div></section>
+      <section data-section="settings" class="hidden"><div class="office-page-head"><div><div class="office-eyebrow">System</div><h1>Office Settings</h1><p>Document numbering, company info, payment info dan user role.</p></div></div><div class="module-grid"><div class="module-card"><h3>Numbering</h3><p>CUS-2026-0001, QT-2026-0001, INV-2026-0001, PRJ-2026-0001.</p></div><div class="module-card"><h3>Company Profile</h3><p>Nama syarikat, alamat, email, telefon dan bank details.</p></div><div class="module-card"><h3>User Role</h3><p>Admin, finance, sales, project manager.</p></div></div></section>
+    </div>
+  </main>
+</div>
+<script src="version.js?v=v8.6.0-rh-office-suite"></script>
+<script src="admin-office.js?v=v8.6.0-rh-office-suite"></script>
+</body>
+</html>
