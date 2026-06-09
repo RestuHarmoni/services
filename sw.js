@@ -1,4 +1,4 @@
-const RH_VERSION = 'v8.6.0-rh-office-suite';
+const RH_VERSION = 'v8.7.1-admin-unified';
 const RH_CACHE_NAME = `services-restu-harmoni-${RH_VERSION}`;
 const RH_CRITICAL_EXTENSIONS = ['.html', '.js', '.css', '.json', '.webmanifest'];
 const RH_NETWORK_FIRST_PATHS = ['/content/', '/engine/'];
