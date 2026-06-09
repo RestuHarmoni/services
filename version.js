@@ -1,1 +1,1 @@
-window.RH_APP_VERSION = 'v8.0.0-rh-aira-lead-clean-structure';
+window.RH_APP_VERSION = 'v8.1.0-rh-aira-lead-copy-clean';
