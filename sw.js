@@ -1,4 +1,4 @@
-const RH_VERSION = 'v8.2.0-rh-service-icons-incoming';
+const RH_VERSION = 'v8.3.0-rh-industry-copy-icons';
 const RH_CACHE_NAME = `services-restu-harmoni-${RH_VERSION}`;
 const RH_CRITICAL_EXTENSIONS = ['.html', '.js', '.css', '.json', '.webmanifest'];
 const RH_NETWORK_FIRST_PATHS = ['/content/', '/engine/'];
