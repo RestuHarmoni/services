@@ -1,1 +1,1 @@
-window.RH_APP_VERSION = 'v8.1.0-rh-aira-lead-copy-clean';
+window.RH_APP_VERSION = 'v8.2.0-rh-service-icons-incoming';

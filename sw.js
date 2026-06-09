@@ -1,4 +1,4 @@
-const RH_VERSION = 'v8.1.0-rh-aira-lead-copy-clean';
+const RH_VERSION = 'v8.2.0-rh-service-icons-incoming';
 const RH_CACHE_NAME = `services-restu-harmoni-${RH_VERSION}`;
 const RH_CRITICAL_EXTENSIONS = ['.html', '.js', '.css', '.json', '.webmanifest'];
 const RH_NETWORK_FIRST_PATHS = ['/content/', '/engine/'];
