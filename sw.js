@@ -1,4 +1,4 @@
-const RH_VERSION = 'v8.4.0-rh-google-testimonials-polish';
+const RH_VERSION = 'v8.5.0-rh-faq-conversion-polish';
 const RH_CACHE_NAME = `services-restu-harmoni-${RH_VERSION}`;
 const RH_CRITICAL_EXTENSIONS = ['.html', '.js', '.css', '.json', '.webmanifest'];
 const RH_NETWORK_FIRST_PATHS = ['/content/', '/engine/'];
