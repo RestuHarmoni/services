@@ -1,0 +1,41 @@
+{
+  "name": "RH Premium 05 — Manufacturing",
+  "industry": "Manufacturing",
+  "headline": "Manufacturing Website UI Untuk Manufacturing",
+  "subheadline": "Template industrial capability showcase dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Manufacturing.",
+  "image": "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1400&q=80",
+  "color": "#374151",
+  "services": [
+    "Hero section",
+    "About / credibility",
+    "Service cards",
+    "Portfolio / gallery",
+    "Testimonial",
+    "FAQ",
+    "WhatsApp CTA"
+  ],
+  "products": [
+    {
+      "title": "Pakej",
+      "price": "RH Premium",
+      "desc": "Website premium untuk jenama high-end, showcase besar, multi-section dan custom direction."
+    },
+    {
+      "title": "Jenis Template",
+      "price": "Manufacturing",
+      "desc": "Industrial capability showcase"
+    },
+    {
+      "title": "Sesuai Untuk",
+      "price": "Manufacturing",
+      "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+    }
+  ],
+  "testimonial": "Manufacturing membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+  "cta": "Pilih Manufacturing",
+  "package": "RH_Premium",
+  "templateCode": "RH_Premium_05_Manufacturing",
+  "className": "tpl-premium-05",
+  "uiConcept": "Industrial capability showcase",
+  "suitableFor": "Manufacturing"
+}

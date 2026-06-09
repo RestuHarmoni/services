@@ -1,0 +1,39 @@
+{
+  "name": "RH Basic 05 — Local Business",
+  "industry": "Bengkel / Kedai Servis",
+  "headline": "Local Business Website UI Untuk Bengkel",
+  "subheadline": "Template local sme storefront style dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Bengkel / Kedai Servis.",
+  "image": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80",
+  "color": "#ea580c",
+  "services": [
+    "Hero section",
+    "About ringkas",
+    "Service cards",
+    "Trust badge",
+    "WhatsApp CTA"
+  ],
+  "products": [
+    {
+      "title": "Pakej",
+      "price": "RH Basic",
+      "desc": "Website asas untuk bisnes kecil yang perlukan profil, servis dan CTA WhatsApp jelas."
+    },
+    {
+      "title": "Jenis Template",
+      "price": "Local Business",
+      "desc": "Local SME storefront style"
+    },
+    {
+      "title": "Sesuai Untuk",
+      "price": "Bengkel / Kedai Servis",
+      "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+    }
+  ],
+  "testimonial": "Local Business membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+  "cta": "Pilih Local Business",
+  "package": "RH_Basic",
+  "templateCode": "RH_Basic_05_Local_Business",
+  "className": "tpl-basic-05",
+  "uiConcept": "Local SME storefront style",
+  "suitableFor": "Bengkel / Kedai Servis"
+}

@@ -1,0 +1,41 @@
+{
+  "name": "RH Standard 06 — Product Online",
+  "industry": "Produk Online",
+  "headline": "Product Online Website UI Untuk Produk Online",
+  "subheadline": "Template product landing and catalog preview dengan gaya Figma-style: spacing kemas, kad moden, section modular dan CTA jelas. Sesuai untuk Produk Online.",
+  "image": "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1400&q=80",
+  "color": "#9333ea",
+  "services": [
+    "Hero section",
+    "About / credibility",
+    "Service cards",
+    "Portfolio / gallery",
+    "Testimonial",
+    "FAQ",
+    "WhatsApp CTA"
+  ],
+  "products": [
+    {
+      "title": "Pakej",
+      "price": "RH Standard",
+      "desc": "Website bisnes lengkap dengan portfolio, katalog ringkas, bukti sosial dan flow enquiry."
+    },
+    {
+      "title": "Jenis Template",
+      "price": "Product Online",
+      "desc": "Product landing and catalog preview"
+    },
+    {
+      "title": "Sesuai Untuk",
+      "price": "Produk Online",
+      "desc": "Boleh ditukar warna, gambar dan copywriting mengikut servis."
+    }
+  ],
+  "testimonial": "Product Online membantu pelanggan nampak servis, bukti kerja dan langkah untuk membuat pertanyaan dengan lebih cepat.",
+  "cta": "Pilih Product Online",
+  "package": "RH_Standard",
+  "templateCode": "RH_Standard_06_Product_Online",
+  "className": "tpl-standard-06",
+  "uiConcept": "Product landing and catalog preview",
+  "suitableFor": "Produk Online"
+}
