@@ -117,6 +117,10 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
+    if (url.pathname === '/admin-office' || url.pathname === '/admin-office/' || url.pathname === '/admin-office.html') {
+      return Response.redirect(`${url.origin}/admin.html?v=v8.8.0-exclusive-admin`, 302);
+    }
+
     if (url.pathname === '/article.html' && url.searchParams.get('slug')) {
       return Response.redirect(`${url.origin}/blog/${encodeURIComponent(url.searchParams.get('slug'))}.html`, 301);
     }

@@ -18,10 +18,20 @@ let googleReviews = (window.RH_GOOGLE_REVIEWS_SERVICE&&window.RH_GOOGLE_REVIEWS_
 
 document.getElementById('logout').onclick=()=>window.RH_ADMIN_AUTH.signOut();
 
-document.querySelectorAll('.side button[data-tab]').forEach(btn=>btn.onclick=()=>{
- document.querySelectorAll('.side button').forEach(b=>b.classList.remove('active')); btn.classList.add('active');
- ['dashboard','site','templates','blog','aira','reviews','export'].forEach(t=>{const el=$('tab-'+t); if(el) el.style.display=(btn.dataset.tab===t?'block':'none');});
- if(btn.dataset.tab==='export') refreshExport(); if(btn.dataset.tab==='aira') renderAiraAdmin(); if(btn.dataset.tab==='reviews') renderGoogleReviewsAdmin(); if(btn.dataset.tab==='blog' && window.RH_BLOG_ADMIN){window.RH_BLOG_ADMIN.refreshPosts();}
+function activateAdminTab(tab){
+ document.querySelectorAll('.side button[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+ document.querySelectorAll('main.panel > section[id^="tab-"]').forEach(el=>{el.style.display=(el.id==='tab-'+tab?'block':'none');});
+ if(tab==='export') refreshExport();
+ if(tab==='aira') renderAiraAdmin();
+ if(tab==='reviews') renderGoogleReviewsAdmin();
+ if(tab==='blog' && window.RH_BLOG_ADMIN){window.RH_BLOG_ADMIN.refreshPosts();}
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+document.addEventListener('click',e=>{
+ const trigger=e.target.closest('button[data-tab]');
+ if(!trigger) return;
+ e.preventDefault();
+ activateAdminTab(trigger.dataset.tab);
 });
 
 function loadSite(){

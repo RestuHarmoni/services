@@ -1,4 +1,4 @@
-const RH_VERSION = 'v8.7.1-admin-unified';
+const RH_VERSION = 'v8.8.0-exclusive-admin';
 const RH_CACHE_NAME = `services-restu-harmoni-${RH_VERSION}`;
 const RH_CRITICAL_EXTENSIONS = ['.html', '.js', '.css', '.json', '.webmanifest'];
 const RH_NETWORK_FIRST_PATHS = ['/content/', '/engine/'];
@@ -35,6 +35,11 @@ self.addEventListener('fetch', event => {
   if (url.origin !== self.location.origin) return;
 
   const pathname = url.pathname;
+
+  if (pathname === '/admin-office' || pathname === '/admin-office/' || pathname === '/admin-office.html') {
+    event.respondWith(Response.redirect('/admin.html?v=v8.8.0-exclusive-admin', 302));
+    return;
+  }
   const isCriticalFile =
     pathname === '/' ||
     pathname.endsWith('/') ||
