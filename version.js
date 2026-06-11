@@ -1,14 +1,14 @@
-window.RH_APP_VERSION = 'v12.0-sales-workspace';
+window.RH_APP_VERSION = 'v12.2-sales-workflow-fix';
 window.RH_VERSION = window.RH_APP_VERSION;
 window.RH_VERSION_META = {
-  version: 'v12.0-sales-workspace',
-  name: 'RH Services Sales Workspace Rebuild',
+  version: 'v12.2-sales-workflow-fix',
+  name: 'RH Services Sales Workflow Fix',
   releaseDate: '2026-06-11',
   notes: [
-    'Rebuilt admin-leads.html into Sales Workspace',
-    'Added Lead Inbox, Prospects, Quotations, Negotiation, Won Projects and Lost Deals stages',
-    'Kept leads as the single source of truth in Supabase',
-    'Added Prospect File with Aira answers, sales notes, follow-up date and quotation filing',
-    'Kept Aira, package template links, blog and public website flow unchanged'
+    'Fixed admin Lead Inbox refused-to-connect issue by removing iframe embed',
+    'Added direct Supabase lead list inside admin.html workspace',
+    'Added Convert To Prospect flow so data does not need to be retyped',
+    'Prospect register now stores source lead id, package, score and temperature',
+    'Dashboard flow remains Lead → Prospect → Quotation → Negotiation → Won Project'
   ]
 };
