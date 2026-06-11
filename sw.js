@@ -1,4 +1,4 @@
-const RH_VERSION = 'v12.0-sales-workspace';
+const RH_VERSION = 'v12.1-dashboard-layout-polish';
 const RH_CACHE_NAME = `services-restu-harmoni-${RH_VERSION}`;
 const RH_CRITICAL_EXTENSIONS = ['.html', '.js', '.css', '.json', '.webmanifest'];
 const RH_NETWORK_FIRST_PATHS = ['/content/', '/engine/'];
@@ -37,7 +37,7 @@ self.addEventListener('fetch', event => {
   const pathname = url.pathname;
 
   if (pathname === '/admin-office' || pathname === '/admin-office/' || pathname === '/admin-office.html') {
-    event.respondWith(Response.redirect('/admin.html?v=v12.0-sales-workspace', 302));
+    event.respondWith(Response.redirect('/admin.html?v=v12.1-dashboard-layout-polish', 302));
     return;
   }
   const isCriticalFile =

@@ -2,7 +2,7 @@
 <html lang="ms">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RH Office Suite v12.0 Sales Workspace | Restu Harmoni</title>
+<title>RH Services v12.1 Dashboard Layout Polish | Restu Harmoni</title>
 <style>
 :root{--bg:#f6f8fc;--card:#fff;--text:#0f172a;--muted:#64748b;--line:#e2e8f0;--blue:#2563eb;--blue-dark:#1d4ed8;--blue2:#dbeafe;--green:#16a34a;--red:#dc2626;--amber:#f59e0b;--shadow:0 22px 70px rgba(15,23,42,.08);--radius:24px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,#dbeafe 0,#f8fafc 36%,#f6f8fc 100%);color:var(--text);-webkit-text-size-adjust:100%}a{color:inherit}.hidden{display:none!important}
@@ -43,7 +43,7 @@ html,body{max-width:100%;overflow-x:hidden}.rh-logo-mark{width:42px;height:42px;
 @media print{.top,.side,.office-ribbon,.mobile-menu-toggle,.admin-scrim,.actions,.office-actions{display:none!important}.wrap{display:block;width:100%;margin:0;padding:0}.panel{box-shadow:none;border:0;padding:0!important}.doc-preview{box-shadow:none;border:0}}
 
 
-/* RH Office Suite v12.0 Sales Workspace: exclusive fit layout */
+/* RH Services v12.1 Dashboard Layout Polish: exclusive fit layout */
 :root{--office-gold:#c89b3c;--office-navy:#07111f;--office-card:#ffffff;--office-soft:#f6f8fc}
 body{overflow-x:hidden}
 .top .inner,.wrap,.office-ribbon{width:min(1880px,calc(100% - 32px));max-width:none}
@@ -85,7 +85,7 @@ body{overflow-x:hidden}
 @media(max-width:540px){.top-actions{grid-template-columns:1fr 1fr!important}.top-actions .btn:nth-child(3){display:flex!important}.brand-admin span{font-size:13px}.office-hero h1{font-size:24px}.office-table{min-width:680px}}
 
 
-/* RH Office Suite v12.0 Sales Workspace: viewport fit polish */
+/* RH Services v12.1 Dashboard Layout Polish: viewport fit polish */
 html,body{width:100%;max-width:100%;overflow-x:hidden!important;}
 .top{width:100%;overflow:hidden;}
 .top .inner{width:100%!important;max-width:none!important;padding-left:22px!important;padding-right:22px!important;}
@@ -137,41 +137,41 @@ html,body{width:100%;max-width:100%;overflow-x:hidden!important;}
 </style>
 </head>
 <body>
-<header class="top"><div class="inner"><div class="brand-admin"><img class="rh-logo-mark" src="assets/rh-logo.png" alt="Restu Harmoni Logo"><span>Restu Harmoni Office Suite<br><small style="color:#cbd5e1;font-weight:700">Exclusive Admin System</small></span></div><button class="mobile-menu-toggle" type="button" aria-label="Buka menu admin" aria-expanded="false">☰ Menu</button><div class="top-actions"><a class="btn gold" href="admin.html">Office Suite</a><a class="btn soft" href="index.html" target="_blank">Lihat Website</a><a class="btn soft" href="admin-leads.html">Sales Workspace</a><button class="primary danger" id="logout">Logout</button></div></div></header>
-<div class="office-ribbon"><div>RH Office Suite • v12.0-sales-workspace</div><span>Dashboard, CRM, Sales, Projects, Documents, Blog, Aira, Reports & Settings dalam satu admin.html</span></div>
+<header class="top"><div class="inner"><div class="brand-admin"><img class="rh-logo-mark" src="assets/rh-logo.png" alt="Restu Harmoni Logo"><span>Restu Harmoni Services Admin<br><small style="color:#cbd5e1;font-weight:700">Sales Workspace</small></span></div><button class="mobile-menu-toggle" type="button" aria-label="Buka menu admin" aria-expanded="false">☰ Menu</button><div class="top-actions"><a class="btn gold" href="admin.html">Dashboard</a><a class="btn soft" href="index.html" target="_blank">Lihat Website</a><a class="btn soft" href="admin-leads.html">Lead Inbox</a><button class="primary danger" id="logout">Logout</button></div></div></header>
+<div class="office-ribbon"><div>RH Services Admin • v12.1-dashboard-layout-polish</div><span>Sales workspace, lead, prospect, quotation, blog, Aira, reports & settings dalam satu admin.html</span></div>
 <div class="admin-scrim" aria-hidden="true"></div>
 <div class="wrap">
 <aside class="side" id="adminSidebar">
   <div class="side-brand-mini">
     <img src="assets/rh-logo.png" alt="RH" class="side-logo-mini">
-    <div><b>Office Command</b><span>RH Suite</span></div>
+    <div><b>Sales Command</b><span>RH Services</span></div>
   </div>
   <button data-tab="dashboard" class="active side-home">Dashboard</button>
 
   <details class="nav-group" open>
-    <summary>CRM</summary>
-    <button data-tab="leads">Leads <small>Live</small></button>
-    <button data-tab="customers">Customers <small>New</small></button>
+    <summary>Sales CRM</summary>
+    <button data-tab="leads">Lead Inbox <small>Live</small></button>
+    <button data-tab="customers">Prospects <small>New</small></button>
   </details>
 
   <details class="nav-group" open>
     <summary>Sales</summary>
     <button data-tab="quotations">Quotations</button>
-    <button data-tab="invoices">Invoices</button>
-    <button data-tab="payments">Payments</button>
+    <button data-tab="invoices">Negotiation</button>
+    <button data-tab="payments">Won Deals</button>
   </details>
 
   <details class="nav-group" open>
-    <summary>Operations</summary>
-    <button data-tab="projects">Projects</button>
-    <button data-tab="documents">Documents</button>
+    <summary>Handover</summary>
+    <button data-tab="projects">Won Projects</button>
+    <button data-tab="documents">Filing</button>
   </details>
 
   <details class="nav-group">
     <summary>Website & AI</summary>
     <button data-tab="blog">Blog Management <small>Live</small></button>
     <button data-tab="aira">AI Assistant / Aira <small>Live</small></button>
-    <button data-tab="reviews">Feedback Customer</button>
+    <button data-tab="reviews">Feedback Prospect</button>
   </details>
 
   <details class="nav-group">
@@ -183,9 +183,9 @@ html,body{width:100%;max-width:100%;overflow-x:hidden!important;}
 <main class="panel">
 <div class="mobile-admin-tip">📱 Mode telefon aktif: menu boleh swipe kiri/kanan. Gunakan butang bawah untuk cepat tulis artikel atau preview blog.</div>
 <section id="tab-dashboard">
-<div class="office-hero"><div class="office-hero-grid"><div><div class="eyebrow" style="color:#f7d37a">Command Center</div><h1>Admin Office Dashboard</h1><p class="muted">Pusat operasi eksklusif Restu Harmoni untuk lead, customer, quotation, invoice, payment, project, dokumen, blog dan Aira.</p><div class="actions"><a class="btn gold" href="admin-leads.html">Buka Sales Workspace</a><button class="btn soft" data-tab="customers">Lihat Customers</button><button class="btn soft" data-tab="quotations">Quotation Pipeline</button></div></div><div class="office-status"><div class="label">System Status</div><p><b>AIRA & Sales Workspace dikekalkan.</b><br><span>Modul Lead asal masih menggunakan halaman/fungsi sedia ada. Modul CRM/Sales di bawah ialah struktur UIX untuk fasa integrasi database berikutnya.</span></p></div></div></div>
-<div class="office-kpis"><div class="office-card"><div class="label">New Leads</div><div class="value">Live</div><div class="trend">Daripada Aira / Website Form</div></div><div class="office-card"><div class="label">Customers</div><div class="value">0</div><div class="trend">Menunggu modul convert lead</div></div><div class="office-card"><div class="label">Outstanding Invoice</div><div class="value">RM0</div><div class="trend">Belum connect database</div></div><div class="office-card"><div class="label">Active Projects</div><div class="value">0</div><div class="trend">Fasa UIX ready</div></div></div>
-<div class="office-grid"><div class="editor-card" style="margin-top:0"><h2>Office Workflow</h2><div class="table-wrap"><table class="office-table"><thead><tr><th>Stage</th><th>Module</th><th>Status</th><th>Action</th></tr></thead><tbody><tr><td>1</td><td>Lead Capture</td><td><span class="status-pill status-paid">Existing Live</span></td><td><a class="btn ghost" href="admin-leads.html">Open Leads</a></td></tr><tr><td>2</td><td>Convert to Customer</td><td><span class="status-pill status-draft">UI Ready</span></td><td><button class="btn ghost" data-tab="customers">Customers</button></td></tr><tr><td>3</td><td>Quotation</td><td><span class="status-pill status-draft">UI Ready</span></td><td><button class="btn ghost" data-tab="quotations">Open</button></td></tr><tr><td>4</td><td>Invoice & Payment</td><td><span class="status-pill status-draft">UI Ready</span></td><td><button class="btn ghost" data-tab="invoices">Open</button></td></tr><tr><td>5</td><td>Project Delivery</td><td><span class="status-pill status-draft">UI Ready</span></td><td><button class="btn ghost" data-tab="projects">Open</button></td></tr></tbody></table></div></div><div class="editor-card" style="margin-top:0"><h2>Quick Office Actions</h2><div class="office-module-grid" style="grid-template-columns:1fr"><div class="module-card"><h3>Aira Manager</h3><p>Kekalkan sistem Aira sedia ada untuk lead generation.</p><div class="actions"><button class="btn dark" data-tab="aira">Open Aira</button></div></div><div class="module-card"><h3>Blog Management</h3><p>SEO CMS asal masih tersedia dalam admin utama.</p><div class="actions"><button class="btn dark" data-tab="blog">Open Blog</button></div></div></div></div></div>
+<div class="office-hero"><div class="office-hero-grid"><div><div class="eyebrow" style="color:#f7d37a">Command Center</div><h1>Admin Office Dashboard</h1><p class="muted">Pusat kerja sales Restu Harmoni untuk lead Aira, prospect, quotation, follow-up dan won project.</p><div class="actions"><a class="btn gold" href="admin-leads.html">Buka Lead Inbox</a><button class="btn soft" data-tab="customers">Lihat Prospects</button><button class="btn soft" data-tab="quotations">Quotation Pipeline</button></div></div><div class="office-status"><div class="label">System Status</div><p><b>AIRA & Sales Workspace dikekalkan.</b><br><span>Modul Lead asal masih menggunakan halaman/fungsi sedia ada. Modul CRM/Sales di bawah ialah struktur UIX untuk fasa integrasi database berikutnya.</span></p></div></div></div>
+<div class="office-kpis"><div class="office-card"><div class="label">New Leads</div><div class="value">Live</div><div class="trend">Daripada Aira / Website Form</div></div><div class="office-card"><div class="label">Prospects</div><div class="value">0</div><div class="trend">Menunggu modul convert lead</div></div><div class="office-card"><div class="label">Negotiation</div><div class="value">RM0</div><div class="trend">Belum connect database</div></div><div class="office-card"><div class="label">Won Projects</div><div class="value">0</div><div class="trend">Fasa UIX ready</div></div></div>
+<div class="office-grid"><div class="editor-card" style="margin-top:0"><h2>Sales Workflow</h2><div class="table-wrap"><table class="office-table"><thead><tr><th>Stage</th><th>Module</th><th>Status</th><th>Action</th></tr></thead><tbody><tr><td>1</td><td>Lead Capture</td><td><span class="status-pill status-paid">Existing Live</span></td><td><a class="btn ghost" href="admin-leads.html">Open Leads</a></td></tr><tr><td>2</td><td>Convert to Prospect</td><td><span class="status-pill status-draft">UI Ready</span></td><td><button class="btn ghost" data-tab="customers">Prospects</button></td></tr><tr><td>3</td><td>Quotation</td><td><span class="status-pill status-draft">UI Ready</span></td><td><button class="btn ghost" data-tab="quotations">Open</button></td></tr><tr><td>4</td><td>Negotiation</td><td><span class="status-pill status-draft">UI Ready</span></td><td><button class="btn ghost" data-tab="invoices">Open</button></td></tr><tr><td>5</td><td>Won Project</td><td><span class="status-pill status-draft">UI Ready</span></td><td><button class="btn ghost" data-tab="projects">Open</button></td></tr></tbody></table></div></div><div class="editor-card" style="margin-top:0"><h2>Quick Sales Actions</h2><div class="office-module-grid" style="grid-template-columns:1fr"><div class="module-card"><h3>Aira Manager</h3><p>Kekalkan sistem Aira sedia ada untuk lead generation.</p><div class="actions"><button class="btn dark" data-tab="aira">Open Aira</button></div></div><div class="module-card"><h3>Blog Management</h3><p>SEO CMS asal masih tersedia dalam admin utama.</p><div class="actions"><button class="btn dark" data-tab="blog">Open Blog</button></div></div></div></div></div>
 </section>
 
 <section id="tab-leads" style="display:none">
@@ -197,19 +197,19 @@ html,body{width:100%;max-width:100%;overflow-x:hidden!important;}
 </section>
 
 <section id="tab-customers" style="display:none">
-<div class="section-head office-section"><div><div class="eyebrow">CRM</div><h1>Customers</h1><p class="muted">Database pelanggan selepas lead disahkan. Fasa seterusnya: convert Lead → Customer secara automatik.</p></div><a class="btn gold" href="admin-leads.html">Convert dari Leads</a></div>
-<div class="office-note">Sales Workspace asal tidak diusik. Customer module ini disediakan sebagai ruang kerja baru untuk v8.9.2 functional integration.</div>
-<div class="office-kpis"><div class="office-card"><div class="label">Total Customers</div><div class="value">0</div><div class="trend">Belum connect Supabase table</div></div><div class="office-card"><div class="label">Qualified Leads</div><div class="value">Live</div><div class="trend">Semak di Sales Workspace</div></div><div class="office-card"><div class="label">Companies</div><div class="value">0</div><div class="trend">Ready for CRM schema</div></div><div class="office-card"><div class="label">Follow-up</div><div class="value">0</div><div class="trend">Task module planned</div></div></div>
-<div class="editor-card"><h2>Customer Filing</h2><div class="table-wrap"><table class="office-table"><thead><tr><th>Customer Code</th><th>Name / Company</th><th>Contact</th><th>Status</th><th>Next Action</th></tr></thead><tbody><tr><td>CUS-2026-0001</td><td class="muted">Sample customer record</td><td>-</td><td><span class="status-pill status-draft">Placeholder</span></td><td><button class="btn ghost">Profile</button></td></tr></tbody></table></div></div>
+<div class="section-head office-section"><div><div class="eyebrow">CRM</div><h1>Prospects</h1><p class="muted">Database pelanggan selepas lead disahkan. Fasa seterusnya: convert Lead → Prospect secara automatik.</p></div><a class="btn gold" href="admin-leads.html">Convert dari Leads</a></div>
+<div class="office-note">Sales Workspace asal tidak diusik. Prospect module ini disediakan sebagai ruang kerja baru untuk v8.9.2 functional integration.</div>
+<div class="office-kpis"><div class="office-card"><div class="label">Total Prospects</div><div class="value">0</div><div class="trend">Belum connect Supabase table</div></div><div class="office-card"><div class="label">Qualified Leads</div><div class="value">Live</div><div class="trend">Semak di Sales Workspace</div></div><div class="office-card"><div class="label">Companies</div><div class="value">0</div><div class="trend">Ready for CRM schema</div></div><div class="office-card"><div class="label">Follow-up</div><div class="value">0</div><div class="trend">Task module planned</div></div></div>
+<div class="editor-card"><h2>Prospect Filing</h2><div class="table-wrap"><table class="office-table"><thead><tr><th>Prospect Code</th><th>Name / Company</th><th>Contact</th><th>Status</th><th>Next Action</th></tr></thead><tbody><tr><td>CUS-2026-0001</td><td class="muted">Sample customer record</td><td>-</td><td><span class="status-pill status-draft">Placeholder</span></td><td><button class="btn ghost">Profile</button></td></tr></tbody></table></div></div>
 </section>
 <section id="tab-quotations" style="display:none">
 <div class="section-head office-section"><div><div class="eyebrow">Sales</div><h1>Quotations</h1><p class="muted">Ruang quotation untuk pakej website, AI dan automation.</p></div><button class="btn gold">+ New Quotation</button></div>
-<div class="office-grid"><div class="editor-card" style="margin-top:0"><h2>Quotation Pipeline</h2><div class="table-wrap"><table class="office-table"><thead><tr><th>No</th><th>Customer</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead><tbody><tr><td>QT-2026-0001</td><td>Sample Client</td><td>RM0.00</td><td><span class="status-pill status-draft">Draft</span></td><td><button class="btn ghost">View</button></td></tr></tbody></table></div></div><div class="editor-card" style="margin-top:0"><h2>Quotation Flow</h2><p class="muted">Lead → Customer → Quotation → Approval → Invoice.</p><div class="office-empty">PDF generator dan Supabase table akan disambung dalam fasa functional.</div></div></div>
+<div class="office-grid"><div class="editor-card" style="margin-top:0"><h2>Quotation Pipeline</h2><div class="table-wrap"><table class="office-table"><thead><tr><th>No</th><th>Prospect</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead><tbody><tr><td>QT-2026-0001</td><td>Sample Client</td><td>RM0.00</td><td><span class="status-pill status-draft">Draft</span></td><td><button class="btn ghost">View</button></td></tr></tbody></table></div></div><div class="editor-card" style="margin-top:0"><h2>Quotation Flow</h2><p class="muted">Lead → Prospect → Quotation → Negotiation → Won Project.</p><div class="office-empty">PDF generator dan Supabase table akan disambung dalam fasa functional.</div></div></div>
 </section>
 <section id="tab-invoices" style="display:none">
 <div class="section-head office-section"><div><div class="eyebrow">Finance</div><h1>Invoices</h1><p class="muted">Invoice selepas quotation diterima. Sesuai untuk tracking bayaran dan status overdue.</p></div><button class="btn gold">+ New Invoice</button></div>
 <div class="office-kpis"><div class="office-card"><div class="label">Unpaid</div><div class="value">RM0</div></div><div class="office-card"><div class="label">Paid This Month</div><div class="value">RM0</div></div><div class="office-card"><div class="label">Overdue</div><div class="value">0</div></div><div class="office-card"><div class="label">Draft</div><div class="value">0</div></div></div>
-<div class="editor-card"><h2>Invoice Register</h2><div class="table-wrap"><table class="office-table"><thead><tr><th>Invoice No</th><th>Customer</th><th>Due Date</th><th>Amount</th><th>Status</th></tr></thead><tbody><tr><td>INV-2026-0001</td><td>Sample Client</td><td>-</td><td>RM0.00</td><td><span class="status-pill status-draft">Draft</span></td></tr></tbody></table></div></div>
+<div class="editor-card"><h2>Negotiation Register</h2><div class="table-wrap"><table class="office-table"><thead><tr><th>Invoice No</th><th>Prospect</th><th>Due Date</th><th>Amount</th><th>Status</th></tr></thead><tbody><tr><td>INV-2026-0001</td><td>Sample Client</td><td>-</td><td>RM0.00</td><td><span class="status-pill status-draft">Draft</span></td></tr></tbody></table></div></div>
 </section>
 <section id="tab-payments" style="display:none">
 <div class="section-head office-section"><div><div class="eyebrow">Finance</div><h1>Payments</h1><p class="muted">Rekod pembayaran, bukti bayaran dan verification.</p></div><button class="btn gold">+ Record Payment</button></div>
@@ -234,7 +234,7 @@ html,body{width:100%;max-width:100%;overflow-x:hidden!important;}
 </section>
 <section id="tab-settings" style="display:none">
 <div class="section-head office-section"><div><div class="eyebrow">Control Center</div><h1>Settings</h1><p class="muted">Tetapan website, Aira, reviews dan backup admin.</p></div></div>
-<div class="office-module-grid"><div class="module-card"><h3>Services Page</h3><p>Edit promo, hero dan showcase.</p><div class="actions"><button class="btn dark" data-tab="site">Open Settings</button></div></div><div class="module-card"><h3>Feedback Customer</h3><p>Urus slider review.</p><div class="actions"><button class="btn dark" data-tab="reviews">Open Reviews</button></div></div><div class="module-card"><h3>Export / Backup</h3><p>Backup JSON untuk production.</p><div class="actions"><button class="btn dark" data-tab="export">Open Backup</button></div></div></div>
+<div class="office-module-grid"><div class="module-card"><h3>Services Page</h3><p>Edit promo, hero dan showcase.</p><div class="actions"><button class="btn dark" data-tab="site">Open Settings</button></div></div><div class="module-card"><h3>Feedback Prospect</h3><p>Urus slider review.</p><div class="actions"><button class="btn dark" data-tab="reviews">Open Reviews</button></div></div><div class="module-card"><h3>Export / Backup</h3><p>Backup JSON untuk production.</p><div class="actions"><button class="btn dark" data-tab="export">Open Backup</button></div></div></div>
 </section>
 <section id="tab-site" style="display:none">
 <div class="section-head"><div><div class="eyebrow">Landing Page</div><h1>Edit Services Page</h1><p class="muted">Kemas kini promo, banner dan maklumat asas website.</p></div></div>
@@ -279,7 +279,7 @@ Kereta Sewa: 1–5 kenderaan, 6–20 kenderaan"></textarea></div><div class="act
 
 <section id="tab-reviews" style="display:none">
   <div class="section-head"><div><div class="eyebrow">Social Proof</div><h1>Google Review Slider</h1><p class="muted">Urus 5 review Google terbaik untuk dipaparkan di website. Review aktif sahaja akan keluar dalam slider.</p></div><button class="primary" id="saveGoogleReviews">Simpan Draft</button></div>
-  <div class="notice" id="googleReviewStatus">Feedback Customer: sedang semak sumber data...</div>
+  <div class="notice" id="googleReviewStatus">Feedback Prospect: sedang semak sumber data...</div>
   <div class="aira-toolbar"><button class="primary success" id="publishGoogleReviews">Publish ke Supabase</button><button class="btn soft" id="reloadGoogleReviews">Reload dari Supabase</button><button class="btn soft" id="addGoogleReview">+ Tambah Review</button></div>
   <div class="review-admin-shell">
     <div>
@@ -297,13 +297,13 @@ Kereta Sewa: 1–5 kenderaan, 6–20 kenderaan"></textarea></div><div class="act
 </main>
 </div>
 <div class="quick-mobile"><button class="write" data-jump-blog="1">+ Tulis Artikel</button><a class="view" href="blog.html" target="_blank">Lihat Blog</a></div>
-<script src="supabase-config.js?v=v12.0-sales-workspace"></script>
-<script src="aira-data-service.js?v=v12.0-sales-workspace"></script>
-<script src="google-reviews-service.js?v=v12.0-sales-workspace"></script>
-<script src="admin-auth.js?v=v12.0-sales-workspace"></script>
-<script src="admin.js?v=v12.0-sales-workspace"></script>
-<script src="admin-blog.js?v=v12.0-sales-workspace"></script>
-<script src="office-system.js?v=v12.0-sales-workspace"></script>
+<script src="supabase-config.js?v=v12.1-dashboard-layout-polish"></script>
+<script src="aira-data-service.js?v=v12.1-dashboard-layout-polish"></script>
+<script src="google-reviews-service.js?v=v12.1-dashboard-layout-polish"></script>
+<script src="admin-auth.js?v=v12.1-dashboard-layout-polish"></script>
+<script src="admin.js?v=v12.1-dashboard-layout-polish"></script>
+<script src="admin-blog.js?v=v12.1-dashboard-layout-polish"></script>
+<script src="office-system.js?v=v12.1-dashboard-layout-polish"></script>
 
 <script>
 (function(){
@@ -324,4 +324,4 @@ Kereta Sewa: 1–5 kenderaan, 6–20 kenderaan"></textarea></div><div class="act
 </script>
 
 </body></html>
-<!-- RH Office Suite v12.0 Sales Workspace: admin-office unified into admin.html -->
+<!-- RH Services v12.1 Dashboard Layout Polish: admin-office unified into admin.html -->
