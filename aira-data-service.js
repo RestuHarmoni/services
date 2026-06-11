@@ -8,9 +8,10 @@
   let client=null;
   function safeJson(raw,fallback){try{return raw?JSON.parse(raw):fallback;}catch(e){return fallback;}}
   function clone(v){return typeof structuredClone==='function'?structuredClone(v):JSON.parse(JSON.stringify(v));}
-  function loadScript(){return new Promise(resolve=>{if(window.supabase)return resolve(true);const s=document.createElement('script');s.src=SUPABASE_CDN;s.onload=()=>resolve(true);s.onerror=()=>resolve(false);document.head.appendChild(s);});}
+  function loadScript(){return window.RHLoadSupabaseLibrary?window.RHLoadSupabaseLibrary():Promise.resolve(!!window.supabase);}
   async function getClient(){
     if(client)return client;
+    if(window.RHGetSupabaseClient){client=await window.RHGetSupabaseClient();return client;}
     if(!cfg.url||!cfg.anonKey||String(cfg.url).includes('PASTE_'))return null;
     const ok=await loadScript(); if(!ok||!window.supabase)return null;
     client=window.supabase.createClient(cfg.url,cfg.anonKey);

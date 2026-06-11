@@ -21,8 +21,8 @@
       {name:'Review Google #5',rating:5,text:'Masukkan review Google sebenar melalui Admin → Google Reviews.',source:'Google Review',active:false,order:5}
     ]
   });}
-  function loadScript(){return new Promise(resolve=>{if(window.supabase)return resolve(true);const s=document.createElement('script');s.src=SUPABASE_CDN;s.onload=()=>resolve(true);s.onerror=()=>resolve(false);document.head.appendChild(s);});}
-  async function getClient(){if(client)return client;if(!cfg.url||!cfg.anonKey||String(cfg.url).includes('PASTE_'))return null;const ok=await loadScript();if(!ok||!window.supabase)return null;client=window.supabase.createClient(cfg.url,cfg.anonKey);return client;}
+  function loadScript(){return window.RHLoadSupabaseLibrary?window.RHLoadSupabaseLibrary():Promise.resolve(!!window.supabase);}
+  async function getClient(){if(client)return client;if(window.RHGetSupabaseClient){client=await window.RHGetSupabaseClient();return client;}if(!cfg.url||!cfg.anonKey||String(cfg.url).includes('PASTE_'))return null;const ok=await loadScript();if(!ok||!window.supabase)return null;client=window.supabase.createClient(cfg.url,cfg.anonKey);return client;}
   function readLocal(){return safeJson(localStorage.getItem(LS),defaults());}
   function writeLocal(data){localStorage.setItem(LS,JSON.stringify(data));}
   async function readSupabase(){const c=await getClient();if(!c)return {ok:false,error:'Supabase belum dikonfigurasi'};const {data,error}=await c.from(TABLE).select('key,value,updated_at').eq('key',KEY).maybeSingle();if(error)return {ok:false,error:error.message};if(!data||!data.value)return {ok:false,error:'Google Reviews belum dipublish'};return {ok:true,reviews:data.value,source:'supabase'};}

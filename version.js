@@ -1,7 +1,7 @@
-window.RH_APP_VERSION = 'v8.9.4-stabilization';
+window.RH_APP_VERSION = 'v9.0-production-cleanup';
 window.RH_VERSION = window.RH_APP_VERSION;
 window.RH_VERSION_META = {
-  version: 'v8.9.4-stabilization',
+  version: 'v9.0-production-cleanup',
   name: 'RH Office Suite Exclusive Fit UIX',
   releaseDate: '2026-06-09',
   notes: [
