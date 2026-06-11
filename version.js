@@ -1,7 +1,7 @@
-window.RH_APP_VERSION = 'v8.9.3-admin-fit-polish';
+window.RH_APP_VERSION = 'v8.9.4-stabilization';
 window.RH_VERSION = window.RH_APP_VERSION;
 window.RH_VERSION_META = {
-  version: 'v8.9.3-admin-fit-polish',
+  version: 'v8.9.4-stabilization',
   name: 'RH Office Suite Exclusive Fit UIX',
   releaseDate: '2026-06-09',
   notes: [
