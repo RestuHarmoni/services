@@ -1,5 +1,5 @@
 (() => {
-  const VERSION = 'v12.4.1-prospect-detail-engine';
+  const VERSION = 'v12.4.2-negotiation-automation';
   const LOGO = 'assets/rh-logo.png';
   const STORE_KEY = 'rh_office_suite_data_v1';
   const $ = (s, r=document) => r.querySelector(s);
@@ -8,6 +8,7 @@
   const seed = {
     customers: [],
     quotations: [],
+    negotiations: [],
     invoices: [], payments: [], projects: [], documents: []
   };
   function today(){ return new Date().toISOString().slice(0,10); }
@@ -18,6 +19,7 @@
   let officeLeads = [];
   let officeAnswers = {};
   let selectedOfficeLeadId = null;
+  let selectedNegotiationIndex = null;
 
   function nextNo(prefix, arr, field){
     const year = new Date().getFullYear();
@@ -66,7 +68,7 @@
   function customersHTML(){return `<div class="section-head office-section"><div><div class="eyebrow">Sales CRM</div><h1>Prospects</h1><p class="muted">Prospect sepatutnya datang daripada Lead Inbox. Manual entry hanya untuk walk-in/referral.</p></div><button class="btn gold" data-tab="leads">Buka Lead Inbox</button></div><div class="editor-card"><h2>Prospect Register</h2><p class="muted">Semua prospect yang telah convert daripada Aira atau ditambah manual.</p><div class="table-wrap"><table class="office-table"><thead><tr><th>Code</th><th>Prospect / Company</th><th>Contact</th><th>Package</th><th>Status</th><th>Action</th></tr></thead><tbody id="customersTbody"></tbody></table></div></div><div id="prospectDetailPanel" class="editor-card prospect-detail-panel"><h2>Prospect Detail</h2><p class="muted">Klik View pada prospect untuk buka fail sales lengkap.</p></div><details class="editor-card"><summary style="cursor:pointer;font-weight:900">+ Tambah Prospect Manual</summary><div style="margin-top:14px"><div class="office-form-grid"><div><label>Nama</label><input id="custName" placeholder="Nama prospect"></div><div><label>Syarikat</label><input id="custCompany" placeholder="Nama syarikat"></div><div><label>Telefon / WhatsApp</label><input id="custPhone"></div><div><label>Email</label><input id="custEmail"></div></div><label>Alamat / Notes</label><textarea id="custAddress"></textarea><div class="office-actions"><button class="btn gold" id="addProspect">Save Prospect</button><button class="btn ghost" data-tab="quotations">Create Quotation</button></div></div></details>`}
 
   function quotationsHTML(){return `<div class="section-head office-section"><div><div class="eyebrow">Sales</div><h1>Quotations</h1><p class="muted">Buat quotation daripada prospect, simpan draft, preview dan lanjut ke follow-up.</p></div><button class="btn gold" id="newQuotationBtn">+ New Quotation</button></div><div class="office-grid"><div class="editor-card" style="margin-top:0"><h2>Quotation Form</h2><div class="office-form-grid"><div><label>Prospect</label><select id="qtProspect"></select></div><div><label>Valid Until</label><input id="qtValid" type="date"></div></div><label>Title</label><input id="qtTitle" value="Business Website Package"><label>Items</label><div class="office-line-items" id="qtItems"></div><div class="office-actions"><button class="btn ghost" id="addQtItem">+ Add Item</button><button class="btn gold" id="saveQuotation">Save Quotation</button><button class="btn dark" id="previewQuotation">Preview / Print</button></div></div><div class="editor-card" style="margin-top:0"><h2>Quotation Pipeline</h2><div class="pipeline-board" id="quotationKanban"></div></div></div><div class="editor-card"><h2>Quotation Register</h2><div class="table-wrap"><table class="office-table"><thead><tr><th>No</th><th>Prospect</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead><tbody id="quotationsTbody"></tbody></table></div></div><div id="quotationPreviewWrap" class="editor-card"></div>`}
-  function invoicesHTML(){return `<div class="section-head office-section"><div><div class="eyebrow">Finance</div><h1>Negotiation</h1><p class="muted">Ruang pantau quotation yang perlu follow-up sebelum client setuju.</p></div><button class="btn gold" id="newInvoiceBtn">Mark Follow-up</button></div><div class="office-kpis"><div class="office-card"><div class="label">Unpaid</div><div class="value" id="kpiUnpaid">RM0</div></div><div class="office-card"><div class="label">Paid</div><div class="value" id="kpiPaid">RM0</div></div><div class="office-card"><div class="label">Draft</div><div class="value" id="kpiDraftInv">0</div></div><div class="office-card"><div class="label">Negotiation</div><div class="value" id="kpiInvCount">0</div></div></div><div class="editor-card"><h2>Negotiation Register</h2><div class="table-wrap"><table class="office-table"><thead><tr><th>Invoice</th><th>Prospect</th><th>Due</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead><tbody id="invoicesTbody"></tbody></table></div></div><div id="invoicePreviewWrap" class="editor-card"></div>`}
+  function invoicesHTML(){return `<div class="section-head office-section"><div><div class="eyebrow">Sales Follow Up</div><h1>Negotiation</h1><p class="muted">Pantau quotation yang sudah dihantar, follow-up client, status closing dan catatan jualan.</p></div><button class="btn gold" data-tab="quotations">+ From Quotation</button></div><div class="office-kpis"><div class="office-card"><div class="label">Active Value</div><div class="value" id="kpiNegValue">RM0</div></div><div class="office-card"><div class="label">Follow Up</div><div class="value" id="kpiNegFollow">0</div></div><div class="office-card"><div class="label">Waiting Client</div><div class="value" id="kpiNegWaiting">0</div></div><div class="office-card"><div class="label">Total Negotiation</div><div class="value" id="kpiNegCount">0</div></div></div><div class="office-grid"><div class="editor-card" style="margin-top:0"><h2>Negotiation Register</h2><div class="table-wrap"><table class="office-table"><thead><tr><th>NEG ID</th><th>Prospect</th><th>Quotation</th><th>Amount</th><th>Status</th><th>Next Follow Up</th><th>Action</th></tr></thead><tbody id="invoicesTbody"></tbody></table></div></div><div id="invoicePreviewWrap" class="editor-card" style="margin-top:0"><h2>Negotiation Detail</h2><p class="muted">Pilih negotiation untuk update status, follow-up dan notes.</p></div></div>`}
   function paymentsHTML(){return `<div class="section-head office-section"><div><div class="eyebrow">Finance</div><h1>Won Deals</h1><p class="muted">Ruang sementara untuk rekod deal menang sebelum dipindahkan ke Office RH.</p></div></div><div class="editor-card"><h2>Record Won Deal</h2><div class="office-form-grid three"><div><label>Invoice</label><select id="payInvoice"></select></div><div><label>Amount</label><input id="payAmount" type="number" step="0.01"></div><div><label>Payment Date</label><input id="payDate" type="date"></div></div><div class="office-form-grid"><div><label>Method</label><select id="payMethod"><option>Bank Transfer</option><option>DuitNow</option><option>Cash</option><option>Other</option></select></div><div><label>Reference No</label><input id="payRef"></div></div><div class="office-actions"><button class="btn gold" id="savePayment">Save Won Deal</button></div></div><div class="editor-card"><h2>Won Deal Records</h2><div class="table-wrap"><table class="office-table"><thead><tr><th>Date</th><th>Invoice</th><th>Amount</th><th>Method</th><th>Reference</th></tr></thead><tbody id="paymentsTbody"></tbody></table></div></div>`}
   function projectsHTML(){return `<div class="section-head office-section"><div><div class="eyebrow">Operations</div><h1>Won Projects</h1><p class="muted">Deal yang telah menang dan sedia dihantar ke Office RH untuk delivery.</p></div></div><div class="editor-card"><h2>Create Won Project</h2><div class="office-form-grid"><div><label>Prospect</label><select id="prProspect"></select></div><div><label>Service Type</label><select id="prType"><option>Website</option><option>AI / Aira</option><option>Automation</option><option>Custom System</option></select></div><div><label>Project Name</label><input id="prName"></div><div><label>Status</label><select id="prStatus"><option>Planning</option><option>In Progress</option><option>Review</option><option>Completed</option><option>On Hold</option></select></div></div><div class="office-actions"><button class="btn gold" id="saveProject">Save Won Project</button></div></div><div class="editor-card"><h2>Won Project Register</h2><div class="table-wrap"><table class="office-table"><thead><tr><th>Project No</th><th>Project</th><th>Prospect</th><th>Type</th><th>Status</th></tr></thead><tbody id="projectsTbody"></tbody></table></div></div>`}
   function documentsHTML(){return `<div class="section-head office-section"><div><div class="eyebrow">Filing System</div><h1>Filing</h1><p class="muted">Filing quotation dan dokumen sales. Dokumen operasi penuh boleh dipindahkan ke Office RH.</p></div></div><div class="office-module-grid"><div class="module-card"><h3>Quotations</h3><p id="docQtCount">0 documents</p></div><div class="module-card"><h3>Negotiation</h3><p id="docInvCount">0 documents</p></div><div class="module-card"><h3>Won Deals</h3><p id="docPayCount">0 records</p></div></div><div class="editor-card"><h2>Recommended Filing</h2><pre style="white-space:pre-wrap;background:#0f172a;color:#e5e7eb;border-radius:18px;padding:18px;overflow:auto">/customers/CUS-2026-0001/\n  profile.json\n  quotations/QT-2026-0001.pdf\n  invoices/INV-2026-0001.pdf\n  payments/receipt.jpg\n  projects/PRJ-2026-0001/</pre></div>`}
@@ -82,7 +84,10 @@
       if(e.target.matches('[data-select-lead]')) { selectedOfficeLeadId=e.target.dataset.selectLead; renderLeadInbox(); }
       if(e.target.matches('[data-convert-lead]')) convertLeadToProspect(e.target.dataset.convertLead);
       if(e.target.matches('[data-view-qt]')) viewQuotation(+e.target.dataset.viewQt);
-      if(e.target.matches('[data-convert-qt]')) convertQuotation(+e.target.dataset.convertQt);
+      if(e.target.matches('[data-convert-qt]')) sendQuotationToNegotiation(+e.target.dataset.convertQt);
+      if(e.target.matches('[data-view-neg]')) viewNegotiation(+e.target.dataset.viewNeg);
+      if(id==='saveNegotiation') saveNegotiationDetail();
+      if(id==='addNegotiationNote') addNegotiationNote();
       if(e.target.matches('[data-view-inv]')) viewInvoice(+e.target.dataset.viewInv);
       if(e.target.matches('[data-mark-paid]')) markPaid(+e.target.dataset.markPaid);
       if(e.target.matches('[data-remove-line]')) { e.target.closest('.office-line-row')?.remove(); }
@@ -212,11 +217,67 @@
   function resetQuotation(){ $('#qtTitle').value='Business Website Package'; $('#qtValid').value=today(); $('#qtItems').innerHTML=''; addQtItem('Business Website Package',1,1299); addQtItem('AI Assisted Content Setup',1,300); }
   function collectQtItems(){ return $$('.office-line-row', $('#qtItems')).map(r=>({desc:$('.qt-desc',r).value, qty:Number($('.qt-qty',r).value||1), price:Number($('.qt-price',r).value||0)})).filter(i=>i.desc); }
   function saveQuotation(){ const q={no:nextNo('QT',db.quotations,'no'),customer:$('#qtProspect').value||'Walk-in Prospect',title:$('#qtTitle').value||'Quotation',validUntil:$('#qtValid').value||today(),status:'Draft',items:collectQtItems(),notes:''}; db.quotations.push(q); save(); viewQuotation(db.quotations.length-1); }
-  function convertQuotation(i){ const q=db.quotations[i]; if(!q)return; q.status='Approved'; const inv={no:nextNo('INV',db.invoices,'no'),quotationNo:q.no,customer:q.customer,title:q.title,dueDate:new Date(Date.now()+7*864e5).toISOString().slice(0,10),status:'Unpaid',items:q.items}; db.invoices.push(inv); save(); alert(`Invoice ${inv.no} generated from ${q.no}`); }
-  function createManualInvoice(){ if(!db.quotations.length){ alert('Create quotation first.'); return; } convertQuotation(db.quotations.length-1); }
+  function findProspectByName(name){ return db.customers.find(c => String(c.name||'') === String(name||'')) || null; }
+  function sendQuotationToNegotiation(i){
+    const q=db.quotations[i]; if(!q)return;
+    const exists=(db.negotiations||[]).find(n=>n.quotationNo===q.no);
+    if(exists){
+      q.status='Negotiation'; save(); setTab('invoices'); setTimeout(()=>viewNegotiation(db.negotiations.indexOf(exists)),60); return;
+    }
+    const prospect=findProspectByName(q.customer);
+    const n={
+      no: nextNo('NEG', db.negotiations||(db.negotiations=[]), 'no'),
+      quotationNo: q.no,
+      customer: q.customer,
+      prospectCode: prospect?.code || '',
+      package: prospect?.package || q.title || 'RH Starter',
+      amount: total(q.items),
+      status: 'New',
+      lastContact: today(),
+      nextFollowUp: new Date(Date.now()+2*864e5).toISOString().slice(0,10),
+      notes:[{date:today(), text:`Quotation ${q.no} dihantar ke Negotiation.`}],
+      created: today()
+    };
+    q.status='Negotiation';
+    db.negotiations.unshift(n);
+    save();
+    setTab('invoices');
+    setTimeout(()=>viewNegotiation(0),60);
+  }
+  function convertQuotation(i){ sendQuotationToNegotiation(i); }
+  function createManualInvoice(){ if(!db.quotations.length){ alert('Create quotation first.'); return; } sendQuotationToNegotiation(db.quotations.length-1); }
   function savePayment(){ const no=$('#payInvoice').value; const inv=db.invoices.find(x=>x.no===no); const p={date:$('#payDate').value||today(),invoiceNo:no,amount:Number($('#payAmount').value||0),method:$('#payMethod').value,ref:$('#payRef').value}; db.payments.push(p); if(inv){ const paid=db.payments.filter(x=>x.invoiceNo===no).reduce((s,x)=>s+Number(x.amount||0),0); inv.status = paid >= total(inv.items) ? 'Paid' : 'Partial'; } save(); }
   function markPaid(i){ const inv=db.invoices[i]; if(!inv)return; db.payments.push({date:today(),invoiceNo:inv.no,amount:total(inv.items),method:'Manual Mark Paid',ref:'ADMIN'}); inv.status='Paid'; save(); }
   function saveProject(){ const pr={no:nextNo('PRJ',db.projects,'no'),customer:$('#prProspect').value||'',name:$('#prName').value||'Untitled Project',type:$('#prType').value,status:$('#prStatus').value,created:today()}; db.projects.push(pr); save(); }
+
+  function viewNegotiation(i){
+    const n=(db.negotiations||[])[i]; const w=$('#invoicePreviewWrap'); if(!w||!n) return;
+    selectedNegotiationIndex=i;
+    const notes=(n.notes||[]).map(x=>`<div class="activity-line"><b>${esc(x.date||'-')}</b><br><span class="office-mini">${esc(x.text||'')}</span></div>`).join('') || '<p class="muted">Belum ada notes.</p>';
+    w.innerHTML=`<div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start"><div><div class="eyebrow">Negotiation Detail</div><h2>${esc(n.no)} — ${esc(n.customer)}</h2><p class="muted">${esc(n.quotationNo)} · ${esc(n.package||'-')} · ${money(n.amount)}</p></div><span>${pill(n.status)}</span></div><div class="office-form-grid three"><div><label>Status</label><select id="negStatus"><option>New</option><option>Follow Up</option><option>Waiting Client</option><option>Need Revision</option><option>Won</option><option>Lost</option></select></div><div><label>Last Contact</label><input id="negLastContact" type="date" value="${esc(n.lastContact||today())}"></div><div><label>Next Follow Up</label><input id="negNextFollow" type="date" value="${esc(n.nextFollowUp||today())}"></div></div><label>New Follow Up Note</label><textarea id="negNewNote" rows="3" placeholder="Contoh: Client minta bincang dengan partner. Follow up semula Jumaat."></textarea><div class="office-actions"><button class="btn gold" id="saveNegotiation">Save Status</button><button class="btn ghost" id="addNegotiationNote">Add Note</button></div><div class="editor-card" style="margin-top:14px"><h3>Follow Up Timeline</h3>${notes}</div>`;
+    const st=$('#negStatus'); if(st) st.value=n.status||'New';
+  }
+  function saveNegotiationDetail(){
+    const n=(db.negotiations||[])[selectedNegotiationIndex]; if(!n) return alert('Pilih negotiation dahulu.');
+    n.status=$('#negStatus')?.value || n.status || 'New';
+    n.lastContact=$('#negLastContact')?.value || n.lastContact || today();
+    n.nextFollowUp=$('#negNextFollow')?.value || n.nextFollowUp || today();
+    if(n.status==='Won'){
+      const q=db.quotations.find(x=>x.no===n.quotationNo); if(q) q.status='Approved';
+    }
+    if(n.status==='Lost'){
+      const q=db.quotations.find(x=>x.no===n.quotationNo); if(q) q.status='Lost';
+    }
+    save(); viewNegotiation(selectedNegotiationIndex);
+  }
+  function addNegotiationNote(){
+    const n=(db.negotiations||[])[selectedNegotiationIndex]; if(!n) return alert('Pilih negotiation dahulu.');
+    const txt=($('#negNewNote')?.value||'').trim(); if(!txt) return alert('Masukkan catatan follow-up dahulu.');
+    n.notes = n.notes || [];
+    n.notes.unshift({date:today(), text:txt});
+    n.lastContact=today();
+    save(); viewNegotiation(selectedNegotiationIndex);
+  }
 
   function docHTML(type, d){ const isInv=type==='INVOICE'; const amount=total(d.items); return `<div class="doc-preview"><div class="doc-head"><div class="doc-brand"><img src="${LOGO}" alt="Restu Harmoni Logo"><div><h2>RESTU HARMONI</h2><div class="office-mini">Digital Solutions • Website • AI • Automation</div></div></div><div class="doc-title"><h2>${type}</h2><strong>${d.no}</strong><br><span class="office-mini">Date: ${today()}</span></div></div><div class="office-form-grid"><div><h3>Prepared For</h3><p>${d.customer||'-'}<br><span class="office-mini">Prospect record from RH Services Sales Workspace</span></p></div><div><h3>${isInv?'Payment':'Quotation'} Details</h3><p>Status: ${d.status}<br>${isInv?'Due Date':'Valid Until'}: ${d.dueDate||d.validUntil||'-'}</p></div></div><div class="table-wrap"><table class="office-table"><thead><tr><th>Description</th><th>Qty</th><th>Price</th><th>Total</th></tr></thead><tbody>${(d.items||[]).map(i=>`<tr><td>${i.desc}</td><td>${i.qty}</td><td>${money(i.price)}</td><td>${money(i.qty*i.price)}</td></tr>`).join('')}</tbody></table></div><p class="doc-total">Total: ${money(amount)}</p><div class="office-actions"><button class="btn dark" onclick="window.print()">Print / Save PDF</button></div></div>`; }
   function viewQuotation(i){ const q=db.quotations[i]; const w=$('#quotationPreviewWrap'); if(w&&q) w.innerHTML=`<h2>Quotation Preview</h2>${docHTML('QUOTATION',q)}`; }
@@ -228,13 +289,17 @@
     ['qtProspect','prProspect'].forEach(id=>{ const el=$('#'+id); if(el) el.innerHTML=opts || '<option>Walk-in Prospect</option>'; });
     const pay=$('#payInvoice'); if(pay) pay.innerHTML=db.invoices.map(i=>`<option value="${i.no}">${i.no} — ${i.customer} — ${money(total(i.items))}</option>`).join('');
     const ct=$('#customersTbody'); if(ct) ct.innerHTML=db.customers.map((c,i)=>`<tr><td>${c.code}</td><td><b>${c.name}</b><br><span class="office-mini">${c.company||'-'}</span></td><td>${c.phone||'-'}<br><span class="office-mini">${c.email||''}</span></td><td>${esc(c.package||'-')}<br><span class="office-mini">${esc(c.score||'')} ${esc(c.temperature||'')}</span></td><td>${pill(c.status)}</td><td><button class="btn ghost" data-view-prospect="${i}">View</button> <button class="btn gold" data-quote-prospect="${i}">Quote</button> <button class="btn ghost danger-lite" data-delete-customer="${i}">Delete</button></td></tr>`).join('') || '<tr><td colspan="6" class="muted">No prospect yet. Convert lead daripada Lead Inbox.</td></tr>';
-    const qt=$('#quotationsTbody'); if(qt) qt.innerHTML=db.quotations.map((q,i)=>`<tr><td>${q.no}</td><td>${q.customer}</td><td>${money(total(q.items))}</td><td>${pill(q.status)}</td><td><button class="btn ghost" data-view-qt="${i}">View</button> <button class="btn gold" data-convert-qt="${i}">Follow Up</button></td></tr>`).join('') || '<tr><td colspan="5" class="muted">No quotation yet.</td></tr>';
-    const kb=$('#quotationKanban'); if(kb){ const stages=['Draft','Sent','Viewed','Approved','Invoice']; kb.innerHTML=stages.map(st=>`<div class="pipeline-col"><h3>${st}</h3>${db.quotations.map((q,i)=>({q,i})).filter(x=> st==='Invoice' ? db.invoices.some(inv=>inv.quotationNo===x.q.no) : x.q.status===st).map(x=>`<div class="pipeline-card"><b>${x.q.no}</b><div>${x.q.customer}</div><div class="office-mini">${money(total(x.q.items))}</div><div class="actions"><button class="btn ghost" data-view-qt="${x.i}">View</button>${st!=='Invoice'?` <button class="btn gold" data-convert-qt="${x.i}">Invoice</button>`:''}</div></div>`).join('') || '<div class="office-mini">Empty</div>'}</div>`).join(''); }
-    const it=$('#invoicesTbody'); if(it) it.innerHTML=db.invoices.map((inv,i)=>`<tr><td>${inv.no}</td><td>${inv.customer}</td><td>${inv.dueDate}</td><td>${money(total(inv.items))}</td><td>${pill(inv.status)}</td><td><button class="btn ghost" data-view-inv="${i}">View</button> <button class="btn gold" data-mark-paid="${i}">Paid</button></td></tr>`).join('') || '<tr><td colspan="6" class="muted">No invoice yet. Convert quotation first.</td></tr>';
+    const qt=$('#quotationsTbody'); if(qt) qt.innerHTML=db.quotations.map((q,i)=>`<tr><td>${q.no}</td><td>${q.customer}</td><td>${money(total(q.items))}</td><td>${pill(q.status)}</td><td><button class="btn ghost" data-view-qt="${i}">View</button> <button class="btn gold" data-convert-qt="${i}">Send To Negotiation</button></td></tr>`).join('') || '<tr><td colspan="5" class="muted">No quotation yet.</td></tr>';
+    const kb=$('#quotationKanban'); if(kb){ const stages=['Draft','Sent','Negotiation','Approved','Lost']; kb.innerHTML=stages.map(st=>`<div class="pipeline-col"><h3>${st}</h3>${db.quotations.map((q,i)=>({q,i})).filter(x=> x.q.status===st).map(x=>`<div class="pipeline-card"><b>${x.q.no}</b><div>${x.q.customer}</div><div class="office-mini">${money(total(x.q.items))}</div><div class="actions"><button class="btn ghost" data-view-qt="${x.i}">View</button>${!['Negotiation','Approved','Lost'].includes(st)?` <button class="btn gold" data-convert-qt="${x.i}">Send</button>`:''}</div></div>`).join('') || '<div class="office-mini">Empty</div>'}</div>`).join(''); }
+    const it=$('#invoicesTbody'); if(it) it.innerHTML=(db.negotiations||[]).map((n,i)=>`<tr><td>${n.no}</td><td><b>${n.customer}</b><br><span class="office-mini">${esc(n.package||'-')}</span></td><td>${n.quotationNo}</td><td>${money(n.amount)}</td><td>${pill(n.status)}</td><td>${esc(n.nextFollowUp||'-')}</td><td><button class="btn ghost" data-view-neg="${i}">View / Update</button></td></tr>`).join('') || '<tr><td colspan="7" class="muted">No negotiation yet. Hantar quotation ke negotiation dahulu.</td></tr>';
     const pt=$('#paymentsTbody'); if(pt) pt.innerHTML=db.payments.map(p=>`<tr><td>${p.date}</td><td>${p.invoiceNo}</td><td>${money(p.amount)}</td><td>${p.method}</td><td>${p.ref||'-'}</td></tr>`).join('') || '<tr><td colspan="5" class="muted">No payment yet.</td></tr>';
     const pr=$('#projectsTbody'); if(pr) pr.innerHTML=db.projects.map(p=>`<tr><td>${p.no}</td><td>${p.name}</td><td>${p.customer}</td><td>${p.type}</td><td>${pill(p.status)}</td></tr>`).join('') || '<tr><td colspan="5" class="muted">No project yet.</td></tr>';
     const unpaid=db.invoices.filter(i=>i.status!=='Paid').reduce((s,i)=>s+total(i.items),0), paid=db.invoices.filter(i=>i.status==='Paid').reduce((s,i)=>s+total(i.items),0);
-    setText('kpiUnpaid',money(unpaid)); setText('kpiPaid',money(paid)); setText('kpiDraftInv',db.invoices.filter(i=>i.status==='Draft').length); setText('kpiInvCount',db.invoices.length); setText('docQtCount',`${db.quotations.length} documents`); setText('docInvCount',`${db.invoices.length} documents`); setText('docPayCount',`${db.payments.length} records`); setText('repProspects',db.customers.length); setText('repQtValue',money(db.quotations.reduce((s,q)=>s+total(q.items),0))); setText('repInvValue',money(db.invoices.reduce((s,i)=>s+total(i.items),0))); setText('repProjects',db.projects.length); setText('dashLeads', officeLeads.filter(x=>!['prospect','quotation','negotiation','won','lost'].includes(normalizeLeadStage(x))).length); setText('dashProspects',db.customers.length); setText('dashQt',money(db.quotations.reduce((s,q)=>s+total(q.items),0))); setText('dashOutstanding',money(unpaid)); setText('dashProjects',db.projects.length);
+    const activeNeg=(db.negotiations||[]).filter(n=>!['Won','Lost'].includes(n.status));
+    const negValue=activeNeg.reduce((s,n)=>s+Number(n.amount||0),0);
+    setText('kpiUnpaid',money(unpaid)); setText('kpiPaid',money(paid)); setText('kpiDraftInv',db.invoices.filter(i=>i.status==='Draft').length); setText('kpiInvCount',db.invoices.length);
+    setText('kpiNegValue',money(negValue)); setText('kpiNegFollow',(db.negotiations||[]).filter(n=>n.status==='Follow Up').length); setText('kpiNegWaiting',(db.negotiations||[]).filter(n=>n.status==='Waiting Client').length); setText('kpiNegCount',(db.negotiations||[]).length);
+    setText('docQtCount',`${db.quotations.length} documents`); setText('docInvCount',`${(db.negotiations||[]).length} records`); setText('docPayCount',`${db.payments.length} records`); setText('repProspects',db.customers.length); setText('repQtValue',money(db.quotations.reduce((s,q)=>s+total(q.items),0))); setText('repInvValue',money(negValue)); setText('repProjects',db.projects.length); setText('dashLeads', officeLeads.filter(x=>!['prospect','quotation','negotiation','won','lost'].includes(normalizeLeadStage(x))).length); setText('dashProspects',db.customers.length); setText('dashQt',money(db.quotations.reduce((s,q)=>s+total(q.items),0))); setText('dashOutstanding',money(negValue)); setText('dashProjects',db.projects.length);
   }
   function setText(id,val){ const el=$('#'+id); if(el) el.textContent=val; }
   function setTab(tab){ const side=document.querySelector(`.side button[data-tab="${tab}"]`); if(side){ side.click(); return; } document.querySelectorAll('.side button[data-tab]').forEach(b=>b.classList.toggle('active', b.dataset.tab===tab)); document.querySelectorAll('main.panel > section[id^="tab-"]').forEach(el=>{ el.style.display=(el.id==='tab-'+tab?'block':'none'); }); }
