@@ -1,14 +1,14 @@
-window.RH_APP_VERSION = 'v12.2-sales-workflow-fix';
+window.RH_APP_VERSION = 'v12.5-won-deal-engine';
 window.RH_VERSION = window.RH_APP_VERSION;
 window.RH_VERSION_META = {
-  version: 'v12.2-sales-workflow-fix',
-  name: 'RH Services Sales Workflow Fix',
-  releaseDate: '2026-06-11',
+  version: 'v12.5-won-deal-engine',
+  name: 'RH Services Won Deal Engine',
+  releaseDate: '2026-06-12',
   notes: [
-    'Fixed admin Lead Inbox refused-to-connect issue by removing iframe embed',
-    'Added direct Supabase lead list inside admin.html workspace',
-    'Added Convert To Prospect flow so data does not need to be retyped',
-    'Prospect register now stores source lead id, package, score and temperature',
-    'Dashboard flow remains Lead → Prospect → Quotation → Negotiation → Won Project'
+    'Added Won Deal Register with WD numbering',
+    'Added final amount, deposit, balance and payment status tracking',
+    'Added Create Project action from won deal records',
+    'Updated Won Projects to reference won deals',
+    'Kept Aira, Lead Inbox, Prospect, Quotation and Negotiation flows stable'
   ]
 };
