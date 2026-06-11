@@ -1,5 +1,5 @@
 {
-  "version": "v10.0-rh-official-package-alignment",
+  "version": "v11.0-package-template-linking",
   "assistantName": "Aira",
   "positioning": "AI Website Consultant",
   "intro": [
@@ -286,7 +286,8 @@
         "Google Maps Integration",
         "WhatsApp CTA",
         "Contact Form"
-      ]
+      ],
+      "templateUrl": "/pakej/rh-starter/"
     },
     "RH Growth": {
       "price": "RM1999",
@@ -310,7 +311,8 @@
         "FAQ Management",
         "Video Embed",
         "Advanced Service Pages"
-      ]
+      ],
+      "templateUrl": "/pakej/rh-growth/"
     },
     "RH Ecosystem": {
       "price": "RM2999",
@@ -333,7 +335,8 @@
         "Lead Management Ready",
         "Multi Website Structure",
         "Ecosystem Architecture Ready"
-      ]
+      ],
+      "templateUrl": "/pakej/rh-ecosystem/"
     }
   },
   "templateLibrary": {

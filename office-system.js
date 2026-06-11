@@ -1,5 +1,5 @@
 (() => {
-  const VERSION = 'v10.0-package-alignment';
+  const VERSION = 'v11.0-template-links';
   const LOGO = 'assets/rh-logo.png';
   const STORE_KEY = 'rh_office_suite_data_v1';
   const $ = (s, r=document) => r.querySelector(s);

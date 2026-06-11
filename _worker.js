@@ -118,7 +118,7 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname === '/admin-office' || url.pathname === '/admin-office/' || url.pathname === '/admin-office.html') {
-      return Response.redirect(`${url.origin}/admin.html?v=v10.0-package-alignment`, 302);
+      return Response.redirect(`${url.origin}/admin.html?v=v11.0-template-links`, 302);
     }
 
     if (url.pathname === '/article.html' && url.searchParams.get('slug')) {
