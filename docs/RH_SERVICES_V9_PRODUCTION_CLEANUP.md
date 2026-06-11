@@ -6,7 +6,7 @@ Status: Safe cleanup patch.
 
 1. Centralized Supabase client melalui `supabase-config.js`.
 2. Kurangkan risiko warning `Multiple GoTrueClient instances detected`.
-3. Bump cache/version kepada `v9.0-production-cleanup`.
+3. Bump cache/version kepada `v10.0-package-alignment`.
 4. Kekalkan flow live Aira, Leads, Blog, Admin dan Worker.
 
 ## Prinsip patch

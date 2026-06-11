@@ -22,13 +22,13 @@
     const f=window.DEFAULT_AIRA_FAQ||window.RH_AIRA_DEFAULT_FAQ_BANK||null;
     return {questionBank:clone(q||{version:'local',steps:[],packages:{}}),faqBank:clone(f||{version:'local',quickActions:[],faq:[]})};
   }
+  function isOfficialPackageBank(qb){return qb&&String(qb.version||'').includes('v10.0-rh-official-package-alignment')&&qb.packages&&qb.packages['RH Starter']&&qb.packages['RH Growth']&&qb.packages['RH Ecosystem'];}
   function readLocal(){
     const d=defaults();
-    return {
-      questionBank:safeJson(localStorage.getItem(LS_Q),d.questionBank),
-      faqBank:safeJson(localStorage.getItem(LS_F),d.faqBank),
-      source:'localStorage'
-    };
+    let questionBank=safeJson(localStorage.getItem(LS_Q),d.questionBank);
+    let faqBank=safeJson(localStorage.getItem(LS_F),d.faqBank);
+    if(!isOfficialPackageBank(questionBank)){questionBank=d.questionBank;faqBank=d.faqBank;}
+    return {questionBank,faqBank,source:'localStorage'};
   }
   function writeLocal(questionBank,faqBank){
     localStorage.setItem(LS_Q,JSON.stringify(questionBank));
@@ -42,7 +42,9 @@
     const d=defaults();
     const map={}; (data||[]).forEach(row=>map[row.key]=row.value);
     if(!map.question_bank&&!map.faq_bank)return {ok:false,error:'Table aira_settings kosong'};
-    return {ok:true,questionBank:map.question_bank||d.questionBank,faqBank:map.faq_bank||d.faqBank,source:'supabase'};
+    const questionBank=isOfficialPackageBank(map.question_bank)?map.question_bank:d.questionBank;
+    const faqBank=isOfficialPackageBank(map.question_bank)?(map.faq_bank||d.faqBank):d.faqBank;
+    return {ok:true,questionBank,faqBank,source:'supabase'};
   }
   async function loadAll(){
     const remote=await readSupabase();

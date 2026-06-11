@@ -1,7 +1,7 @@
-window.RH_APP_VERSION = 'v9.0-production-cleanup';
+window.RH_APP_VERSION = 'v10.0-package-alignment';
 window.RH_VERSION = window.RH_APP_VERSION;
 window.RH_VERSION_META = {
-  version: 'v9.0-production-cleanup',
+  version: 'v10.0-package-alignment',
   name: 'RH Office Suite Exclusive Fit UIX',
   releaseDate: '2026-06-09',
   notes: [

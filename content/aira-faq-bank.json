@@ -1,8 +1,8 @@
 {
-  "version": "v7.0.0-rh-package-template-alignment",
+  "version": "v10.0-rh-official-package-alignment",
   "quickActions": [
     "Dapatkan Cadangan Website",
-    "Harga Pakej",
+    "Harga Pakej RH",
     "Lihat Contoh Website",
     "Berapa Lama Siap?",
     "Domain & Hosting",
@@ -22,7 +22,7 @@
         "bayaran",
         "berapa"
       ],
-      "answer": "Pakej website Restu Harmoni disusun kepada <strong>RH Basic</strong>, <strong>RH Standard</strong>, <strong>RH Professional</strong> dan <strong>RH Premium</strong>. Setiap pakej ada 10 konsep template UI, dengan cadangan harga bermula sekitar RM699 bergantung kepada scope."
+      "answer": "Pakej rasmi Restu Harmoni ialah <strong>RH Starter RM1299</strong> + maintenance RM129/bulan, <strong>RH Growth RM1999</strong> + maintenance RM179/bulan, dan <strong>RH Ecosystem RM2999</strong> + maintenance RM249/bulan. Aira akan cadangkan pakej berdasarkan jenis bisnes, matlamat website dan tahap keperluan."
     },
     {
       "topic": "tempoh",
@@ -99,7 +99,7 @@
         "template",
         "sample"
       ],
-      "answer": "Kami susun demo template mengikut pakej: RH Basic, RH Standard, RH Professional dan RH Premium. Setiap pakej dirancang mempunyai 10 pilihan UI untuk jenis bisnes berbeza."
+      "answer": "Kami susun contoh website mengikut keperluan bisnes seperti Aircond, Plumbing, Elektrik, Homestay, Kereta Sewa, Event, Produk Online, Corporate dan Company Profile. Pakej rasmi yang digunakan ialah RH Starter, RH Growth dan RH Ecosystem."
     },
     {
       "topic": "bayaran",

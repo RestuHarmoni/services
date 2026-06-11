@@ -54,3 +54,21 @@ Schema: `SUPABASE_LEADS_SCHEMA.sql`
 - Tambah Share Facebook, WhatsApp dan Salin Link pada halaman artikel.
 - Share link menggunakan URL SEO `/blog/slug.html`.
 - Service worker cache bump ke v6.1.1.
+
+## v10.0 Package Alignment
+
+Official RH packages are now locked as:
+
+- RH Starter — RM1299, maintenance RM129/bulan
+- RH Growth — RM1999, maintenance RM179/bulan
+- RH Ecosystem — RM2999, maintenance RM249/bulan
+
+Aira and future Sales Workspace / Quotation Filing must use these package labels only.
+
+After deploy, run:
+
+`supabase/migrations/20260611100000_rh_services_v100_package_alignment.sql`
+
+Uploaded template packages are mapped under:
+
+`rh-packages/templates/`
