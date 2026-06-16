@@ -1,12 +1,13 @@
 {
-  "version": "v12.0-aira-v3-sales-consultant-live-base",
+  "version": "v10.0-rh-official-package-alignment",
   "database": "supabase",
   "table": "leads",
   "fields": [
     "business_type",
-    "domain_status",
-    "hosting_status",
     "objective",
+    "has_website",
+    "has_domain",
+    "content_ready",
     "budget",
     "timeline",
     "name",
@@ -24,37 +25,30 @@
     "LOST"
   ],
   "packages": {
-    "RH Basic": {
-      "setup": "RM799",
-      "maintenance": "RM79/bulan"
+    "RH Starter": {
+      "setup": "RM1299",
+      "maintenance": "RM129/bulan"
     },
     "RH Growth": {
       "setup": "RM1999",
-      "maintenance": "RM129/bulan"
+      "maintenance": "RM179/bulan"
     },
     "RH Ecosystem": {
       "setup": "RM2999",
       "maintenance": "RM249/bulan"
-    },
-    "RH Enterprise": {
-      "setup": "Custom",
-      "maintenance": "Ikut scope"
     }
   },
   "allowed_recommended_package": [
-    "RH Basic",
+    "RH Starter",
     "RH Growth",
-    "RH Ecosystem",
-    "RH Enterprise"
+    "RH Ecosystem"
   ],
   "legacy_package_map": {
-    "RH Starter": "RH Basic",
-    "RH Basic": "RH Basic",
+    "RH Basic": "RH Starter",
     "RH Standard": "RH Growth",
+    "RH Ecosystemfessional": "RH Growth",
     "RH Premium": "RH Ecosystem",
     "RH Growth": "RH Growth",
-    "RH Ecosystem": "RH Ecosystem",
-    "Enterprise": "RH Enterprise",
-    "Custom": "RH Enterprise"
+    "RH Ecosystem": "RH Ecosystem"
   }
 }
