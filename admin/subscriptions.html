@@ -58,6 +58,8 @@
             <input id="subscriptionSearch" class="search-input" placeholder="Cari client, subscription, telefon...">
             <select id="subscriptionStatusFilter" class="select-input">
               <option value="">Semua status</option>
+              <option value="pending_invoice">Pending Invoice</option>
+              <option value="invoiced">Invoiced</option>
               <option value="active">Active</option>
               <option value="due_soon">Due Soon</option>
               <option value="overdue">Overdue</option>
@@ -92,10 +94,12 @@
       <div class="modal-head"><div><h2 id="subscriptionModalTitle">Subscription</h2><span id="subscriptionModalSub">-</span></div><button id="closeSubscriptionModal" class="icon-close" type="button">×</button></div>
       <div id="subscriptionPreview"></div>
       <div class="modal-actions">
+        <button id="editSubscriptionBtn" class="ghost-btn" type="button">Edit</button>
         <button id="generateRenewalInvoiceBtn" class="primary-btn" type="button">Generate Renewal Invoice</button>
         <button id="freezeSubscriptionBtn" class="ghost-btn danger-action" type="button">Freeze</button>
         <button id="unfreezeSubscriptionBtn" class="ghost-btn" type="button">Unfreeze</button>
         <button id="cancelSubscriptionBtn" class="ghost-btn danger-action" type="button">Cancel</button>
+        <button id="deleteSubscriptionBtn" class="ghost-btn danger-action" type="button">Delete</button>
       </div>
     </div>
   </section>
@@ -135,6 +139,56 @@
           <textarea id="subscriptionNotes" rows="3" placeholder="Contoh: Maintenance bermula selepas website live."></textarea>
         </label>
         <div class="form-actions full"><button type="button" id="cancelSubscriptionCreateBtn" class="ghost-btn">Cancel</button><button type="submit" class="primary-btn">Create Subscription</button></div>
+      </form>
+    </div>
+  </section>
+
+
+  <section id="subscriptionEditModal" class="modal-backdrop" hidden>
+    <div class="modal-card wide-modal">
+      <div class="modal-head"><div><h2>Edit Subscription</h2><span>Perubahan memerlukan password admin.</span></div><button id="closeSubscriptionEditModal" class="icon-close" type="button">×</button></div>
+      <form id="subscriptionEditForm" class="form-grid admin-form-grid">
+        <input id="editSubscriptionId" type="hidden">
+        <label>Plan
+          <select id="editSubscriptionPlan">
+            <option value="RH Basic Maintenance" data-monthly="79">RH Basic Maintenance — RM79/bulan</option>
+            <option value="RH Growth Maintenance" data-monthly="129">RH Growth Maintenance — RM129/bulan</option>
+            <option value="RH Ecosystem Maintenance" data-monthly="249">RH Ecosystem Maintenance — RM249/bulan</option>
+            <option value="RH Enterprise Maintenance" data-monthly="0">RH Enterprise Maintenance — Custom</option>
+          </select>
+        </label>
+        <label>Billing Cycle
+          <select id="editSubscriptionCycle">
+            <option value="monthly">Monthly</option>
+            <option value="six_months">6 Months</option>
+            <option value="yearly">Yearly</option>
+          </select>
+        </label>
+        <label>Monthly Amount
+          <input id="editSubscriptionMonthly" type="number" min="0" step="1" required>
+        </label>
+        <label>Cycle Amount
+          <input id="editSubscriptionAmount" type="number" min="0" step="1" required>
+        </label>
+        <label>Discount
+          <input id="editSubscriptionDiscount" type="number" min="0" step="1" value="0">
+        </label>
+        <label>Status
+          <select id="editSubscriptionStatus">
+            <option value="pending_invoice">Pending Invoice</option>
+            <option value="invoiced">Invoiced</option>
+            <option value="active">Active</option>
+            <option value="suspended">Suspended</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </label>
+        <label>Next Billing Date
+          <input id="editSubscriptionNextBilling" type="date">
+        </label>
+        <label class="full">Notes
+          <textarea id="editSubscriptionNotes" rows="3"></textarea>
+        </label>
+        <div class="form-actions full"><button type="button" id="cancelSubscriptionEditBtn" class="ghost-btn">Cancel</button><button type="submit" class="primary-btn">Save With Password</button></div>
       </form>
     </div>
   </section>

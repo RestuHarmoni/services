@@ -1,4 +1,4 @@
-/* RH Services v1.3 Subscription & Renewal Engine */
+/* RH Services v1.3.2 Subscription & Renewal Engine */
 .subscription-stat-grid{grid-template-columns:repeat(6,1fr)}
 .subscription-table{min-width:980px}
 .subscription-summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
@@ -6,6 +6,8 @@
 .subscription-status-card span{display:block;color:#94a3b8;font-size:12px;text-transform:uppercase;letter-spacing:.06em;font-weight:900}
 .subscription-status-card strong{display:block;margin-top:6px;font-size:18px;white-space:pre-wrap}
 .subscription-status-card.full{grid-column:1/-1}
+.status-pill.pending_invoice{background:rgba(148,163,184,.14);color:#cbd5e1}
+.status-pill.invoiced{background:rgba(59,130,246,.16);color:#bfdbfe}
 .status-pill.due_soon{background:rgba(245,158,11,.14);color:#fde68a}
 .status-pill.overdue{background:rgba(249,115,22,.16);color:#fed7aa}
 .status-pill.expired{background:rgba(220,38,38,.16);color:#fecaca}

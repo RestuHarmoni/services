@@ -1,6 +1,6 @@
-/* RH Services v1.3.1 Subscription & Renewal Engine
-   Package pricing aligned with Aira official 4 packages.
-   New isolated module. Does not modify locked sales/project engines. */
+/* RH Services v1.3.2 Subscription & Renewal Engine
+   Fix: pending invoice flow, secure edit/delete, soft delete audit.
+   Package pricing aligned with Aira official 4 packages. */
 const RHSubscriptions = (() => {
   const SESSION_KEY = 'rh_admin_session_v1';
   const qs = (s) => document.querySelector(s);
@@ -9,10 +9,12 @@ const RHSubscriptions = (() => {
   let invoicesCache = [];
   let projectsCache = [];
   let currentSubscription = null;
+  let editingSubscriptionId = null;
 
   const fmtRM = (n) => new Intl.NumberFormat('ms-MY',{style:'currency',currency:'MYR',maximumFractionDigits:0}).format(Number(n||0));
   const esc = (s) => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const todayISO = () => new Date().toISOString().slice(0,10);
+  async function sha256(text){ const buf=await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)); return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join(''); }
   const dateShort = (d) => d ? new Date(d).toLocaleDateString('ms-MY',{day:'2-digit',month:'short',year:'numeric'}) : '-';
   const getSession = () => { try{return JSON.parse(localStorage.getItem(SESSION_KEY)||'null')}catch{return null} };
   async function getClient(){ if(window.RHGetSupabaseClient) return await window.RHGetSupabaseClient(); return window.supabaseClient || null; }
@@ -58,10 +60,11 @@ const RHSubscriptions = (() => {
     return Number(monthly||0) * cycleMonths(cycle);
   }
   function defaultDiscount(monthly, cycle, amount){ return Math.max(0,(Number(monthly||0)*cycleMonths(cycle))-Number(amount||0)); }
-  function normalizeStatus(st){ return String(st||'active').toLowerCase().replace(/\s+/g,'_'); }
+  function normalizeStatus(st){ return String(st||'pending_invoice').toLowerCase().replace(/\s+/g,'_'); }
   function displayStatus(sub){
     const base=normalizeStatus(sub.status);
-    if(['suspended','cancelled'].includes(base)) return base;
+    // Pending/invoiced subscriptions must not become due soon until renewal invoice is paid.
+    if(['pending_invoice','invoiced','suspended','cancelled'].includes(base)) return base;
     const next=sub.next_billing_date || sub.current_period_end;
     if(!next) return base;
     const now=new Date(todayISO()+'T00:00:00');
@@ -69,10 +72,10 @@ const RHSubscriptions = (() => {
     const diff=Math.ceil((due-now)/(1000*60*60*24));
     if(diff < -30) return 'expired';
     if(diff < 0) return 'overdue';
-    if(diff <= 30) return 'due_soon';
-    return base;
+    if(diff <= 7) return 'due_soon';
+    return 'active';
   }
-  function statusLabel(st){ return ({active:'Active',due_soon:'Due Soon',overdue:'Overdue',expired:'Expired',suspended:'Suspended',cancelled:'Cancelled',draft:'Draft',sent:'Sent',paid:'Paid'})[normalizeStatus(st)] || st || '-'; }
+  function statusLabel(st){ return ({pending_invoice:'Pending Invoice',invoiced:'Invoiced',active:'Active',due_soon:'Due Soon',overdue:'Overdue',expired:'Expired',suspended:'Suspended',cancelled:'Cancelled',draft:'Draft',sent:'Sent',paid:'Paid'})[normalizeStatus(st)] || st || '-'; }
   function subscriptionNoFromCount(count){ return `SUB-${new Date().getFullYear()}-${String(Number(count||0)+1).padStart(4,'0')}`; }
   async function nextSubscriptionNo(client){ try{ const {count}=await client.from('subscriptions').select('*',{count:'exact',head:true}); return subscriptionNoFromCount(count); }catch{return `SUB-${new Date().getFullYear()}-${String(Date.now()).slice(-4)}`;} }
   async function nextRenewalInvoiceNo(client){ try{ const {count}=await client.from('subscription_invoices').select('*',{count:'exact',head:true}); return `MNT-${new Date().getFullYear()}-${String(Number(count||0)+1).padStart(4,'0')}`; }catch{return `MNT-${new Date().getFullYear()}-${String(Date.now()).slice(-4)}`;} }
@@ -116,7 +119,7 @@ const RHSubscriptions = (() => {
     if(!rows.length){ body.innerHTML='<tr><td colspan="7"><div class="empty-state">Tiada subscription untuk filter ini.</div></td></tr>'; return; }
     body.innerHTML=rows.map(s=>{
       const st=displayStatus(s);
-      return `<tr><td><strong>${esc(s.subscription_no||'-')}</strong><span class="small-muted">${esc(s.project_no||'')}</span></td><td><strong>${esc(s.client_name||'-')}</strong><span class="small-muted">${esc(s.phone||'')}</span></td><td>${esc(s.plan_name||s.package_name||'-')}<span class="small-muted">${esc(s.package_name||'')}</span></td><td><strong>${fmtRM(s.cycle_amount||0)}</strong><span class="small-muted">${cycleLabel(s.billing_cycle)} • Discount ${fmtRM(s.discount_amount||0)}</span></td><td>${dateShort(s.next_billing_date||s.current_period_end)}</td><td><span class="status-pill ${st}">${statusLabel(st)}</span></td><td><div class="table-actions"><button class="mini-btn primary" data-view-subscription="${s.id}">View</button><button class="mini-btn" data-renew-subscription="${s.id}">Renew Invoice</button></div></td></tr>`;
+      return `<tr><td><strong>${esc(s.subscription_no||'-')}</strong><span class="small-muted">${esc(s.project_no||'')}</span></td><td><strong>${esc(s.client_name||'-')}</strong><span class="small-muted">${esc(s.phone||'')}</span></td><td>${esc(s.plan_name||s.package_name||'-')}<span class="small-muted">${esc(s.package_name||'')}</span></td><td><strong>${fmtRM(s.cycle_amount||0)}</strong><span class="small-muted">${cycleLabel(s.billing_cycle)} • Discount ${fmtRM(s.discount_amount||0)}</span></td><td>${dateShort(s.next_billing_date||s.current_period_end)}</td><td><span class="status-pill ${st}">${statusLabel(st)}</span></td><td><div class="table-actions"><button class="mini-btn primary" data-view-subscription="${s.id}">View</button><button class="mini-btn" data-edit-subscription="${s.id}">Edit</button><button class="mini-btn" data-renew-subscription="${s.id}">Renew Invoice</button><button class="mini-btn danger-action" data-delete-subscription="${s.id}">Delete</button></div></td></tr>`;
     }).join('');
   }
   function renderSubscriptionInvoicesTable(){
@@ -181,11 +184,11 @@ const RHSubscriptions = (() => {
       monthly_amount:monthly,
       cycle_amount:Number(qs('#subscriptionCycleAmount')?.value||0),
       discount_amount:Number(qs('#subscriptionDiscount')?.value||0),
-      status:'active',
+      status:'pending_invoice',
       start_date:start,
-      current_period_start:start,
-      current_period_end:end,
-      next_billing_date:end,
+      current_period_start:null,
+      current_period_end:null,
+      next_billing_date:null,
       notes:qs('#subscriptionNotes')?.value||'Maintenance subscription created after project completion.',
       created_by:(getSession()||{}).staff_id||'system'
     };
@@ -208,7 +211,7 @@ const RHSubscriptions = (() => {
       const plan = packagePlan.planName;
       const monthly=packagePlan.monthly; const cycle='monthly'; const start=todayISO(); const end=addMonthsISO(start,1);
       seq += 1;
-      rows.push({subscription_no:subscriptionNoFromCount(seq-1), project_id:p.id, project_no:p.project_no||null, invoice_id:p.invoice_id||null, client_name:p.client_name||'Client', phone:p.phone||null, email:p.email||null, company:p.company||null, business_type:p.business_type||null, package_name:p.package_name||packagePlan.packageName, plan_name:plan, billing_cycle:cycle, monthly_amount:monthly, cycle_amount:monthly, discount_amount:0, status:'active', start_date:start, current_period_start:start, current_period_end:end, next_billing_date:end, notes:'Auto synced from completed project using RH official package maintenance pricing.', created_by:(getSession()||{}).staff_id||'system'});
+      rows.push({subscription_no:subscriptionNoFromCount(seq-1), project_id:p.id, project_no:p.project_no||null, invoice_id:p.invoice_id||null, client_name:p.client_name||'Client', phone:p.phone||null, email:p.email||null, company:p.company||null, business_type:p.business_type||null, package_name:p.package_name||packagePlan.packageName, plan_name:plan, billing_cycle:cycle, monthly_amount:monthly, cycle_amount:monthly, discount_amount:0, status:'pending_invoice', start_date:start, current_period_start:null, current_period_end:null, next_billing_date:null, notes:'Auto synced from completed project. Awaiting first renewal invoice/payment before active.', created_by:(getSession()||{}).staff_id||'system'});
     }
     const {error}=await client.from('subscriptions').insert(rows);
     if(error){ alert('Sync gagal: '+error.message); return; }
@@ -268,6 +271,7 @@ const RHSubscriptions = (() => {
     };
     const {data,error}=await client.from('subscription_invoices').insert(payload).select().single();
     if(error){ alert('Gagal generate renewal invoice: '+error.message); return; }
+    await client.from('subscriptions').update({status:'invoiced', updated_at:new Date().toISOString()}).eq('id',sub.id);
     await createRenewalReminders(client, data, sub);
     await loadSubscriptionsPage(); if(currentSubscription) openSubscriptionModal(currentSubscription.id);
   }
@@ -312,6 +316,88 @@ const RHSubscriptions = (() => {
     await loadSubscriptionsPage(); openSubscriptionModal(currentSubscription.id);
   }
 
+  async function verifyAdminPassword(actionLabel='tindakan ini'){
+    const s=getSession()||{};
+    if(!s.staff_id){ alert('Session admin tidak sah. Sila login semula.'); return false; }
+    const password=prompt(`Masukkan password admin untuk sahkan ${actionLabel}:`);
+    if(!password) return false;
+    const client=await getClient(); if(!client) return false;
+    const passwordHash=await sha256(password);
+    const {data,error}=await client.from('staff_users').select('staff_id,password_hash,status,role').eq('staff_id',s.staff_id).maybeSingle();
+    if(error || !data){ alert('Gagal semak password admin.'); return false; }
+    if(data.status!=='active' || data.password_hash!==passwordHash){ alert('Password admin tidak sah. Tindakan dibatalkan.'); return false; }
+    return true;
+  }
+  function openSubscriptionEditModal(id){
+    const sub=subscriptionsCache.find(s=>String(s.id)===String(id)) || currentSubscription;
+    if(!sub) return;
+    editingSubscriptionId=sub.id;
+    qs('#editSubscriptionId').value=sub.id;
+    qs('#editSubscriptionPlan').value=sub.plan_name || planFromPackage(sub.package_name).planName;
+    qs('#editSubscriptionCycle').value=sub.billing_cycle || 'monthly';
+    qs('#editSubscriptionMonthly').value=Number(sub.monthly_amount||0);
+    qs('#editSubscriptionAmount').value=Number(sub.cycle_amount||0);
+    qs('#editSubscriptionDiscount').value=Number(sub.discount_amount||0);
+    qs('#editSubscriptionStatus').value=normalizeStatus(sub.status);
+    qs('#editSubscriptionNextBilling').value=sub.next_billing_date || '';
+    qs('#editSubscriptionNotes').value=sub.notes || '';
+    qs('#subscriptionEditModal').hidden=false;
+  }
+  function closeSubscriptionEditModal(){ const m=qs('#subscriptionEditModal'); if(m) m.hidden=true; editingSubscriptionId=null; }
+  function updateEditPricing(){
+    const plan=qs('#editSubscriptionPlan'); const cycle=qs('#editSubscriptionCycle')?.value || 'monthly';
+    const opt=plan?.selectedOptions?.[0]; const monthly=Number(opt?.dataset?.monthly || planMonthlyAmount(plan?.value));
+    qs('#editSubscriptionMonthly').value=monthly;
+    const amount=defaultCycleAmount(monthly,cycle);
+    qs('#editSubscriptionAmount').value=amount;
+    qs('#editSubscriptionDiscount').value=defaultDiscount(monthly,cycle,amount);
+  }
+  async function submitSubscriptionEdit(e){
+    e.preventDefault();
+    const id=qs('#editSubscriptionId')?.value || editingSubscriptionId;
+    if(!id) return;
+    const ok=await verifyAdminPassword('edit subscription'); if(!ok) return;
+    const client=await getClient(); if(!client) return;
+    const now=new Date().toISOString();
+    const payload={
+      plan_name:qs('#editSubscriptionPlan')?.value || 'RH Basic Maintenance',
+      billing_cycle:qs('#editSubscriptionCycle')?.value || 'monthly',
+      monthly_amount:Number(qs('#editSubscriptionMonthly')?.value||0),
+      cycle_amount:Number(qs('#editSubscriptionAmount')?.value||0),
+      discount_amount:Number(qs('#editSubscriptionDiscount')?.value||0),
+      status:qs('#editSubscriptionStatus')?.value || 'pending_invoice',
+      next_billing_date:qs('#editSubscriptionNextBilling')?.value || null,
+      notes:qs('#editSubscriptionNotes')?.value || null,
+      updated_at:now
+    };
+    const st=normalizeStatus(payload.status);
+    if(st==='suspended') payload.suspended_at=now;
+    if(st!=='suspended') payload.suspended_at=null;
+    if(st==='cancelled') payload.cancelled_at=now;
+    const {error}=await client.from('subscriptions').update(payload).eq('id',id);
+    if(error){ alert('Gagal edit subscription: '+error.message); return; }
+    try{ await client.from('audit_logs').insert({module:'subscription',record_id:String(id),record_label:String(id),action:'secure_edit',staff_id:(getSession()||{}).staff_id||'system',notes:'Subscription edited with password confirmation'}); }catch{}
+    closeSubscriptionEditModal(); await loadSubscriptionsPage(); openSubscriptionModal(id);
+  }
+  async function secureDeleteSubscription(id){
+    const client=await getClient(); if(!client) return;
+    const sub=subscriptionsCache.find(s=>String(s.id)===String(id)) || currentSubscription;
+    if(!sub){ alert('Subscription tidak dijumpai.'); return; }
+    const openInv=invoicesCache.find(i=>String(i.subscription_id)===String(sub.id) && !['paid','cancelled'].includes(normalizeStatus(i.status)));
+    if(openInv){ alert(`Subscription ini ada renewal invoice belum selesai (${openInv.invoice_no}). Cancel/settle invoice dahulu.`); return; }
+    const label=sub.subscription_no || sub.client_name || id;
+    const typed=prompt(`WARNING: Subscription akan diarkibkan secara soft delete:\n\n${label}\n\nTaip DELETE untuk teruskan.`);
+    if(String(typed||'').trim()!=='DELETE'){ alert('Delete dibatalkan.'); return; }
+    const ok=await verifyAdminPassword('delete subscription'); if(!ok) return;
+    const reason=prompt('Sebab delete/arkib subscription ini?') || 'No reason provided';
+    const now=new Date().toISOString();
+    const s=getSession()||{};
+    const {error}=await client.from('subscriptions').update({is_deleted:true,deleted_at:now,deleted_by:s.staff_id||'system',delete_reason:reason,status:'cancelled',updated_at:now}).eq('id',sub.id);
+    if(error){ alert('Gagal delete subscription: '+error.message); return; }
+    try{ await client.from('audit_logs').insert({module:'subscription',record_id:String(sub.id),record_label:String(label),action:'soft_delete',staff_id:s.staff_id||'system',notes:reason}); }catch{}
+    closeSubscriptionModal(); await loadSubscriptionsPage(); alert('Subscription berjaya diarkibkan.');
+  }
+
   function bind(){
     bindBase();
     qs('#refreshSubscriptionsBtn')?.addEventListener('click',loadSubscriptionsPage);
@@ -326,6 +412,8 @@ const RHSubscriptions = (() => {
     qs('#subscriptionPlanSelect')?.addEventListener('change',updateSubscriptionPricing);
     qs('#subscriptionCycleSelect')?.addEventListener('change',updateSubscriptionPricing);
     qs('#closeSubscriptionModal')?.addEventListener('click',closeSubscriptionModal);
+    qs('#editSubscriptionBtn')?.addEventListener('click',()=>currentSubscription&&openSubscriptionEditModal(currentSubscription.id));
+    qs('#deleteSubscriptionBtn')?.addEventListener('click',()=>currentSubscription&&secureDeleteSubscription(currentSubscription.id));
     qs('#generateRenewalInvoiceBtn')?.addEventListener('click',()=>currentSubscription&&generateRenewalInvoice(currentSubscription.id));
     qs('#freezeSubscriptionBtn')?.addEventListener('click',()=>confirm('Freeze subscription ini? Client masih boleh dilihat, tetapi maintenance/support dianggap suspended.')&&setSubscriptionStatus('suspended'));
     qs('#unfreezeSubscriptionBtn')?.addEventListener('click',()=>setSubscriptionStatus('active'));
@@ -333,9 +421,16 @@ const RHSubscriptions = (() => {
     qs('#closeSubscriptionPaymentModal')?.addEventListener('click',closePaymentModal);
     qs('#cancelSubscriptionPaymentBtn')?.addEventListener('click',closePaymentModal);
     qs('#subscriptionPaymentForm')?.addEventListener('submit',submitPayment);
+    qs('#closeSubscriptionEditModal')?.addEventListener('click',closeSubscriptionEditModal);
+    qs('#cancelSubscriptionEditBtn')?.addEventListener('click',closeSubscriptionEditModal);
+    qs('#subscriptionEditForm')?.addEventListener('submit',submitSubscriptionEdit);
+    qs('#editSubscriptionPlan')?.addEventListener('change',updateEditPricing);
+    qs('#editSubscriptionCycle')?.addEventListener('change',updateEditPricing);
     document.addEventListener('click',e=>{
       const view=e.target.closest('[data-view-subscription]'); if(view) openSubscriptionModal(view.dataset.viewSubscription);
+      const edit=e.target.closest('[data-edit-subscription]'); if(edit) openSubscriptionEditModal(edit.dataset.editSubscription);
       const renew=e.target.closest('[data-renew-subscription]'); if(renew) generateRenewalInvoice(renew.dataset.renewSubscription);
+      const del=e.target.closest('[data-delete-subscription]'); if(del) secureDeleteSubscription(del.dataset.deleteSubscription);
       const paid=e.target.closest('[data-mark-sub-invoice-paid]'); if(paid) openPaymentModal(paid.dataset.markSubInvoicePaid);
     });
   }
