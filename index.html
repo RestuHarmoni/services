@@ -902,7 +902,7 @@ a[href="#aira-popup"], .rh-open-aira, [data-open-aira]{
 </div>
 
 
-<!-- Removed old duplicate Aira v34 script. Active Aira lead funnel is rh-v530-aira-v3-sales-consultant. -->
+<!-- Removed old duplicate Aira v34 script. Active Aira lead funnel is rh-v528-aira-faq-consultant. -->
 
 
 <div style="position:absolute;left:-9999px"></div>
@@ -932,6 +932,7 @@ window.AIRA_LEAD_FUNNEL_V52 = {
 <script src="aira-data-service.js?v=v12.0-sales-workspace"></script>
 <script src="google-reviews-service.js?v=v12.0-sales-workspace"></script>
 <script src="aira-lead-system.js?v=v12.0-sales-workspace"></script>
+<script src="aira-v3-sales-consultant-patch.js?v=20260616-safe1"></script>
 
 
 
@@ -980,7 +981,7 @@ window.AIRA_LEAD_FUNNEL_V52 = {
 })();
 </script>
 
-<script id="rh-v530-aira-v3-sales-consultant">
+<script id="rh-v528-aira-faq-consultant">
 (function(){
   function ready(fn){document.readyState!=='loading'?fn():document.addEventListener('DOMContentLoaded',fn)}
   ready(async function(){
@@ -995,23 +996,16 @@ window.AIRA_LEAD_FUNNEL_V52 = {
     function typing(text,cb){const el=document.createElement('div');el.className='rh-typing';el.innerHTML='<i></i><i></i><i></i>';chat.appendChild(el);chat.scrollTop=chat.scrollHeight;setTimeout(()=>{el.remove();add(text,'bot');if(cb)cb();},560);}
     function options(list,cb){controls.innerHTML='<div class="rh-aira-options"></div>';const wrap=controls.querySelector('.rh-aira-options');list.forEach(x=>{const b=document.createElement('button');b.type='button';b.textContent=x;b.onclick=()=>{add(x,'user');cb(x)};wrap.appendChild(b)});}
     function input(label,placeholder,cb,validate){controls.innerHTML='<div class="rh-aira-input-row"><input id="airaInput" placeholder="'+placeholder+'"><button type="button">Hantar</button></div>';const inp=controls.querySelector('input'),btn=controls.querySelector('button');function send(){const val=inp.value.trim();if(!val){inp.focus();return}if(validate&&!validate(val)){alert(label+' tidak sah.');inp.focus();return}add(val,'user');cb(val)}btn.onclick=send;inp.addEventListener('keydown',e=>{if(e.key==='Enter')send()});inp.focus();}
-    function quickMenu(){const safeActions=(SYS.BANK.quickActions||["📦 Lihat Pakej","💰 Semak Harga","🖥️ Lihat Demo Website","💬 Dapatkan Cadangan"]).filter(x=>!["Buka Contoh Website"].includes(x));options(safeActions,handleQuick);}
-    function startHome(){data={};askedTopics=[];chat.innerHTML='';controls.innerHTML='';const intro=['👋 Hai, saya <strong>Aira</strong>.','Saya boleh bantu cadangkan website yang sesuai untuk bisnes anda dalam masa kurang 1 minit.'];typing(intro[0],()=>typing(intro[1],()=>quickMenu()));}
-    function handleQuick(v){
-      const label=String(v||'').toLowerCase();
-      if(label.includes('cadangan'))return startLead();
-      if(label.includes('harga')||label.includes('pakej'))return answerFAQ('harga pakej');
-      if(label.includes('demo')||label.includes('contoh'))return answerFAQ('demo website');
-      if(label.includes('soalan'))return askFreeText();
-      return answerFAQ(v);
-    }
+    function quickMenu(){const safeActions=(SYS.BANK.quickActions||[]).filter(x=>!["Buka Contoh Website"].includes(x));options(safeActions,handleQuick);}
+    function startHome(){data={};askedTopics=[];chat.innerHTML='';controls.innerHTML='';if(window.RH_AIRA_V3_APPLY)window.RH_AIRA_V3_APPLY();const intro=['👋 Hai, saya <strong>Aira</strong>.','Saya boleh bantu cadangkan website yang sesuai untuk bisnes anda dalam masa kurang 1 minit.'];typing(intro[0],()=>typing(intro[1],()=>quickMenu()));}
+    function handleQuick(v){if(["Cadangkan Website Saya","Dapatkan Cadangan Website","Dapatkan Cadangan"].includes(v))return startLead();if(["Harga Pakej","Harga Pakej RH","Lihat Pakej"].includes(v))return answerFAQ("harga pakej");if(["Lihat Contoh Website","Lihat Detail Pakej"].includes(v))return answerFAQ("contoh template pakej");if(v==="Berapa Lama Siap?")return answerFAQ("berapa lama siap");if(v==="Domain & Hosting")return answerFAQ("domain hosting");if(v==="SEO Google")return answerFAQ("seo google");if(v==="Website atau Facebook?")return answerFAQ("website atau facebook");if(v==="Maintenance & Support")return answerFAQ("maintenance support");if(v==="Boleh Edit Sendiri?")return answerFAQ("boleh edit sendiri");if(v==="Saya Tiada Logo/Gambar")return answerFAQ("tak ada gambar logo");if(v==="Tanya Soalan Lain")return askFreeText();return answerFAQ(v);}
     function askFreeText(){typing('Boleh. Taip soalan anda di bawah. Contoh: “domain termasuk?”, “berapa lama siap?”, “SEO ada?”',()=>input('Soalan','Tulis soalan anda...',q=>answerFAQ(q)));}
     function answerFAQ(q){const item=SYS.matchFAQ(q);if(item)askedTopics.push(item.topic);typing(item?item.answer:'Saya boleh bantu tentang harga, tempoh siap, domain, hosting, SEO, proses kerja dan gambar/logo.',()=>typing('Mahu saya cadangkan pakej website yang sesuai untuk bisnes anda?',()=>options(["Ya, cadangkan website saya","Saya ada soalan lain","Lihat pilihan utama"],x=>{if(x==="Ya, cadangkan website saya")startLead();else if(x==="Saya ada soalan lain")askFreeText();else quickMenu();})));}
     function startLead(){data={notes:"FAQ topics: "+askedTopics.join(", ")};typing('Baik. Saya akan tanya beberapa soalan ringkas supaya cadangan lebih tepat.',()=>runStep(0));}
     function visibleStep(step){if(!step)return false;if(step.conditional&&step.conditions){const opts=step.conditions[data.business_type];return Array.isArray(opts)&&opts.length>0;}return true;}
     function stepOptions(step){if(step.conditional&&step.conditions)return step.conditions[data.business_type]||[];return step.options||[];}
     function runStep(i){const steps=SYS.BANK.steps||[];while(i<steps.length&&!visibleStep(steps[i]))i++;if(i>=steps.length)return submitLead();const step=steps[i];const next=()=>runStep(i+1);const q=step.question||'Sila pilih jawapan.';if(step.input||step.type==='input'){const validator=step.validation==='phone'?SYS.validPhone:null;typing(q,()=>input(step.key||'Maklumat',step.placeholder||'Taip jawapan anda...',v=>{data[step.key]=step.validation==='phone'?SYS.normalizePhone(v):v;next();},validator));return;}const opts=stepOptions(step);typing(q,()=>options(opts,v=>{data[step.key]=v;if(step.key==='business_type')typing('Baik. Untuk '+v+', website biasanya perlu jelas dari segi servis, bukti kepercayaan dan cara pelanggan membuat pertanyaan.',next);else next();}));}
-    function templateUrlFor(pkg){const p=SYS.BANK.packages&&SYS.BANK.packages[pkg];return p&&p.templateUrl?p.templateUrl:(pkg==='RH Basic'?'/pakej/rh-basic/':pkg==='RH Growth'?'/pakej/rh-growth/':pkg==='RH Ecosystem'?'/pakej/rh-ecosystem/':'/pakej/');}
+    function templateUrlFor(pkg){const p=SYS.BANK.packages&&SYS.BANK.packages[pkg];return p&&p.templateUrl?p.templateUrl:(pkg==='RH Basic'?'/pakej/rh-basic/':pkg==='RH Growth'?'/pakej/rh-growth/':pkg==='RH Ecosystem'?'/pakej/rh-ecosystem/':'/#aira-popup');}
     async function submitLead(){const payload=SYS.createLeadPayload(data),pkg=payload.recommended_package,price=SYS.priceFor(pkg),features=SYS.featuresFor(pkg).map(x=>'✓ '+x).join('<br>'),templateUrl=templateUrlFor(pkg);typing('Terima kasih. Aira sedang rekodkan cadangan anda...',async()=>{const res=await SYS.saveLead(payload);let saveNote='Maklumat anda telah direkodkan. Team kami akan semak dan hubungi anda semula.';if(!res.ok&&res.error){saveNote='Maklumat disimpan sementara di browser, tetapi gagal masuk ke Supabase: '+res.error+'. Sila maklumkan admin untuk semak RLS/table leads.';}else if(res.mode==='local'){saveNote='Maklumat disimpan sementara di browser kerana sambungan Supabase tidak aktif. Sila maklumkan admin untuk semak konfigurasi.';}else if(res.warning){saveNote='Maklumat utama telah direkodkan, tetapi ada amaran: '+res.warning;}typing(`<strong>Cadangan Aira</strong><br><br>Pakej: <strong>${pkg}</strong><br>Anggaran: <strong>${price}</strong><br>Lead Score: <strong>${payload.lead_score}/100 (${payload.lead_temperature})</strong><br><br>${features}<br><br><a class="rh-aira-link" href="${templateUrl}" target="_blank" rel="noopener">Lihat detail template ${pkg}</a><br><br>${saveNote}`,()=>options(["Lihat Detail Pakej","Ulang Semula","Tanya Soalan Lain"],x=>{if(x==="Lihat Detail Pakej")window.open(templateUrl,'_blank','noopener');else if(x==="Ulang Semula")startHome();else askFreeText();}));});}
     launcher.onclick=openAira;if(closeBtn)closeBtn.onclick=closeAira;if(toastStart)toastStart.onclick=openAira;if(toastClose)toastClose.onclick=()=>toast.classList.remove('show');
     document.addEventListener('click',function(e){const t=e.target.closest&&e.target.closest('a[href="#aira-popup"],a[href="#aira"],.rh-open-aira,[data-open-aira]');if(!t)return;e.preventDefault();openAira();});
