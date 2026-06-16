@@ -1,1 +1,0 @@
--- Payment Module V1.0.3.3 frontend-only hotfix. No database changes required.
