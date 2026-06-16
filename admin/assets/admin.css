@@ -442,3 +442,107 @@
   #quotationModal .modal-head,
   #quotationModal .icon-close{display:none !important;}
 }
+
+/* RH Services v1.3.3 - Admin Responsive QA Patch
+   Target: Dashboard/Admin views for phone, tablet, laptop, PC, Android, iPhone and MacBook.
+   Scope: layout CSS only. No business logic changed. */
+html{width:100%;max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%}
+body.admin-page{width:100%;max-width:100%;overflow-x:hidden}
+.admin-main{min-width:0;max-width:100%;overflow-x:hidden}
+.content{width:100%;max-width:100%;min-width:0}
+.panel,.stat-card,.dashboard-grid,.stat-grid{min-width:0}
+.responsive-table-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.data-table{max-width:100%}
+canvas{display:block;max-width:100%;height:auto}
+
+/* Laptop / MacBook compact width */
+@media(max-width:1366px){
+  .admin-page{grid-template-columns:264px minmax(0,1fr)}
+  .topbar{padding:16px 24px;min-height:78px}
+  .content{padding:24px}
+  .stat-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .dashboard-grid{grid-template-columns:1fr 1fr;gap:14px}
+  .dashboard-grid .large-panel{min-height:320px}
+}
+
+/* Tablet landscape / small laptop */
+@media(max-width:1024px){
+  .admin-page{grid-template-columns:236px minmax(0,1fr)}
+  .sidebar{padding:16px 12px}
+  .side-nav a{font-size:14px;padding:10px}
+  .side-brand{gap:10px}
+  .side-brand img{width:42px;height:42px}
+  .topbar{padding:15px 18px}
+  .topbar h1{font-size:24px}
+  .topbar p{font-size:14px;line-height:1.45}
+  .content{padding:18px}
+  .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .stat-card{padding:15px;border-radius:18px}
+  .stat-card strong{font-size:26px}
+  .dashboard-grid{grid-template-columns:1fr;gap:14px}
+  .donut-wrap{min-height:210px}
+}
+
+/* Tablet portrait + phone: sidebar off-canvas */
+@media(max-width:820px){
+  body.admin-page{display:block;min-height:100vh}
+  .admin-page{display:block}
+  .admin-main{width:100%}
+  .sidebar{position:fixed;left:0;top:0;bottom:0;width:min(86vw,300px);height:100dvh;z-index:50;transform:translateX(-110%);transition:transform .22s ease;box-shadow:24px 0 70px rgba(0,0,0,.38)}
+  .sidebar.open{transform:translateX(0)}
+  .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;padding:0;flex:0 0 auto}
+  .topbar{position:sticky;top:0;z-index:20;min-height:70px;padding:12px 14px;gap:10px;align-items:center}
+  .topbar>div:nth-child(2){min-width:0;flex:1}
+  .topbar h1{font-size:22px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topbar p{font-size:13px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .top-actions{gap:8px;flex:0 0 auto}
+  .staff-badge{display:none}
+  .ghost-btn{padding:10px 12px;border-radius:13px;font-size:13px}
+  .content{padding:14px;overflow-x:hidden}
+  .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .stat-card{padding:14px;border-radius:17px}
+  .stat-card span{font-size:12px}
+  .stat-card strong{font-size:24px;margin:7px 0 3px}
+  .stat-card small{font-size:12px;line-height:1.3}
+  .panel{padding:14px;border-radius:18px}
+  .panel-head{gap:8px;margin-bottom:12px}
+  .panel-head h2{font-size:17px}
+  .panel-head span{font-size:12px}
+  .lead-row{grid-template-columns:1fr;align-items:start}
+  .lead-row .status-pill{justify-self:start}
+  .activity-item{font-size:13px;line-height:1.45}
+  .modal-backdrop{padding:10px;align-items:start;overflow:auto}
+  .modal-card{width:100%;max-height:calc(100dvh - 20px);border-radius:20px;padding:14px}
+  .detail-grid{grid-template-columns:1fr}
+  .detail-item.full{grid-column:auto}
+}
+
+/* Phone narrow */
+@media(max-width:520px){
+  .topbar{min-height:64px;padding:10px 12px}
+  .topbar h1{font-size:20px}
+  .topbar p{display:none}
+  .content{padding:12px}
+  .stat-grid{grid-template-columns:1fr}
+  .stat-card{display:grid;grid-template-columns:1fr auto;grid-template-areas:'label value' 'small value';align-items:center;gap:2px 12px}
+  .stat-card span{grid-area:label}
+  .stat-card strong{grid-area:value;margin:0;font-size:25px;text-align:right}
+  .stat-card small{grid-area:small}
+  .dashboard-grid{gap:12px;margin-top:12px}
+  .panel{padding:12px;border-radius:16px}
+  .donut-wrap{min-height:190px}
+  #statusChart{max-width:190px!important;max-height:190px!important;margin:auto}
+  .table-actions{width:100%}
+  .table-actions .mini-btn{flex:1 1 auto}
+}
+
+/* Very small Android/iPhone SE */
+@media(max-width:380px){
+  .content{padding:10px}
+  .topbar{gap:8px}
+  .icon-btn{width:38px;height:38px}
+  .ghost-btn{padding:9px 10px;font-size:12px}
+  .stat-card{padding:12px}
+  .stat-card strong{font-size:23px}
+  .panel-head{flex-direction:column;align-items:flex-start}
+}

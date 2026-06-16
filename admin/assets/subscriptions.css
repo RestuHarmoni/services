@@ -21,3 +21,26 @@
 .danger-action{border-color:rgba(220,38,38,.45)!important;color:#fecaca!important}
 @media(max-width:1180px){.subscription-stat-grid{grid-template-columns:repeat(3,1fr)}.subscription-summary-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:760px){.subscription-stat-grid,.subscription-summary-grid{grid-template-columns:1fr}.renewal-item{grid-template-columns:1fr}.renewal-item .table-actions{justify-content:stretch}.renewal-item button{width:100%}}
+
+/* RH Services v1.3.3 - Subscription responsive table cleanup */
+.subscription-table{min-width:760px}
+.subscription-table td,.subscription-table th{word-break:normal}
+.subscription-table .table-actions{display:flex;flex-wrap:wrap;gap:8px;min-width:210px}
+.subscription-table .table-actions .mini-btn{white-space:nowrap}
+@media(min-width:1181px){
+  .subscription-table{min-width:0;table-layout:fixed}
+  .subscription-table th:nth-child(1),.subscription-table td:nth-child(1){width:15%}
+  .subscription-table th:nth-child(2),.subscription-table td:nth-child(2){width:15%}
+  .subscription-table th:nth-child(3),.subscription-table td:nth-child(3){width:17%}
+  .subscription-table th:nth-child(4),.subscription-table td:nth-child(4){width:17%}
+  .subscription-table th:nth-child(5),.subscription-table td:nth-child(5){width:13%}
+  .subscription-table th:nth-child(6),.subscription-table td:nth-child(6){width:10%}
+  .subscription-table th:nth-child(7),.subscription-table td:nth-child(7){width:13%}
+}
+@media(max-width:820px){
+  .subscription-table{min-width:820px}
+  .subscription-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:520px){
+  .subscription-stat-grid{grid-template-columns:1fr}
+}
