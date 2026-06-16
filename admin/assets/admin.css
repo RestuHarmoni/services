@@ -671,3 +671,20 @@ canvas{display:block;max-width:100%;height:auto}
 /* RH v1.3.8 Aira Knowledge */
 .mini-card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}.mini-card{background:#fff;border:1px solid rgba(15,23,42,.08);border-radius:16px;padding:14px;box-shadow:0 8px 24px rgba(15,23,42,.05)}.mini-card h3{margin:4px 0 8px;font-size:16px}.mini-card p{margin:0;color:#475569;line-height:1.5}.mini-card small{color:#64748b}.stats-grid.compact{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-top:14px}.row-actions{display:flex;gap:8px;flex-wrap:wrap}.alert.info{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;padding:12px;border-radius:14px;margin-top:12px}
 @media(max-width:640px){.mini-card-grid{grid-template-columns:1fr}.section-head{gap:12px}.row-actions button{width:100%}}
+
+
+/* RH Services v1.3.9 - Aira Knowledge CRUD */
+.aira-kb-toolbar{flex-wrap:wrap}
+.filter-row{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.filter-row .search-input{min-width:240px;flex:1}
+.kb-card .card-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.kb-card.is-deleted{opacity:.65;border-style:dashed}
+.kb-modal-card{max-width:780px;width:min(94vw,780px)}
+.kb-form label{display:block;margin:12px 0;font-weight:700;color:#e5e7eb}
+.kb-form input,.kb-form textarea,.kb-form select{width:100%;margin-top:6px;border:1px solid rgba(148,163,184,.35);background:#0f172a;color:#f8fafc;border-radius:12px;padding:11px 12px}
+.kb-form textarea{min-height:90px;resize:vertical}.kb-form textarea.large{min-height:180px}
+.kb-form .check-row{display:flex;align-items:center;gap:8px}.kb-form .check-row input{width:auto;margin:0}
+.kb-answer-preview{border:1px solid rgba(148,163,184,.25);background:rgba(15,23,42,.65);border-radius:14px;padding:14px;margin-top:12px}
+.danger-outline-btn{border:1px solid rgba(239,68,68,.55);color:#fecaca;background:rgba(127,29,29,.18);border-radius:12px;padding:10px 14px;font-weight:800;cursor:pointer}
+.danger-outline-btn:hover{background:rgba(127,29,29,.36)}
+@media(max-width:768px){.filter-row{display:block}.filter-row>*{width:100%;margin-bottom:8px}.kb-card .card-actions button{flex:1 1 46%}.aira-kb-toolbar button{width:100%}}
