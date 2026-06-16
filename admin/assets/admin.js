@@ -1653,6 +1653,59 @@ const RHAdmin = (() => {
     const {data}=client.storage.from('blog-images').getPublicUrl(path);
     return data?.publicUrl || '';
   }
+
+  function isLogoCover(url){
+    return /\/assets\/rh-logo\.png/i.test(String(url||''));
+  }
+  function articleFileKey(name){
+    return String(name||'').toLowerCase()
+      .replace(/\.(png|jpe?g|webp|gif)$/i,'')
+      .replace(/-\d{10,}$/,'')
+      .normalize('NFD').replace(/[̀-ͯ]/g,'')
+      .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+  }
+  function articleMatchScore(slug, fileName){
+    const a=articleFileKey(slug).split('-').filter(Boolean);
+    const b=articleFileKey(fileName).split('-').filter(Boolean);
+    if(!a.length || !b.length) return 0;
+    const ak=a.join('-'), bk=b.join('-');
+    if(bk.startsWith(ak) || ak.startsWith(bk)) return 1;
+    const bs=new Set(b);
+    const common=a.filter(t=>bs.has(t) && t.length>2).length;
+    return common / Math.max(a.length,b.length);
+  }
+  async function syncArticleStorageImages(){
+    const client=await getClient(); if(!client) return;
+    if(!confirm('Sync cover image dari bucket blog-images/articles kepada artikel yang masih guna logo RH atau tiada gambar?')) return;
+    try{
+      const {data:files,error:listError}=await client.storage.from('blog-images').list('articles',{limit:200,sortBy:{column:'name',order:'asc'}});
+      if(listError) throw listError;
+      const imageFiles=(files||[]).filter(f=>/\.(png|jpe?g|webp|gif)$/i.test(f.name||''));
+      if(!imageFiles.length){ alert('Tiada image ditemui dalam blog-images/articles.'); return; }
+      let updated=0, skipped=0;
+      for(const post of articlesCache){
+        if(post.cover_image && !isLogoCover(post.cover_image)){ skipped++; continue; }
+        let best=null, bestScore=0;
+        for(const f of imageFiles){
+          const score=articleMatchScore(post.slug||post.title, f.name);
+          if(score>bestScore){ bestScore=score; best=f; }
+        }
+        if(best && bestScore>=0.34){
+          const path='articles/'+best.name;
+          const {data:urlData}=client.storage.from('blog-images').getPublicUrl(path);
+          const publicUrl=urlData?.publicUrl||'';
+          if(publicUrl){
+            const {error:updateError}=await client.from('blog_posts').update({cover_image:publicUrl,updated_at:new Date().toISOString()}).eq('id',post.id);
+            if(updateError) throw updateError;
+            updated++;
+          }
+        }else skipped++;
+      }
+      await addLog(client,'article_cover_sync',`Synced ${updated} article cover image(s) from Storage`,'article','blog_posts');
+      await loadArticlesPage();
+      alert(`Sync selesai. Updated: ${updated}. Skipped: ${skipped}.`);
+    }catch(err){ console.error('[ARTICLE IMAGE SYNC ERROR]',err); alert(err?.message || 'Gagal sync gambar artikel dari Storage.'); }
+  }
   async function loadArticlesPage(){
     const client=await getClient(); if(!client) return;
     const body=qs('#articlesTableBody');
@@ -1833,6 +1886,20 @@ const RHAdmin = (() => {
     const lostClose=qs('#closeLostModal'); if(lostClose) lostClose.onclick=closeLostReasonModal;
     const lostCancel=qs('#cancelLostReasonBtn'); if(lostCancel) lostCancel.onclick=closeLostReasonModal;
 
+
+    const aSearch=qs('#articleSearch'); if(aSearch) aSearch.oninput=renderArticlesTable;
+    const aFilter=qs('#articleStatusFilter'); if(aFilter) aFilter.onchange=renderArticlesTable;
+    const aNew=qs('#newArticleBtn'); if(aNew) aNew.onclick=()=>openArticleModal();
+    const aRefresh=qs('#refreshArticlesBtn'); if(aRefresh) aRefresh.onclick=loadArticlesPage;
+    const aSync=qs('#syncArticleImagesBtn'); if(aSync) aSync.onclick=syncArticleStorageImages;
+    const aClose=qs('#closeArticleModal'); if(aClose) aClose.onclick=closeArticleModal;
+    const aForm=qs('#articleForm'); if(aForm) aForm.addEventListener('submit',e=>{e.preventDefault();saveArticle();});
+    const aDraft=qs('#saveArticleDraftBtn'); if(aDraft) aDraft.onclick=()=>saveArticle('draft');
+    const aPublish=qs('#publishArticleBtn'); if(aPublish) aPublish.onclick=()=>saveArticle('published');
+    const aPreview=qs('#previewArticleBtn'); if(aPreview) aPreview.onclick=()=>{const slug=slugifyArticle(qs('#articleSlug')?.value || qs('#articleTitle')?.value || currentArticle?.slug || ''); if(slug) window.open(articleUrl(slug),'_blank','noopener');};
+    const aTitle=qs('#articleTitle'); if(aTitle) aTitle.addEventListener('input',()=>{const slugEl=qs('#articleSlug'); if(slugEl && !currentArticle && !slugEl.value.trim()) slugEl.value=slugifyArticle(aTitle.value);});
+    const aFile=qs('#articleCoverFile'); if(aFile) aFile.addEventListener('change',()=>{const f=aFile.files?.[0]; const img=qs('#articleCoverImage'); if(f && img && !img.value) img.placeholder='Gambar akan di-upload dan URL disimpan semasa Save/Publish';});
+
     const qRefresh=qs('#refreshQuotationsBtn'); if(qRefresh) qRefresh.onclick=loadQuotationsPage;
     const qSearch=qs('#quotationSearch'); if(qSearch) qSearch.oninput=renderQuotationsTable;
     const qFilter=qs('#quotationStatusFilter'); if(qFilter) qFilter.onchange=renderQuotationsTable;
@@ -1906,6 +1973,9 @@ const RHAdmin = (() => {
       const invPay=e.target.closest('[data-pay-invoice]'); if(invPay) openPaymentModal(invPay.dataset.payInvoice);
       const invDel=e.target.closest('[data-delete-invoice]'); if(invDel) secureSoftDelete('invoice', invDel.dataset.deleteInvoice);
       const receipt=e.target.closest('[data-open-receipt]'); if(receipt) openReceiptFile(receipt.dataset.url, receipt.dataset.path);
+      const aEdit=e.target.closest('[data-edit-article]'); if(aEdit) openArticleModal(aEdit.dataset.editArticle);
+      const aStatus=e.target.closest('[data-article-status]'); if(aStatus) changeArticleStatus(aStatus.dataset.articleStatus, aStatus.dataset.status);
+      const aDelete=e.target.closest('[data-delete-article]'); if(aDelete) deleteArticle(aDelete.dataset.deleteArticle);
       const prView=e.target.closest('[data-view-project]'); if(prView) openProjectModal(prView.dataset.viewProject);
       const prStage=e.target.closest('[data-project-stage]'); if(prStage) updateProjectStatus(prStage.dataset.projectStage, prStage.dataset.status);
       const prEdit=e.target.closest('[data-edit-project]'); if(prEdit) openProjectModal(prEdit.dataset.editProject);
