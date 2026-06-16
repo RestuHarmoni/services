@@ -1,1 +1,61 @@
-<!doctype html><html lang="ms"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Storage | RH Admin V1</title><link rel="stylesheet" href="assets/admin.css"></head><body class="admin-page"><aside class="sidebar" id="sidebar"><a class="side-brand" href="dashboard.html"><img src="../assets/rh-logo.png" alt="RH"><span>RH Admin<br><small>Command Center</small></span></a><nav class="side-nav"><a href="dashboard.html">🏠 Dashboard</a><div class="nav-label">Sales</div><a href="leads.html">📥 Leads</a><a class="" href="prospects.html">👥 Prospects</a><a class="" href="quotations.html">📄 Quotations</a><a class="" href="invoices.html">🧾 Invoices</a><div class="nav-label">Recurring</div><a class="" href="subscriptions.html">🔁 Subscriptions</a><div class="nav-label">Content</div><a class="" href="articles.html">📝 Articles</a><a class="" href="aira-knowledge.html">🤖 Aira Knowledge</a><div class="nav-label">System</div><a class="active" href="storage.html">📁 Storage</a><a class="" href="reports.html">📊 Reports</a><a class="" href="settings.html">⚙️ Settings</a><a class="" href="staff.html">🔐 Staff</a></nav></aside><div class="admin-main"><header class="topbar"><button id="menuBtn" class="icon-btn">☰</button><div><h1>Storage</h1><p>Fail client dan blog images.</p></div><div class="top-actions"><span id="staffBadge" class="staff-badge">Loading...</span><button id="logoutBtn" class="ghost-btn">Logout</button></div></header><main class="content"><section class="panel section-panel"><div class="empty-state"><strong>Storage</strong><br>Modul ini akan dibina pada phase seterusnya. Struktur route sudah disediakan supaya menu tidak 404.</div></section></main></div><script src="../supabase-config.js"></script><script src="assets/admin.js"></script></body></html>
+<!doctype html><html lang="ms"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Storage | RH Admin V1</title><link rel="stylesheet" href="assets/admin.css"></head><body class="admin-page"><aside class="sidebar" id="sidebar"><a class="side-brand" href="dashboard.html"><img src="../assets/rh-logo.png" alt="RH"><span>RH Admin<br><small>Command Center</small></span></a><nav class="side-nav"><a href="dashboard.html">🏠 Dashboard</a><div class="nav-label">Sales</div><a href="leads.html">📥 Leads</a><a class="" href="prospects.html">👥 Prospects</a><a class="" href="quotations.html">📄 Quotations</a><a class="" href="invoices.html">🧾 Invoices</a><div class="nav-label">Recurring</div><a class="" href="subscriptions.html">🔁 Subscriptions</a><div class="nav-label">Content</div><a class="" href="articles.html">📝 Articles</a><a class="" href="aira-knowledge.html">🤖 Aira Knowledge</a><div class="nav-label">System</div><a class="active" href="storage.html">📁 Storage</a><a class="" href="reports.html">📊 Reports</a><a class="" href="settings.html">⚙️ Settings</a><a class="" href="staff.html">🔐 Staff</a></nav></aside><div class="admin-main"><header class="topbar"><button id="menuBtn" class="icon-btn">☰</button><div><h1>Storage</h1><p>Fail client dan blog images.</p></div><div class="top-actions"><span id="staffBadge" class="staff-badge">Loading...</span><button id="logoutBtn" class="ghost-btn">Logout</button></div></header><main class="content storage-page">
+  <section class="stat-grid storage-stat-grid">
+    <div class="stat-card"><span>Blog Images</span><strong id="storageBlogCount">0</strong><small>blog-images</small></div>
+    <div class="stat-card"><span>Client Files</span><strong id="storageClientCount">0</strong><small>client-files</small></div>
+    <div class="stat-card"><span>Payment Receipts</span><strong id="storageReceiptCount">0</strong><small>payment-receipts</small></div>
+    <div class="stat-card"><span>Total Files</span><strong id="storageTotalCount">0</strong><small>Semua bucket</small></div>
+    <div class="stat-card"><span>Total Size</span><strong id="storageTotalSize">0 MB</strong><small>Anggaran digunakan</small></div>
+  </section>
+
+  <section class="panel section-panel">
+    <div class="panel-head stacked-head">
+      <div>
+        <h2>Storage Manager</h2>
+        <span>Urus blog images, fail client dan payment receipts dari Supabase Storage.</span>
+      </div>
+      <div class="toolbar storage-toolbar">
+        <button class="mini-btn primary" id="refreshStorageBtn">Refresh</button>
+        <button class="mini-btn primary" id="uploadStorageBtn">+ Upload File</button>
+        <input type="file" id="storageFileInput" hidden multiple>
+      </div>
+    </div>
+
+    <div class="storage-tabs" role="tablist">
+      <button class="storage-tab active" data-storage-tab="blog-images">Blog Images</button>
+      <button class="storage-tab" data-storage-tab="client-files">Client Files</button>
+      <button class="storage-tab" data-storage-tab="payment-receipts">Payment Receipts</button>
+    </div>
+
+    <div class="toolbar storage-filter-row">
+      <input id="storageSearch" class="search-input" placeholder="Cari nama fail / folder...">
+      <select id="storageTypeFilter" class="select-input">
+        <option value="all">Semua jenis</option>
+        <option value="image">Imej</option>
+        <option value="document">Dokumen</option>
+        <option value="other">Lain-lain</option>
+      </select>
+    </div>
+
+    <div id="storageStatus" class="login-note" hidden></div>
+
+    <div class="storage-grid" id="storageGrid"></div>
+    <div class="responsive-table-wrap storage-table-wrap">
+      <table class="data-table storage-table">
+        <thead><tr><th>File</th><th>Bucket</th><th>Size</th><th>Updated</th><th>Action</th></tr></thead>
+        <tbody id="storageTableBody"><tr><td colspan="5"><div class="empty-state">Memuatkan storage...</div></td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel section-panel">
+    <div class="panel-head">
+      <div><h2>Storage Safety Notes</h2><span>Delete menggunakan password admin. Fail yang dipadam dari Storage tidak boleh dipulihkan melainkan ada backup.</span></div>
+    </div>
+    <div class="detail-grid">
+      <div class="detail-item"><span>Blog Images</span><strong>Digunakan untuk cover artikel dan OG image.</strong></div>
+      <div class="detail-item"><span>Client Files</span><strong>Untuk dokumen projek/client pada fasa client portal nanti.</strong></div>
+      <div class="detail-item"><span>Payment Receipts</span><strong>Untuk bukti bayaran dan receipt verification.</strong></div>
+      <div class="detail-item"><span>Security</span><strong>Copy URL hanya untuk public bucket. Delete wajib password.</strong></div>
+    </div>
+  </section>
+</main></div><script src="../supabase-config.js"></script><script src="assets/admin.js"></script></body></html>

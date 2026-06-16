@@ -688,3 +688,25 @@ canvas{display:block;max-width:100%;height:auto}
 .danger-outline-btn{border:1px solid rgba(239,68,68,.55);color:#fecaca;background:rgba(127,29,29,.18);border-radius:12px;padding:10px 14px;font-weight:800;cursor:pointer}
 .danger-outline-btn:hover{background:rgba(127,29,29,.36)}
 @media(max-width:768px){.filter-row{display:block}.filter-row>*{width:100%;margin-bottom:8px}.kb-card .card-actions button{flex:1 1 46%}.aira-kb-toolbar button{width:100%}}
+
+/* RH Services v1.5.2 Storage Manager */
+.storage-stat-grid{grid-template-columns:repeat(5,minmax(0,1fr));}
+.storage-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 16px;}
+.storage-tab{border:1px solid var(--line);background:#0b1220;color:#cbd5e1;border-radius:14px;padding:10px 14px;font-weight:950;cursor:pointer;}
+.storage-tab.active{background:rgba(37,99,235,.22);border-color:rgba(37,99,235,.48);color:#fff;}
+.storage-filter-row{margin-bottom:14px;}
+.storage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:14px;}
+.storage-file-card{border:1px solid rgba(148,163,184,.18);background:rgba(15,23,42,.42);border-radius:18px;overflow:hidden;display:grid;min-height:260px;}
+.storage-thumb{height:150px;background:#0b1220;display:grid;place-items:center;border-bottom:1px solid rgba(148,163,184,.14);overflow:hidden;}
+.storage-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.storage-thumb .file-icon{font-size:48px;opacity:.85;}
+.storage-file-body{padding:14px;display:grid;gap:10px;}
+.storage-file-name{font-weight:950;line-height:1.25;word-break:break-word;}
+.storage-file-meta{color:#94a3b8;font-size:12px;line-height:1.45;}
+.storage-file-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.storage-table-wrap{margin-top:14px;}
+.storage-table .file-line strong{display:block;word-break:break-word;}
+.storage-table .file-line span{display:block;color:#94a3b8;font-size:12px;margin-top:4px;}
+@media(max-width:1180px){.storage-stat-grid{grid-template-columns:repeat(3,minmax(0,1fr));}}
+@media(max-width:760px){.storage-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.storage-toolbar,.storage-filter-row{width:100%;display:grid;grid-template-columns:1fr;}.storage-tabs{display:grid;grid-template-columns:1fr;}.storage-grid{grid-template-columns:1fr;}.storage-table{min-width:740px;}}
+@media(max-width:480px){.storage-stat-grid{grid-template-columns:1fr;}.storage-file-actions .mini-btn{flex:1 1 100%;}}

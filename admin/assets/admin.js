@@ -13,6 +13,7 @@ const RHAdmin = (() => {
   let currentInvoice = null;
   let projectsCache = [];
   let currentProject = null;
+  let storageState = { bucket:'blog-images', rows:[], loading:false };
   const fmtRM = (n) => new Intl.NumberFormat('ms-MY',{style:'currency',currency:'MYR',maximumFractionDigits:0}).format(Number(n||0));
   async function getClient(){
     if(window.RHGetSupabaseClient) return await window.RHGetSupabaseClient();
@@ -1909,10 +1910,179 @@ const RHAdmin = (() => {
     }catch{return false;}
   }
 
+
+  // RH Services v1.5.2 Storage Manager
+  const STORAGE_BUCKETS = {
+    'blog-images': {label:'Blog Images', root:'articles', type:'image', public:true, uploadPrefix:'articles'},
+    'client-files': {label:'Client Files', root:'', type:'file', public:true, uploadPrefix:'uploads'},
+    'payment-receipts': {label:'Payment Receipts', root:'', type:'receipt', public:true, uploadPrefix:'manual'}
+  };
+  function storageMsg(msg, isError=false){
+    const el=qs('#storageStatus'); if(!el) return;
+    el.hidden=!msg; el.textContent=msg||''; el.style.color=isError?'#fecaca':'#bfdbfe';
+  }
+  function bytesFmt(n){
+    const v=Number(n||0); if(!v) return '0 KB';
+    const units=['B','KB','MB','GB']; let x=v, i=0; while(x>=1024 && i<units.length-1){x/=1024;i++;}
+    return `${x>=10?x.toFixed(0):x.toFixed(1)} ${units[i]}`;
+  }
+  function safeFileName(name){
+    const ext=String(name||'file').split('.').pop().toLowerCase();
+    const base=String(name||'file').replace(/\.[^.]+$/,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,80) || 'file';
+    return `${base}-${Date.now()}.${ext}`;
+  }
+  function storageKind(name, mime=''){
+    const n=String(name||'').toLowerCase(); const m=String(mime||'').toLowerCase();
+    if(m.startsWith('image/') || /\.(png|jpg|jpeg|webp|gif|svg)$/i.test(n)) return 'image';
+    if(/\.(pdf|doc|docx|xls|xlsx|ppt|pptx|txt|csv)$/i.test(n)) return 'document';
+    return 'other';
+  }
+  function storageIcon(kind){ return kind==='image'?'🖼️':kind==='document'?'📄':'📦'; }
+  function getStoragePublicUrl(client,bucket,path){
+    try{ const {data}=client.storage.from(bucket).getPublicUrl(path); return data?.publicUrl || ''; }catch{return '';}
+  }
+  async function listStorageFolder(client,bucket,prefix='',depth=0){
+    const out=[];
+    const {data,error}=await client.storage.from(bucket).list(prefix||'',{limit:1000,sortBy:{column:'updated_at',order:'desc'}});
+    if(error) throw error;
+    for(const item of (data||[])){
+      const isFolder = !item.id && !item.metadata && !item.name.includes('.');
+      const path = prefix ? `${prefix}/${item.name}` : item.name;
+      if(isFolder && depth<2){
+        const nested=await listStorageFolder(client,bucket,path,depth+1);
+        out.push(...nested);
+      }else if(!isFolder){
+        out.push({bucket,path,name:item.name,folder:prefix||'',size:item.metadata?.size||item.size||0,updated_at:item.updated_at||item.created_at||'',metadata:item.metadata||{}});
+      }
+    }
+    return out;
+  }
+  async function loadStoragePage(){
+    const client=await getClient(); if(!client) return;
+    storageState.loading=true; storageMsg('Memuatkan fail storage...');
+    const body=qs('#storageTableBody'); if(body) body.innerHTML='<tr><td colspan="5"><div class="empty-state">Memuatkan storage...</div></td></tr>';
+    try{
+      const all=[];
+      for(const bucket of Object.keys(STORAGE_BUCKETS)){
+        try{
+          const rows=await listStorageFolder(client,bucket,STORAGE_BUCKETS[bucket].root||'');
+          all.push(...rows.map(r=>({...r,bucketLabel:STORAGE_BUCKETS[bucket].label,kind:storageKind(r.name,r.metadata?.mimetype||r.metadata?.contentType)})));
+        }catch(err){ console.warn('[Storage bucket load failed]', bucket, err); }
+      }
+      storageState.rows=all;
+      renderStorageStats(); renderStorageFiles(); storageMsg('');
+    }catch(err){
+      console.error('[Storage load error]',err); storageMsg(err?.message || 'Gagal load storage.', true); renderStorageFiles();
+    }finally{ storageState.loading=false; }
+  }
+  function renderStorageStats(){
+    const rows=storageState.rows||[];
+    const by=b=>rows.filter(r=>r.bucket===b).length;
+    const totalSize=rows.reduce((a,b)=>a+Number(b.size||0),0);
+    const set=(id,val)=>{const el=qs(id); if(el) el.textContent=val;};
+    set('#storageBlogCount',by('blog-images'));
+    set('#storageClientCount',by('client-files'));
+    set('#storageReceiptCount',by('payment-receipts'));
+    set('#storageTotalCount',rows.length);
+    set('#storageTotalSize',bytesFmt(totalSize));
+  }
+  function filteredStorageRows(){
+    const term=String(qs('#storageSearch')?.value||'').toLowerCase().trim();
+    const type=qs('#storageTypeFilter')?.value||'all';
+    return (storageState.rows||[]).filter(r=>r.bucket===storageState.bucket).filter(r=>{
+      const hay=`${r.name} ${r.path} ${r.folder}`.toLowerCase();
+      const okTerm=!term || hay.includes(term);
+      const okType=type==='all' || r.kind===type;
+      return okTerm && okType;
+    });
+  }
+  function renderStorageFiles(){
+    const rows=filteredStorageRows();
+    const grid=qs('#storageGrid'); const body=qs('#storageTableBody');
+    if(!rows.length){
+      if(grid) grid.innerHTML='<div class="empty-state">Tiada fail dalam bucket/filter ini.</div>';
+      if(body) body.innerHTML='<tr><td colspan="5"><div class="empty-state">Tiada fail dalam bucket/filter ini.</div></td></tr>';
+      return;
+    }
+    const clientUrlRows = rows.map(r=>{
+      const publicUrl = getStoragePublicUrl({storage:{from:()=>({getPublicUrl:()=>({data:{publicUrl:''}})})}},r.bucket,r.path);
+      return {...r,publicUrl};
+    });
+    getClient().then(client=>{
+      const prepared=rows.map(r=>({...r,publicUrl:getStoragePublicUrl(client,r.bucket,r.path)}));
+      if(grid) grid.innerHTML=prepared.map(r=>storageCardHtml(r)).join('');
+      if(body) body.innerHTML=prepared.map(r=>storageRowHtml(r)).join('');
+    });
+  }
+  function storageCardHtml(r){
+    const isImg=r.kind==='image';
+    const thumb=isImg&&r.publicUrl?`<img src="${esc(r.publicUrl)}" alt="${esc(r.name)}" loading="lazy">`:`<div class="file-icon">${storageIcon(r.kind)}</div>`;
+    return `<article class="storage-file-card">
+      <div class="storage-thumb">${thumb}</div>
+      <div class="storage-file-body">
+        <div class="storage-file-name">${esc(r.name)}</div>
+        <div class="storage-file-meta">${esc(r.bucketLabel)}<br>${esc(r.path)}<br>${bytesFmt(r.size)} • ${r.updated_at?dateShort(r.updated_at):'-'}</div>
+        <div class="storage-file-actions">
+          ${r.publicUrl?`<button class="mini-btn primary" data-storage-open="${esc(r.publicUrl)}">Preview</button><button class="mini-btn" data-storage-copy="${esc(r.publicUrl)}">Copy URL</button>`:''}
+          <button class="mini-btn danger" data-storage-delete-bucket="${esc(r.bucket)}" data-storage-delete-path="${esc(r.path)}">Delete</button>
+        </div>
+      </div>
+    </article>`;
+  }
+  function storageRowHtml(r){
+    return `<tr>
+      <td><div class="file-line"><strong>${esc(r.name)}</strong><span>${esc(r.path)}</span></div></td>
+      <td>${esc(r.bucketLabel)}</td><td>${bytesFmt(r.size)}</td><td>${r.updated_at?dateShort(r.updated_at):'-'}</td>
+      <td><div class="table-actions">${r.publicUrl?`<button class="mini-btn primary" data-storage-open="${esc(r.publicUrl)}">Preview</button><button class="mini-btn" data-storage-copy="${esc(r.publicUrl)}">Copy</button>`:''}<button class="mini-btn danger" data-storage-delete-bucket="${esc(r.bucket)}" data-storage-delete-path="${esc(r.path)}">Delete</button></div></td>
+    </tr>`;
+  }
+  function setStorageTab(bucket){
+    if(!STORAGE_BUCKETS[bucket]) return; storageState.bucket=bucket;
+    qsa('[data-storage-tab]').forEach(b=>b.classList.toggle('active',b.dataset.storageTab===bucket));
+    renderStorageFiles();
+  }
+  async function uploadStorageFiles(){
+    const input=qs('#storageFileInput'); const files=[...(input?.files||[])];
+    if(!files.length) return;
+    const client=await getClient(); if(!client) return;
+    const cfg=STORAGE_BUCKETS[storageState.bucket];
+    storageMsg(`Uploading ${files.length} fail...`);
+    try{
+      for(const file of files){
+        const folder=cfg.uploadPrefix || 'uploads';
+        const path=`${folder}/${safeFileName(file.name)}`;
+        const {error}=await client.storage.from(storageState.bucket).upload(path,file,{cacheControl:'31536000',upsert:false,contentType:file.type||undefined});
+        if(error) throw error;
+      }
+      if(input) input.value='';
+      storageMsg('Upload selesai.');
+      await loadStoragePage();
+    }catch(err){ storageMsg(err?.message || 'Gagal upload fail.', true); }
+  }
+  async function deleteStorageObject(bucket,path){
+    const typed=prompt(`WARNING: Fail Storage akan dipadam:\n\n${bucket}/${path}\n\nTaip DELETE untuk teruskan.`);
+    if(typed!=='DELETE') return;
+    const password=prompt('Masukkan password admin untuk delete fail storage:');
+    if(!password) return;
+    const ok=await verifyAdminPassword(password);
+    if(!ok){ alert('Password admin tidak sah.'); return; }
+    const client=await getClient(); if(!client) return;
+    const {error}=await client.storage.from(bucket).remove([path]);
+    if(error){ alert(error.message || 'Gagal delete fail.'); return; }
+    try{ const s=getSession()||{}; await client.from('audit_logs').insert({module:'storage',record_id:path,record_label:`${bucket}/${path}`,action:'delete_storage_object',staff_id:s.staff_id||'system',notes:'Storage object deleted via secure delete'}); }catch{}
+    await loadStoragePage();
+  }
+
   function bind(){
     const form=qs('#loginForm'); if(form){ form.addEventListener('submit',(e)=>{e.preventDefault();e.stopPropagation();login(e);return false;}); form.setAttribute('onsubmit','return false'); }
     const loginBtn=qs('#loginButton') || qs('#loginForm button'); if(loginBtn){ loginBtn.setAttribute('type','button'); loginBtn.addEventListener('click',login); }
     const logout=qs('#logoutBtn'); if(logout) logout.onclick=()=>{clearSession();location.href='login.html'};
+    const stRefresh=qs('#refreshStorageBtn'); if(stRefresh) stRefresh.onclick=loadStoragePage;
+    const stUpload=qs('#uploadStorageBtn'); if(stUpload) stUpload.onclick=()=>qs('#storageFileInput')?.click();
+    const stFile=qs('#storageFileInput'); if(stFile) stFile.onchange=uploadStorageFiles;
+    const stSearch=qs('#storageSearch'); if(stSearch) stSearch.oninput=renderStorageFiles;
+    const stType=qs('#storageTypeFilter'); if(stType) stType.onchange=renderStorageFiles;
+    qsa('[data-storage-tab]').forEach(btn=>btn.onclick=()=>setStorageTab(btn.dataset.storageTab));
     const menu=qs('#menuBtn'); if(menu) menu.onclick=()=>qs('#sidebar').classList.toggle('open');
     const search=qs('#leadSearch'); if(search) search.oninput=renderLeadsTable;
     const filter=qs('#leadStatusFilter'); if(filter) filter.onchange=renderLeadsTable;
@@ -2042,9 +2212,12 @@ const RHAdmin = (() => {
       const prDel=e.target.closest('[data-delete-project]'); if(prDel) secureSoftDelete('project', prDel.dataset.deleteProject);
       const prDept=e.target.closest('[data-project-dept-status]'); if(prDept) updateProjectDepartmentStatus(prDept.dataset.projectDeptStatus, prDept.dataset.status);
       const prTask=e.target.closest('[data-project-task]'); if(prTask) updateProjectTask(prTask.dataset.projectTask, prTask.checked);
+      const stOpen=e.target.closest('[data-storage-open]'); if(stOpen) window.open(stOpen.dataset.storageOpen,'_blank','noopener');
+      const stCopy=e.target.closest('[data-storage-copy]'); if(stCopy){ navigator.clipboard?.writeText(stCopy.dataset.storageCopy); alert('URL disalin.'); }
+      const stDel=e.target.closest('[data-storage-delete-bucket]'); if(stDel) deleteStorageObject(stDel.dataset.storageDeleteBucket, stDel.dataset.storageDeletePath);
     });
   }
-  function init(){bind(); const s=protect(); if(!s) return; if(qs('#totalLeads')) loadDashboard(); if(qs('#leadsTableBody')) loadLeadsPage(); if(qs('#prospectsTableBody')) loadProspectsPage(); if(qs('#quotationsTableBody')) loadQuotationsPage(); if(qs('#invoicesTableBody')) loadInvoicesPage(); if(qs('#projectsTableBody')) loadProjectsPage(); if(qs('#articlesTableBody')) loadArticlesPage();}
+  function init(){bind(); const s=protect(); if(!s) return; if(qs('#totalLeads')) loadDashboard(); if(qs('#leadsTableBody')) loadLeadsPage(); if(qs('#prospectsTableBody')) loadProspectsPage(); if(qs('#quotationsTableBody')) loadQuotationsPage(); if(qs('#invoicesTableBody')) loadInvoicesPage(); if(qs('#projectsTableBody')) loadProjectsPage(); if(qs('#articlesTableBody')) loadArticlesPage(); if(qs('#storageGrid')) loadStoragePage();}
   return {init};
 })();
 document.addEventListener('DOMContentLoaded', RHAdmin.init);
