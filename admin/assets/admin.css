@@ -371,3 +371,74 @@
 .status-pill.draft{background:rgba(100,116,139,.18);color:#cbd5e1}.status-pill.published{background:rgba(22,163,74,.16);color:#bbf7d0}.status-pill.archived{background:rgba(245,158,11,.14);color:#fde68a}.status-pill.deleted{background:rgba(220,38,38,.16);color:#fecaca}
 @media(max-width:1180px){.article-stat-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:760px){.article-stat-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* RH Admin QA Patch V16.1 - Quotation UI + Project Detail Fix */
+#quotationModal .modal-card.quote-preview-card{
+  display:flex;
+  flex-direction:column;
+  max-height:88vh;
+  overflow:auto;
+}
+#quotationModal #quotationPreview.quotation-preview{
+  overflow:visible;
+  padding-bottom:28px;
+}
+#quotationModal .modal-actions{
+  position:static !important;
+  bottom:auto !important;
+  z-index:auto !important;
+  background:transparent !important;
+  border-top:1px solid var(--line);
+  margin-top:18px;
+  padding:18px 0 0;
+  box-shadow:none !important;
+}
+#quotationModal .quote-document{
+  margin-bottom:0;
+}
+.quote-package-list{
+  margin:10px 0 0 0;
+  padding-left:18px;
+  color:#0f172a;
+}
+.quote-package-list li{
+  margin:4px 0;
+  line-height:1.4;
+}
+.detail-card{
+  padding:12px;
+  border:1px solid rgba(148,163,184,.16);
+  background:rgba(15,23,42,.38);
+  border-radius:16px;
+  min-width:0;
+}
+.detail-card.full{grid-column:1/-1;}
+.detail-card span{
+  display:block;
+  color:#94a3b8;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  font-weight:900;
+  margin-bottom:6px;
+}
+.detail-card strong{
+  display:block;
+  color:#f8fafc;
+  font-size:15px;
+  line-height:1.45;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+@media(max-width:760px){
+  #quotationModal .modal-actions{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+  #quotationModal .modal-actions button{width:100%;}
+}
+@media print{
+  #quotationModal .modal-actions,
+  #quotationModal .modal-head,
+  #quotationModal .icon-close{display:none !important;}
+}

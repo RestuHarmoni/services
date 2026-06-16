@@ -694,17 +694,28 @@ const RHAdmin = (() => {
     return v || 'RH Growth';
   }
   function packageTemplate(name){ return PACKAGE_TEMPLATES[getPackageName(name)] || PACKAGE_TEMPLATES['RH Growth']; }
+  const PACKAGE_PUBLIC_DESCRIPTIONS = {
+    'RH Basic': ['Website basic / personal web', 'Reka bentuk responsive untuk mobile dan desktop', 'Struktur halaman asas untuk bisnes', 'Setup borang/CTA lead asas', 'SEO asas dan konfigurasi teknikal permulaan'],
+    'RH Starter': ['Website starter untuk bisnes kecil', 'Halaman penting bisnes dan servis', 'SEO asas + setup halaman', 'Basic lead capture', 'Struktur sedia untuk kempen promosi'],
+    'RH Growth': ['Website service / company profile', 'AI chatbot Aira setup', 'Blog / artikel module basic', 'SEO asas + performance setup', 'Lead capture dan struktur conversion'],
+    'RH Ecosystem': ['Company profile website', 'Service / product listing structure', 'Advanced AI chatbot Aira', 'Blog CMS + SEO setup', 'Basic dashboard / lead management'],
+    'Custom': ['Skop custom berdasarkan keperluan projek', 'Fungsi dan harga tertakluk kepada pengesahan scope', 'Timeline akan disahkan selepas sesi discovery']
+  };
+  function packagePublicBullets(name){ return PACKAGE_PUBLIC_DESCRIPTIONS[getPackageName(name)] || PACKAGE_PUBLIC_DESCRIPTIONS['RH Growth']; }
+  function packagePublicHtml(name){ return `<ul class="quote-package-list">${packagePublicBullets(name).map(item=>`<li>${esc(item)}</li>`).join('')}</ul>`; }
   async function nextQuotationNo(client){
     const year=new Date().getFullYear();
     try{const {count}=await client.from('quotations').select('*',{count:'exact',head:true}); return `QT-${year}-${String((count||0)+1).padStart(4,'0')}`;}catch{return `QT-${year}-${String(Date.now()).slice(-4)}`;}
   }
   function quoteAmount(q){ return Number(q.grand_total ?? q.total_amount ?? 0); }
   function quoteClientNotes(q){
+    // Client-facing quotation must never expose raw Aira answers, FAQ topics, internal notes or sales qualification data.
     const fallback='Quotation pembangunan website dan sistem digital berdasarkan pakej yang dipersetujui.';
-    const raw=String(q?.client_notes || q?.quotation_notes || q?.notes || '').trim();
+    const raw=String(q?.client_notes || q?.quotation_notes || '').trim();
     if(!raw) return fallback;
-    if(/\[system\]|marked for review|invalid test name|semak data/i.test(raw)) return fallback;
-    const cleaned=raw.split(/\n+/).filter(line=>!/^\s*(internal|system|staff|admin)\s*:/i.test(line) && !/\[system\]/i.test(line)).join(' ').trim();
+    const looksInternal=/FAQ topics|Aira Answers|Apakah|Adakah|Budget anggaran|Nombor WhatsApp|Domain:|Hosting:|\[system\]|marked for review|invalid test name|semak data/i.test(raw);
+    if(looksInternal) return fallback;
+    const cleaned=raw.split(/\n+/).filter(line=>!/\s*(internal|system|staff|admin)\s*:/i.test(line) && !/\[system\]/i.test(line)).join(' ').trim();
     return cleaned || fallback;
   }
   function quoteValidUntil(q){
@@ -841,7 +852,7 @@ const RHAdmin = (() => {
     const el=qs('#quotationPreview'); if(!el) return;
     const validUntil=quoteValidUntil(q);
     el.innerHTML=`<div class="quote-document">${quoteWatermark(q)}<div class="quote-head"><div style="display:flex;gap:12px;align-items:center"><img src="../assets/rh-logo.png" alt="RH"><div><h2>Restu Harmoni Digital Solutions</h2><p>Website, AI Chatbot & Digital System</p></div></div><div class="quote-meta"><h2>${esc(q.quotation_no||'Quotation')}</h2><p>Status: ${quotationStatusLabel(q.status)}</p><p>Date: ${dateShort(q.created_at)}</p><p>Valid until: ${validUntil?dateShort(validUntil):'-'}</p></div></div>
-      <div class="quote-grid"><div class="quote-box"><span>Bill To</span><strong>${esc(q.client_name||'Client')}</strong><p>${esc(q.company||q.business_type||'-')}<br>${esc(q.phone||'-')}<br>${esc(q.email||'')}</p></div><div class="quote-box"><span>Package</span><strong>${esc(q.package_name||'-')}</strong><p>${esc(quoteClientNotes(q))}</p></div></div>
+      <div class="quote-grid"><div class="quote-box"><span>Bill To</span><strong>${esc(q.client_name||'Client')}</strong><p>${esc(q.company||q.business_type||'-')}<br>${esc(q.phone||'-')}${q.email?'<br>'+esc(q.email):''}</p></div><div class="quote-box"><span>Package</span><strong>${esc(q.package_name||'-')}</strong><p>${esc(quoteClientNotes(q))}</p>${packagePublicHtml(q.package_name)}</div></div>
       <table class="quote-table"><thead><tr><th>Description</th><th>Qty</th><th>Unit Price</th><th>Amount</th></tr></thead><tbody>${(items||[]).map(i=>`<tr><td>${esc(i.description)}</td><td>${Number(i.qty||1)}</td><td>${fmtRM(i.unit_price||0)}</td><td>${fmtRM(i.amount||0)}</td></tr>`).join('')}</tbody></table>
       <div class="quote-total"><div><span>Subtotal</span><strong>${fmtRM(q.subtotal||0)}</strong></div><div><span>Discount</span><strong>${fmtRM(q.discount||0)}</strong></div><div><span>Tax/SST</span><strong>${fmtRM(q.tax||0)}</strong></div><div class="grand"><span>Grand Total</span><strong>${fmtRM(quoteAmount(q))}</strong></div></div>
       <div class="quote-signature-grid"><div><strong>Prepared By</strong><span>RH Admin<br>Restu Harmoni Digital Solutions</span><em></em></div><div><strong>Client Approval</strong><span>Name:<br>Date:</span><em></em></div></div>
