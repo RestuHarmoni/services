@@ -1,1 +1,87 @@
-<!doctype html><html lang="ms"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Staff | RH Admin V1</title><link rel="stylesheet" href="assets/admin.css"></head><body class="admin-page"><aside class="sidebar" id="sidebar"><a class="side-brand" href="dashboard.html"><img src="../assets/rh-logo.png" alt="RH"><span>RH Admin<br><small>Command Center</small></span></a><nav class="side-nav"><a href="dashboard.html">🏠 Dashboard</a><div class="nav-label">Sales</div><a href="leads.html">📥 Leads</a><a class="" href="prospects.html">👥 Prospects</a><a class="" href="quotations.html">📄 Quotations</a><a class="" href="invoices.html">🧾 Invoices</a><div class="nav-label">Recurring</div><a class="" href="subscriptions.html">🔁 Subscriptions</a><div class="nav-label">Content</div><a class="" href="articles.html">📝 Articles</a><a class="" href="aira-knowledge.html">🤖 Aira Knowledge</a><div class="nav-label">System</div><a class="" href="storage.html">📁 Storage</a><a class="" href="reports.html">📊 Reports</a><a class="" href="settings.html">⚙️ Settings</a><a class="active" href="staff.html">🔐 Staff</a></nav></aside><div class="admin-main"><header class="topbar"><button id="menuBtn" class="icon-btn">☰</button><div><h1>Staff</h1><p>Cipta dan urus Staff ID.</p></div><div class="top-actions"><span id="staffBadge" class="staff-badge">Loading...</span><button id="logoutBtn" class="ghost-btn">Logout</button></div></header><main class="content"><section class="panel section-panel"><div class="empty-state"><strong>Staff</strong><br>Modul ini akan dibina pada phase seterusnya. Struktur route sudah disediakan supaya menu tidak 404.</div></section></main></div><script src="../supabase-config.js"></script><script src="assets/admin.js"></script></body></html>
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Staff | RH Admin V1</title>
+  <link rel="stylesheet" href="assets/admin.css">
+</head>
+<body class="admin-page">
+<aside class="sidebar" id="sidebar">
+  <a class="side-brand" href="dashboard.html"><img src="../assets/rh-logo.png" alt="RH"><span>RH Admin<br><small>Command Center</small></span></a>
+  <nav class="side-nav">
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <div class="nav-label">Sales</div>
+    <a href="leads.html">📥 Leads</a><a href="prospects.html">👥 Prospects</a><a href="quotations.html">📄 Quotations</a><a href="invoices.html">🧾 Invoices</a>
+    <div class="nav-label">Recurring</div><a href="subscriptions.html">🔁 Subscriptions</a>
+    <div class="nav-label">Content</div><a href="articles.html">📝 Articles</a><a href="aira-knowledge.html">🤖 Aira Knowledge</a>
+    <div class="nav-label">System</div><a href="storage.html">📁 Storage</a><a href="reports.html">📊 Reports</a><a href="settings.html">⚙️ Settings</a><a class="active" href="staff.html">🔐 Staff</a>
+  </nav>
+</aside>
+<div class="admin-main">
+  <header class="topbar">
+    <button id="menuBtn" class="icon-btn">☰</button>
+    <div><h1>Staff</h1><p>Cipta dan urus Staff ID.</p></div>
+    <div class="top-actions"><span id="staffBadge" class="staff-badge">Loading...</span><button id="logoutBtn" class="ghost-btn">Logout</button></div>
+  </header>
+  <main class="content staff-page-content">
+    <section class="staff-stat-grid lead-stat-grid" id="staffStats">
+      <article class="stat-card"><span>Total Staff</span><strong id="staffTotal">0</strong><small>Semua rekod aktif</small></article>
+      <article class="stat-card"><span>Active</span><strong id="staffActive">0</strong><small>Boleh login</small></article>
+      <article class="stat-card"><span>Suspended</span><strong id="staffSuspended">0</strong><small>Login dikunci</small></article>
+      <article class="stat-card"><span>Admin Roles</span><strong id="staffAdmins">0</strong><small>SUPER_ADMIN / ADMIN</small></article>
+    </section>
+
+    <section class="panel section-panel staff-manager-panel">
+      <div class="stacked-head staff-head-row">
+        <div>
+          <h2>Staff Management</h2>
+          <p>Urus akses team RH, role, status dan reset password.</p>
+        </div>
+        <div class="toolbar staff-toolbar-actions">
+          <button class="primary-btn" id="addStaffBtn">+ Add Staff</button>
+          <button class="ghost-btn" id="refreshStaffBtn">Refresh</button>
+        </div>
+      </div>
+      <div class="toolbar staff-toolbar">
+        <input class="search-input" id="staffSearch" placeholder="Cari staff ID, nama, email, role...">
+        <select class="select-input" id="staffRoleFilter">
+          <option value="all">Semua role</option>
+          <option value="SUPER_ADMIN">SUPER_ADMIN</option><option value="ADMIN">ADMIN</option><option value="SALES">SALES</option><option value="FINANCE">FINANCE</option><option value="PROJECT_MANAGER">PROJECT_MANAGER</option><option value="CONTENT">CONTENT</option><option value="SUPPORT">SUPPORT</option><option value="VIEWER">VIEWER</option>
+        </select>
+        <select class="select-input" id="staffStatusFilter"><option value="all">Semua status</option><option value="active">Active</option><option value="suspended">Suspended</option></select>
+      </div>
+      <div class="responsive-table-wrap staff-table-wrap">
+        <table class="data-table staff-table">
+          <thead><tr><th>Staff</th><th>Role</th><th>Department</th><th>Status</th><th>Last Login</th><th>Action</th></tr></thead>
+          <tbody id="staffTableBody"><tr><td colspan="6">Loading staff...</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="modal-backdrop" id="staffModal" hidden>
+  <div class="modal-card wide-modal staff-modal-card">
+    <div class="modal-head"><div><h2 id="staffModalTitle">Add Staff</h2><span id="staffModalSub">Create Staff ID</span></div><button class="icon-close" id="staffModalClose">×</button></div>
+    <form id="staffForm" class="form-grid">
+      <input type="hidden" id="staffRowId">
+      <label>Staff ID<input id="staffFormId" required placeholder="Contoh: SALES001"></label>
+      <label>Nama Penuh<input id="staffFullName" required placeholder="Nama staff"></label>
+      <label>Email<input id="staffEmail" type="email" placeholder="nama@email.com"></label>
+      <label>Telefon<input id="staffPhone" placeholder="0123456789"></label>
+      <label>Role<select id="staffRole"><option>SALES</option><option>FINANCE</option><option>PROJECT_MANAGER</option><option>CONTENT</option><option>SUPPORT</option><option>VIEWER</option><option>ADMIN</option><option>SUPER_ADMIN</option></select></label>
+      <label>Department<input id="staffDepartment" placeholder="Sales / Finance / Delivery"></label>
+      <label>Status<select id="staffStatus"><option value="active">Active</option><option value="suspended">Suspended</option></select></label>
+      <label>Password Baru<input id="staffPassword" type="password" placeholder="Isi untuk create / reset password"></label>
+      <label class="full">Notes<textarea id="staffNotes" rows="3" placeholder="Nota internal staff"></textarea></label>
+      <div class="modal-actions full"><button type="button" class="ghost-btn" id="staffCancelBtn">Cancel</button><button type="submit" class="primary-btn">Save Staff</button></div>
+    </form>
+  </div>
+</div>
+
+<script src="../supabase-config.js"></script>
+<script src="assets/admin.js"></script>
+<script src="assets/staff.js"></script>
+</body>
+</html>

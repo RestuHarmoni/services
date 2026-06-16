@@ -735,3 +735,6 @@ canvas{display:block;max-width:100%;height:auto}
 .storage-pager-buttons{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 .storage-pager-buttons .mini-btn:disabled{opacity:.45;cursor:not-allowed;}
 @media(max-width:760px){.storage-control-bar{display:grid;grid-template-columns:1fr;}.storage-view-toggle{display:grid;grid-template-columns:1fr 1fr;}.storage-folder-grid{grid-template-columns:1fr;}.storage-pager{display:grid;grid-template-columns:1fr;}.storage-pager-buttons{justify-content:space-between;}}
+
+/* RH Services v1.5.4 - Staff Management */
+.staff-stat-grid{grid-template-columns:repeat(4,1fr);margin-bottom:18px}.staff-manager-panel h2{margin:0 0 6px}.staff-head-row{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.staff-toolbar{margin:16px 0}.staff-toolbar-actions{justify-content:flex-end}.staff-table .status-pill{text-transform:capitalize}.staff-modal-card .form-grid{margin-top:8px}@media(max-width:900px){.staff-stat-grid{grid-template-columns:repeat(2,1fr)}.staff-head-row{display:block}.staff-toolbar-actions{margin-top:14px}.staff-toolbar-actions button{width:100%}.staff-table{min-width:760px}}@media(max-width:560px){.staff-stat-grid{grid-template-columns:1fr}.staff-page-content{padding:14px}.staff-toolbar{display:grid}.staff-toolbar .search-input,.staff-toolbar .select-input{width:100%;min-width:0}}
