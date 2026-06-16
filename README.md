@@ -72,3 +72,45 @@ After deploy, run:
 Uploaded template packages are mapped under:
 
 `rh-packages/templates/`
+
+
+## RH Admin Quotation Module V1.0.4
+
+Single Source Quotation Template: preview dan print/PDF kini menggunakan source template yang sama, dengan print root khas untuk A4 professional.
+
+## RH Admin V1.6.1 — Invoice V1.1 Deposit / Discount Update
+
+Run SQL:
+
+```text
+supabase/migrations/20260612224500_rh_admin_v1_6_1_invoice_deposit_discount.sql
+```
+
+QA route:
+
+```text
+/admin/invoices.html → + New Invoice → discount/deposit → Generate → Record Payment
+```
+
+## Update: Invoice Module V1.1.2 — Supabase Header Fix
+
+Patch for invoice generation error: `No API key found in request`.
+
+Run SQL:
+
+```text
+supabase/migrations/20260612230500_rh_admin_v1_6_3_invoice_supabase_header_fix.sql
+```
+
+Then test `/admin/invoices.html` → `+ New Invoice` → Generate Invoice.
+
+## Invoice Module V1.1.4 - Modal Action Bar Fix
+- Fix invoice preview action bar overlap.
+- Buttons no longer cover Balance Due / total text.
+- Print/PDF action buttons remain hidden.
+
+
+## RH Admin Payment Module V1.0.1
+Run: `supabase/migrations/20260612234000_rh_admin_payment_module_v1_0_1.sql`
+
+QA: `/admin/invoices.html` → View Invoice → Paid → upload receipt → Save Payment.

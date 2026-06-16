@@ -26,6 +26,14 @@
 /engine/*
   Cache-Control: no-cache, no-store, must-revalidate
 
+/aira-lead-system.js
+  Cache-Control: no-cache, no-store, must-revalidate
 
+/aira-data-service.js
+  Cache-Control: no-cache, no-store, must-revalidate
 
+/content/aira-faq-bank.json
+  Cache-Control: no-cache, no-store, must-revalidate
 
+/content/aira-question-bank.json
+  Cache-Control: no-cache, no-store, must-revalidate

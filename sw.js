@@ -1,4 +1,4 @@
-const RH_VERSION = 'v12.6-project-intake-engine';
+const RH_VERSION = 'v1-admin-project-module-v1.2-department-production-engine';
 const RH_CACHE_NAME = `services-restu-harmoni-${RH_VERSION}`;
 const RH_CRITICAL_EXTENSIONS = ['.html', '.js', '.css', '.json', '.webmanifest'];
 const RH_NETWORK_FIRST_PATHS = ['/content/', '/engine/'];
@@ -36,10 +36,6 @@ self.addEventListener('fetch', event => {
 
   const pathname = url.pathname;
 
-  if (pathname === '/admin-office' || pathname === '/admin-office/' || pathname === '/admin-office.html') {
-    event.respondWith(Response.redirect('/admin.html?v=v12.6-project-intake-engine', 302));
-    return;
-  }
   const isCriticalFile =
     pathname === '/' ||
     pathname.endsWith('/') ||
@@ -70,3 +66,5 @@ self.addEventListener('fetch', event => {
     })
   );
 });
+
+// project-full-v1
