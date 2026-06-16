@@ -1,0 +1,160 @@
+
+(function(){
+  'use strict';
+  const $=(s,r=document)=>r.querySelector(s);
+  const esc=v=>String(v??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+  const clone=o=>JSON.parse(JSON.stringify(o||{}));
+  const now=()=>new Date().toISOString();
+  const statusOf=o=>o?.is_deleted?'deleted':(o?.status||'published');
+  let currentQ={version:'v1.4.0-aira-knowledge-qa-recovery',steps:[],packages:{}};
+  let currentF={version:'v1.4.0-aira-knowledge-qa-recovery',faq:[]};
+  let source='local';
+  let editCtx=null;
+
+  const OFFICIAL_Q={version:'v1.4.0-aira-knowledge-qa-recovery',assistantName:'Aira',positioning:'AI Website Consultant',intro:['👋 Hai, saya <strong>Aira</strong>.','Saya akan tanya beberapa soalan ringkas untuk cadangkan pakej website RH yang paling sesuai.'],steps:[
+    {key:'business_type',question:'Apakah jenis bisnes anda?',type:'choice',required:true,status:'published',options:['Servis','Produk','Restoran / F&B','Event / Rental','Hartanah','Homestay / Hotel','Kereta Sewa','Klinik / Profesional','Kontraktor / Renovasi','Company Profile','E-commerce / Katalog','Custom System / Portal','Lain-lain']},
+    {key:'domain_status',question:'Adakah anda sudah mempunyai domain?',type:'choice',required:false,status:'published',options:['Ya, sudah ada domain','Belum ada domain','Tidak pasti / perlu semak']},
+    {key:'hosting_status',question:'Adakah anda sudah mempunyai hosting?',type:'choice',required:false,status:'published',options:['Ya, sudah ada hosting','Belum ada hosting','Tidak pasti / perlu semak']},
+    {key:'website_status',question:'Adakah anda sudah ada website sekarang?',type:'choice',required:false,status:'published',options:['Belum ada website','Ada, tetapi mahu upgrade','Ada landing page sahaja','Tidak pasti']},
+    {key:'objective',question:'Apakah objektif utama website anda?',type:'choice',required:true,status:'published',options:['Dapatkan Lead','Profil Syarikat','Jual Produk / Katalog','Booking / Tempahan','SEO Google','Dashboard / Sistem','Ecosystem Digital Lengkap']},
+    {key:'feature_need',question:'Fungsi apa yang anda paling perlukan?',type:'choice',required:false,status:'published',options:['Website basic + WhatsApp','AI Chatbot Aira','Blog / Artikel SEO','Service / Product Listing','Dashboard Basic','Payment / Invoice','Client Portal / Sistem Custom','Belum pasti']},
+    {key:'budget',question:'Budget anggaran anda?',type:'choice',required:true,status:'published',options:['RM799 (RH Basic)','RM1999 (RH Growth)','RM2999 (RH Ecosystem)','RM3000+ (RH Enterprise)','Tidak Pasti']},
+    {key:'timeline',question:'Bila anda mahu website mula siap atau dilancarkan?',type:'choice',required:true,status:'published',options:['Segera','1–2 minggu','Dalam 1 bulan','Belum pasti']},
+    {key:'content_ready',question:'Bahan seperti logo, gambar dan teks sudah ada?',type:'choice',required:false,status:'published',options:['Sudah lengkap','Ada sebahagian','Belum ada','Perlu bantuan susun content']},
+    {key:'name',question:'Boleh saya tahu nama anda?',type:'input',input:true,required:true,status:'published',placeholder:'Contoh: Ahmad'},
+    {key:'phone',question:'Nombor WhatsApp untuk team kami hubungi?',type:'input',input:true,required:true,status:'published',placeholder:'Contoh: 0123456789',validation:'phone'},
+    {key:'email',question:'Email untuk proposal / quotation?',type:'input',input:true,required:false,status:'published',placeholder:'Contoh: nama@email.com',validation:'email'}
+  ],packages:{
+    'RH Basic':{price:'RM799',maintenance:'RM79/bulan',bestFor:['Bisnes kecil','Personal brand','Profil ringkas','Baru mula online'],features:['Website asas / one-page','Mobile responsive','WhatsApp CTA','Lead form ringkas','SEO asas','Struktur Google-ready'],templateUrl:'/pakej/rh-basic/'},
+    'RH Growth':{price:'RM1999',maintenance:'RM129/bulan',bestFor:['Bisnes servis','Lead generation','Portfolio','Blog SEO','Listing servis / produk'],features:['Multi-page website','AI Chatbot Aira','Lead Capture System','Service / Product Listing','Blog / Artikel','Portfolio / Gallery','SEO asas'],templateUrl:'/pakej/rh-growth/'},
+    'RH Ecosystem':{price:'RM2999',maintenance:'RM249/bulan',bestFor:['Syarikat berkembang','Multi servis','Admin dashboard','Sales funnel','Ecosystem digital'],features:['Company profile + service website','Advanced AI Chatbot','Blog CMS','Dashboard Basic','Lead Management Ready','Analytics-ready structure','Multi Website Structure'],templateUrl:'/pakej/rh-ecosystem/'},
+    'RH Enterprise':{price:'Custom',maintenance:'Custom',bestFor:['Portal','CRM','Custom system','Multi-branch','Automation'],features:['Custom quotation','Portal / dashboard','Automation flow','Integration planning','Advanced workflow','Custom scope'],templateUrl:'/#aira-popup'}
+  }};
+  const OFFICIAL_F={version:'v1.4.0-aira-knowledge-qa-recovery',quickActions:['harga','pakej','domain','hosting','maintenance','tempoh siap'],faq:[
+    {topic:'Harga pakej',status:'published',triggers:['harga','pakej','berapa kos'],answer:'Kami ada 4 pilihan utama:<br><br><strong>RH Basic</strong> — RM799 + maintenance RM79/bulan<br><strong>RH Growth</strong> — RM1999 + maintenance RM129/bulan<br><strong>RH Ecosystem</strong> — RM2999 + maintenance RM249/bulan<br><strong>RH Enterprise</strong> — Custom quotation.'},
+    {topic:'Maintenance',status:'published',triggers:['maintenance','bulanan','support'],answer:'Maintenance merangkumi pemantauan website, SSL, backup asas, bug fix minor dan support mengikut pakej.'},
+    {topic:'Domain dan hosting',status:'published',triggers:['domain','hosting','server'],answer:'Jika sudah ada domain/hosting, kami boleh semak dahulu. Jika belum ada, RH boleh bantu susun domain, hosting dan setup teknikal.'},
+    {topic:'Tempoh siap',status:'published',triggers:['berapa lama','tempoh siap','siap bila'],answer:'Tempoh biasa ialah 3–14 hari bekerja bergantung kepada pakej, content dan kelulusan client.'}
+  ]};
+
+  function normalize(){
+    currentQ.steps=Array.isArray(currentQ.steps)?currentQ.steps:[];
+    currentQ.packages=currentQ.packages&&typeof currentQ.packages==='object'?currentQ.packages:{};
+    currentF.faq=Array.isArray(currentF.faq)?currentF.faq:[];
+    if(!currentQ.version) currentQ.version='v1.4.0-aira-knowledge-qa-recovery';
+    if(!currentF.version) currentF.version='v1.4.0-aira-knowledge-qa-recovery';
+  }
+  function setMsg(msg,type='info'){
+    const el=$('#airaStatus'); if(!el)return;
+    el.className='alert '+type; el.textContent=msg;
+  }
+  function render(){
+    normalize();
+    $('#airaVersion').textContent=currentQ.version||'-';
+    $('#qCount').textContent=currentQ.steps.filter(x=>!x.is_deleted).length;
+    $('#pCount').textContent=Object.keys(currentQ.packages||{}).length;
+    $('#fCount').textContent=currentF.faq.filter(x=>!x.is_deleted).length;
+    $('#bankSource').textContent=source||'-';
+    renderPackages(); renderQuestions(); renderFaq();
+  }
+  function renderPackages(){
+    const box=$('#packageCards'); const entries=Object.entries(currentQ.packages||{});
+    box.innerHTML=entries.length?entries.map(([name,p])=>`<div class="kb-card"><div class="kb-meta"><span class="kb-badge active">Package</span><span>${esc(p.price||'')}</span><span>${esc(p.maintenance||'')}</span></div><h3>${esc(name)}</h3><p><strong>Best for:</strong> ${esc((p.bestFor||[]).join(', ')||'-')}</p><p><strong>Features:</strong> ${esc((p.features||[]).slice(0,5).join(', ')||'-')}</p><div class="kb-actions"><button class="ghost-btn" data-edit-package="${esc(name)}">Edit</button><button class="ghost-btn" data-dup-package="${esc(name)}">Duplicate</button><button class="danger-outline-btn" data-del-package="${esc(name)}">Delete</button></div></div>`).join(''):'<div class="kb-empty">Tiada pakej. Klik Add Package.</div>';
+  }
+  function filterList(list,searchEl,statusEl,fields){
+    const q=String($(searchEl)?.value||'').toLowerCase().trim(); const st=$(statusEl)?.value||'';
+    return list.filter(item=>{ const blob=fields.map(f=>Array.isArray(item[f])?item[f].join(' '):(item[f]||'')).join(' ').toLowerCase(); return (!q||blob.includes(q))&&(!st||statusOf(item)===st); });
+  }
+  function renderQuestions(){
+    const box=$('#questionCards'); const items=filterList(currentQ.steps,'#questionSearch','#questionStatusFilter',['key','question','options']);
+    box.innerHTML=items.length?items.map(item=>{ const i=currentQ.steps.indexOf(item); const st=statusOf(item); return `<div class="kb-card ${item.is_deleted?'is-deleted':''}"><div class="kb-meta"><span class="kb-badge ${st}">${esc(st)}</span><span>${esc(item.key||'-')}</span><span>${item.required?'Required':'Optional'}</span></div><h3>${esc(item.question||'-')}</h3><p>${esc((item.options||[]).slice(0,8).join(', ')||item.placeholder||'Input field')}</p><div class="kb-actions"><button class="ghost-btn" data-edit-question="${i}">Edit</button><button class="ghost-btn" data-dup-question="${i}">Duplicate</button><button class="ghost-btn" data-toggle-question="${i}">${st==='published'?'Draft':'Publish'}</button>${item.is_deleted?`<button class="ghost-btn" data-restore-question="${i}">Restore</button>`:`<button class="danger-outline-btn" data-del-question="${i}">Delete</button>`}</div></div>`; }).join(''):'<div class="kb-empty">Tiada soalan. Klik Add Question atau Reset Official.</div>';
+  }
+  function renderFaq(){
+    const box=$('#faqCards'); const items=filterList(currentF.faq,'#faqSearch','#faqStatusFilter',['topic','triggers','answer']);
+    box.innerHTML=items.length?items.map(item=>{ const i=currentF.faq.indexOf(item); const st=statusOf(item); return `<div class="kb-card ${item.is_deleted?'is-deleted':''}"><div class="kb-meta"><span class="kb-badge ${st}">${esc(st)}</span><span>${esc(item.topic||'-')}</span></div><h3>${esc((item.triggers||[]).slice(0,6).join(', ')||item.topic||'-')}</h3><p>${item.answer||''}</p><div class="kb-actions"><button class="ghost-btn" data-edit-faq="${i}">Edit</button><button class="ghost-btn" data-dup-faq="${i}">Duplicate</button><button class="ghost-btn" data-toggle-faq="${i}">${st==='published'?'Draft':'Publish'}</button>${item.is_deleted?`<button class="ghost-btn" data-restore-faq="${i}">Restore</button>`:`<button class="danger-outline-btn" data-del-faq="${i}">Delete</button>`}</div></div>`; }).join(''):'<div class="kb-empty">Tiada FAQ. Klik Add FAQ atau Reset Official.</div>';
+  }
+  async function loadCurrent(){
+    setMsg('Memuatkan bank soalan...','info');
+    try{
+      const svc=window.RH_AIRA_DATA_SERVICE;
+      if(!svc) throw new Error('Aira data service tidak tersedia.');
+      const res=await svc.loadAll();
+      currentQ=res.questionBank&&res.questionBank.steps?clone(res.questionBank):clone(OFFICIAL_Q);
+      currentF=res.faqBank&&res.faqBank.faq?clone(res.faqBank):clone(OFFICIAL_F);
+      source=res.source||'local'; normalize(); render();
+      setMsg(res.warning?'Loaded fallback. Warning: '+res.warning:'Bank soalan berjaya dimuatkan.','info');
+    }catch(err){ currentQ=clone(OFFICIAL_Q); currentF=clone(OFFICIAL_F); source='official fallback'; render(); setMsg('Gagal load remote. Official fallback dipaparkan: '+err.message,'danger'); }
+  }
+  async function publishCurrent(){
+    try{
+      normalize(); currentQ.version='v1.4.0-aira-knowledge-qa-recovery'; currentF.version='v1.4.0-aira-knowledge-qa-recovery';
+      const res=await window.RH_AIRA_DATA_SERVICE.publishAll(currentQ,currentF);
+      source=res.mode||source; render(); setMsg(res.ok?'Perubahan Aira Knowledge berjaya publish.':'Gagal publish: '+(res.error||'Unknown error'),res.ok?'success':'danger');
+    }catch(err){ setMsg('Gagal publish: '+err.message,'danger'); }
+  }
+  function lines(v){ return String(v||'').split('\n').map(x=>x.trim()).filter(Boolean); }
+  function comma(v){ return String(v||'').split(',').map(x=>x.trim()).filter(Boolean); }
+  function openModal(type,index,key){
+    editCtx={type,index,key}; let title=''; let html='';
+    if(type==='question'){
+      const item=index==null?{key:'',question:'',type:'choice',required:false,status:'draft',options:[],placeholder:''}:currentQ.steps[index]; title=index==null?'Add Question':'Edit Question';
+      html=`<div class="two-col"><label>Key<input name="key" value="${esc(item.key)}" required></label><label>Status<select name="status"><option value="published" ${statusOf(item)==='published'?'selected':''}>published</option><option value="draft" ${statusOf(item)==='draft'?'selected':''}>draft</option><option value="archived" ${statusOf(item)==='archived'?'selected':''}>archived</option></select></label></div><label>Question<textarea name="question" required>${esc(item.question)}</textarea></label><div class="two-col"><label>Type<select name="type"><option value="choice" ${item.type==='choice'?'selected':''}>choice</option><option value="input" ${item.type==='input'?'selected':''}>input</option></select></label><label>Placeholder<input name="placeholder" value="${esc(item.placeholder||'')}"></label></div><label><input type="checkbox" name="required" ${item.required?'checked':''}> Required</label><label>Options <span class="kb-help">Satu baris satu pilihan</span><textarea name="options">${esc((item.options||[]).join('\n'))}</textarea></label>`;
+    }
+    if(type==='faq'){
+      const item=index==null?{topic:'',triggers:[],answer:'',status:'draft'}:currentF.faq[index]; title=index==null?'Add FAQ':'Edit FAQ';
+      html=`<div class="two-col"><label>Topic<input name="topic" value="${esc(item.topic)}" required></label><label>Status<select name="status"><option value="published" ${statusOf(item)==='published'?'selected':''}>published</option><option value="draft" ${statusOf(item)==='draft'?'selected':''}>draft</option><option value="archived" ${statusOf(item)==='archived'?'selected':''}>archived</option></select></label></div><label>Triggers <span class="kb-help">Pisah dengan koma</span><textarea name="triggers">${esc((item.triggers||[]).join(', '))}</textarea></label><label>Answer <span class="kb-help">HTML ringkas dibenarkan</span><textarea name="answer" class="large" required>${esc(item.answer)}</textarea></label><div class="kb-preview"><h4>Preview</h4><div id="answerPreview">${item.answer||''}</div></div>`;
+    }
+    if(type==='package'){
+      const item=key?currentQ.packages[key]:{price:'',maintenance:'',bestFor:[],features:[],templateUrl:''}; title=key?'Edit Package':'Add Package';
+      html=`<label>Package Name<input name="name" value="${esc(key||'')}" required></label><div class="two-col"><label>Price<input name="price" value="${esc(item.price||'')}"></label><label>Maintenance<input name="maintenance" value="${esc(item.maintenance||'')}"></label></div><label>Best For <span class="kb-help">Satu baris satu item</span><textarea name="bestFor">${esc((item.bestFor||[]).join('\n'))}</textarea></label><label>Features <span class="kb-help">Satu baris satu item</span><textarea name="features">${esc((item.features||[]).join('\n'))}</textarea></label><label>Template URL<input name="templateUrl" value="${esc(item.templateUrl||'')}"></label>`;
+    }
+    $('#kbModalTitle').textContent=title; $('#kbFormFields').innerHTML=html; $('#kbModal').classList.remove('hidden');
+    const ans=$('#kbFormFields textarea[name="answer"]'); if(ans) ans.addEventListener('input',e=>{ const p=$('#answerPreview'); if(p)p.innerHTML=e.target.value; });
+  }
+  function closeModal(){ $('#kbModal').classList.add('hidden'); editCtx=null; }
+  function saveForm(e){
+    e.preventDefault(); const fd=new FormData(e.target); const stamp=now();
+    if(editCtx.type==='question'){
+      const obj={key:String(fd.get('key')||'').trim(),question:String(fd.get('question')||'').trim(),type:fd.get('type')||'choice',required:!!fd.get('required'),placeholder:fd.get('placeholder')||'',options:lines(fd.get('options')),status:fd.get('status')||'draft',updated_at:stamp};
+      if(editCtx.index==null) currentQ.steps.push(obj); else currentQ.steps[editCtx.index]={...currentQ.steps[editCtx.index],...obj};
+    }
+    if(editCtx.type==='faq'){
+      const obj={topic:String(fd.get('topic')||'').trim(),triggers:comma(fd.get('triggers')),answer:String(fd.get('answer')||''),status:fd.get('status')||'draft',updated_at:stamp};
+      if(editCtx.index==null) currentF.faq.push(obj); else currentF.faq[editCtx.index]={...currentF.faq[editCtx.index],...obj};
+    }
+    if(editCtx.type==='package'){
+      const name=String(fd.get('name')||'').trim(); if(!name) return;
+      const obj={price:fd.get('price')||'',maintenance:fd.get('maintenance')||'',bestFor:lines(fd.get('bestFor')),features:lines(fd.get('features')),templateUrl:fd.get('templateUrl')||''};
+      if(editCtx.key && editCtx.key!==name) delete currentQ.packages[editCtx.key]; currentQ.packages[name]=obj;
+    }
+    closeModal(); render(); setMsg('Perubahan disimpan sebagai draft. Tekan Publish Changes untuk live.','info');
+  }
+  function duplicate(type,i,key){ if(type==='question'){const c=clone(currentQ.steps[i]); c.key=(c.key||'question')+'_copy'; c.question='Copy - '+(c.question||''); c.status='draft'; currentQ.steps.push(c);} if(type==='faq'){const c=clone(currentF.faq[i]); c.topic=(c.topic||'FAQ')+' Copy'; c.status='draft'; currentF.faq.push(c);} if(type==='package'){const c=clone(currentQ.packages[key]); currentQ.packages[key+' Copy']=c;} render(); setMsg('Item duplicated sebagai draft.','info'); }
+  function softDelete(type,i,key){
+    const label=type==='package'?key:(type==='question'?currentQ.steps[i]?.question:currentF.faq[i]?.topic);
+    const typed=prompt(`Taip DELETE untuk arkib/delete knowledge:\n\n${label}`); if(typed!=='DELETE') return;
+    const reason=prompt('Sebab delete/arkib knowledge ini?')||'No reason provided';
+    if(type==='package') delete currentQ.packages[key];
+    else { const item=type==='question'?currentQ.steps[i]:currentF.faq[i]; Object.assign(item,{is_deleted:true,status:'deleted',deleted_at:now(),delete_reason:reason}); }
+    render(); setMsg('Knowledge diarkibkan/dipadam dari draft. Tekan Publish Changes untuk live.','info');
+  }
+  document.addEventListener('click',e=>{
+    const t=e.target.closest('button'); if(!t) return;
+    if(t.id==='menuBtn') $('#sidebar')?.classList.toggle('open');
+    if(t.id==='addQuestionBtn') openModal('question'); if(t.id==='addFaqBtn') openModal('faq'); if(t.id==='addPackageBtn') openModal('package');
+    if(t.id==='loadAiraBankBtn') loadCurrent(); if(t.id==='publishAiraBankBtn') publishCurrent();
+    if(t.id==='resetOfficialBtn'){ if(confirm('Reset kepada Official Bank v1.4.0?')){ currentQ=clone(OFFICIAL_Q); currentF=clone(OFFICIAL_F); source='official'; render(); setMsg('Official bank dimuatkan sebagai draft. Tekan Publish Changes untuk live.','info'); } }
+    if(t.dataset.editQuestion!==undefined) openModal('question',Number(t.dataset.editQuestion)); if(t.dataset.editFaq!==undefined) openModal('faq',Number(t.dataset.editFaq)); if(t.dataset.editPackage) openModal('package',null,t.dataset.editPackage);
+    if(t.dataset.dupQuestion!==undefined) duplicate('question',Number(t.dataset.dupQuestion)); if(t.dataset.dupFaq!==undefined) duplicate('faq',Number(t.dataset.dupFaq)); if(t.dataset.dupPackage) duplicate('package',null,t.dataset.dupPackage);
+    if(t.dataset.toggleQuestion!==undefined){ const it=currentQ.steps[Number(t.dataset.toggleQuestion)]; it.status=statusOf(it)==='published'?'draft':'published'; render(); }
+    if(t.dataset.toggleFaq!==undefined){ const it=currentF.faq[Number(t.dataset.toggleFaq)]; it.status=statusOf(it)==='published'?'draft':'published'; render(); }
+    if(t.dataset.delQuestion!==undefined) softDelete('question',Number(t.dataset.delQuestion)); if(t.dataset.delFaq!==undefined) softDelete('faq',Number(t.dataset.delFaq)); if(t.dataset.delPackage) softDelete('package',null,t.dataset.delPackage);
+    if(t.dataset.restoreQuestion!==undefined){ const it=currentQ.steps[Number(t.dataset.restoreQuestion)]; delete it.is_deleted; it.status='draft'; render(); }
+    if(t.dataset.restoreFaq!==undefined){ const it=currentF.faq[Number(t.dataset.restoreFaq)]; delete it.is_deleted; it.status='draft'; render(); }
+    if(t.id==='kbModalClose'||t.id==='kbCancelBtn') closeModal();
+  });
+  $('#kbModal')?.addEventListener('click',e=>{ if(e.target.id==='kbModal') closeModal(); });
+  $('#kbForm')?.addEventListener('submit',saveForm);
+  ['questionSearch','questionStatusFilter','faqSearch','faqStatusFilter'].forEach(id=>$('#'+id)?.addEventListener('input',render));
+  render(); loadCurrent();
+})();

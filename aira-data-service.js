@@ -27,7 +27,7 @@
     const version=String(qb.version||'');
     const hasNew=qb.packages['RH Basic']&&qb.packages['RH Growth']&&qb.packages['RH Ecosystem']&&qb.packages['RH Enterprise'];
     const hasOld=qb.packages['RH Starter']&&qb.packages['RH Growth']&&qb.packages['RH Ecosystem'];
-    return version.includes('v1.3.8-aira-knowledge-bank-sales-question-flow') || version.includes('v11.0-package-template-linking')&&hasNew || version.includes('v10.0-rh-official-package-alignment')&&hasOld;
+    return version.includes('v1.4.0-aira-knowledge-qa-recovery') || version.includes('v1.3.9-aira-knowledge-crud-management') || version.includes('v1.3.8-aira-knowledge-bank-sales-question-flow') || version.includes('v11.0-package-template-linking')&&hasNew || version.includes('v10.0-rh-official-package-alignment')&&hasOld;
   }
   function readLocal(){
     const d=defaults();
