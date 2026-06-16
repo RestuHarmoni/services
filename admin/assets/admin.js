@@ -13,7 +13,7 @@ const RHAdmin = (() => {
   let currentInvoice = null;
   let projectsCache = [];
   let currentProject = null;
-  let storageState = { bucket:'blog-images', rows:[], loading:false };
+  let storageState = { bucket:'blog-images', rows:[], loading:false, folder:null, page:1, pageSize:12, view:'folders' };
   const fmtRM = (n) => new Intl.NumberFormat('ms-MY',{style:'currency',currency:'MYR',maximumFractionDigits:0}).format(Number(n||0));
   async function getClient(){
     if(window.RHGetSupabaseClient) return await window.RHGetSupabaseClient();
@@ -1911,7 +1911,7 @@ const RHAdmin = (() => {
   }
 
 
-  // RH Services v1.5.2 Storage Manager
+  // RH Services v1.5.3 Storage Folder View + Pagination
   const STORAGE_BUCKETS = {
     'blog-images': {label:'Blog Images', root:'articles', type:'image', public:true, uploadPrefix:'articles'},
     'client-files': {label:'Client Files', root:'', type:'file', public:true, uploadPrefix:'uploads'},
@@ -1948,7 +1948,7 @@ const RHAdmin = (() => {
     for(const item of (data||[])){
       const isFolder = !item.id && !item.metadata && !item.name.includes('.');
       const path = prefix ? `${prefix}/${item.name}` : item.name;
-      if(isFolder && depth<2){
+      if(isFolder && depth<3){
         const nested=await listStorageFolder(client,bucket,path,depth+1);
         out.push(...nested);
       }else if(!isFolder){
@@ -1956,6 +1956,30 @@ const RHAdmin = (() => {
       }
     }
     return out;
+  }
+  function getBucketRoot(bucket){ return STORAGE_BUCKETS[bucket]?.root || ''; }
+  function getTopFolder(row){
+    const root=getBucketRoot(row.bucket);
+    const folder=String(row.folder||'').replace(/^\/+|\/+$/g,'');
+    if(root && (folder===root || folder.startsWith(root+'/'))) return root;
+    return folder.split('/').filter(Boolean)[0] || 'root';
+  }
+  function getFolderGroups(){
+    const rows=filteredStorageRows(false).filter(r=>r.bucket===storageState.bucket);
+    const map=new Map();
+    rows.forEach(r=>{
+      const key=getTopFolder(r);
+      const existing=map.get(key)||{name:key,label:key==='root'?'Root':key,path:key,count:0,size:0,updated_at:''};
+      existing.count+=1; existing.size+=Number(r.size||0);
+      if(!existing.updated_at || String(r.updated_at||'')>String(existing.updated_at||'')) existing.updated_at=r.updated_at;
+      map.set(key,existing);
+    });
+    return [...map.values()].sort((a,b)=>a.label.localeCompare(b.label));
+  }
+  function rowsForCurrentFolder(){
+    const rows=filteredStorageRows(false).filter(r=>r.bucket===storageState.bucket);
+    if(!storageState.folder) return rows.filter(r=>getTopFolder(r)==='root');
+    return rows.filter(r=>getTopFolder(r)===storageState.folder);
   }
   async function loadStoragePage(){
     const client=await getClient(); if(!client) return;
@@ -1986,38 +2010,79 @@ const RHAdmin = (() => {
     set('#storageTotalCount',rows.length);
     set('#storageTotalSize',bytesFmt(totalSize));
   }
-  function filteredStorageRows(){
+  function filteredStorageRows(applyFolder=true){
     const term=String(qs('#storageSearch')?.value||'').toLowerCase().trim();
     const type=qs('#storageTypeFilter')?.value||'all';
-    return (storageState.rows||[]).filter(r=>r.bucket===storageState.bucket).filter(r=>{
+    let rows=(storageState.rows||[]).filter(r=>r.bucket===storageState.bucket).filter(r=>{
       const hay=`${r.name} ${r.path} ${r.folder}`.toLowerCase();
       const okTerm=!term || hay.includes(term);
       const okType=type==='all' || r.kind===type;
       return okTerm && okType;
     });
+    if(applyFolder && storageState.folder) rows=rows.filter(r=>getTopFolder(r)===storageState.folder);
+    return rows;
+  }
+  function storageViewMode(){ return storageState.folder ? storageState.view : 'folders'; }
+  function updateStorageToolbar(){
+    qsa('[data-storage-view]').forEach(btn=>btn.classList.toggle('active',btn.dataset.storageView===storageViewMode()));
+    const crumb=qs('#storageBreadcrumb');
+    if(crumb){
+      const bucketLabel=STORAGE_BUCKETS[storageState.bucket]?.label || storageState.bucket;
+      crumb.innerHTML=`<button class="crumb-link" data-storage-root="1">${esc(bucketLabel)}</button>${storageState.folder?`<span>/</span><strong>${esc(storageState.folder)}</strong>`:'<span>/ Folders</span>'}`;
+    }
+    const back=qs('#storageBackBtn'); if(back) back.hidden=!storageState.folder;
   }
   function renderStorageFiles(){
-    const rows=filteredStorageRows();
-    const grid=qs('#storageGrid'); const body=qs('#storageTableBody');
-    if(!rows.length){
-      if(grid) grid.innerHTML='<div class="empty-state">Tiada fail dalam bucket/filter ini.</div>';
-      if(body) body.innerHTML='<tr><td colspan="5"><div class="empty-state">Tiada fail dalam bucket/filter ini.</div></td></tr>';
+    updateStorageToolbar();
+    const mode=storageViewMode();
+    const grid=qs('#storageGrid'); const body=qs('#storageTableBody'); const pager=qs('#storagePager');
+    if(mode==='folders'){
+      const folders=getFolderGroups();
+      if(body) body.innerHTML='';
+      if(pager) pager.innerHTML='';
+      if(!folders.length){ if(grid) grid.innerHTML='<div class="empty-state">Tiada folder/fail dalam bucket atau filter ini.</div>'; return; }
+      if(grid) grid.innerHTML=`<div class="storage-folder-grid">${folders.map(storageFolderHtml).join('')}</div>`;
       return;
     }
-    const clientUrlRows = rows.map(r=>{
-      const publicUrl = getStoragePublicUrl({storage:{from:()=>({getPublicUrl:()=>({data:{publicUrl:''}})})}},r.bucket,r.path);
-      return {...r,publicUrl};
-    });
+    const allRows=rowsForCurrentFolder();
+    const total=allRows.length; const per=Number(storageState.pageSize||12); const totalPages=Math.max(1,Math.ceil(total/per));
+    if(storageState.page>totalPages) storageState.page=totalPages;
+    const start=(storageState.page-1)*per;
+    const rows=allRows.slice(start,start+per);
+    if(!total){
+      if(grid) grid.innerHTML='<div class="empty-state">Tiada fail dalam folder/filter ini.</div>';
+      if(body) body.innerHTML='<tr><td colspan="5"><div class="empty-state">Tiada fail dalam folder/filter ini.</div></td></tr>';
+      if(pager) pager.innerHTML='';
+      return;
+    }
     getClient().then(client=>{
       const prepared=rows.map(r=>({...r,publicUrl:getStoragePublicUrl(client,r.bucket,r.path)}));
-      if(grid) grid.innerHTML=prepared.map(r=>storageCardHtml(r)).join('');
+      if(grid){
+        grid.classList.toggle('compact-mode',mode==='compact');
+        grid.innerHTML=mode==='list'?'':prepared.map(r=>storageCardHtml(r,mode)).join('');
+      }
       if(body) body.innerHTML=prepared.map(r=>storageRowHtml(r)).join('');
+      if(pager) pager.innerHTML=storagePagerHtml(total,totalPages,start,rows.length);
     });
   }
-  function storageCardHtml(r){
+  function storageFolderHtml(f){
+    return `<button class="storage-folder-card" data-storage-folder="${esc(f.path)}">
+      <div class="folder-icon">📁</div>
+      <div><strong>${esc(f.label)}</strong><span>${f.count} fail • ${bytesFmt(f.size)}</span><small>Update: ${f.updated_at?dateShort(f.updated_at):'-'}</small></div>
+    </button>`;
+  }
+  function storagePagerHtml(total,totalPages,start,count){
+    return `<div class="storage-pager-info">${start+1}-${start+count} daripada ${total} fail</div>
+      <div class="storage-pager-buttons">
+        <button class="mini-btn" data-storage-page="prev" ${storageState.page<=1?'disabled':''}>Previous</button>
+        <span>Page ${storageState.page} / ${totalPages}</span>
+        <button class="mini-btn" data-storage-page="next" ${storageState.page>=totalPages?'disabled':''}>Next</button>
+      </div>`;
+  }
+  function storageCardHtml(r,mode='grid'){
     const isImg=r.kind==='image';
     const thumb=isImg&&r.publicUrl?`<img src="${esc(r.publicUrl)}" alt="${esc(r.name)}" loading="lazy">`:`<div class="file-icon">${storageIcon(r.kind)}</div>`;
-    return `<article class="storage-file-card">
+    return `<article class="storage-file-card ${mode==='compact'?'is-compact':''}">
       <div class="storage-thumb">${thumb}</div>
       <div class="storage-file-body">
         <div class="storage-file-name">${esc(r.name)}</div>
@@ -2037,8 +2102,18 @@ const RHAdmin = (() => {
     </tr>`;
   }
   function setStorageTab(bucket){
-    if(!STORAGE_BUCKETS[bucket]) return; storageState.bucket=bucket;
+    if(!STORAGE_BUCKETS[bucket]) return; storageState.bucket=bucket; storageState.folder=null; storageState.page=1; storageState.view='grid';
     qsa('[data-storage-tab]').forEach(b=>b.classList.toggle('active',b.dataset.storageTab===bucket));
+    renderStorageFiles();
+  }
+  function openStorageFolder(folder){ storageState.folder=folder; storageState.page=1; storageState.view='grid'; renderStorageFiles(); }
+  function backStorageRoot(){ storageState.folder=null; storageState.page=1; renderStorageFiles(); }
+  function setStorageView(view){ if(!['grid','list','compact'].includes(view)) return; storageState.view=view; renderStorageFiles(); }
+  function setStoragePage(dir){
+    const total=Math.max(1,Math.ceil(rowsForCurrentFolder().length/Number(storageState.pageSize||12)));
+    if(dir==='prev') storageState.page=Math.max(1,storageState.page-1);
+    else if(dir==='next') storageState.page=Math.min(total,storageState.page+1);
+    else storageState.page=Math.min(total,Math.max(1,Number(dir)||1));
     renderStorageFiles();
   }
   async function uploadStorageFiles(){
@@ -2049,7 +2124,7 @@ const RHAdmin = (() => {
     storageMsg(`Uploading ${files.length} fail...`);
     try{
       for(const file of files){
-        const folder=cfg.uploadPrefix || 'uploads';
+        const folder=storageState.folder || cfg.uploadPrefix || 'uploads';
         const path=`${folder}/${safeFileName(file.name)}`;
         const {error}=await client.storage.from(storageState.bucket).upload(path,file,{cacheControl:'31536000',upsert:false,contentType:file.type||undefined});
         if(error) throw error;
@@ -2080,8 +2155,9 @@ const RHAdmin = (() => {
     const stRefresh=qs('#refreshStorageBtn'); if(stRefresh) stRefresh.onclick=loadStoragePage;
     const stUpload=qs('#uploadStorageBtn'); if(stUpload) stUpload.onclick=()=>qs('#storageFileInput')?.click();
     const stFile=qs('#storageFileInput'); if(stFile) stFile.onchange=uploadStorageFiles;
-    const stSearch=qs('#storageSearch'); if(stSearch) stSearch.oninput=renderStorageFiles;
-    const stType=qs('#storageTypeFilter'); if(stType) stType.onchange=renderStorageFiles;
+    const stSearch=qs('#storageSearch'); if(stSearch) stSearch.oninput=()=>{storageState.page=1; renderStorageFiles();};
+    const stType=qs('#storageTypeFilter'); if(stType) stType.onchange=()=>{storageState.page=1; renderStorageFiles();};
+    const stPageSize=qs('#storagePageSize'); if(stPageSize) stPageSize.onchange=()=>{storageState.pageSize=Number(stPageSize.value)||12; storageState.page=1; renderStorageFiles();};
     qsa('[data-storage-tab]').forEach(btn=>btn.onclick=()=>setStorageTab(btn.dataset.storageTab));
     const menu=qs('#menuBtn'); if(menu) menu.onclick=()=>qs('#sidebar').classList.toggle('open');
     const search=qs('#leadSearch'); if(search) search.oninput=renderLeadsTable;
@@ -2215,6 +2291,11 @@ const RHAdmin = (() => {
       const stOpen=e.target.closest('[data-storage-open]'); if(stOpen) window.open(stOpen.dataset.storageOpen,'_blank','noopener');
       const stCopy=e.target.closest('[data-storage-copy]'); if(stCopy){ navigator.clipboard?.writeText(stCopy.dataset.storageCopy); alert('URL disalin.'); }
       const stDel=e.target.closest('[data-storage-delete-bucket]'); if(stDel) deleteStorageObject(stDel.dataset.storageDeleteBucket, stDel.dataset.storageDeletePath);
+      const stFolder=e.target.closest('[data-storage-folder]'); if(stFolder) openStorageFolder(stFolder.dataset.storageFolder);
+      const stRoot=e.target.closest('[data-storage-root]'); if(stRoot) backStorageRoot();
+      const stBack=e.target.closest('[data-storage-back]'); if(stBack) backStorageRoot();
+      const stView=e.target.closest('[data-storage-view]'); if(stView) setStorageView(stView.dataset.storageView);
+      const stPage=e.target.closest('[data-storage-page]'); if(stPage) setStoragePage(stPage.dataset.storagePage);
     });
   }
   function init(){bind(); const s=protect(); if(!s) return; if(qs('#totalLeads')) loadDashboard(); if(qs('#leadsTableBody')) loadLeadsPage(); if(qs('#prospectsTableBody')) loadProspectsPage(); if(qs('#quotationsTableBody')) loadQuotationsPage(); if(qs('#invoicesTableBody')) loadInvoicesPage(); if(qs('#projectsTableBody')) loadProjectsPage(); if(qs('#articlesTableBody')) loadArticlesPage(); if(qs('#storageGrid')) loadStoragePage();}

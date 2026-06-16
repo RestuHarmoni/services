@@ -26,6 +26,17 @@
       <button class="storage-tab" data-storage-tab="payment-receipts">Payment Receipts</button>
     </div>
 
+    <div class="storage-control-bar">
+      <div class="storage-breadcrumb" id="storageBreadcrumb">Storage / Folders</div>
+      <div class="storage-view-toggle" aria-label="Storage view mode">
+        <button class="mini-btn" data-storage-back hidden id="storageBackBtn">← Back</button>
+        <button class="mini-btn active" data-storage-view="folders">Folders</button>
+        <button class="mini-btn" data-storage-view="grid">Grid</button>
+        <button class="mini-btn" data-storage-view="list">List</button>
+        <button class="mini-btn" data-storage-view="compact">Compact</button>
+      </div>
+    </div>
+
     <div class="toolbar storage-filter-row">
       <input id="storageSearch" class="search-input" placeholder="Cari nama fail / folder...">
       <select id="storageTypeFilter" class="select-input">
@@ -34,11 +45,17 @@
         <option value="document">Dokumen</option>
         <option value="other">Lain-lain</option>
       </select>
+      <select id="storagePageSize" class="select-input">
+        <option value="12">12 / page</option>
+        <option value="24">24 / page</option>
+        <option value="48">48 / page</option>
+      </select>
     </div>
 
     <div id="storageStatus" class="login-note" hidden></div>
 
     <div class="storage-grid" id="storageGrid"></div>
+    <div class="storage-pager" id="storagePager"></div>
     <div class="responsive-table-wrap storage-table-wrap">
       <table class="data-table storage-table">
         <thead><tr><th>File</th><th>Bucket</th><th>Size</th><th>Updated</th><th>Action</th></tr></thead>
