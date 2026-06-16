@@ -59,6 +59,7 @@ Schema: `SUPABASE_LEADS_SCHEMA.sql`
 
 Official RH packages are now locked as:
 
+- RH Basic — RM799, maintenance RM79/bulan
 - RH Starter — RM1299, maintenance RM129/bulan
 - RH Growth — RM1999, maintenance RM179/bulan
 - RH Ecosystem — RM2999, maintenance RM249/bulan

@@ -1,7 +1,7 @@
-const RH_VERSION = 'v1-admin-project-module-v1.2-department-production-engine';
+const RH_VERSION = 'v1-admin-aira-bank-rh-basic-plan-fix';
 const RH_CACHE_NAME = `services-restu-harmoni-${RH_VERSION}`;
 const RH_CRITICAL_EXTENSIONS = ['.html', '.js', '.css', '.json', '.webmanifest'];
-const RH_NETWORK_FIRST_PATHS = ['/content/', '/engine/'];
+const RH_NETWORK_FIRST_PATHS = ['/content/', '/engine/', '/admin/'];
 
 self.addEventListener('install', event => {
   self.skipWaiting();
