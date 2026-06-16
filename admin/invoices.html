@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Invoices | RH Admin V1</title>
+  <link rel="stylesheet" href="assets/admin.css">
+</head>
+<body class="admin-page">
+  <aside class="sidebar" id="sidebar">
+    <a class="side-brand" href="dashboard.html"><img src="../assets/rh-logo.png" alt="RH"><span>RH Admin<br><small>Command Center</small></span></a>
+    <nav class="side-nav">
+      <a href="dashboard.html">🏠 Dashboard</a>
+      <div class="nav-label">Sales</div>
+      <a href="leads.html">📥 Leads</a>
+      <a href="prospects.html">👥 Prospects</a>
+      <a href="quotations.html">📄 Quotations</a>
+      <a class="active" href="invoices.html">🧾 Invoices</a>
+      
+      <div class="nav-label">Delivery</div>
+      <a href="projects.html">🚀 Projects</a>
+      <div class="nav-label">Content</div>
+      <a href="articles.html">📝 Articles</a>
+      <a href="aira-knowledge.html">🤖 Aira Knowledge</a>
+      <div class="nav-label">System</div>
+      <a href="storage.html">📁 Storage</a>
+      <a href="reports.html">📊 Reports</a>
+      <a href="settings.html">⚙️ Settings</a>
+      <a href="staff.html">🔐 Staff</a>
+    </nav>
+  </aside>
+
+  <div class="admin-main">
+    <header class="topbar">
+      <button id="menuBtn" class="icon-btn">☰</button>
+      <div><h1>Invoices</h1><p>Billing engine untuk quotation yang diterima dan bayaran client.</p></div>
+      <div class="top-actions"><span id="staffBadge" class="staff-badge">Loading...</span><button id="refreshInvoicesBtn" class="ghost-btn">Refresh</button><button id="logoutBtn" class="ghost-btn">Logout</button></div>
+    </header>
+
+    <main class="content">
+      <section class="stat-grid invoice-stat-grid">
+        <div class="stat-card"><span>Total Invoices</span><strong id="invoiceCountTotal">0</strong><small>Semua invoice</small></div>
+        <div class="stat-card"><span>Outstanding</span><strong id="invoiceCountOutstanding">0</strong><small>Belum selesai</small></div>
+        <div class="stat-card"><span>Paid</span><strong id="invoiceCountPaid">0</strong><small>Bayaran penuh</small></div>
+        <div class="stat-card"><span>Overdue</span><strong id="invoiceCountOverdue">0</strong><small>Tertunggak</small></div>
+        <div class="stat-card"><span>Revenue</span><strong id="invoiceRevenue">RM0</strong><small>Kutipan paid</small></div>
+        <div class="stat-card"><span>Collection Rate</span><strong id="invoiceCollectionRate">0%</strong><small>Paid / total</small></div>
+      </section>
+
+      <section class="panel section-panel">
+        <div class="panel-head stacked-head">
+          <div><h2>Invoice Pipeline</h2><span>Generate invoice daripada accepted quotation dan urus bayaran.</span></div>
+          <div class="toolbar">
+            <button id="newInvoiceBtn" class="ghost-btn">+ New Invoice</button>
+            <input id="invoiceSearch" class="search-input" placeholder="Cari invoice, client, telefon...">
+            <select id="invoiceStatusFilter" class="select-input">
+              <option value="">Semua status</option>
+              <option value="draft">Draft</option>
+              <option value="sent">Sent</option>
+              <option value="partial_paid">Partial Paid</option>
+              <option value="paid">Paid</option>
+              <option value="overdue">Overdue</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+        <div class="responsive-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>No</th><th>Client</th><th>Quotation</th><th>Amount</th><th>Status</th><th>Due</th><th>Action</th></tr></thead>
+            <tbody id="invoicesTableBody"><tr><td colspan="7"><div class="empty-state">Memuatkan invoices...</div></td></tr></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <section id="invoiceModal" class="modal-backdrop" hidden>
+    <div class="modal-card wide-modal quote-preview-card">
+      <div class="modal-head">
+        <div><h2 id="invoiceModalTitle">Invoice</h2><span id="invoiceModalSub">-</span></div>
+        <button id="closeInvoiceModal" class="icon-close" type="button">×</button>
+      </div>
+      <div id="invoicePreview" class="quotation-preview"></div>
+      <div class="modal-actions">
+        <button id="printInvoiceBtn" class="ghost-btn" type="button">Print / PDF</button>
+        <button id="invoiceSentBtn" class="ghost-btn" type="button">Mark Sent</button>
+        <button id="invoicePaidBtn" class="primary-btn" type="button">Mark Paid</button>
+        <button id="invoiceOverdueBtn" class="ghost-btn" type="button">Overdue</button>
+        <button id="createProjectFromInvoiceBtn" class="ghost-btn" type="button">Create Project</button>
+        <button id="invoiceCancelBtn" class="ghost-btn danger-action" type="button">Cancel Invoice</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="invoiceCreateModal" class="modal-backdrop" hidden>
+    <div class="modal-card wide-modal">
+      <div class="modal-head">
+        <div><h2>Create Invoice</h2><span>Pilih accepted quotation untuk dijadikan invoice.</span></div>
+        <button id="closeInvoiceCreateModal" class="icon-close" type="button">×</button>
+      </div>
+      <form id="invoiceCreateForm" class="form-grid admin-form-grid">
+        <label class="full">Accepted Quotation
+          <select id="invoiceQuotationSelect" required></select>
+        </label>
+        <label>Issue Date<input id="invoiceIssueDate" type="date"></label>
+        <label>Due Date<input id="invoiceDueDate" type="date"></label>
+        <label>Original Amount (RM)<input id="invoiceOriginalAmount" type="number" min="0" readonly></label>
+        <label>Discount (RM)<input id="invoiceDiscount" type="number" min="0" value="0"></label>
+        <label>Net Amount (RM)<input id="invoiceNetAmount" class="calc-field" type="number" min="0" readonly><small class="field-note">Auto: Original Amount - Discount</small></label>
+        <label>Deposit Type
+          <select id="invoiceDepositType">
+            <option value="percent">Percentage (%)</option>
+            <option value="fixed">Fixed Amount (RM)</option>
+          </select>
+        </label>
+        <label id="invoiceDepositValueLabel">Deposit Percentage (%)<input id="invoiceDepositValue" type="number" min="0" value="50"><small class="field-note">Tukar kepada RM jika pilih Fixed Amount.</small></label>
+        <label>Deposit Required (RM)<input id="invoiceDepositAmount" class="calc-field highlight-deposit" type="number" min="0" readonly></label>
+        <label>Balance After Deposit (RM)<input id="invoiceBalanceAfterDeposit" class="calc-field highlight-balance" type="number" min="0" readonly></label>
+        <label>Payment Terms
+          <select id="invoicePaymentTerms">
+            <option value="50% deposit, 50% before handover">50% Deposit, 50% Before Handover</option>
+            <option value="70% deposit, 30% before handover">70% Deposit, 30% Before Handover</option>
+            <option value="100% advance payment">100% Advance Payment</option>
+            <option value="Monthly subscription">Monthly Subscription</option>
+            <option value="Payment within 7 days">Payment Within 7 Days</option>
+            <option value="Payment within 14 days">Payment Within 14 Days</option>
+            <option value="Custom terms">Custom</option>
+          </select>
+        </label>
+        <label>Bank Account
+          <input id="invoiceBankDetails" value="Maybank / Restu Harmoni Digital Solutions / XXXXXXXXXX">
+        </label>
+        <label class="full">Invoice Notes<textarea id="invoiceNotes" rows="3" placeholder="Nota invoice untuk client..."></textarea></label>
+        <div class="form-actions full"><button type="button" id="cancelInvoiceCreateBtn" class="ghost-btn">Cancel</button><button type="submit" class="primary-btn">Generate Invoice</button></div>
+      </form>
+    </div>
+  </section>
+
+  <section id="paymentModal" class="modal-backdrop" hidden>
+    <div class="modal-card">
+      <div class="modal-head">
+        <div><h2>Record Payment</h2><span>Simpan rekod bayaran untuk invoice ini.</span></div>
+        <button id="closePaymentModal" class="icon-close" type="button">×</button>
+      </div>
+      <form id="paymentForm" class="form-grid admin-form-grid">
+        <label>Payment Date<input id="paymentDate" type="date" required></label>
+        <label>Amount (RM)<input id="paymentAmount" type="number" min="0" required></label>
+        <label>Payment Type
+          <select id="paymentType">
+            <option value="deposit">Deposit</option>
+            <option value="progress">Progress Payment</option>
+            <option value="final">Final Payment</option>
+            <option value="full">Full Payment</option>
+          </select>
+        </label>
+        <label>Payment Method
+          <select id="paymentMethod">
+            <option value="bank_transfer">Bank Transfer</option>
+            <option value="duitnow">DuitNow</option>
+            <option value="fpx">FPX</option>
+            <option value="cash">Cash</option>
+            <option value="cheque">Cheque</option>
+          </select>
+        </label>
+        <label>Reference No<input id="paymentReference" placeholder="FPX / bank reference"></label>
+        <label>Upload Receipt<input id="paymentReceiptFile" type="file" accept="image/*,application/pdf"></label>
+        <label class="full">Proof URL<input id="paymentProofUrl" placeholder="Auto dari upload, atau paste link resit"></label>
+        <label class="full">Notes<textarea id="paymentNotes" rows="3" placeholder="Nota bayaran..."></textarea></label>
+        <div class="form-actions full"><button type="button" id="cancelPaymentBtn" class="ghost-btn">Cancel</button><button type="submit" class="primary-btn">Save Payment</button></div>
+      </form>
+    </div>
+  </section>
+
+  <script src="../supabase-config.js"></script>
+  <script src="assets/admin.js"></script>
+</body>
+</html>

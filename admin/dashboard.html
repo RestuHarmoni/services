@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dashboard | RH Admin V1</title>
+  <link rel="stylesheet" href="assets/admin.css">
+</head>
+<body class="admin-page">
+  <aside class="sidebar" id="sidebar">
+    <a class="side-brand" href="dashboard.html">
+      <img src="../assets/rh-logo.png" alt="RH">
+      <span>RH Admin<br><small>Command Center</small></span>
+    </a>
+    <nav class="side-nav">
+      <a class="active" href="dashboard.html">🏠 Dashboard</a>
+      <div class="nav-label">Sales</div>
+      <a href="leads.html">📥 Leads</a>
+      <a href="prospects.html">👥 Prospects</a>
+      <a href="quotations.html">📄 Quotations</a>
+      <a href="invoices.html">🧾 Invoices</a>
+      
+      <div class="nav-label">Delivery</div>
+      <a href="projects.html">🚀 Projects</a>
+      <div class="nav-label">Content</div>
+      <a href="articles.html">📝 Articles</a>
+      <a href="aira-knowledge.html">🤖 Aira Knowledge</a>
+      <div class="nav-label">System</div>
+      <a href="storage.html">📁 Storage</a>
+      <a href="reports.html">📊 Reports</a>
+      <a href="settings.html">⚙️ Settings</a>
+      <a href="staff.html">🔐 Staff</a>
+    </nav>
+  </aside>
+  <div class="admin-main">
+    <header class="topbar">
+      <button id="menuBtn" class="icon-btn">☰</button>
+      <div>
+        <h1>Dashboard</h1>
+        <p>Ringkasan operasi RH Services.</p>
+      </div>
+      <div class="top-actions">
+        <span id="staffBadge" class="staff-badge">Loading...</span>
+        <button id="logoutBtn" class="ghost-btn">Logout</button>
+      </div>
+    </header>
+    <main class="content">
+      <section class="stat-grid">
+        <article class="stat-card"><span>Total Leads</span><strong id="totalLeads">0</strong><small>Aira + public form</small></article>
+        <article class="stat-card"><span>Prospects</span><strong id="totalProspects">0</strong><small>Manual / convert lead</small></article>
+        <article class="stat-card"><span>Quotations</span><strong id="totalQuotations">0</strong><small>QT generated</small></article>
+        <article class="stat-card"><span>Invoices</span><strong id="totalInvoices">0</strong><small>INV active</small></article>
+        <article class="stat-card"><span>Articles</span><strong id="totalArticles">0</strong><small>Published blog</small></article>
+        <article class="stat-card"><span>Paid Amount</span><strong id="paidAmount">RM0</strong><small>Receipt / invoice paid</small></article>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="panel large-panel">
+          <div class="panel-head"><h2>Leads Mingguan</h2><span>7 hari terakhir</span></div>
+          <canvas id="leadChart" height="120"></canvas>
+        </article>
+        <article class="panel">
+          <div class="panel-head"><h2>Sales Status</h2><span>Ringkasan</span></div>
+          <div class="donut-wrap"><canvas id="statusChart" width="220" height="220"></canvas></div>
+        </article>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="panel">
+          <div class="panel-head"><h2>Recent Leads</h2><span id="leadRefreshStatus">Live data</span></div>
+          <div id="recentLeads" class="table-list"><div class="empty-state">Memuatkan leads...</div></div>
+        </article>
+        <article class="panel">
+          <div class="panel-head"><h2>Recent Activity</h2><span>System log</span></div>
+          <div id="recentActivity" class="activity-list"><div class="empty-state">Belum ada aktiviti.</div></div>
+        </article>
+      </section>
+    </main>
+  </div>
+  <script src="../supabase-config.js"></script>
+  <script src="assets/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+{
+  "version": "v10.0-rh-official-package-alignment",
+  "database": "supabase",
+  "table": "leads",
+  "fields": [
+    "business_type",
+    "objective",
+    "has_website",
+    "has_domain",
+    "content_ready",
+    "budget",
+    "timeline",
+    "name",
+    "phone",
+    "recommended_package",
+    "lead_score",
+    "lead_temperature"
+  ],
+  "statuses": [
+    "NEW",
+    "CONTACTED",
+    "QUOTATION_SENT",
+    "NEGOTIATION",
+    "WON",
+    "LOST"
+  ],
+  "packages": {
+    "RH Starter": {
+      "setup": "RM1299",
+      "maintenance": "RM129/bulan"
+    },
+    "RH Growth": {
+      "setup": "RM1999",
+      "maintenance": "RM179/bulan"
+    },
+    "RH Ecosystem": {
+      "setup": "RM2999",
+      "maintenance": "RM249/bulan"
+    }
+  },
+  "allowed_recommended_package": [
+    "RH Starter",
+    "RH Growth",
+    "RH Ecosystem"
+  ],
+  "legacy_package_map": {
+    "RH Basic": "RH Starter",
+    "RH Standard": "RH Growth",
+    "RH Ecosystemfessional": "RH Growth",
+    "RH Premium": "RH Ecosystem",
+    "RH Growth": "RH Growth",
+    "RH Ecosystem": "RH Ecosystem"
+  }
+}

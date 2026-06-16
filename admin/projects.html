@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Projects | RH Admin V1</title>
+  <link rel="stylesheet" href="assets/admin.css">
+</head>
+<body class="admin-page">
+  <aside class="sidebar" id="sidebar">
+    <a class="side-brand" href="dashboard.html"><img src="../assets/rh-logo.png" alt="RH"><span>RH Admin<br><small>Command Center</small></span></a>
+    <nav class="side-nav">
+      <a href="dashboard.html">🏠 Dashboard</a>
+      <div class="nav-label">Sales</div>
+      <a href="leads.html">📥 Leads</a>
+      <a href="prospects.html">👥 Prospects</a>
+      <a href="quotations.html">📄 Quotations</a>
+      <a href="invoices.html">🧾 Invoices</a>
+      
+      <div class="nav-label">Delivery</div>
+      <a class="active" href="projects.html">🚀 Projects</a>
+      <div class="nav-label">Content</div>
+      <a href="articles.html">📝 Articles</a>
+      <a href="aira-knowledge.html">🤖 Aira Knowledge</a>
+      <div class="nav-label">System</div>
+      <a href="storage.html">📁 Storage</a>
+      <a href="reports.html">📊 Reports</a>
+      <a href="settings.html">⚙️ Settings</a>
+      <a href="staff.html">🔐 Staff</a>
+    </nav>
+  </aside>
+
+  <div class="admin-main">
+    <header class="topbar">
+      <button id="menuBtn" class="icon-btn">☰</button>
+      <div><h1>Projects</h1><p>Delivery pipeline selepas deposit diterima dan invoice bersedia untuk mula kerja.</p></div>
+      <div class="top-actions"><span id="staffBadge" class="staff-badge">Loading...</span><button id="refreshProjectsBtn" class="ghost-btn">Refresh</button><button id="logoutBtn" class="ghost-btn">Logout</button></div>
+    </header>
+
+    <main class="content">
+      <section class="stat-grid project-stat-grid">
+        <div class="stat-card"><span>Total Projects</span><strong id="projectCountTotal">0</strong><small>Semua projek</small></div>
+        <div class="stat-card"><span>Active</span><strong id="projectCountActive">0</strong><small>Belum selesai</small></div>
+        <div class="stat-card"><span>Onboarding</span><strong id="projectCountOnboarding">0</strong><small>Setup awal</small></div>
+        <div class="stat-card"><span>Development</span><strong id="projectCountDevelopment">0</strong><small>Sedang dibina</small></div>
+        <div class="stat-card"><span>Review</span><strong id="projectCountReview">0</strong><small>QA / semakan</small></div>
+        <div class="stat-card"><span>Completed</span><strong id="projectCountCompleted">0</strong><small>Siap deliver</small></div>
+        <div class="stat-card"><span>Overdue</span><strong id="projectCountOverdue">0</strong><small>Lewat due date</small></div>
+        <div class="stat-card"><span>Project Value</span><strong id="projectValueTotal">RM0</strong><small>Nilai projek</small></div>
+      </section>
+
+      <section class="panel section-panel">
+        <div class="panel-head stacked-head">
+          <div><h2>Project Pipeline</h2><span>Auto create project daripada invoice yang sudah menerima deposit atau telah paid.</span></div>
+          <div class="toolbar">
+            <button id="newProjectBtn" class="ghost-btn">+ New Project</button>
+            <input id="projectSearch" class="search-input" placeholder="Cari project, client, telefon...">
+            <select id="projectStatusFilter" class="select-input">
+              <option value="">Semua status</option>
+              <option value="new_project">New Project</option>
+              <option value="onboarding">Onboarding</option>
+              <option value="content_collection">Content Collection</option>
+              <option value="design">Design</option>
+              <option value="development">Development</option>
+              <option value="review">Review</option>
+              <option value="delivery">Delivery</option>
+              <option value="completed">Completed</option>
+              <option value="on_hold">On Hold</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+        <div class="responsive-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>No</th><th>Client</th><th>Bisnes</th><th>Value</th><th>Status</th><th>Due</th><th>Action</th></tr></thead>
+            <tbody id="projectsTableBody"><tr><td colspan="7"><div class="empty-state">Memuatkan projects...</div></td></tr></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <section id="projectModal" class="modal-backdrop" hidden>
+    <div class="modal-card wide-modal">
+      <div class="modal-head">
+        <div><h2 id="projectModalTitle">Project</h2><span id="projectModalSub">-</span></div>
+        <button id="closeProjectModal" class="icon-close" type="button">×</button>
+      </div>
+      <div id="projectPreview"></div>
+      <div class="modal-actions">
+        <button id="projectOnboardingBtn" class="ghost-btn" type="button">Onboarding</button>
+        <button id="projectContentBtn" class="ghost-btn" type="button">Content</button>
+        <button id="projectDesignBtn" class="ghost-btn" type="button">Design</button>
+        <button id="projectDevBtn" class="ghost-btn" type="button">Development</button>
+        <button id="projectReviewBtn" class="ghost-btn" type="button">Review</button>
+        <button id="projectDeliveryBtn" class="ghost-btn" type="button">Delivery</button>
+        <button id="projectCompleteBtn" class="primary-btn" type="button">Completed</button>
+        <button id="projectHoldBtn" class="ghost-btn" type="button">On Hold</button>
+        <button id="projectCancelBtn" class="ghost-btn danger-action" type="button">Cancel</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="projectCreateModal" class="modal-backdrop" hidden>
+    <div class="modal-card wide-modal">
+      <div class="modal-head">
+        <div><h2>Create Project</h2><span>Pilih invoice yang sudah partial paid atau paid.</span></div>
+        <button id="closeProjectCreateModal" class="icon-close" type="button">×</button>
+      </div>
+      <form id="projectCreateForm" class="form-grid admin-form-grid">
+        <label class="full">Invoice Ready For Project
+          <select id="projectInvoiceSelect" required></select>
+        </label>
+        <div class="form-actions full"><button type="button" id="cancelProjectCreateBtn" class="ghost-btn">Cancel</button><button type="submit" class="primary-btn">Generate Project</button></div>
+      </form>
+    </div>
+  </section>
+
+  <script src="../supabase-config.js"></script>
+  <script src="assets/admin.js"></script>
+</body>
+</html>

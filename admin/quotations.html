@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Quotations | RH Admin V1</title>
+  <link rel="stylesheet" href="assets/admin.css">
+</head>
+<body class="admin-page">
+  <aside class="sidebar" id="sidebar">
+    <a class="side-brand" href="dashboard.html"><img src="../assets/rh-logo.png" alt="RH"><span>RH Admin<br><small>Command Center</small></span></a>
+    <nav class="side-nav">
+      <a href="dashboard.html">🏠 Dashboard</a>
+      <div class="nav-label">Sales</div>
+      <a href="leads.html">📥 Leads</a>
+      <a href="prospects.html">👥 Prospects</a>
+      <a class="active" href="quotations.html">📄 Quotations</a>
+      <a href="invoices.html">🧾 Invoices</a>
+      
+      <div class="nav-label">Delivery</div>
+      <a href="projects.html">🚀 Projects</a>
+      <div class="nav-label">Content</div>
+      <a href="articles.html">📝 Articles</a>
+      <a href="aira-knowledge.html">🤖 Aira Knowledge</a>
+      <div class="nav-label">System</div>
+      <a href="storage.html">📁 Storage</a>
+      <a href="reports.html">📊 Reports</a>
+      <a href="settings.html">⚙️ Settings</a>
+      <a href="staff.html">🔐 Staff</a>
+    </nav>
+  </aside>
+
+  <div class="admin-main">
+    <header class="topbar">
+      <button id="menuBtn" class="icon-btn">☰</button>
+      <div><h1>Quotations</h1><p>Generate quotation daripada prospect dan urus status proposal.</p></div>
+      <div class="top-actions"><span id="staffBadge" class="staff-badge">Loading...</span><button id="refreshQuotationsBtn" class="ghost-btn">Refresh</button><button id="logoutBtn" class="ghost-btn">Logout</button></div>
+    </header>
+
+    <main class="content">
+      <section class="stat-grid quote-stat-grid">
+        <div class="stat-card"><span>Total Quotations</span><strong id="quoteCountTotal">0</strong><small>Semua rekod</small></div>
+        <div class="stat-card"><span>Draft</span><strong id="quoteCountDraft">0</strong><small>Belum dihantar</small></div>
+        <div class="stat-card"><span>Sent</span><strong id="quoteCountSent">0</strong><small>Proposal dihantar</small></div>
+        <div class="stat-card"><span>Accepted</span><strong id="quoteCountAccepted">0</strong><small>Client setuju</small></div>
+        <div class="stat-card"><span>Rejected</span><strong id="quoteCountRejected">0</strong><small>Tidak jadi</small></div>
+        <div class="stat-card"><span>Total Value</span><strong id="quoteTotalValue">RM0</strong><small>Nilai quotation</small></div>
+      </section>
+
+      <section class="panel section-panel">
+        <div class="panel-head stacked-head">
+          <div><h2>Quotation Pipeline</h2><span>Semak quotation, preview dan tukar status.</span></div>
+          <div class="toolbar">
+            <button id="newQuotationBtn" class="ghost-btn">+ New Quotation</button>
+            <input id="quotationSearch" class="search-input" placeholder="Cari quotation, client, telefon...">
+            <select id="quotationStatusFilter" class="select-input">
+              <option value="">Semua status</option>
+              <option value="draft">Draft</option>
+              <option value="sent">Sent</option>
+              <option value="accepted">Accepted</option>
+              <option value="rejected">Rejected</option>
+              <option value="expired">Expired</option>
+            </select>
+          </div>
+        </div>
+        <div class="responsive-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>No</th><th>Client</th><th>Bisnes</th><th>Amount</th><th>Status</th><th>Tarikh</th><th>Action</th></tr></thead>
+            <tbody id="quotationsTableBody"><tr><td colspan="7"><div class="empty-state">Memuatkan quotations...</div></td></tr></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <section id="quotationModal" class="modal-backdrop" hidden>
+    <div class="modal-card wide-modal quote-preview-card">
+      <div class="modal-head">
+        <div><h2 id="quotationModalTitle">Quotation</h2><span id="quotationModalSub">-</span></div>
+        <button id="closeQuotationModal" class="icon-close" type="button">×</button>
+      </div>
+      <div id="quotationPreview" class="quotation-preview"></div>
+      <div class="modal-actions">
+        <button id="printQuotationBtn" class="ghost-btn" type="button">Print / PDF</button>
+        <button id="generateInvoiceFromQuoteBtn" class="primary-btn" type="button">Generate Invoice</button>
+        <button id="quoteSentBtn" class="ghost-btn" type="button">Mark Sent</button>
+        <button id="quoteAcceptedBtn" class="primary-btn" type="button">Accepted</button>
+        <button id="quoteRejectedBtn" class="ghost-btn danger-action" type="button">Rejected</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="quotationCreateModal" class="modal-backdrop" hidden>
+    <div class="modal-card wide-modal">
+      <div class="modal-head">
+        <div><h2>Create Quotation</h2><span>Pilih prospect dan pakej untuk generate quotation.</span></div>
+        <button id="closeQuoteCreateModal" class="icon-close" type="button">×</button>
+      </div>
+      <form id="quotationCreateForm" class="form-grid admin-form-grid">
+        <label class="full">Prospect
+          <select id="quoteProspectSelect" required></select>
+        </label>
+        <label>Pakej
+          <select id="quotePackageSelect">
+            <option value="RH Basic">RH Basic - RM799</option>
+            <option value="RH Starter">RH Starter - RM1299</option>
+            <option value="RH Growth">RH Growth - RM1999</option>
+            <option value="RH Ecosystem">RH Ecosystem - RM2999</option>
+            <option value="Custom">Custom</option>
+          </select>
+        </label>
+        <label>Discount (RM)<input id="quoteDiscount" type="number" min="0" value="0"></label>
+        <label>Tax / SST (RM)<input id="quoteTax" type="number" min="0" value="0"></label>
+        <label>Expiry Date<input id="quoteExpiryDate" type="date"></label>
+        <label class="full">Notes<textarea id="quoteNotes" rows="3" placeholder="Nota quotation untuk client..."></textarea></label>
+        <div class="form-actions full"><button type="button" id="cancelQuoteCreateBtn" class="ghost-btn">Cancel</button><button type="submit" class="primary-btn">Generate Quotation</button></div>
+      </form>
+    </div>
+  </section>
+
+  <script src="../supabase-config.js"></script>
+  <script src="assets/admin.js"></script>
+</body>
+</html>
