@@ -26,7 +26,13 @@
     return bank;
   }
   window.RH_AIRA_DEFAULT_FAQ_BANK = DEFAULT_FAQ_BANK;
-  function isOfficialPackageBank(qb){return qb&&String(qb.version||'').includes('v10.0-rh-official-package-alignment')||String(qb.version||'').includes('v11.0-package-template-linking')&&qb.packages&&qb.packages['RH Starter']&&qb.packages['RH Growth']&&qb.packages['RH Ecosystem'];}
+  function isOfficialPackageBank(qb){
+    if(!qb||!qb.packages)return false;
+    const version=String(qb.version||'');
+    const hasNew=qb.packages['RH Basic']&&qb.packages['RH Growth']&&qb.packages['RH Ecosystem']&&qb.packages['RH Enterprise'];
+    const hasOld=qb.packages['RH Starter']&&qb.packages['RH Growth']&&qb.packages['RH Ecosystem'];
+    return version.includes('v1.3.8-aira-knowledge-bank-sales-question-flow') || version.includes('v11.0-package-template-linking')&&hasNew || version.includes('v10.0-rh-official-package-alignment')&&hasOld;
+  }
   function loadBank(){
     let qb=safeJson(localStorage.getItem("rh_aira_question_bank"),DEFAULT_QUESTION_BANK);
     let fb=safeJson(localStorage.getItem("rh_aira_faq_bank"),DEFAULT_FAQ_BANK);
@@ -46,10 +52,38 @@
   async function initSupabase(){if(supabaseClient)return supabaseClient;if(window.RHGetSupabaseClient){supabaseClient=await window.RHGetSupabaseClient();return supabaseClient;}if(!cfg.url||!cfg.anonKey||cfg.url.includes("PASTE_"))return null;const ok=await loadSupabase();if(!ok||!window.supabase)return null;supabaseClient=window.supabase.createClient(cfg.url,cfg.anonKey);return supabaseClient;}
   function normalizePhone(v){return String(v||"").replace(/[\s-]/g,"");}
   function validPhone(v){return /^(\+?6?01)[0-9]{7,10}$/.test(normalizePhone(v));}
-  function scoreLead(data){let score=40;const budget=String(data.budget||'');if(budget.includes('2999')||budget.includes('Ecosystem')||budget.includes('RM3500'))score+=35;else if(budget.includes('1999')||budget.includes('Growth')||budget.includes('RM2000')||budget.includes('RM1000'))score+=25;else if(budget.includes('1299')||budget.includes('Starter')||budget.includes('RM699'))score+=12;if(data.timeline==='Segera')score+=25;else if(String(data.timeline||'').toLowerCase().includes('1–2'))score+=15;else if(String(data.timeline||'').toLowerCase().includes('bulan'))score+=8;const rec=DEFAULT_QUESTION_BANK.serviceRecommendations&&DEFAULT_QUESTION_BANK.serviceRecommendations[data.business_type];if(rec&&rec.recommendedPackage==='RH Ecosystem')score+=12;else if(rec&&rec.recommendedPackage==='RH Growth')score+=7;const obj=String(data.objective||'').toLowerCase();if(obj.includes('booking')||obj.includes('katalog')||obj.includes('produk')||obj.includes('premium')||obj.includes('custom'))score+=8;if(data.has_website==='Ada, tetapi mahu upgrade')score+=8;if(data.has_domain==='Ya, sudah ada domain')score+=5;if(data.content_ready==='Logo & gambar sudah ada')score+=5;return Math.min(score,100);}
-  function packageFor(data){const rec=DEFAULT_QUESTION_BANK.serviceRecommendations&&DEFAULT_QUESTION_BANK.serviceRecommendations[data.business_type];const budget=String(data.budget||'');const obj=String(data.objective||'').toLowerCase();if(obj.includes('custom')||budget.includes('2999')||budget.includes('Ecosystem')||data.has_website==='Ada, tetapi mahu upgrade')return 'RH Ecosystem';if(budget.includes('1999')||budget.includes('Growth')||obj.includes('katalog')||obj.includes('produk')||obj.includes('booking')||obj.includes('portfolio'))return 'RH Growth';if(rec&&rec.recommendedPackage)return rec.recommendedPackage;return 'RH Starter';}
-  function priceFor(pkg){const p=BANK.packages&&BANK.packages[pkg];return p&&p.price?p.price:(pkg==='RH Starter'?'RM1299':pkg==='RH Growth'?'RM1999':'RM2999');}
-  function maintenanceFor(pkg){const p=BANK.packages&&BANK.packages[pkg];return p&&p.maintenance?p.maintenance:(pkg==='RH Starter'?'RM129/bulan':pkg==='RH Growth'?'RM179/bulan':'RM249/bulan');}
+  function scoreLead(data){
+    data=data||{};
+    let score=45;
+    const budget=String(data.budget||'');
+    const obj=String(data.objective||'').toLowerCase();
+    const feature=String(data.feature_need||'').toLowerCase();
+    const biz=String(data.business_type||'').toLowerCase();
+    if(budget.includes('RM3000')||budget.includes('Enterprise'))score=95;
+    else if(budget.includes('2999')||budget.includes('Ecosystem'))score=85;
+    else if(budget.includes('1999')||budget.includes('Growth'))score=70;
+    else if(budget.includes('799')||budget.includes('Basic'))score=48;
+    if(String(data.timeline||'').toLowerCase().includes('segera'))score+=7;
+    if(obj.includes('seo')||obj.includes('booking')||obj.includes('dashboard')||obj.includes('sistem'))score+=7;
+    if(feature.includes('dashboard')||feature.includes('payment')||feature.includes('client portal'))score+=10;
+    if(biz.includes('custom')||biz.includes('portal')||biz.includes('e-commerce'))score+=8;
+    if(String(data.domain_status||'').toLowerCase().includes('ya'))score+=3;
+    if(String(data.hosting_status||'').toLowerCase().includes('ya'))score+=2;
+    return Math.min(score,100);
+  }
+  function packageFor(data){
+    data=data||{};
+    const budget=String(data.budget||'');
+    const obj=String(data.objective||'').toLowerCase();
+    const feature=String(data.feature_need||'').toLowerCase();
+    const biz=String(data.business_type||'').toLowerCase();
+    if(budget.includes('RM3000')||budget.includes('Enterprise')||obj.includes('sistem')||feature.includes('client portal')||biz.includes('custom'))return 'RH Enterprise';
+    if(budget.includes('2999')||budget.includes('Ecosystem')||obj.includes('ecosystem')||feature.includes('dashboard')||feature.includes('payment')||biz.includes('e-commerce')||biz.includes('event')||biz.includes('homestay')||biz.includes('kereta'))return 'RH Ecosystem';
+    if(budget.includes('1999')||budget.includes('Growth')||obj.includes('jual produk')||obj.includes('booking')||obj.includes('seo')||feature.includes('blog')||feature.includes('listing')||feature.includes('chatbot'))return 'RH Growth';
+    return 'RH Basic';
+  }
+  function priceFor(pkg){const p=BANK.packages&&BANK.packages[pkg];return p&&p.price?p.price:(pkg==='RH Enterprise'?'Custom':pkg==='RH Ecosystem'?'RM2999':pkg==='RH Growth'?'RM1999':'RM799');}
+  function maintenanceFor(pkg){const p=BANK.packages&&BANK.packages[pkg];return p&&p.maintenance?p.maintenance:(pkg==='RH Enterprise'?'Custom':pkg==='RH Ecosystem'?'RM249/bulan':pkg==='RH Growth'?'RM129/bulan':'RM79/bulan');}
   function tempFor(score){return score>=80?"HOT":score>=60?"WARM":"COLD";}
   function featuresFor(pkg){const p=BANK.packages&&BANK.packages[pkg];if(p&&Array.isArray(p.features))return p.features;const map={'RH Starter':['Company Profile Website','Mobile responsive','AI Chatbot Aira','Lead Capture System','SEO Asas'],'RH Growth':['Semua RH Starter','Unlimited Service Listing','Product Listing','Blog / Artikel','Portfolio / Gallery','Video Embed'],'RH Ecosystem':['Semua RH Growth','Company Profile + Service Website','Advanced AI Chatbot','Analytics Dashboard','Lead Management Ready','Multi Website Structure']};return map[pkg]||map['RH Starter'];}
   function getLocalLeads(){try{return JSON.parse(localStorage.getItem("rh_leads")||"[]");}catch(e){return[];}}
@@ -162,7 +196,7 @@
     const recommended_package=packageFor(data),lead_score=scoreLead(data),answers=buildAnswerSnapshot(data);
     const compact=answers.map(a=>`${a.question}: ${a.answer}`).join(" | ");
     const notes=[data.notes||"",compact?"Aira Answers: "+compact:""];
-    return{name:data.name,phone:normalizePhone(data.phone),business_type:data.business_type,objective:data.objective,budget:data.budget,timeline:data.timeline,recommended_package,lead_score,lead_temperature:tempFor(lead_score),status:"NEW",notes:notes.filter(Boolean).join(" | "),source:"Aira",page_url:location.href,user_agent:navigator.userAgent,answers};
+    return{name:data.name,phone:normalizePhone(data.phone),email:data.email||null,business_type:data.business_type,objective:data.objective,budget:data.budget,timeline:data.timeline,recommended_package,lead_score,lead_temperature:tempFor(lead_score),status:"NEW",notes:notes.filter(Boolean).join(" | "),source:"Aira",page_url:location.href,user_agent:navigator.userAgent,answers};
   }
   window.RH_AIRA_LEAD_SYSTEM={BANK,DEFAULT_QUESTION_BANK,DEFAULT_FAQ_BANK,loadRemoteBank,initSupabase,normalizePhone,validPhone,scoreLead,packageFor,priceFor,maintenanceFor,tempFor,featuresFor,getLocalLeads,getRetryQueue,retryQueuedLeads,saveLead,createLeadPayload,buildAnswerSnapshot,matchFAQ};
 })();

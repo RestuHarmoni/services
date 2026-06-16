@@ -22,7 +22,13 @@
     const f=window.DEFAULT_AIRA_FAQ||window.RH_AIRA_DEFAULT_FAQ_BANK||null;
     return {questionBank:clone(q||{version:'local',steps:[],packages:{}}),faqBank:clone(f||{version:'local',quickActions:[],faq:[]})};
   }
-  function isOfficialPackageBank(qb){return qb&&String(qb.version||'').includes('v10.0-rh-official-package-alignment')||String(qb.version||'').includes('v11.0-package-template-linking')&&qb.packages&&qb.packages['RH Starter']&&qb.packages['RH Growth']&&qb.packages['RH Ecosystem'];}
+  function isOfficialPackageBank(qb){
+    if(!qb||!qb.packages)return false;
+    const version=String(qb.version||'');
+    const hasNew=qb.packages['RH Basic']&&qb.packages['RH Growth']&&qb.packages['RH Ecosystem']&&qb.packages['RH Enterprise'];
+    const hasOld=qb.packages['RH Starter']&&qb.packages['RH Growth']&&qb.packages['RH Ecosystem'];
+    return version.includes('v1.3.8-aira-knowledge-bank-sales-question-flow') || version.includes('v11.0-package-template-linking')&&hasNew || version.includes('v10.0-rh-official-package-alignment')&&hasOld;
+  }
   function readLocal(){
     const d=defaults();
     let questionBank=safeJson(localStorage.getItem(LS_Q),d.questionBank);
