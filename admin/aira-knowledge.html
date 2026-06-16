@@ -6,12 +6,8 @@
   <title>Aira Knowledge | RH Admin V1</title>
   <link rel="stylesheet" href="assets/admin.css">
   <style>
-    .aira-kb-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-    .kb-section-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:14px 0}
-    .kb-filter-row{display:grid;grid-template-columns:1fr 180px;gap:10px;width:100%}
-    .kb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:12px}
-    .kb-card{background:rgba(15,23,42,.45);border:1px solid rgba(148,163,184,.18);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px;min-height:150px}
-    .kb-card h3{margin:0;font-size:18px;line-height:1.25}.kb-card p{margin:0;color:#cbd5e1;line-height:1.55}.kb-meta{display:flex;gap:8px;flex-wrap:wrap;color:#93a4bd;font-size:12px}.kb-badge{display:inline-flex;align-items:center;border-radius:999px;padding:4px 9px;background:#102448;color:#bfdbfe;font-weight:800;font-size:12px}.kb-badge.published,.kb-badge.active{background:#0f5132;color:#bbf7d0}.kb-badge.draft{background:#3b2f0f;color:#fde68a}.kb-badge.archived{background:#334155;color:#cbd5e1}.kb-badge.deleted{background:#4c1111;color:#fecaca}.kb-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}.kb-empty{border:1px dashed rgba(148,163,184,.35);border-radius:16px;padding:20px;color:#94a3b8;text-align:center}.kb-modal-card{max-width:760px;width:min(760px,calc(100vw - 26px));max-height:90vh;overflow:auto}.kb-form{display:grid;gap:13px}.kb-form label{display:grid;gap:7px;font-weight:800;color:#cbd5e1}.kb-form input,.kb-form textarea,.kb-form select,.kb-filter-row input,.kb-filter-row select{width:100%;border:1px solid rgba(148,163,184,.25);background:#0f172a;color:#fff;border-radius:13px;padding:12px}.kb-form textarea{min-height:96px;resize:vertical}.kb-form textarea.large{min-height:180px}.kb-form .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}.kb-preview{background:#0b1220;border:1px solid rgba(148,163,184,.18);border-radius:14px;padding:14px;color:#dbeafe}.kb-preview h4{margin:0 0 8px}.kb-help{font-size:12px;color:#93a4bd}.hidden{display:none!important}@media(max-width:720px){.kb-filter-row,.kb-form .two-col{grid-template-columns:1fr}.aira-kb-toolbar .primary-btn,.aira-kb-toolbar .ghost-btn,.aira-kb-toolbar .danger-outline-btn,.kb-section-tools .primary-btn{width:100%}.kb-grid{grid-template-columns:1fr}.kb-card{padding:14px}.kb-actions button{flex:1 1 auto}.stats-grid.compact{grid-template-columns:1fr}}
+    .ak-wrap{display:grid;gap:18px}.ak-hero{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}.ak-toolbar{display:flex;gap:10px;flex-wrap:wrap}.ak-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.ak-tab{border:1px solid rgba(148,163,184,.24);background:#0b1220;color:#cbd5e1;border-radius:14px;padding:10px 14px;font-weight:900;cursor:pointer}.ak-tab.active{background:linear-gradient(135deg,#2563eb,#38bdf8);border-color:transparent;color:white}.ak-panel{display:none}.ak-panel.active{display:block}.ak-section-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:14px}.ak-section-head h2{margin:0}.ak-section-head p{margin:6px 0 0;color:#9fb0c9}.ak-tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.ak-search{min-width:280px;max-width:460px;flex:1;border:1px solid rgba(148,163,184,.25);background:#0b1220;color:#fff;border-radius:14px;padding:12px 14px}.ak-select{border:1px solid rgba(148,163,184,.25);background:#0b1220;color:#fff;border-radius:14px;padding:12px 14px}.ak-table-wrap{overflow-x:auto;border:1px solid rgba(148,163,184,.16);border-radius:18px;background:rgba(15,23,42,.35)}.ak-table{width:100%;border-collapse:collapse;min-width:860px}.ak-table th,.ak-table td{padding:14px 13px;border-bottom:1px solid rgba(148,163,184,.12);text-align:left;vertical-align:top}.ak-table th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#93a4bd}.ak-table td{color:#e5eefc}.ak-title{font-weight:950;color:#fff;line-height:1.25}.ak-sub{display:block;margin-top:5px;color:#9fb0c9;font-size:12px;line-height:1.35}.ak-badge{display:inline-flex;align-items:center;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:950;background:#334155;color:#dbeafe}.ak-badge.published,.ak-badge.active{background:#0f5132;color:#bbf7d0}.ak-badge.draft{background:#3b2f0f;color:#fde68a}.ak-badge.archived{background:#334155;color:#cbd5e1}.ak-badge.deleted{background:#581c1c;color:#fecaca}.ak-actions{display:flex;gap:7px;flex-wrap:wrap}.ak-actions button{padding:9px 11px;border-radius:12px}.ak-empty{padding:24px;text-align:center;color:#94a3b8}.ak-cards{display:none}.ak-card{border:1px solid rgba(148,163,184,.16);background:rgba(15,23,42,.45);border-radius:18px;padding:15px;margin-bottom:12px}.ak-card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.ak-card .ak-actions{margin-top:14px}.ak-modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,.72);z-index:9999;padding:18px}.ak-modal.hidden{display:none!important}.ak-modal-card{width:min(900px,100%);max-height:92dvh;overflow:auto;background:#172236;border:1px solid rgba(148,163,184,.24);border-radius:24px;box-shadow:0 24px 80px rgba(0,0,0,.45)}.ak-modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px;border-bottom:1px solid rgba(148,163,184,.18)}.ak-modal-head h2{margin:0}.ak-form{display:grid;gap:14px;padding:20px}.ak-form label{display:grid;gap:7px;color:#cbd5e1;font-weight:900}.ak-form input,.ak-form select,.ak-form textarea{width:100%;border:1px solid rgba(148,163,184,.25);background:#0b1220;color:white;border-radius:13px;padding:12px 13px}.ak-form textarea{min-height:110px;resize:vertical}.ak-form textarea.large{min-height:200px}.ak-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ak-form-actions{position:sticky;bottom:0;display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;background:#172236;padding:14px 20px;border-top:1px solid rgba(148,163,184,.18);border-radius:0 0 24px 24px}.ak-preview{background:#0b1220;border:1px solid rgba(148,163,184,.15);border-radius:16px;padding:14px;color:#dbeafe}.ak-preview h3{margin:0 0 8px}.ak-help{font-size:12px;color:#93a4bd}.ak-danger{border-color:rgba(239,68,68,.45)!important;color:#fecaca!important}.ak-mini{font-size:12px;color:#9fb0c9}.ak-readonly{opacity:.75}.hidden{display:none!important}
+    @media(max-width:760px){.ak-toolbar,.ak-tools{width:100%;display:grid;grid-template-columns:1fr}.ak-search,.ak-select,.ak-toolbar button,.ak-section-head button{width:100%;min-width:0}.ak-table-wrap{display:none}.ak-cards{display:block}.ak-form-grid{grid-template-columns:1fr}.ak-modal{align-items:flex-start;padding:10px}.ak-modal-card{border-radius:18px}.ak-form-actions{justify-content:stretch}.ak-form-actions button{flex:1 1 45%}.stats-grid.compact{grid-template-columns:1fr}.ak-tabs{display:grid;grid-template-columns:1fr 1fr}.ak-tab{width:100%}}
   </style>
 </head>
 <body class="admin-page">
@@ -26,217 +22,239 @@
   </nav>
 </aside>
 <div class="admin-main">
-  <header class="topbar"><button id="menuBtn" class="icon-btn">☰</button><div><h1>Aira Knowledge</h1><p>Urus bank soalan, FAQ dan pakej rasmi Aira.</p></div><div class="top-actions"><span id="staffBadge" class="staff-badge">Loading...</span><button id="logoutBtn" class="ghost-btn">Logout</button></div></header>
-  <main class="content">
+  <header class="topbar"><button id="menuBtn" class="icon-btn">☰</button><div><h1>Aira Knowledge</h1><p>Bank soalan, FAQ dan pakej rasmi Aira.</p></div><div class="top-actions"><span id="staffBadge" class="staff-badge">Loading...</span><button id="logoutBtn" class="ghost-btn">Logout</button></div></header>
+  <main class="content ak-wrap">
     <section class="panel section-panel">
-      <div class="section-head">
-        <div><h2>Aira Knowledge Management</h2><p>Version: <strong id="airaVersion">Loading...</strong></p></div>
-        <div class="aira-kb-toolbar">
-          <button id="loadAiraBankBtn" class="ghost-btn">Load Current</button>
-          <button id="publishAiraBankBtn" class="primary-btn">Publish Changes</button>
-          <button id="resetOfficialBtn" class="danger-outline-btn">Reset Official</button>
-        </div>
+      <div class="ak-hero">
+        <div><h2>Aira Knowledge Manager</h2><p>Susun knowledge Aira secara kemas. Edit dibuat sebagai draft dahulu, kemudian tekan Publish Changes untuk live.</p><p class="ak-mini">Version: <strong id="akVersion">v1.5.0</strong> • Source: <strong id="akSource">loading</strong></p></div>
+        <div class="ak-toolbar"><button id="loadBtn" class="ghost-btn">Load Current</button><button id="publishBtn" class="primary-btn">Publish Changes</button><button id="resetBtn" class="danger-outline-btn">Reset Official</button></div>
       </div>
-      <div id="airaStatus" class="alert info">Memuatkan bank soalan...</div>
+      <div id="akStatus" class="alert info">Memuatkan bank soalan...</div>
       <div class="stats-grid compact">
         <div class="stat-card"><span>Questions</span><strong id="qCount">0</strong></div>
-        <div class="stat-card"><span>Packages</span><strong id="pCount">0</strong></div>
         <div class="stat-card"><span>FAQ</span><strong id="fCount">0</strong></div>
-        <div class="stat-card"><span>Source</span><strong id="bankSource">-</strong></div>
+        <div class="stat-card"><span>Packages</span><strong id="pCount">0</strong></div>
+        <div class="stat-card"><span>Published</span><strong id="pubCount">0</strong></div>
       </div>
+      <div class="ak-tabs" role="tablist"><button class="ak-tab active" data-tab="questions">Questions</button><button class="ak-tab" data-tab="faq">FAQ</button><button class="ak-tab" data-tab="packages">Packages</button><button class="ak-tab" data-tab="deleted">Archive</button></div>
     </section>
 
-    <section class="panel section-panel">
-      <div class="section-head"><div><h2>4 Pakej Rasmi</h2><p>Tambah dan edit pakej yang Aira guna untuk cadangan.</p></div><button class="primary-btn" id="addPackageBtn">+ Add Package</button></div>
-      <div id="packageCards" class="kb-grid"></div>
+    <section id="tab-questions" class="panel section-panel ak-panel active">
+      <div class="ak-section-head"><div><h2>Bank Soalan Sales Flow</h2><p>Soalan qualification sebelum lead dicipta.</p></div><button class="primary-btn" data-add="question">+ Add Question</button></div>
+      <div class="ak-tools"><input id="qSearch" class="ak-search" placeholder="Cari key / soalan / pilihan..."><select id="qStatus" class="ak-select"><option value="">Semua status</option><option value="published">Published</option><option value="draft">Draft</option><option value="archived">Archived</option></select></div>
+      <div id="qTable"></div><div id="qCards" class="ak-cards"></div>
     </section>
 
-    <section class="panel section-panel">
-      <div class="section-head"><div><h2>Bank Soalan Sales Flow</h2><p>Soalan qualification yang Aira tanya sebelum create lead.</p></div><button class="primary-btn" id="addQuestionBtn">+ Add Question</button></div>
-      <div class="kb-section-tools"><div class="kb-filter-row"><input id="questionSearch" placeholder="Search soalan / key..."><select id="questionStatusFilter"><option value="">Semua Status</option><option value="published">Published</option><option value="draft">Draft</option><option value="archived">Archived</option><option value="deleted">Deleted</option></select></div></div>
-      <div id="questionCards" class="kb-grid"></div>
+    <section id="tab-faq" class="panel section-panel ak-panel">
+      <div class="ak-section-head"><div><h2>FAQ Knowledge</h2><p>Jawapan pantas Aira kepada pelanggan.</p></div><button class="primary-btn" data-add="faq">+ Add FAQ</button></div>
+      <div class="ak-tools"><input id="fSearch" class="ak-search" placeholder="Cari topic / trigger / jawapan..."><select id="fStatus" class="ak-select"><option value="">Semua status</option><option value="published">Published</option><option value="draft">Draft</option><option value="archived">Archived</option></select></div>
+      <div id="fTable"></div><div id="fCards" class="ak-cards"></div>
     </section>
 
-    <section class="panel section-panel">
-      <div class="section-head"><div><h2>FAQ Knowledge</h2><p>Jawapan pantas Aira untuk soalan pelanggan.</p></div><button class="primary-btn" id="addFaqBtn">+ Add FAQ</button></div>
-      <div class="kb-section-tools"><div class="kb-filter-row"><input id="faqSearch" placeholder="Search topic / trigger / jawapan..."><select id="faqStatusFilter"><option value="">Semua Status</option><option value="published">Published</option><option value="draft">Draft</option><option value="archived">Archived</option><option value="deleted">Deleted</option></select></div></div>
-      <div id="faqCards" class="kb-grid"></div>
+    <section id="tab-packages" class="panel section-panel ak-panel">
+      <div class="ak-section-head"><div><h2>4 Pakej Rasmi RH</h2><p>Pakej yang digunakan untuk cadangan Aira.</p></div><button class="primary-btn" data-add="package">+ Add Package</button></div>
+      <div id="pTable"></div><div id="pCards" class="ak-cards"></div>
+    </section>
+
+    <section id="tab-deleted" class="panel section-panel ak-panel">
+      <div class="ak-section-head"><div><h2>Archive / Deleted</h2><p>Knowledge yang diarkibkan atau soft delete.</p></div></div>
+      <div id="dTable"></div><div id="dCards" class="ak-cards"></div>
     </section>
   </main>
 </div>
 
-<div id="kbModal" class="modal hidden">
-  <div class="modal-card kb-modal-card">
-    <div class="modal-head"><h2 id="kbModalTitle">Edit</h2><button id="kbModalClose" class="icon-btn">×</button></div>
-    <form id="kbForm" class="kb-form">
-      <div id="kbFormFields"></div>
-      <div class="modal-actions"><button type="button" id="kbCancelBtn" class="ghost-btn">Cancel</button><button type="submit" class="primary-btn">Save Draft</button></div>
-    </form>
+<div id="akModal" class="ak-modal hidden" aria-hidden="true">
+  <div class="ak-modal-card">
+    <div class="ak-modal-head"><h2 id="modalTitle">Edit</h2><button id="modalClose" class="icon-btn" type="button">×</button></div>
+    <form id="akForm"><div id="formBody" class="ak-form"></div><div class="ak-form-actions"><button type="button" id="modalCancel" class="ghost-btn">Cancel</button><button type="submit" id="saveDraftBtn" class="ghost-btn">Save Draft</button><button type="button" id="savePublishBtn" class="primary-btn">Save & Publish</button></div></form>
   </div>
 </div>
 
 <script src="../supabase-config.js"></script>
-<script src="../aira-lead-system.js?v=v1.4.0-aira-kb-recovery"></script>
-<script src="../aira-data-service.js?v=v1.4.0-aira-kb-recovery"></script>
+<script src="../aira-lead-system.js?v=v1.5.0-aira-kb-ui"></script>
+<script src="../aira-data-service.js?v=v1.5.0-aira-kb-ui"></script>
 <script src="assets/admin.js"></script>
 <script>
 (function(){
   'use strict';
+  const VERSION='v1.5.0-aira-knowledge-professional-admin-ui';
   const $=(s,r=document)=>r.querySelector(s);
-  const esc=v=>String(v??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+  const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+  const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
   const clone=o=>JSON.parse(JSON.stringify(o||{}));
+  const lines=v=>String(v||'').split('\n').map(x=>x.trim()).filter(Boolean);
+  const comma=v=>String(v||'').split(',').map(x=>x.trim()).filter(Boolean);
+  const joinLines=a=>(Array.isArray(a)?a:[]).join('\n');
+  const joinComma=a=>(Array.isArray(a)?a:[]).join(', ');
   const now=()=>new Date().toISOString();
   const statusOf=o=>o?.is_deleted?'deleted':(o?.status||'published');
-  let currentQ={version:'v1.4.0-aira-knowledge-qa-recovery',steps:[],packages:{}};
-  let currentF={version:'v1.4.0-aira-knowledge-qa-recovery',faq:[]};
+  const activeOnly=list=>(list||[]).filter(x=>!x.is_deleted);
+  let qBank={version:VERSION,assistantName:'Aira',steps:[],packages:{}};
+  let fBank={version:VERSION,quickActions:[],faq:[]};
   let source='local';
-  let editCtx=null;
+  let ctx=null;
 
-  const OFFICIAL_Q={version:'v1.4.0-aira-knowledge-qa-recovery',assistantName:'Aira',positioning:'AI Website Consultant',intro:['👋 Hai, saya <strong>Aira</strong>.','Saya akan tanya beberapa soalan ringkas untuk cadangkan pakej website RH yang paling sesuai.'],steps:[
-    {key:'business_type',question:'Apakah jenis bisnes anda?',type:'choice',required:true,status:'published',options:['Servis','Produk','Restoran / F&B','Event / Rental','Hartanah','Homestay / Hotel','Kereta Sewa','Klinik / Profesional','Kontraktor / Renovasi','Company Profile','E-commerce / Katalog','Custom System / Portal','Lain-lain']},
-    {key:'domain_status',question:'Adakah anda sudah mempunyai domain?',type:'choice',required:false,status:'published',options:['Ya, sudah ada domain','Belum ada domain','Tidak pasti / perlu semak']},
-    {key:'hosting_status',question:'Adakah anda sudah mempunyai hosting?',type:'choice',required:false,status:'published',options:['Ya, sudah ada hosting','Belum ada hosting','Tidak pasti / perlu semak']},
-    {key:'website_status',question:'Adakah anda sudah ada website sekarang?',type:'choice',required:false,status:'published',options:['Belum ada website','Ada, tetapi mahu upgrade','Ada landing page sahaja','Tidak pasti']},
-    {key:'objective',question:'Apakah objektif utama website anda?',type:'choice',required:true,status:'published',options:['Dapatkan Lead','Profil Syarikat','Jual Produk / Katalog','Booking / Tempahan','SEO Google','Dashboard / Sistem','Ecosystem Digital Lengkap']},
-    {key:'feature_need',question:'Fungsi apa yang anda paling perlukan?',type:'choice',required:false,status:'published',options:['Website basic + WhatsApp','AI Chatbot Aira','Blog / Artikel SEO','Service / Product Listing','Dashboard Basic','Payment / Invoice','Client Portal / Sistem Custom','Belum pasti']},
-    {key:'budget',question:'Budget anggaran anda?',type:'choice',required:true,status:'published',options:['RM799 (RH Basic)','RM1999 (RH Growth)','RM2999 (RH Ecosystem)','RM3000+ (RH Enterprise)','Tidak Pasti']},
-    {key:'timeline',question:'Bila anda mahu website mula siap atau dilancarkan?',type:'choice',required:true,status:'published',options:['Segera','1–2 minggu','Dalam 1 bulan','Belum pasti']},
-    {key:'content_ready',question:'Bahan seperti logo, gambar dan teks sudah ada?',type:'choice',required:false,status:'published',options:['Sudah lengkap','Ada sebahagian','Belum ada','Perlu bantuan susun content']},
-    {key:'name',question:'Boleh saya tahu nama anda?',type:'input',input:true,required:true,status:'published',placeholder:'Contoh: Ahmad'},
-    {key:'phone',question:'Nombor WhatsApp untuk team kami hubungi?',type:'input',input:true,required:true,status:'published',placeholder:'Contoh: 0123456789',validation:'phone'},
-    {key:'email',question:'Email untuk proposal / quotation?',type:'input',input:true,required:false,status:'published',placeholder:'Contoh: nama@email.com',validation:'email'}
+  const OFFICIAL_Q={version:VERSION,assistantName:'Aira',positioning:'AI Website Consultant',steps:[
+    {key:'business_type',question:'Apakah jenis bisnes anda?',type:'choice',required:true,status:'published',priority:10,options:['Servis','Produk','Restoran / F&B','Event / Rental','Hartanah','Homestay / Hotel','Kereta Sewa','Klinik / Profesional','Kontraktor / Renovasi','Company Profile','E-commerce / Katalog','Custom System / Portal','Lain-lain']},
+    {key:'domain_status',question:'Adakah anda sudah mempunyai domain?',type:'choice',required:false,status:'published',priority:20,options:['Ya, sudah ada domain','Belum ada domain','Tidak pasti / perlu semak']},
+    {key:'hosting_status',question:'Adakah anda sudah mempunyai hosting?',type:'choice',required:false,status:'published',priority:30,options:['Ya, sudah ada hosting','Belum ada hosting','Tidak pasti / perlu semak']},
+    {key:'website_status',question:'Adakah anda sudah ada website sekarang?',type:'choice',required:false,status:'published',priority:40,options:['Belum ada website','Ada, tetapi mahu upgrade','Ada landing page sahaja','Tidak pasti']},
+    {key:'objective',question:'Apakah objektif utama website anda?',type:'choice',required:true,status:'published',priority:50,options:['Dapatkan Lead','Profil Syarikat','Jual Produk / Katalog','Booking / Tempahan','SEO Google','Dashboard / Sistem','Ecosystem Digital Lengkap']},
+    {key:'feature_need',question:'Fungsi apa yang anda paling perlukan?',type:'choice',required:false,status:'published',priority:60,options:['Website basic + WhatsApp','AI Chatbot Aira','Blog / Artikel SEO','Service / Product Listing','Dashboard Basic','Payment / Invoice','Client Portal / Sistem Custom','Belum pasti']},
+    {key:'budget',question:'Budget anggaran anda?',type:'choice',required:true,status:'published',priority:70,options:['RM799 (RH Basic)','RM1999 (RH Growth)','RM2999 (RH Ecosystem)','RM3000+ (RH Enterprise)','Tidak Pasti']},
+    {key:'timeline',question:'Bila anda mahu website mula siap atau dilancarkan?',type:'choice',required:true,status:'published',priority:80,options:['Segera','1–2 minggu','Dalam 1 bulan','Belum pasti']},
+    {key:'content_ready',question:'Bahan seperti logo, gambar dan teks sudah ada?',type:'choice',required:false,status:'published',priority:90,options:['Sudah lengkap','Ada sebahagian','Belum ada','Perlu bantuan susun content']},
+    {key:'name',question:'Boleh saya tahu nama anda?',type:'input',required:true,status:'published',priority:100,placeholder:'Contoh: Ahmad'},
+    {key:'phone',question:'Nombor WhatsApp untuk team kami hubungi?',type:'input',required:true,status:'published',priority:110,placeholder:'Contoh: 0123456789',validation:'phone'},
+    {key:'email',question:'Email untuk proposal / quotation?',type:'input',required:false,status:'published',priority:120,placeholder:'Contoh: nama@email.com',validation:'email'}
   ],packages:{
-    'RH Basic':{price:'RM799',maintenance:'RM79/bulan',bestFor:['Bisnes kecil','Personal brand','Profil ringkas','Baru mula online'],features:['Website asas / one-page','Mobile responsive','WhatsApp CTA','Lead form ringkas','SEO asas','Struktur Google-ready'],templateUrl:'/pakej/rh-basic/'},
-    'RH Growth':{price:'RM1999',maintenance:'RM129/bulan',bestFor:['Bisnes servis','Lead generation','Portfolio','Blog SEO','Listing servis / produk'],features:['Multi-page website','AI Chatbot Aira','Lead Capture System','Service / Product Listing','Blog / Artikel','Portfolio / Gallery','SEO asas'],templateUrl:'/pakej/rh-growth/'},
-    'RH Ecosystem':{price:'RM2999',maintenance:'RM249/bulan',bestFor:['Syarikat berkembang','Multi servis','Admin dashboard','Sales funnel','Ecosystem digital'],features:['Company profile + service website','Advanced AI Chatbot','Blog CMS','Dashboard Basic','Lead Management Ready','Analytics-ready structure','Multi Website Structure'],templateUrl:'/pakej/rh-ecosystem/'},
-    'RH Enterprise':{price:'Custom',maintenance:'Custom',bestFor:['Portal','CRM','Custom system','Multi-branch','Automation'],features:['Custom quotation','Portal / dashboard','Automation flow','Integration planning','Advanced workflow','Custom scope'],templateUrl:'/#aira-popup'}
+    'RH Basic':{status:'published',price:'RM799',maintenance:'RM79/bulan',bestFor:['Bisnes kecil','Personal brand','Profil ringkas','Baru mula online'],features:['Website asas / one-page','Mobile responsive','WhatsApp CTA','Lead form ringkas','SEO asas','Struktur Google-ready'],templateUrl:'/pakej/rh-basic/'},
+    'RH Growth':{status:'published',price:'RM1999',maintenance:'RM129/bulan',bestFor:['Bisnes servis','Lead generation','Portfolio','Blog SEO','Listing servis / produk'],features:['Multi-page website','AI Chatbot Aira','Lead Capture System','Service / Product Listing','Blog / Artikel','Portfolio / Gallery','SEO asas'],templateUrl:'/pakej/rh-growth/'},
+    'RH Ecosystem':{status:'published',price:'RM2999',maintenance:'RM249/bulan',bestFor:['Syarikat berkembang','Multi servis','Admin dashboard','Sales funnel','Ecosystem digital'],features:['Company profile + service website','Advanced AI Chatbot','Blog CMS','Dashboard Basic','Lead Management Ready','Analytics-ready structure','Multi Website Structure'],templateUrl:'/pakej/rh-ecosystem/'},
+    'RH Enterprise':{status:'published',price:'Custom',maintenance:'Custom',bestFor:['Portal','CRM','Custom system','Multi-branch','Automation'],features:['Custom quotation','Portal / dashboard','Automation flow','Integration planning','Advanced workflow','Custom scope'],templateUrl:'/#aira-popup'}
   }};
-  const OFFICIAL_F={version:'v1.4.0-aira-knowledge-qa-recovery',quickActions:['harga','pakej','domain','hosting','maintenance','tempoh siap'],faq:[
+  const OFFICIAL_F={version:VERSION,quickActions:['harga','pakej','domain','hosting','maintenance','tempoh siap'],faq:[
     {topic:'Harga pakej',status:'published',triggers:['harga','pakej','berapa kos'],answer:'Kami ada 4 pilihan utama:<br><br><strong>RH Basic</strong> — RM799 + maintenance RM79/bulan<br><strong>RH Growth</strong> — RM1999 + maintenance RM129/bulan<br><strong>RH Ecosystem</strong> — RM2999 + maintenance RM249/bulan<br><strong>RH Enterprise</strong> — Custom quotation.'},
     {topic:'Maintenance',status:'published',triggers:['maintenance','bulanan','support'],answer:'Maintenance merangkumi pemantauan website, SSL, backup asas, bug fix minor dan support mengikut pakej.'},
     {topic:'Domain dan hosting',status:'published',triggers:['domain','hosting','server'],answer:'Jika sudah ada domain/hosting, kami boleh semak dahulu. Jika belum ada, RH boleh bantu susun domain, hosting dan setup teknikal.'},
-    {topic:'Tempoh siap',status:'published',triggers:['berapa lama','tempoh siap','siap bila'],answer:'Tempoh biasa ialah 3–14 hari bekerja bergantung kepada pakej, content dan kelulusan client.'}
+    {topic:'Tempoh siap',status:'published',triggers:['berapa lama','tempoh siap','siap bila'],answer:'Tempoh biasa ialah 3–14 hari bekerja bergantung kepada pakej, content dan kelulusan client.'},
+    {topic:'Bahan website',status:'published',triggers:['logo','gambar','content','teks','copywriting','bahan'],answer:'Jika bahan seperti logo, gambar dan teks belum lengkap, RH boleh bantu susun struktur content asas supaya website masih boleh dimulakan dengan kemas.'},
+    {topic:'Media sosial vs website',status:'published',triggers:['facebook','fb','instagram','tiktok','social media'],answer:'Media sosial bagus untuk promosi harian. Website pula menjadi pusat rujukan rasmi yang lebih mudah dipercayai dan boleh dihubungkan dengan SEO Google, Aira dan lead form.'}
   ]};
 
   function normalize(){
-    currentQ.steps=Array.isArray(currentQ.steps)?currentQ.steps:[];
-    currentQ.packages=currentQ.packages&&typeof currentQ.packages==='object'?currentQ.packages:{};
-    currentF.faq=Array.isArray(currentF.faq)?currentF.faq:[];
-    if(!currentQ.version) currentQ.version='v1.4.0-aira-knowledge-qa-recovery';
-    if(!currentF.version) currentF.version='v1.4.0-aira-knowledge-qa-recovery';
+    qBank.steps=Array.isArray(qBank.steps)?qBank.steps:[];
+    qBank.packages=qBank.packages&&typeof qBank.packages==='object'?qBank.packages:{};
+    fBank.faq=Array.isArray(fBank.faq)?fBank.faq:[];
+    qBank.version=qBank.version||VERSION; fBank.version=fBank.version||VERSION;
   }
-  function setMsg(msg,type='info'){
-    const el=$('#airaStatus'); if(!el)return;
-    el.className='alert '+type; el.textContent=msg;
+  function setMsg(msg,type='info'){const el=$('#akStatus'); if(el){el.className='alert '+type; el.textContent=msg;}}
+  function rowActions(type,id,st){
+    const main=`<button class="ghost-btn" data-action="edit" data-type="${type}" data-id="${esc(id)}">Edit</button><button class="ghost-btn" data-action="duplicate" data-type="${type}" data-id="${esc(id)}">Duplicate</button>`;
+    const toggle= st==='published'?`<button class="ghost-btn" data-action="status" data-type="${type}" data-id="${esc(id)}" data-status="draft">Draft</button>`:`<button class="ghost-btn" data-action="status" data-type="${type}" data-id="${esc(id)}" data-status="published">Publish</button>`;
+    const del= st==='deleted'?`<button class="ghost-btn" data-action="restore" data-type="${type}" data-id="${esc(id)}">Restore</button>`:`<button class="danger-outline-btn" data-action="delete" data-type="${type}" data-id="${esc(id)}">Delete</button>`;
+    return `<div class="ak-actions">${main}${toggle}${del}</div>`;
   }
-  function render(){
-    normalize();
-    $('#airaVersion').textContent=currentQ.version||'-';
-    $('#qCount').textContent=currentQ.steps.filter(x=>!x.is_deleted).length;
-    $('#pCount').textContent=Object.keys(currentQ.packages||{}).length;
-    $('#fCount').textContent=currentF.faq.filter(x=>!x.is_deleted).length;
-    $('#bankSource').textContent=source||'-';
-    renderPackages(); renderQuestions(); renderFaq();
+  function statusBadge(st){return `<span class="ak-badge ${esc(st)}">${esc(st)}</span>`;}
+  function filterItems(items,search,status,fields,deletedOnly=false){
+    const q=String($(search)?.value||'').toLowerCase().trim(); const st=$(status)?.value||'';
+    return (items||[]).filter(item=>{
+      const isDel=!!item.is_deleted; if(deletedOnly&&!isDel)return false; if(!deletedOnly&&isDel)return false;
+      const blob=fields.map(f=>Array.isArray(item[f])?item[f].join(' '):(item[f]||'')).join(' ').toLowerCase();
+      return (!q||blob.includes(q))&&(!st||statusOf(item)===st);
+    });
   }
-  function renderPackages(){
-    const box=$('#packageCards'); const entries=Object.entries(currentQ.packages||{});
-    box.innerHTML=entries.length?entries.map(([name,p])=>`<div class="kb-card"><div class="kb-meta"><span class="kb-badge active">Package</span><span>${esc(p.price||'')}</span><span>${esc(p.maintenance||'')}</span></div><h3>${esc(name)}</h3><p><strong>Best for:</strong> ${esc((p.bestFor||[]).join(', ')||'-')}</p><p><strong>Features:</strong> ${esc((p.features||[]).slice(0,5).join(', ')||'-')}</p><div class="kb-actions"><button class="ghost-btn" data-edit-package="${esc(name)}">Edit</button><button class="ghost-btn" data-dup-package="${esc(name)}">Duplicate</button><button class="danger-outline-btn" data-del-package="${esc(name)}">Delete</button></div></div>`).join(''):'<div class="kb-empty">Tiada pakej. Klik Add Package.</div>';
+  function renderTable(target,headers,rows,empty){
+    const box=$(target); if(!box)return;
+    if(!rows.length){box.innerHTML=`<div class="ak-table-wrap"><div class="ak-empty">${esc(empty)}</div></div>`;return;}
+    box.innerHTML=`<div class="ak-table-wrap"><table class="ak-table"><thead><tr>${headers.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table></div>`;
   }
-  function filterList(list,searchEl,statusEl,fields){
-    const q=String($(searchEl)?.value||'').toLowerCase().trim(); const st=$(statusEl)?.value||'';
-    return list.filter(item=>{ const blob=fields.map(f=>Array.isArray(item[f])?item[f].join(' '):(item[f]||'')).join(' ').toLowerCase(); return (!q||blob.includes(q))&&(!st||statusOf(item)===st); });
-  }
+  function renderCards(target,rows,empty){const box=$(target); if(!box)return; box.innerHTML=rows.length?rows.join(''):`<div class="ak-empty">${esc(empty)}</div>`;}
   function renderQuestions(){
-    const box=$('#questionCards'); const items=filterList(currentQ.steps,'#questionSearch','#questionStatusFilter',['key','question','options']);
-    box.innerHTML=items.length?items.map(item=>{ const i=currentQ.steps.indexOf(item); const st=statusOf(item); return `<div class="kb-card ${item.is_deleted?'is-deleted':''}"><div class="kb-meta"><span class="kb-badge ${st}">${esc(st)}</span><span>${esc(item.key||'-')}</span><span>${item.required?'Required':'Optional'}</span></div><h3>${esc(item.question||'-')}</h3><p>${esc((item.options||[]).slice(0,8).join(', ')||item.placeholder||'Input field')}</p><div class="kb-actions"><button class="ghost-btn" data-edit-question="${i}">Edit</button><button class="ghost-btn" data-dup-question="${i}">Duplicate</button><button class="ghost-btn" data-toggle-question="${i}">${st==='published'?'Draft':'Publish'}</button>${item.is_deleted?`<button class="ghost-btn" data-restore-question="${i}">Restore</button>`:`<button class="danger-outline-btn" data-del-question="${i}">Delete</button>`}</div></div>`; }).join(''):'<div class="kb-empty">Tiada soalan. Klik Add Question atau Reset Official.</div>';
+    const items=filterItems(qBank.steps,'#qSearch','#qStatus',['key','question','options','placeholder']);
+    const rows=items.map(item=>{const idx=qBank.steps.indexOf(item); const st=statusOf(item); return `<tr><td><span class="ak-title">${esc(item.key||'-')}</span><span class="ak-sub">${item.required?'Required':'Optional'} • ${esc(item.type||'choice')}</span></td><td><span class="ak-title">${esc(item.question||'-')}</span><span class="ak-sub">${esc((item.options||[]).slice(0,6).join(', ')||item.placeholder||'Input field')}</span></td><td>${statusBadge(st)}</td><td>${esc(item.priority||idx+1)}</td><td>${rowActions('question',idx,st)}</td></tr>`});
+    const cards=items.map(item=>{const idx=qBank.steps.indexOf(item); const st=statusOf(item); return `<div class="ak-card"><div class="ak-card-top"><div><span class="ak-title">${esc(item.question||'-')}</span><span class="ak-sub">${esc(item.key||'-')} • ${item.required?'Required':'Optional'}</span></div>${statusBadge(st)}</div><p class="ak-sub">${esc((item.options||[]).slice(0,8).join(', ')||item.placeholder||'Input field')}</p>${rowActions('question',idx,st)}</div>`});
+    renderTable('#qTable',['Key','Question','Status','Priority','Action'],rows,'Tiada soalan. Klik Add Question atau Reset Official.'); renderCards('#qCards',cards,'Tiada soalan.');
   }
   function renderFaq(){
-    const box=$('#faqCards'); const items=filterList(currentF.faq,'#faqSearch','#faqStatusFilter',['topic','triggers','answer']);
-    box.innerHTML=items.length?items.map(item=>{ const i=currentF.faq.indexOf(item); const st=statusOf(item); return `<div class="kb-card ${item.is_deleted?'is-deleted':''}"><div class="kb-meta"><span class="kb-badge ${st}">${esc(st)}</span><span>${esc(item.topic||'-')}</span></div><h3>${esc((item.triggers||[]).slice(0,6).join(', ')||item.topic||'-')}</h3><p>${item.answer||''}</p><div class="kb-actions"><button class="ghost-btn" data-edit-faq="${i}">Edit</button><button class="ghost-btn" data-dup-faq="${i}">Duplicate</button><button class="ghost-btn" data-toggle-faq="${i}">${st==='published'?'Draft':'Publish'}</button>${item.is_deleted?`<button class="ghost-btn" data-restore-faq="${i}">Restore</button>`:`<button class="danger-outline-btn" data-del-faq="${i}">Delete</button>`}</div></div>`; }).join(''):'<div class="kb-empty">Tiada FAQ. Klik Add FAQ atau Reset Official.</div>';
+    const items=filterItems(fBank.faq,'#fSearch','#fStatus',['topic','triggers','answer']);
+    const rows=items.map(item=>{const idx=fBank.faq.indexOf(item); const st=statusOf(item); return `<tr><td><span class="ak-title">${esc(item.topic||'-')}</span><span class="ak-sub">${esc((item.triggers||[]).join(', '))}</span></td><td>${item.answer||''}</td><td>${statusBadge(st)}</td><td>${rowActions('faq',idx,st)}</td></tr>`});
+    const cards=items.map(item=>{const idx=fBank.faq.indexOf(item); const st=statusOf(item); return `<div class="ak-card"><div class="ak-card-top"><div><span class="ak-title">${esc(item.topic||'-')}</span><span class="ak-sub">${esc((item.triggers||[]).join(', '))}</span></div>${statusBadge(st)}</div><p class="ak-sub">${item.answer||''}</p>${rowActions('faq',idx,st)}</div>`});
+    renderTable('#fTable',['Topic / Triggers','Answer','Status','Action'],rows,'Tiada FAQ. Klik Add FAQ atau Reset Official.'); renderCards('#fCards',cards,'Tiada FAQ.');
+  }
+  function renderPackages(){
+    const entries=Object.entries(qBank.packages||{}).filter(([n,p])=>!p.is_deleted);
+    const rows=entries.map(([name,p])=>{const st=statusOf(p); return `<tr><td><span class="ak-title">${esc(name)}</span><span class="ak-sub">${esc((p.bestFor||[]).slice(0,4).join(', '))}</span></td><td><strong>${esc(p.price||'-')}</strong><span class="ak-sub">Maintenance: ${esc(p.maintenance||'-')}</span></td><td>${esc((p.features||[]).slice(0,6).join(', '))}</td><td>${statusBadge(st)}</td><td>${rowActions('package',name,st)}</td></tr>`});
+    const cards=entries.map(([name,p])=>{const st=statusOf(p); return `<div class="ak-card"><div class="ak-card-top"><div><span class="ak-title">${esc(name)}</span><span class="ak-sub">${esc(p.price||'-')} • ${esc(p.maintenance||'-')}</span></div>${statusBadge(st)}</div><p class="ak-sub">${esc((p.features||[]).slice(0,7).join(', '))}</p>${rowActions('package',name,st)}</div>`});
+    renderTable('#pTable',['Package','Price','Features','Status','Action'],rows,'Tiada pakej. Klik Add Package atau Reset Official.'); renderCards('#pCards',cards,'Tiada pakej.');
+  }
+  function renderDeleted(){
+    const q=qBank.steps.filter(x=>x.is_deleted).map((item,i)=>({type:'question',id:qBank.steps.indexOf(item),title:item.question,key:item.key,status:statusOf(item),meta:item.delete_reason||''}));
+    const f=fBank.faq.filter(x=>x.is_deleted).map(item=>({type:'faq',id:fBank.faq.indexOf(item),title:item.topic,key:(item.triggers||[]).join(', '),status:statusOf(item),meta:item.delete_reason||''}));
+    const p=Object.entries(qBank.packages||{}).filter(([n,x])=>x.is_deleted).map(([name,item])=>({type:'package',id:name,title:name,key:item.price,meta:item.delete_reason||'',status:statusOf(item)}));
+    const items=[...q,...f,...p];
+    const rows=items.map(x=>`<tr><td>${esc(x.type)}</td><td><span class="ak-title">${esc(x.title||'-')}</span><span class="ak-sub">${esc(x.key||'')}</span></td><td>${esc(x.meta||'-')}</td><td>${rowActions(x.type,x.id,'deleted')}</td></tr>`);
+    const cards=items.map(x=>`<div class="ak-card"><span class="ak-title">${esc(x.title||'-')}</span><span class="ak-sub">${esc(x.type)} • ${esc(x.meta||'-')}</span>${rowActions(x.type,x.id,'deleted')}</div>`);
+    renderTable('#dTable',['Type','Item','Reason','Action'],rows,'Tiada archived / deleted knowledge.'); renderCards('#dCards',cards,'Tiada archive.');
+  }
+  function render(){
+    normalize(); $('#akVersion').textContent=qBank.version||VERSION; $('#akSource').textContent=source||'-';
+    const qActive=activeOnly(qBank.steps); const fActive=activeOnly(fBank.faq); const pActive=Object.values(qBank.packages||{}).filter(x=>!x.is_deleted);
+    $('#qCount').textContent=qActive.length; $('#fCount').textContent=fActive.length; $('#pCount').textContent=pActive.length;
+    $('#pubCount').textContent=qActive.filter(x=>statusOf(x)==='published').length+fActive.filter(x=>statusOf(x)==='published').length+pActive.filter(x=>statusOf(x)==='published').length;
+    renderQuestions(); renderFaq(); renderPackages(); renderDeleted();
   }
   async function loadCurrent(){
-    setMsg('Memuatkan bank soalan...','info');
-    try{
-      const svc=window.RH_AIRA_DATA_SERVICE;
-      if(!svc) throw new Error('Aira data service tidak tersedia.');
-      const res=await svc.loadAll();
-      currentQ=res.questionBank&&res.questionBank.steps?clone(res.questionBank):clone(OFFICIAL_Q);
-      currentF=res.faqBank&&res.faqBank.faq?clone(res.faqBank):clone(OFFICIAL_F);
-      source=res.source||'local'; normalize(); render();
-      setMsg(res.warning?'Loaded fallback. Warning: '+res.warning:'Bank soalan berjaya dimuatkan.','info');
-    }catch(err){ currentQ=clone(OFFICIAL_Q); currentF=clone(OFFICIAL_F); source='official fallback'; render(); setMsg('Gagal load remote. Official fallback dipaparkan: '+err.message,'danger'); }
+    try{setMsg('Loading Aira Knowledge...','info'); const svc=window.RH_AIRA_DATA_SERVICE; if(!svc)throw new Error('Aira data service tidak tersedia.'); const res=await svc.loadAll(); qBank=res.questionBank&&res.questionBank.steps?clone(res.questionBank):clone(OFFICIAL_Q); fBank=res.faqBank&&res.faqBank.faq?clone(res.faqBank):clone(OFFICIAL_F); source=res.source||'local'; render(); setMsg(res.warning?'Loaded fallback. Warning: '+res.warning:'Bank soalan berjaya dimuatkan.','success');}catch(err){qBank=clone(OFFICIAL_Q); fBank=clone(OFFICIAL_F); source='official fallback'; render(); setMsg('Gagal load remote. Official fallback dipaparkan: '+err.message,'danger');}
   }
   async function publishCurrent(){
-    try{
-      normalize(); currentQ.version='v1.4.0-aira-knowledge-qa-recovery'; currentF.version='v1.4.0-aira-knowledge-qa-recovery';
-      const res=await window.RH_AIRA_DATA_SERVICE.publishAll(currentQ,currentF);
-      source=res.mode||source; render(); setMsg(res.ok?'Perubahan Aira Knowledge berjaya publish.':'Gagal publish: '+(res.error||'Unknown error'),res.ok?'success':'danger');
-    }catch(err){ setMsg('Gagal publish: '+err.message,'danger'); }
+    try{qBank.version=VERSION; fBank.version=VERSION; const res=await window.RH_AIRA_DATA_SERVICE.publishAll(qBank,fBank); source=res.mode||source; render(); setMsg(res.ok?'Perubahan berjaya publish.':'Gagal publish: '+(res.error||'Unknown error'),res.ok?'success':'danger');}catch(err){setMsg('Gagal publish: '+err.message,'danger');}
   }
-  function lines(v){ return String(v||'').split('\n').map(x=>x.trim()).filter(Boolean); }
-  function comma(v){ return String(v||'').split(',').map(x=>x.trim()).filter(Boolean); }
-  function openModal(type,index,key){
-    editCtx={type,index,key}; let title=''; let html='';
+  function switchTab(tab){$$('.ak-tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab)); $$('.ak-panel').forEach(p=>p.classList.toggle('active',p.id==='tab-'+tab));}
+  function modalFields(type,id){
     if(type==='question'){
-      const item=index==null?{key:'',question:'',type:'choice',required:false,status:'draft',options:[],placeholder:''}:currentQ.steps[index]; title=index==null?'Add Question':'Edit Question';
-      html=`<div class="two-col"><label>Key<input name="key" value="${esc(item.key)}" required></label><label>Status<select name="status"><option value="published" ${statusOf(item)==='published'?'selected':''}>published</option><option value="draft" ${statusOf(item)==='draft'?'selected':''}>draft</option><option value="archived" ${statusOf(item)==='archived'?'selected':''}>archived</option></select></label></div><label>Question<textarea name="question" required>${esc(item.question)}</textarea></label><div class="two-col"><label>Type<select name="type"><option value="choice" ${item.type==='choice'?'selected':''}>choice</option><option value="input" ${item.type==='input'?'selected':''}>input</option></select></label><label>Placeholder<input name="placeholder" value="${esc(item.placeholder||'')}"></label></div><label><input type="checkbox" name="required" ${item.required?'checked':''}> Required</label><label>Options <span class="kb-help">Satu baris satu pilihan</span><textarea name="options">${esc((item.options||[]).join('\n'))}</textarea></label>`;
+      const item=id==null?{key:'',question:'',type:'choice',required:false,status:'draft',priority:'',options:[],placeholder:''}:qBank.steps[Number(id)];
+      return `<div class="ak-form-grid"><label>Key<input name="key" value="${esc(item.key||'')}" required></label><label>Status<select name="status"><option value="published" ${statusOf(item)==='published'?'selected':''}>Published</option><option value="draft" ${statusOf(item)==='draft'?'selected':''}>Draft</option><option value="archived" ${statusOf(item)==='archived'?'selected':''}>Archived</option></select></label></div><label>Question<textarea name="question" required>${esc(item.question||'')}</textarea></label><div class="ak-form-grid"><label>Type<select name="type"><option value="choice" ${(item.type||'choice')==='choice'?'selected':''}>Choice</option><option value="input" ${item.type==='input'?'selected':''}>Input</option></select></label><label>Priority<input type="number" name="priority" value="${esc(item.priority||'')}"></label></div><label>Placeholder<input name="placeholder" value="${esc(item.placeholder||'')}"></label><label><span><input type="checkbox" name="required" ${item.required?'checked':''}> Required question</span></label><label>Options <span class="ak-help">Satu baris satu pilihan</span><textarea name="options">${esc(joinLines(item.options))}</textarea></label>`;
     }
     if(type==='faq'){
-      const item=index==null?{topic:'',triggers:[],answer:'',status:'draft'}:currentF.faq[index]; title=index==null?'Add FAQ':'Edit FAQ';
-      html=`<div class="two-col"><label>Topic<input name="topic" value="${esc(item.topic)}" required></label><label>Status<select name="status"><option value="published" ${statusOf(item)==='published'?'selected':''}>published</option><option value="draft" ${statusOf(item)==='draft'?'selected':''}>draft</option><option value="archived" ${statusOf(item)==='archived'?'selected':''}>archived</option></select></label></div><label>Triggers <span class="kb-help">Pisah dengan koma</span><textarea name="triggers">${esc((item.triggers||[]).join(', '))}</textarea></label><label>Answer <span class="kb-help">HTML ringkas dibenarkan</span><textarea name="answer" class="large" required>${esc(item.answer)}</textarea></label><div class="kb-preview"><h4>Preview</h4><div id="answerPreview">${item.answer||''}</div></div>`;
+      const item=id==null?{topic:'',triggers:[],answer:'',status:'draft'}:fBank.faq[Number(id)];
+      return `<div class="ak-form-grid"><label>Topic<input name="topic" value="${esc(item.topic||'')}" required></label><label>Status<select name="status"><option value="published" ${statusOf(item)==='published'?'selected':''}>Published</option><option value="draft" ${statusOf(item)==='draft'?'selected':''}>Draft</option><option value="archived" ${statusOf(item)==='archived'?'selected':''}>Archived</option></select></label></div><label>Triggers <span class="ak-help">Pisah dengan koma</span><textarea name="triggers">${esc(joinComma(item.triggers))}</textarea></label><label>Answer <span class="ak-help">HTML ringkas dibenarkan</span><textarea name="answer" class="large" required>${esc(item.answer||'')}</textarea></label><div class="ak-preview"><h3>Preview</h3><div id="answerPreview">${item.answer||''}</div></div>`;
     }
-    if(type==='package'){
-      const item=key?currentQ.packages[key]:{price:'',maintenance:'',bestFor:[],features:[],templateUrl:''}; title=key?'Edit Package':'Add Package';
-      html=`<label>Package Name<input name="name" value="${esc(key||'')}" required></label><div class="two-col"><label>Price<input name="price" value="${esc(item.price||'')}"></label><label>Maintenance<input name="maintenance" value="${esc(item.maintenance||'')}"></label></div><label>Best For <span class="kb-help">Satu baris satu item</span><textarea name="bestFor">${esc((item.bestFor||[]).join('\n'))}</textarea></label><label>Features <span class="kb-help">Satu baris satu item</span><textarea name="features">${esc((item.features||[]).join('\n'))}</textarea></label><label>Template URL<input name="templateUrl" value="${esc(item.templateUrl||'')}"></label>`;
-    }
-    $('#kbModalTitle').textContent=title; $('#kbFormFields').innerHTML=html; $('#kbModal').classList.remove('hidden');
-    const ans=$('#kbFormFields textarea[name="answer"]'); if(ans) ans.addEventListener('input',e=>{ const p=$('#answerPreview'); if(p)p.innerHTML=e.target.value; });
+    const item=id? qBank.packages[id] : {status:'draft',price:'',maintenance:'',bestFor:[],features:[],templateUrl:''};
+    return `<div class="ak-form-grid"><label>Package Name<input name="name" value="${esc(id||'')}" required></label><label>Status<select name="status"><option value="published" ${statusOf(item)==='published'?'selected':''}>Published</option><option value="draft" ${statusOf(item)==='draft'?'selected':''}>Draft</option><option value="archived" ${statusOf(item)==='archived'?'selected':''}>Archived</option></select></label></div><div class="ak-form-grid"><label>Setup Price<input name="price" value="${esc(item.price||'')}"></label><label>Maintenance<input name="maintenance" value="${esc(item.maintenance||'')}"></label></div><label>Best For <span class="ak-help">Satu baris satu item</span><textarea name="bestFor">${esc(joinLines(item.bestFor))}</textarea></label><label>Features <span class="ak-help">Satu baris satu item</span><textarea name="features" class="large">${esc(joinLines(item.features))}</textarea></label><label>Template URL<input name="templateUrl" value="${esc(item.templateUrl||'')}"></label>`;
   }
-  function closeModal(){ $('#kbModal').classList.add('hidden'); editCtx=null; }
-  function saveForm(e){
-    e.preventDefault(); const fd=new FormData(e.target); const stamp=now();
-    if(editCtx.type==='question'){
-      const obj={key:String(fd.get('key')||'').trim(),question:String(fd.get('question')||'').trim(),type:fd.get('type')||'choice',required:!!fd.get('required'),placeholder:fd.get('placeholder')||'',options:lines(fd.get('options')),status:fd.get('status')||'draft',updated_at:stamp};
-      if(editCtx.index==null) currentQ.steps.push(obj); else currentQ.steps[editCtx.index]={...currentQ.steps[editCtx.index],...obj};
-    }
-    if(editCtx.type==='faq'){
-      const obj={topic:String(fd.get('topic')||'').trim(),triggers:comma(fd.get('triggers')),answer:String(fd.get('answer')||''),status:fd.get('status')||'draft',updated_at:stamp};
-      if(editCtx.index==null) currentF.faq.push(obj); else currentF.faq[editCtx.index]={...currentF.faq[editCtx.index],...obj};
-    }
-    if(editCtx.type==='package'){
-      const name=String(fd.get('name')||'').trim(); if(!name) return;
-      const obj={price:fd.get('price')||'',maintenance:fd.get('maintenance')||'',bestFor:lines(fd.get('bestFor')),features:lines(fd.get('features')),templateUrl:fd.get('templateUrl')||''};
-      if(editCtx.key && editCtx.key!==name) delete currentQ.packages[editCtx.key]; currentQ.packages[name]=obj;
+  function openModal(type,id=null){ctx={type,id}; $('#modalTitle').textContent=(id==null?'Add ':'Edit ')+(type==='faq'?'FAQ':type.charAt(0).toUpperCase()+type.slice(1)); $('#formBody').innerHTML=modalFields(type,id); $('#akModal').classList.remove('hidden'); $('#akModal').setAttribute('aria-hidden','false'); const ans=$('#formBody textarea[name="answer"]'); if(ans)ans.addEventListener('input',e=>{const p=$('#answerPreview'); if(p)p.innerHTML=e.target.value;});}
+  function closeModal(){ctx=null; $('#akModal').classList.add('hidden'); $('#akModal').setAttribute('aria-hidden','true'); $('#akForm').reset(); $('#formBody').innerHTML='';}
+  function saveForm(publish=false){
+    if(!ctx)return; const fd=new FormData($('#akForm')); const st=publish?'published':(fd.get('status')||'draft');
+    if(ctx.type==='question'){
+      const obj={key:String(fd.get('key')||'').trim(),question:String(fd.get('question')||'').trim(),type:fd.get('type')||'choice',required:!!fd.get('required'),priority:Number(fd.get('priority')||0)||'',placeholder:fd.get('placeholder')||'',options:lines(fd.get('options')),status:st,updated_at:now()};
+      if(ctx.id==null)qBank.steps.push(obj); else qBank.steps[Number(ctx.id)]={...qBank.steps[Number(ctx.id)],...obj,is_deleted:false};
+    } else if(ctx.type==='faq'){
+      const obj={topic:String(fd.get('topic')||'').trim(),triggers:comma(fd.get('triggers')),answer:String(fd.get('answer')||''),status:st,updated_at:now()};
+      if(ctx.id==null)fBank.faq.push(obj); else fBank.faq[Number(ctx.id)]={...fBank.faq[Number(ctx.id)],...obj,is_deleted:false};
+    } else {
+      const name=String(fd.get('name')||'').trim(); if(!name)return alert('Package name diperlukan.');
+      const obj={price:String(fd.get('price')||''),maintenance:String(fd.get('maintenance')||''),bestFor:lines(fd.get('bestFor')),features:lines(fd.get('features')),templateUrl:String(fd.get('templateUrl')||''),status:st,updated_at:now()};
+      if(ctx.id && ctx.id!==name)delete qBank.packages[ctx.id]; qBank.packages[name]=obj;
     }
     closeModal(); render(); setMsg('Perubahan disimpan sebagai draft. Tekan Publish Changes untuk live.','info');
   }
-  function duplicate(type,i,key){ if(type==='question'){const c=clone(currentQ.steps[i]); c.key=(c.key||'question')+'_copy'; c.question='Copy - '+(c.question||''); c.status='draft'; currentQ.steps.push(c);} if(type==='faq'){const c=clone(currentF.faq[i]); c.topic=(c.topic||'FAQ')+' Copy'; c.status='draft'; currentF.faq.push(c);} if(type==='package'){const c=clone(currentQ.packages[key]); currentQ.packages[key+' Copy']=c;} render(); setMsg('Item duplicated sebagai draft.','info'); }
-  function softDelete(type,i,key){
-    const label=type==='package'?key:(type==='question'?currentQ.steps[i]?.question:currentF.faq[i]?.topic);
-    const typed=prompt(`Taip DELETE untuk arkib/delete knowledge:\n\n${label}`); if(typed!=='DELETE') return;
-    const reason=prompt('Sebab delete/arkib knowledge ini?')||'No reason provided';
-    if(type==='package') delete currentQ.packages[key];
-    else { const item=type==='question'?currentQ.steps[i]:currentF.faq[i]; Object.assign(item,{is_deleted:true,status:'deleted',deleted_at:now(),delete_reason:reason}); }
-    render(); setMsg('Knowledge diarkibkan/dipadam dari draft. Tekan Publish Changes untuk live.','info');
+  function duplicate(type,id){
+    if(type==='question'){const c=clone(qBank.steps[Number(id)]); c.key=(c.key||'question')+'_copy'; c.question='Copy - '+(c.question||''); c.status='draft'; delete c.is_deleted; qBank.steps.push(c);}
+    if(type==='faq'){const c=clone(fBank.faq[Number(id)]); c.topic=(c.topic||'FAQ')+' Copy'; c.status='draft'; delete c.is_deleted; fBank.faq.push(c);}
+    if(type==='package'){const c=clone(qBank.packages[id]); c.status='draft'; delete c.is_deleted; qBank.packages[id+' Copy']=c;}
+    render(); setMsg('Item duplicated sebagai draft.','info');
+  }
+  function setStatus(type,id,status){
+    const obj=type==='question'?qBank.steps[Number(id)]:type==='faq'?fBank.faq[Number(id)]:qBank.packages[id]; if(!obj)return;
+    delete obj.is_deleted; obj.status=status; obj.updated_at=now(); render(); setMsg('Status dikemaskini sebagai draft. Tekan Publish Changes untuk live.','info');
+  }
+  function restore(type,id){setStatus(type,id,'draft');}
+  function softDelete(type,id){
+    const obj=type==='question'?qBank.steps[Number(id)]:type==='faq'?fBank.faq[Number(id)]:qBank.packages[id]; if(!obj)return;
+    const label=type==='package'?id:(obj.question||obj.topic||id);
+    if(prompt(`WARNING: Knowledge akan diarkibkan secara soft delete:\n\n${label}\n\nTaip DELETE untuk teruskan.`)!=='DELETE')return;
+    const pwd=prompt('Masukkan password admin untuk sahkan delete knowledge:'); if(!pwd)return;
+    const reason=prompt('Sebab delete / archive knowledge ini?')||'No reason provided';
+    Object.assign(obj,{is_deleted:true,status:'deleted',deleted_at:now(),deleted_by:'SUPER001',delete_reason:reason});
+    render(); setMsg('Knowledge telah diarkibkan. Tekan Publish Changes untuk live.','info');
   }
   document.addEventListener('click',e=>{
-    const t=e.target.closest('button'); if(!t) return;
-    if(t.id==='menuBtn') $('#sidebar')?.classList.toggle('open');
-    if(t.id==='addQuestionBtn') openModal('question'); if(t.id==='addFaqBtn') openModal('faq'); if(t.id==='addPackageBtn') openModal('package');
-    if(t.id==='loadAiraBankBtn') loadCurrent(); if(t.id==='publishAiraBankBtn') publishCurrent();
-    if(t.id==='resetOfficialBtn'){ if(confirm('Reset kepada Official Bank v1.4.0?')){ currentQ=clone(OFFICIAL_Q); currentF=clone(OFFICIAL_F); source='official'; render(); setMsg('Official bank dimuatkan sebagai draft. Tekan Publish Changes untuk live.','info'); } }
-    if(t.dataset.editQuestion!==undefined) openModal('question',Number(t.dataset.editQuestion)); if(t.dataset.editFaq!==undefined) openModal('faq',Number(t.dataset.editFaq)); if(t.dataset.editPackage) openModal('package',null,t.dataset.editPackage);
-    if(t.dataset.dupQuestion!==undefined) duplicate('question',Number(t.dataset.dupQuestion)); if(t.dataset.dupFaq!==undefined) duplicate('faq',Number(t.dataset.dupFaq)); if(t.dataset.dupPackage) duplicate('package',null,t.dataset.dupPackage);
-    if(t.dataset.toggleQuestion!==undefined){ const it=currentQ.steps[Number(t.dataset.toggleQuestion)]; it.status=statusOf(it)==='published'?'draft':'published'; render(); }
-    if(t.dataset.toggleFaq!==undefined){ const it=currentF.faq[Number(t.dataset.toggleFaq)]; it.status=statusOf(it)==='published'?'draft':'published'; render(); }
-    if(t.dataset.delQuestion!==undefined) softDelete('question',Number(t.dataset.delQuestion)); if(t.dataset.delFaq!==undefined) softDelete('faq',Number(t.dataset.delFaq)); if(t.dataset.delPackage) softDelete('package',null,t.dataset.delPackage);
-    if(t.dataset.restoreQuestion!==undefined){ const it=currentQ.steps[Number(t.dataset.restoreQuestion)]; delete it.is_deleted; it.status='draft'; render(); }
-    if(t.dataset.restoreFaq!==undefined){ const it=currentF.faq[Number(t.dataset.restoreFaq)]; delete it.is_deleted; it.status='draft'; render(); }
-    if(t.id==='kbModalClose'||t.id==='kbCancelBtn') closeModal();
+    const b=e.target.closest('button'); if(!b)return;
+    if(b.id==='menuBtn'){$('#sidebar')?.classList.toggle('open'); return;}
+    if(b.dataset.tab){switchTab(b.dataset.tab); return;}
+    if(b.id==='loadBtn'){loadCurrent(); return;}
+    if(b.id==='publishBtn'){publishCurrent(); return;}
+    if(b.id==='resetBtn'){if(confirm('Reset kepada Official Aira Knowledge v1.5.0?')){qBank=clone(OFFICIAL_Q);fBank=clone(OFFICIAL_F);source='official';render();setMsg('Official bank dimuatkan sebagai draft. Tekan Publish Changes untuk live.','info');} return;}
+    if(b.dataset.add){openModal(b.dataset.add); return;}
+    if(b.dataset.action){const {action,type,id,status}=b.dataset; if(action==='edit')openModal(type,id); if(action==='duplicate')duplicate(type,id); if(action==='status')setStatus(type,id,status); if(action==='delete')softDelete(type,id); if(action==='restore')restore(type,id); return;}
+    if(b.id==='modalClose'||b.id==='modalCancel'){closeModal(); return;}
+    if(b.id==='savePublishBtn'){saveForm(true); return;}
   });
-  $('#kbModal')?.addEventListener('click',e=>{ if(e.target.id==='kbModal') closeModal(); });
-  $('#kbForm')?.addEventListener('submit',saveForm);
-  ['questionSearch','questionStatusFilter','faqSearch','faqStatusFilter'].forEach(id=>$('#'+id)?.addEventListener('input',render));
+  $('#akModal')?.addEventListener('click',e=>{if(e.target.id==='akModal')closeModal();});
+  $('#akForm')?.addEventListener('submit',e=>{e.preventDefault(); saveForm(false);});
+  ['qSearch','qStatus','fSearch','fStatus'].forEach(id=>$('#'+id)?.addEventListener('input',render));
   render(); loadCurrent();
 })();
 </script>
