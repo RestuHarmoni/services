@@ -546,3 +546,110 @@ canvas{display:block;max-width:100%;height:auto}
   .stat-card strong{font-size:23px}
   .panel-head{flex-direction:column;align-items:flex-start}
 }
+
+/* RH Services v1.3.4 - Universal Mobile Card Tables
+   Scope: all admin tables including Lead, Prospect, Quotation, Invoice, Project and Articles. */
+@media(max-width:640px){
+  .content .responsive-table-wrap{
+    overflow-x:visible;
+    padding:0;
+    border:0;
+    background:transparent;
+  }
+  .content .data-table{
+    min-width:0!important;
+    width:100%!important;
+    border-collapse:separate;
+    border-spacing:0 12px;
+  }
+  .content .data-table thead{
+    position:absolute!important;
+    width:1px;height:1px;
+    padding:0;margin:-1px;
+    overflow:hidden;clip:rect(0,0,0,0);
+    white-space:nowrap;border:0;
+  }
+  .content .data-table tbody,
+  .content .data-table tr,
+  .content .data-table td{
+    display:block;
+    width:100%;
+  }
+  .content .data-table tr{
+    background:rgba(15,23,42,.42);
+    border:1px solid rgba(148,163,184,.18);
+    border-radius:18px;
+    padding:12px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+  }
+  .content .data-table td{
+    border:0!important;
+    padding:9px 0!important;
+    min-width:0!important;
+  }
+  .content .data-table td+td{
+    border-top:1px solid rgba(148,163,184,.12)!important;
+  }
+  .content .data-table td::before{
+    content:attr(data-label);
+    display:block;
+    margin-bottom:5px;
+    color:#93a4bd;
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+  .content .data-table td:not([data-label])::before{content:'';display:none}
+  .content .data-table td strong{
+    display:block;
+    font-size:15px;
+    line-height:1.35;
+    overflow-wrap:anywhere;
+  }
+  .content .data-table .small-muted{
+    display:block;
+    margin-top:3px;
+    line-height:1.35;
+    overflow-wrap:anywhere;
+  }
+  .content .data-table .status-pill{
+    display:inline-flex;
+    max-width:100%;
+    white-space:normal;
+  }
+  .content .data-table .table-actions{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+    width:100%;
+    min-width:0!important;
+  }
+  .content .data-table .table-actions .mini-btn,
+  .content .data-table .table-actions button,
+  .content .data-table .table-actions a{
+    width:100%;
+    min-width:0;
+    justify-content:center;
+    text-align:center;
+    white-space:normal;
+  }
+  .toolbar,
+  .panel-head.stacked-head .toolbar{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+    width:100%;
+  }
+  .toolbar .search-input,
+  .toolbar .select-input,
+  .toolbar .primary-btn,
+  .toolbar .ghost-btn,
+  .toolbar button{
+    width:100%;
+  }
+}
+@media(max-width:380px){
+  .content .data-table .table-actions{grid-template-columns:1fr}
+}

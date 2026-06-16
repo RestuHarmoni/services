@@ -230,13 +230,13 @@ const RHAdmin = (() => {
       const bad=needsReviewLead(r);
       const warn=(dup||bad)?`<span class="small-muted warning-text">${bad?'Semak data':dup?'Duplicate phone':''}</span>`:'';
       return `<tr>
-      <td><strong>${esc(r.name||'Tanpa nama')}</strong><span class="small-muted">${esc(r.source||'aira')}</span>${warn}</td>
-      <td>${esc(r.phone||'-')}</td>
-      <td>${esc(r.business_type||'-')}<span class="small-muted">${esc(r.objective||'')}</span></td>
-      <td>${esc(r.recommended_package||'-')}<span class="small-muted">${esc(r.budget||'')}</span></td>
-      <td><span class="status-pill ${statusClass(r.status)}">${esc(statusLabel(r.status))}</span></td>
-      <td>${dateShort(r.created_at)}</td>
-      <td><div class="table-actions"><button class="mini-btn primary" data-view-lead="${r.id}">View</button><button class="mini-btn" data-edit-lead="${r.id}">Edit</button><button class="mini-btn" data-status-lead="${r.id}" data-status="contacted">Contacted</button><button class="mini-btn" data-convert-lead="${r.id}">${bad&&isSuperAdmin()?'Force Prospect':'Prospect'}</button>${isSuperAdmin()?`<button class="mini-btn danger" data-delete-lead="${r.id}">Delete</button>`:''}</div></td>
+      <td data-label="Nama"><strong>${esc(r.name||'Tanpa nama')}</strong><span class="small-muted">${esc(r.source||'aira')}</span>${warn}</td>
+      <td data-label="Telefon">${esc(r.phone||'-')}</td>
+      <td data-label="Bisnes">${esc(r.business_type||'-')}<span class="small-muted">${esc(r.objective||'')}</span></td>
+      <td data-label="Pakej">${esc(r.recommended_package||'-')}<span class="small-muted">${esc(r.budget||'')}</span></td>
+      <td data-label="Status"><span class="status-pill ${statusClass(r.status)}">${esc(statusLabel(r.status))}</span></td>
+      <td data-label="Tarikh">${dateShort(r.created_at)}</td>
+      <td data-label="Action"><div class="table-actions"><button class="mini-btn primary" data-view-lead="${r.id}">View</button><button class="mini-btn" data-edit-lead="${r.id}">Edit</button><button class="mini-btn" data-status-lead="${r.id}" data-status="contacted">Contacted</button><button class="mini-btn" data-convert-lead="${r.id}">${bad&&isSuperAdmin()?'Force Prospect':'Prospect'}</button>${isSuperAdmin()?`<button class="mini-btn danger" data-delete-lead="${r.id}">Delete</button>`:''}</div></td>
     </tr>`}).join('');
   }
   async function openLeadModal(leadId){
@@ -493,13 +493,13 @@ const RHAdmin = (() => {
     if(search) rows=rows.filter(r=>[r.name,r.phone,r.business_type,r.company,r.recommended_package,r.notes].join(' ').toLowerCase().includes(search));
     if(!rows.length){body.innerHTML='<tr><td colspan="7"><div class="empty-state">Tiada prospect untuk filter ini.</div></td></tr>';return;}
     body.innerHTML=rows.map(r=>`<tr>
-      <td><strong>${esc(r.name||'Tanpa nama')}</strong><span class="small-muted">${esc(r.company||r.assigned_staff||'RH')}</span></td>
-      <td>${esc(r.phone||'-')}<span class="small-muted">${esc(r.email||'')}</span></td>
-      <td>${esc(r.business_type||'-')}<span class="small-muted">${esc(r.objective||'')}</span></td>
-      <td>${esc(r.recommended_package||'-')}<span class="small-muted">${esc(r.budget||'')}</span></td>
-      <td><span class="status-pill ${statusClass(normalizeProspectStage(r.sales_stage||r.prospect_status))}">${esc(stageLabel(r.sales_stage||r.prospect_status))}</span></td>
-      <td>${dateShort(r.created_at)}</td>
-      <td><div class="table-actions"><button class="mini-btn primary" data-view-prospect="${r.id}">View</button><button class="mini-btn" data-edit-prospect="${r.id}">Edit</button><button class="mini-btn" data-stage-prospect="${r.id}" data-stage="proposal_sent">Proposal</button><button class="mini-btn" data-stage-prospect="${r.id}" data-stage="negotiation">Negotiation</button><button class="mini-btn" data-stage-prospect="${r.id}" data-stage="won">Won</button><button class="mini-btn danger" data-lost-prospect="${r.id}">Lost</button><button class="mini-btn danger" data-delete-prospect="${r.id}">Delete</button></div></td>
+      <td data-label="Nama"><strong>${esc(r.name||'Tanpa nama')}</strong><span class="small-muted">${esc(r.company||r.assigned_staff||'RH')}</span></td>
+      <td data-label="Telefon">${esc(r.phone||'-')}<span class="small-muted">${esc(r.email||'')}</span></td>
+      <td data-label="Bisnes">${esc(r.business_type||'-')}<span class="small-muted">${esc(r.objective||'')}</span></td>
+      <td data-label="Pakej">${esc(r.recommended_package||'-')}<span class="small-muted">${esc(r.budget||'')}</span></td>
+      <td data-label="Stage"><span class="status-pill ${statusClass(normalizeProspectStage(r.sales_stage||r.prospect_status))}">${esc(stageLabel(r.sales_stage||r.prospect_status))}</span></td>
+      <td data-label="Tarikh">${dateShort(r.created_at)}</td>
+      <td data-label="Action"><div class="table-actions"><button class="mini-btn primary" data-view-prospect="${r.id}">View</button><button class="mini-btn" data-edit-prospect="${r.id}">Edit</button><button class="mini-btn" data-stage-prospect="${r.id}" data-stage="proposal_sent">Proposal</button><button class="mini-btn" data-stage-prospect="${r.id}" data-stage="negotiation">Negotiation</button><button class="mini-btn" data-stage-prospect="${r.id}" data-stage="won">Won</button><button class="mini-btn danger" data-lost-prospect="${r.id}">Lost</button><button class="mini-btn danger" data-delete-prospect="${r.id}">Delete</button></div></td>
     </tr>`).join('');
   }
 
@@ -777,13 +777,13 @@ const RHAdmin = (() => {
     if(search) rows=rows.filter(r=>[r.quotation_no,r.client_name,r.phone,r.company,r.business_type].join(' ').toLowerCase().includes(search));
     if(!rows.length){ body.innerHTML='<tr><td colspan="7"><div class="empty-state">Tiada quotation untuk filter ini.</div></td></tr>'; return; }
     body.innerHTML=rows.map(q=>`<tr>
-      <td><strong>${esc(q.quotation_no||'-')}</strong><span class="small-muted">${esc(q.package_name||'')}</span></td>
-      <td><strong>${esc(q.client_name||'Client')}</strong><span class="small-muted">${esc(q.phone||'-')}</span></td>
-      <td>${esc(q.business_type||'-')}<span class="small-muted">${esc(q.company||'')}</span></td>
-      <td><strong>${fmtRM(quoteAmount(q))}</strong><span class="small-muted">Discount ${fmtRM(q.discount||0)}</span></td>
-      <td><span class="status-pill ${normalizeQuotationStatus(q.status)}">${quotationStatusLabel(q.status)}</span></td>
-      <td>${dateShort(q.created_at)}</td>
-      <td><div class="table-actions">${quoteActionsHtml(q)}</div></td>
+      <td data-label="No"><strong>${esc(q.quotation_no||'-')}</strong><span class="small-muted">${esc(q.package_name||'')}</span></td>
+      <td data-label="Client"><strong>${esc(q.client_name||'Client')}</strong><span class="small-muted">${esc(q.phone||'-')}</span></td>
+      <td data-label="Bisnes">${esc(q.business_type||'-')}<span class="small-muted">${esc(q.company||'')}</span></td>
+      <td data-label="Amount"><strong>${fmtRM(quoteAmount(q))}</strong><span class="small-muted">Discount ${fmtRM(q.discount||0)}</span></td>
+      <td data-label="Status"><span class="status-pill ${normalizeQuotationStatus(q.status)}">${quotationStatusLabel(q.status)}</span></td>
+      <td data-label="Tarikh">${dateShort(q.created_at)}</td>
+      <td data-label="Action"><div class="table-actions">${quoteActionsHtml(q)}</div></td>
     </tr>`).join('');
   }
   async function loadProspectsForQuotation(){
@@ -1015,13 +1015,13 @@ const RHAdmin = (() => {
     if(search) rows=rows.filter(r=>[r.invoice_no,r.client_name,r.phone,r.company,r.business_type,r.quotation_no].join(' ').toLowerCase().includes(search));
     if(!rows.length){ body.innerHTML='<tr><td colspan="7"><div class="empty-state">Tiada invoice untuk filter ini.</div></td></tr>'; return; }
     body.innerHTML=rows.map(inv=>`<tr>
-      <td><strong>${esc(inv.invoice_no||'-')}</strong><span class="small-muted">${esc(inv.package_name||'')}</span></td>
-      <td><strong>${esc(inv.client_name||'-')}</strong><span class="small-muted">${esc(inv.phone||'')}</span></td>
-      <td>${esc(inv.quotation_no||'-')}</td>
-      <td><strong>${fmtRM(invoiceAmount(inv))}</strong><span class="small-muted">Paid ${fmtRM(inv.amount_paid||0)}</span></td>
-      <td><span class="status-pill ${normalizeInvoiceStatus(inv.status)}">${invoiceStatusLabel(inv.status)}</span></td>
-      <td>${dateShort(inv.due_date||inv.created_at)}</td>
-      <td><div class="table-actions">${invoiceActionsHtml(inv)}</div></td>
+      <td data-label="No"><strong>${esc(inv.invoice_no||'-')}</strong><span class="small-muted">${esc(inv.package_name||'')}</span></td>
+      <td data-label="Client"><strong>${esc(inv.client_name||'-')}</strong><span class="small-muted">${esc(inv.phone||'')}</span></td>
+      <td data-label="Quotation">${esc(inv.quotation_no||'-')}</td>
+      <td data-label="Amount"><strong>${fmtRM(invoiceAmount(inv))}</strong><span class="small-muted">Paid ${fmtRM(inv.amount_paid||0)}</span></td>
+      <td data-label="Status"><span class="status-pill ${normalizeInvoiceStatus(inv.status)}">${invoiceStatusLabel(inv.status)}</span></td>
+      <td data-label="Due">${dateShort(inv.due_date||inv.created_at)}</td>
+      <td data-label="Action"><div class="table-actions">${invoiceActionsHtml(inv)}</div></td>
     </tr>`).join('');
   }
   async function loadAcceptedQuotationsForInvoice(){
@@ -1528,13 +1528,13 @@ const RHAdmin = (() => {
     if(search) rows=rows.filter(r=>[r.project_no,r.client_name,r.phone,r.company,r.business_type,r.package_name,r.assigned_pm].join(' ').toLowerCase().includes(search));
     if(!rows.length){ body.innerHTML='<tr><td colspan="7"><div class="empty-state">Tiada project untuk filter ini.</div></td></tr>'; return; }
     body.innerHTML=rows.map(p=>`<tr>
-      <td><strong>${esc(p.project_no||'-')}</strong><span class="small-muted">${esc(p.package_name||'')}</span></td>
-      <td><strong>${esc(p.client_name||'-')}</strong><span class="small-muted">${esc(p.phone||'')}</span></td>
-      <td>${esc(p.business_type||'-')}</td>
-      <td><strong>${fmtRM(projectAmount(p))}</strong><span class="small-muted">Paid ${fmtRM(p.amount_paid||0)} • Balance ${fmtRM(p.balance_due||0)}</span></td>
-      <td><span class="status-pill ${normalizeProjectStatus(p.status)}">${projectStatusLabel(p.status)}</span><span class="small-muted">${projectProgressFromRecord(p)}%</span></td>
-      <td>${dateShort(p.due_date||p.created_at)}</td>
-      <td><div class="table-actions">${projectActionsHtml(p)}</div></td>
+      <td data-label="No"><strong>${esc(p.project_no||'-')}</strong><span class="small-muted">${esc(p.package_name||'')}</span></td>
+      <td data-label="Client"><strong>${esc(p.client_name||'-')}</strong><span class="small-muted">${esc(p.phone||'')}</span></td>
+      <td data-label="Bisnes">${esc(p.business_type||'-')}</td>
+      <td data-label="Value"><strong>${fmtRM(projectAmount(p))}</strong><span class="small-muted">Paid ${fmtRM(p.amount_paid||0)} • Balance ${fmtRM(p.balance_due||0)}</span></td>
+      <td data-label="Status"><span class="status-pill ${normalizeProjectStatus(p.status)}">${projectStatusLabel(p.status)}</span><span class="small-muted">${projectProgressFromRecord(p)}%</span></td>
+      <td data-label="Due">${dateShort(p.due_date||p.created_at)}</td>
+      <td data-label="Action"><div class="table-actions">${projectActionsHtml(p)}</div></td>
     </tr>`).join('');
   }
   async function openProjectCreateModal(){
@@ -1685,12 +1685,12 @@ const RHAdmin = (() => {
       const featured=(a.is_featured===true||a.featured===true)?'<span class="small-muted">⭐ Featured</span>':'';
       const publicLink=a.slug?`<a class="mini-btn" target="_blank" rel="noopener" href="${articleUrl(a.slug)}">Public</a>`:'';
       return `<tr>
-        <td><strong>${esc(a.title||'Untitled')}</strong><span class="small-muted">/${esc(a.slug||'-')}</span>${featured}</td>
-        <td>${esc(a.category||'General')}</td>
-        <td>${esc(a.focus_keyword||'-')}<span class="small-muted">${esc(desc).slice(0,90)}</span></td>
-        <td><span class="status-pill ${articleStatusClass(a.status)}">${esc(articleStatusLabel(a.status))}</span></td>
-        <td>${dateShort(a.updated_at||a.published_at||a.created_at)}</td>
-        <td><div class="table-actions"><button class="mini-btn primary" data-edit-article="${a.id}">Edit</button>${publicLink}<button class="mini-btn" data-article-status="${a.id}" data-status="${String(a.status||'draft').toLowerCase()==='published'?'draft':'published'}">${String(a.status||'draft').toLowerCase()==='published'?'Unpublish':'Publish'}</button><button class="mini-btn danger" data-delete-article="${a.id}">Delete</button></div></td>
+        <td data-label="Article"><strong>${esc(a.title||'Untitled')}</strong><span class="small-muted">/${esc(a.slug||'-')}</span>${featured}</td>
+        <td data-label="Category">${esc(a.category||'General')}</td>
+        <td data-label="SEO">${esc(a.focus_keyword||'-')}<span class="small-muted">${esc(desc).slice(0,90)}</span></td>
+        <td data-label="Status"><span class="status-pill ${articleStatusClass(a.status)}">${esc(articleStatusLabel(a.status))}</span></td>
+        <td data-label="Updated">${dateShort(a.updated_at||a.published_at||a.created_at)}</td>
+        <td data-label="Actions"><div class="table-actions"><button class="mini-btn primary" data-edit-article="${a.id}">Edit</button>${publicLink}<button class="mini-btn" data-article-status="${a.id}" data-status="${String(a.status||'draft').toLowerCase()==='published'?'draft':'published'}">${String(a.status||'draft').toLowerCase()==='published'?'Unpublish':'Publish'}</button><button class="mini-btn danger" data-delete-article="${a.id}">Delete</button></div></td>
       </tr>`;
     }).join('');
   }

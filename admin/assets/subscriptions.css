@@ -44,3 +44,29 @@
 @media(max-width:520px){
   .subscription-stat-grid{grid-template-columns:1fr}
 }
+
+/* RH Services v1.3.4 - Subscription Mobile Card Table Fix */
+@media(max-width:640px){
+  .subscription-table{min-width:0!important;width:100%!important;table-layout:auto!important}
+  #subscriptionsTableBody tr,
+  #subscriptionInvoicesTableBody tr{
+    background:rgba(15,23,42,.42);
+    border:1px solid rgba(148,163,184,.18);
+    border-radius:18px;
+    padding:12px;
+    overflow:hidden;
+  }
+  #subscriptionsTableBody td,
+  #subscriptionInvoicesTableBody td{
+    display:block;width:100%;border:0!important;padding:9px 0!important;
+  }
+  #subscriptionsTableBody td+td,
+  #subscriptionInvoicesTableBody td+td{border-top:1px solid rgba(148,163,184,.12)!important}
+  #subscriptionsTableBody td::before,
+  #subscriptionInvoicesTableBody td::before{
+    content:attr(data-label);display:block;margin-bottom:5px;color:#93a4bd;font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;
+  }
+  .subscription-table .table-actions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;min-width:0!important;width:100%}
+  .subscription-table .table-actions .mini-btn,.subscription-table .table-actions button{width:100%;white-space:normal;text-align:center;justify-content:center}
+}
+@media(max-width:380px){.subscription-table .table-actions{grid-template-columns:1fr}}
