@@ -1,5 +1,5 @@
 {
-  "version": "v11.1-rh-basic-plan-alignment",
+  "version": "v10.0-rh-official-package-alignment",
   "database": "supabase",
   "table": "leads",
   "fields": [
@@ -25,10 +25,6 @@
     "LOST"
   ],
   "packages": {
-    "RH Basic": {
-      "setup": "RM799",
-      "maintenance": "RM79/bulan"
-    },
     "RH Starter": {
       "setup": "RM1299",
       "maintenance": "RM129/bulan"
@@ -43,20 +39,16 @@
     }
   },
   "allowed_recommended_package": [
-    "RH Basic",
     "RH Starter",
     "RH Growth",
     "RH Ecosystem"
   ],
   "legacy_package_map": {
-    "RH Basic": "RH Basic",
+    "RH Basic": "RH Starter",
     "RH Standard": "RH Growth",
     "RH Ecosystemfessional": "RH Growth",
     "RH Premium": "RH Ecosystem",
     "RH Growth": "RH Growth",
-    "RH Ecosystem": "RH Ecosystem",
-    "Basic": "RH Basic",
-    "Pakej Basic": "RH Basic",
-    "Pakej Bajet": "RH Basic"
+    "RH Ecosystem": "RH Ecosystem"
   }
 }
