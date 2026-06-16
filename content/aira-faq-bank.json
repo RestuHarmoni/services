@@ -1,10 +1,14 @@
 {
-  "version": "v11.0-package-template-linking-aira-v3-sales-consultant",
+  "version": "v1.3.8-aira-knowledge-bank-sales-question-flow",
   "quickActions": [
-    "Lihat Pakej",
+    "Dapatkan Cadangan",
     "Harga Pakej RH",
-    "Lihat Contoh Website",
-    "Dapatkan Cadangan"
+    "Beza Pakej",
+    "Domain & Hosting",
+    "Maintenance",
+    "Tempoh Siap",
+    "SEO Google",
+    "AI Chatbot Aira"
   ],
   "faq": [
     {
@@ -27,29 +31,36 @@
         "basic",
         "rm799",
         "799",
-        "starter murah",
-        "industri kecil",
+        "murah",
+        "permulaan",
         "personal"
       ],
-      "answer": "<strong>RH Basic RM799</strong> sesuai untuk personal web, bisnes kecil, profil ringkas dan permulaan digital. Maintenance bermula RM79/bulan."
+      "answer": "<strong>RH Basic RM799</strong> sesuai untuk bisnes kecil, personal brand atau profil ringkas yang mahu mula ada website rasmi. Maintenance RM79/bulan."
     },
     {
       "topic": "growth",
       "triggers": [
         "growth",
         "rm1999",
-        "1999"
+        "1999",
+        "lead",
+        "blog",
+        "artikel",
+        "servis"
       ],
-      "answer": "<strong>RH Growth RM1999</strong> sesuai untuk bisnes servis yang mahu dapatkan lead, paparkan portfolio, servis, artikel dan struktur website lebih lengkap."
+      "answer": "<strong>RH Growth RM1999</strong> sesuai untuk bisnes servis yang mahu dapatkan lead, paparkan servis/produk, portfolio dan artikel SEO. Maintenance RM129/bulan."
     },
     {
       "topic": "ecosystem",
       "triggers": [
         "ecosystem",
         "rm2999",
-        "2999"
+        "2999",
+        "dashboard",
+        "ekosistem",
+        "multi"
       ],
-      "answer": "<strong>RH Ecosystem RM2999</strong> sesuai untuk syarikat yang mahu website + Aira + blog CMS + dashboard basic + lead management."
+      "answer": "<strong>RH Ecosystem RM2999</strong> sesuai untuk syarikat yang perlukan website lebih lengkap: Aira, blog CMS, dashboard basic dan lead management. Maintenance RM249/bulan."
     },
     {
       "topic": "enterprise",
@@ -60,9 +71,20 @@
         "rm3000",
         "portal",
         "crm",
-        "system"
+        "system",
+        "sistem"
       ],
       "answer": "<strong>RH Enterprise</strong> ialah quotation custom untuk portal, dashboard, CRM, multi-branch, automation atau sistem khas."
+    },
+    {
+      "topic": "beza_pakej",
+      "triggers": [
+        "beza",
+        "compare",
+        "perbezaan",
+        "mana sesuai"
+      ],
+      "answer": "Secara ringkas: <strong>RH Basic</strong> untuk mula online, <strong>RH Growth</strong> untuk lead + content + listing, <strong>RH Ecosystem</strong> untuk website lengkap dengan dashboard dan funnel, manakala <strong>Enterprise</strong> untuk sistem custom."
     },
     {
       "topic": "tempoh",
@@ -74,7 +96,7 @@
         "duration",
         "ready"
       ],
-      "answer": "Kebanyakan website boleh siap dalam 3–7 hari bekerja selepas bahan lengkap diterima. Projek custom mungkin mengambil masa lebih lama."
+      "answer": "Kebanyakan website boleh siap dalam 3–7 hari bekerja selepas bahan lengkap diterima. Projek custom atau Enterprise mungkin mengambil masa lebih lama mengikut scope."
     },
     {
       "topic": "domain",
@@ -82,7 +104,8 @@
         "domain",
         ".com",
         ".my",
-        "nama website"
+        "nama website",
+        "dns"
       ],
       "answer": "Jika belum ada domain, RH boleh bantu setup. Jika sudah ada domain, kami boleh bantu semak DNS dan sambungkan kepada website."
     },
@@ -92,9 +115,10 @@
         "hosting",
         "server",
         "online",
-        "publish"
+        "publish",
+        "cpanel"
       ],
-      "answer": "Jika belum ada hosting, RH boleh bantu urus setup. Jika sudah ada hosting sendiri, kami akan semak kesesuaian sebelum deployment."
+      "answer": "Jika belum ada hosting, RH boleh bantu urus setup. Jika sudah ada hosting sendiri, kami akan semak kesesuaian hosting sebelum deployment."
     },
     {
       "topic": "seo",
@@ -103,20 +127,21 @@
         "google",
         "ranking",
         "search",
-        "carian"
+        "carian",
+        "google business"
       ],
       "answer": "Website disediakan dengan SEO asas seperti meta title, meta description, heading structure, sitemap, mobile responsive dan struktur Google-ready."
     },
     {
-      "topic": "contoh",
+      "topic": "aira",
       "triggers": [
-        "contoh",
-        "demo",
-        "portfolio",
-        "template",
-        "sample"
+        "aira",
+        "chatbot",
+        "ai",
+        "bot",
+        "auto reply"
       ],
-      "answer": "Anda boleh lihat contoh website mengikut pakej di halaman pakej RH. Aira juga boleh cadangkan pakej selepas menjawab beberapa soalan ringkas."
+      "answer": "Aira ialah AI website consultant / chatbot yang bantu jawab soalan pelanggan, kumpul maklumat lead dan cadangkan pakej berdasarkan jawapan pelanggan."
     },
     {
       "topic": "maintenance",
@@ -125,9 +150,45 @@
         "support",
         "jaga website",
         "kemaskini bulanan",
-        "update website"
+        "update website",
+        "bulanan"
       ],
-      "answer": "Maintenance bergantung kepada pakej. RH Basic bermula RM79/bulan, RH Growth RM129/bulan dan RH Ecosystem RM249/bulan."
+      "answer": "Maintenance bergantung kepada pakej: RH Basic RM79/bulan, RH Growth RM129/bulan dan RH Ecosystem RM249/bulan. Ia meliputi pemantauan asas, support dan kemaskini kecil mengikut pakej."
+    },
+    {
+      "topic": "payment",
+      "triggers": [
+        "deposit",
+        "bayar",
+        "ansuran",
+        "invoice",
+        "quotation",
+        "sebut harga"
+      ],
+      "answer": "Biasanya proses bermula dengan cadangan pakej, quotation, invoice dan bayaran mengikut terma yang dipersetujui. Untuk Enterprise, quotation bergantung kepada scope."
+    },
+    {
+      "topic": "content",
+      "triggers": [
+        "logo",
+        "gambar",
+        "content",
+        "teks",
+        "copywriting",
+        "bahan"
+      ],
+      "answer": "Jika bahan seperti logo, gambar dan teks belum lengkap, RH boleh bantu susun struktur content asas supaya website masih boleh dimulakan dengan kemas."
+    },
+    {
+      "topic": "facebook",
+      "triggers": [
+        "facebook",
+        "fb",
+        "instagram",
+        "tiktok",
+        "social media"
+      ],
+      "answer": "Media sosial bagus untuk promosi harian. Website pula menjadi pusat rujukan rasmi yang lebih mudah dipercayai dan boleh dihubungkan dengan SEO Google, Aira dan lead form."
     }
   ]
 }

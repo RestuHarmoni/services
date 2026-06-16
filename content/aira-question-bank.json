@@ -1,10 +1,10 @@
 {
-  "version": "v11.0-package-template-linking-aira-v3-sales-consultant",
+  "version": "v1.3.8-aira-knowledge-bank-sales-question-flow",
   "assistantName": "Aira",
   "positioning": "AI Website Consultant",
   "intro": [
     "👋 Hai, saya <strong>Aira</strong>.",
-    "Saya boleh bantu cadangkan website yang sesuai untuk bisnes anda dalam masa kurang 1 minit."
+    "Saya akan tanya beberapa soalan ringkas untuk cadangkan pakej website RH yang paling sesuai."
   ],
   "steps": [
     {
@@ -15,9 +15,16 @@
       "options": [
         "Servis",
         "Produk",
-        "Restoran",
-        "Event",
+        "Restoran / F&B",
+        "Event / Rental",
         "Hartanah",
+        "Homestay / Hotel",
+        "Kereta Sewa",
+        "Klinik / Profesional",
+        "Kontraktor / Renovasi",
+        "Company Profile",
+        "E-commerce / Katalog",
+        "Custom System / Portal",
         "Lain-lain"
       ]
     },
@@ -27,9 +34,9 @@
       "type": "choice",
       "required": false,
       "options": [
-        "Ya",
-        "Belum",
-        "Tidak Pasti"
+        "Ya, sudah ada domain",
+        "Belum ada domain",
+        "Tidak pasti / perlu semak"
       ]
     },
     {
@@ -38,9 +45,21 @@
       "type": "choice",
       "required": false,
       "options": [
-        "Ya",
-        "Belum",
-        "Tidak Pasti"
+        "Ya, sudah ada hosting",
+        "Belum ada hosting",
+        "Tidak pasti / perlu semak"
+      ]
+    },
+    {
+      "key": "website_status",
+      "question": "Adakah anda sudah ada website sekarang?",
+      "type": "choice",
+      "required": false,
+      "options": [
+        "Belum ada website",
+        "Ada, tetapi mahu upgrade",
+        "Ada landing page sahaja",
+        "Tidak pasti"
       ]
     },
     {
@@ -51,14 +70,32 @@
       "options": [
         "Dapatkan Lead",
         "Profil Syarikat",
-        "Jual Produk",
-        "Booking",
-        "SEO Google"
+        "Jual Produk / Katalog",
+        "Booking / Tempahan",
+        "SEO Google",
+        "Dashboard / Sistem",
+        "Ecosystem Digital Lengkap"
+      ]
+    },
+    {
+      "key": "feature_need",
+      "question": "Fungsi apa yang anda paling perlukan?",
+      "type": "choice",
+      "required": false,
+      "options": [
+        "Website basic + WhatsApp",
+        "AI Chatbot Aira",
+        "Blog / Artikel SEO",
+        "Service / Product Listing",
+        "Dashboard Basic",
+        "Payment / Invoice",
+        "Client Portal / Sistem Custom",
+        "Belum pasti"
       ]
     },
     {
       "key": "budget",
-      "question": "Budget anggaran?",
+      "question": "Budget anggaran anda?",
       "type": "choice",
       "required": true,
       "options": [
@@ -82,6 +119,18 @@
       ]
     },
     {
+      "key": "content_ready",
+      "question": "Bahan seperti logo, gambar dan teks sudah ada?",
+      "type": "choice",
+      "required": false,
+      "options": [
+        "Sudah lengkap",
+        "Ada sebahagian",
+        "Belum ada",
+        "Perlu bantuan susun content"
+      ]
+    },
+    {
       "key": "name",
       "question": "Boleh saya tahu nama anda?",
       "type": "input",
@@ -97,38 +146,46 @@
       "placeholder": "Contoh: 0123456789",
       "required": true,
       "validation": "phone"
+    },
+    {
+      "key": "email",
+      "question": "Email untuk proposal / quotation?",
+      "type": "input",
+      "input": true,
+      "placeholder": "Contoh: nama@email.com",
+      "required": false,
+      "validation": "email"
     }
   ],
   "packages": {
     "RH Basic": {
       "price": "RM799",
       "maintenance": "RM79/bulan",
-      "templateCount": 1,
       "bestFor": [
-        "Startup",
-        "Personal web",
         "Bisnes kecil",
-        "Profil ringkas"
+        "Personal brand",
+        "Profil ringkas",
+        "Baru mula online"
       ],
       "features": [
-        "One-page / basic profile website",
+        "Website asas / one-page",
         "Mobile responsive",
-        "Lead form ringkas",
         "WhatsApp CTA",
+        "Lead form ringkas",
         "SEO asas",
-        "Google-ready structure"
+        "Struktur Google-ready"
       ],
       "templateUrl": "/pakej/rh-basic/"
     },
     "RH Growth": {
       "price": "RM1999",
       "maintenance": "RM129/bulan",
-      "templateCount": 10,
       "bestFor": [
         "Bisnes servis",
         "Lead generation",
         "Portfolio",
-        "Blog SEO"
+        "Blog SEO",
+        "Listing servis / produk"
       ],
       "features": [
         "Multi-page website",
@@ -144,15 +201,15 @@
     "RH Ecosystem": {
       "price": "RM2999",
       "maintenance": "RM249/bulan",
-      "templateCount": 10,
       "bestFor": [
         "Syarikat berkembang",
         "Multi servis",
         "Admin dashboard",
-        "AI sales funnel"
+        "Sales funnel",
+        "Ecosystem digital"
       ],
       "features": [
-        "Company Profile + Service Website",
+        "Company profile + service website",
         "Advanced AI Chatbot",
         "Blog CMS",
         "Dashboard Basic",
@@ -164,22 +221,60 @@
     },
     "RH Enterprise": {
       "price": "Custom",
-      "maintenance": "Ikut scope",
-      "templateCount": 0,
+      "maintenance": "Custom",
       "bestFor": [
-        "Custom system",
         "Portal",
         "CRM",
-        "Multi-branch"
+        "Custom system",
+        "Multi-branch",
+        "Automation"
       ],
       "features": [
         "Custom quotation",
         "Portal / dashboard",
         "Automation flow",
         "Integration planning",
-        "Advanced workflow"
+        "Advanced workflow",
+        "Custom scope"
       ],
       "templateUrl": "/#aira-popup"
     }
+  },
+  "recommendationRules": {
+    "basic": [
+      "RM799",
+      "Basic",
+      "Belum ada website",
+      "Website basic + WhatsApp",
+      "Profil Syarikat"
+    ],
+    "growth": [
+      "RM1999",
+      "Growth",
+      "Jual Produk / Katalog",
+      "Booking / Tempahan",
+      "Blog / Artikel SEO",
+      "AI Chatbot Aira",
+      "Service / Product Listing",
+      "SEO Google"
+    ],
+    "ecosystem": [
+      "RM2999",
+      "Ecosystem",
+      "Dashboard Basic",
+      "Payment / Invoice",
+      "Ecosystem Digital Lengkap",
+      "Homestay / Hotel",
+      "Kereta Sewa",
+      "Event / Rental",
+      "E-commerce / Katalog"
+    ],
+    "enterprise": [
+      "RM3000+",
+      "Enterprise",
+      "Dashboard / Sistem",
+      "Client Portal / Sistem Custom",
+      "Custom System / Portal"
+    ]
   }
 }
