@@ -1,4 +1,5 @@
-/* RH Services v1.3 Subscription & Renewal Engine
+/* RH Services v1.3.1 Subscription & Renewal Engine
+   Package pricing aligned with Aira official 4 packages.
    New isolated module. Does not modify locked sales/project engines. */
 const RHSubscriptions = (() => {
   const SESSION_KEY = 'rh_admin_session_v1';
@@ -35,13 +36,28 @@ const RHSubscriptions = (() => {
   function addDaysISO(dateISO, days){ const d=new Date((dateISO||todayISO())+'T00:00:00'); d.setDate(d.getDate()+Number(days||0)); return d.toISOString().slice(0,10); }
   function cycleMonths(cycle){ return cycle==='yearly'?12:(cycle==='six_months'?6:1); }
   function cycleLabel(cycle){ return ({monthly:'Monthly',six_months:'6 Months',yearly:'Yearly'})[cycle] || 'Monthly'; }
-  function planMonthlyAmount(plan){ const p=String(plan||'').toLowerCase(); if(p.includes('pro')) return 199; if(p.includes('business')) return 149; return 129; }
-  function defaultCycleAmount(monthly, cycle){
-    if(cycle==='six_months') return monthly===129?699:monthly*6;
-    if(cycle==='yearly') return monthly===129?1299:monthly*12;
-    return monthly;
+
+  const RH_PACKAGE_PLANS = {
+    basic: { packageName:'RH Basic', planName:'RH Basic Maintenance', monthly:79 },
+    growth: { packageName:'RH Growth', planName:'RH Growth Maintenance', monthly:129 },
+    ecosystem: { packageName:'RH Ecosystem', planName:'RH Ecosystem Maintenance', monthly:249 },
+    enterprise: { packageName:'RH Enterprise', planName:'RH Enterprise Maintenance', monthly:0 }
+  };
+  function detectPackageKey(value){
+    const p=String(value||'').toLowerCase();
+    if(p.includes('enterprise') || p.includes('custom')) return 'enterprise';
+    if(p.includes('ecosystem') || p.includes('2999') || p.includes('2,999')) return 'ecosystem';
+    if(p.includes('growth') || p.includes('1999') || p.includes('1,999')) return 'growth';
+    if(p.includes('basic') || p.includes('799')) return 'basic';
+    return 'basic';
   }
-  function defaultDiscount(monthly, cycle, amount){ return Math.max(0,(monthly*cycleMonths(cycle))-Number(amount||0)); }
+  function planFromPackage(packageName){ return RH_PACKAGE_PLANS[detectPackageKey(packageName)] || RH_PACKAGE_PLANS.basic; }
+  function planMonthlyAmount(plan){ return (RH_PACKAGE_PLANS[detectPackageKey(plan)] || RH_PACKAGE_PLANS.basic).monthly; }
+  function defaultCycleAmount(monthly, cycle){
+    // Discount is editable. Default amount uses full cycle value to avoid hidden/unapproved discounts.
+    return Number(monthly||0) * cycleMonths(cycle);
+  }
+  function defaultDiscount(monthly, cycle, amount){ return Math.max(0,(Number(monthly||0)*cycleMonths(cycle))-Number(amount||0)); }
   function normalizeStatus(st){ return String(st||'active').toLowerCase().replace(/\s+/g,'_'); }
   function displayStatus(sub){
     const base=normalizeStatus(sub.status);
@@ -120,10 +136,18 @@ const RHSubscriptions = (() => {
     const sel=qs('#subscriptionProjectSelect');
     if(sel) sel.innerHTML=completed.length ? completed.map(p=>`<option value="${p.id}">${esc(p.project_no||'PRJ')} — ${esc(p.client_name||'-')} — ${esc(p.package_name||'-')}</option>`).join('') : '<option value="">Tiada completed project yang belum ada subscription</option>';
     qs('#subscriptionStartDate').value=todayISO();
-    updateSubscriptionPricing();
+    applyProjectPlanSelection();
     modal.hidden=false;
   }
   function closeSubscriptionCreateModal(){ const m=qs('#subscriptionCreateModal'); if(m) m.hidden=true; }
+  function applyProjectPlanSelection(){
+    const projectId=qs('#subscriptionProjectSelect')?.value;
+    const project=projectsCache.find(p=>String(p.id)===String(projectId));
+    const plan=project ? planFromPackage(project.package_name).planName : 'RH Basic Maintenance';
+    const planSelect=qs('#subscriptionPlanSelect');
+    if(planSelect) planSelect.value=plan;
+    updateSubscriptionPricing();
+  }
   function updateSubscriptionPricing(){
     const plan=qs('#subscriptionPlanSelect'); const cycle=qs('#subscriptionCycleSelect')?.value || 'monthly';
     const opt=plan?.selectedOptions?.[0]; const monthly=Number(opt?.dataset?.monthly || planMonthlyAmount(plan?.value));
@@ -136,7 +160,7 @@ const RHSubscriptions = (() => {
     const client=await getClient(); if(!client) return;
     const projectId=qs('#subscriptionProjectSelect')?.value; if(!projectId){ alert('Tiada project dipilih.'); return; }
     const project=projectsCache.find(p=>String(p.id)===String(projectId)); if(!project){ alert('Project tidak dijumpai.'); return; }
-    const plan=qs('#subscriptionPlanSelect')?.value || 'RH Basic Maintenance';
+    const plan=qs('#subscriptionPlanSelect')?.value || planFromPackage(project.package_name).planName;
     const cycle=qs('#subscriptionCycleSelect')?.value || 'monthly';
     const monthly=planMonthlyAmount(plan);
     const start=qs('#subscriptionStartDate')?.value || todayISO();
@@ -180,10 +204,11 @@ const RHSubscriptions = (() => {
     try{ const {count}=await client.from('subscriptions').select('*',{count:'exact',head:true}); baseCount=Number(count||0); }catch{}
     let seq=baseCount;
     for(const p of completed){
-      const plan = String(p.package_name||'').toLowerCase().includes('pro') ? 'RH Pro Maintenance' : (String(p.package_name||'').toLowerCase().includes('business') ? 'RH Business Maintenance' : 'RH Basic Maintenance');
-      const monthly=planMonthlyAmount(plan); const cycle='monthly'; const start=todayISO(); const end=addMonthsISO(start,1);
+      const packagePlan = planFromPackage(p.package_name);
+      const plan = packagePlan.planName;
+      const monthly=packagePlan.monthly; const cycle='monthly'; const start=todayISO(); const end=addMonthsISO(start,1);
       seq += 1;
-      rows.push({subscription_no:subscriptionNoFromCount(seq-1), project_id:p.id, project_no:p.project_no||null, invoice_id:p.invoice_id||null, client_name:p.client_name||'Client', phone:p.phone||null, email:p.email||null, company:p.company||null, business_type:p.business_type||null, package_name:p.package_name||null, plan_name:plan, billing_cycle:cycle, monthly_amount:monthly, cycle_amount:monthly, discount_amount:0, status:'active', start_date:start, current_period_start:start, current_period_end:end, next_billing_date:end, notes:'Auto synced from completed project. Default monthly maintenance plan.', created_by:(getSession()||{}).staff_id||'system'});
+      rows.push({subscription_no:subscriptionNoFromCount(seq-1), project_id:p.id, project_no:p.project_no||null, invoice_id:p.invoice_id||null, client_name:p.client_name||'Client', phone:p.phone||null, email:p.email||null, company:p.company||null, business_type:p.business_type||null, package_name:p.package_name||packagePlan.packageName, plan_name:plan, billing_cycle:cycle, monthly_amount:monthly, cycle_amount:monthly, discount_amount:0, status:'active', start_date:start, current_period_start:start, current_period_end:end, next_billing_date:end, notes:'Auto synced from completed project using RH official package maintenance pricing.', created_by:(getSession()||{}).staff_id||'system'});
     }
     const {error}=await client.from('subscriptions').insert(rows);
     if(error){ alert('Sync gagal: '+error.message); return; }
@@ -297,6 +322,7 @@ const RHSubscriptions = (() => {
     qs('#closeSubscriptionCreateModal')?.addEventListener('click',closeSubscriptionCreateModal);
     qs('#cancelSubscriptionCreateBtn')?.addEventListener('click',closeSubscriptionCreateModal);
     qs('#subscriptionCreateForm')?.addEventListener('submit',submitSubscriptionCreate);
+    qs('#subscriptionProjectSelect')?.addEventListener('change',applyProjectPlanSelection);
     qs('#subscriptionPlanSelect')?.addEventListener('change',updateSubscriptionPricing);
     qs('#subscriptionCycleSelect')?.addEventListener('change',updateSubscriptionPricing);
     qs('#closeSubscriptionModal')?.addEventListener('click',closeSubscriptionModal);
