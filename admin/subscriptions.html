@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Subscriptions | RH Admin V1</title>
+  <link rel="stylesheet" href="assets/admin.css">
+  <link rel="stylesheet" href="assets/subscriptions.css">
+</head>
+<body class="admin-page">
+  <aside class="sidebar" id="sidebar">
+    <a class="side-brand" href="dashboard.html"><img src="../assets/rh-logo.png" alt="RH"><span>RH Admin<br><small>Command Center</small></span></a>
+    <nav class="side-nav">
+      <a href="dashboard.html">🏠 Dashboard</a>
+      <div class="nav-label">Sales</div>
+      <a href="leads.html">📥 Leads</a>
+      <a href="prospects.html">👥 Prospects</a>
+      <a href="quotations.html">📄 Quotations</a>
+      <a href="invoices.html">🧾 Invoices</a>
+      <div class="nav-label">Delivery</div>
+      <a href="projects.html">🚀 Projects</a>
+      <div class="nav-label">Recurring</div>
+      <a class="active" href="subscriptions.html">🔁 Subscriptions</a>
+      <div class="nav-label">Content</div>
+      <a href="articles.html">📝 Articles</a>
+      <a href="aira-knowledge.html">🤖 Aira Knowledge</a>
+      <div class="nav-label">System</div>
+      <a href="storage.html">📁 Storage</a>
+      <a href="reports.html">📊 Reports</a>
+      <a href="settings.html">⚙️ Settings</a>
+      <a href="staff.html">🔐 Staff</a>
+    </nav>
+  </aside>
+
+  <div class="admin-main">
+    <header class="topbar">
+      <button id="menuBtn" class="icon-btn">☰</button>
+      <div><h1>Subscriptions</h1><p>Maintenance, renewal invoice, freeze/unfreeze dan recurring payment untuk client RH.</p></div>
+      <div class="top-actions"><span id="staffBadge" class="staff-badge">Loading...</span><button id="refreshSubscriptionsBtn" class="ghost-btn">Refresh</button><button id="logoutBtn" class="ghost-btn">Logout</button></div>
+    </header>
+
+    <main class="content">
+      <section class="stat-grid subscription-stat-grid">
+        <article class="stat-card"><span>Active</span><strong id="subCountActive">0</strong><small>Langganan aktif</small></article>
+        <article class="stat-card"><span>Due Soon</span><strong id="subCountDueSoon">0</strong><small>≤ 30 hari</small></article>
+        <article class="stat-card"><span>Overdue</span><strong id="subCountOverdue">0</strong><small>Lepas due</small></article>
+        <article class="stat-card"><span>Suspended</span><strong id="subCountSuspended">0</strong><small>Freeze</small></article>
+        <article class="stat-card"><span>MRR</span><strong id="subMRR">RM0</strong><small>Anggaran bulanan</small></article>
+        <article class="stat-card"><span>Renewal Revenue</span><strong id="subRenewalRevenue">RM0</strong><small>Paid renewal</small></article>
+      </section>
+
+      <section class="panel section-panel">
+        <div class="panel-head stacked-head">
+          <div><h2>Subscription Pipeline</h2><span>Project completed boleh disync menjadi maintenance subscription.</span></div>
+          <div class="toolbar">
+            <button id="newSubscriptionBtn" class="primary-btn">+ New Subscription</button>
+            <button id="syncCompletedProjectsBtn" class="ghost-btn">Sync Completed Projects</button>
+            <input id="subscriptionSearch" class="search-input" placeholder="Cari client, subscription, telefon...">
+            <select id="subscriptionStatusFilter" class="select-input">
+              <option value="">Semua status</option>
+              <option value="active">Active</option>
+              <option value="due_soon">Due Soon</option>
+              <option value="overdue">Overdue</option>
+              <option value="expired">Expired</option>
+              <option value="suspended">Suspended</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+        <div class="responsive-table-wrap">
+          <table class="data-table subscription-table">
+            <thead><tr><th>No</th><th>Client</th><th>Plan</th><th>Billing</th><th>Next Billing</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="subscriptionsTableBody"><tr><td colspan="7"><div class="empty-state">Memuatkan subscriptions...</div></td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel section-panel">
+        <div class="panel-head"><div><h2>Renewal Invoices</h2><span>Invoice servis bulanan / 6 bulan / tahunan.</span></div></div>
+        <div class="responsive-table-wrap">
+          <table class="data-table subscription-table">
+            <thead><tr><th>Invoice</th><th>Client</th><th>Period</th><th>Amount</th><th>Due</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="subscriptionInvoicesTableBody"><tr><td colspan="7"><div class="empty-state">Memuatkan renewal invoices...</div></td></tr></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <section id="subscriptionModal" class="modal-backdrop" hidden>
+    <div class="modal-card wide-modal">
+      <div class="modal-head"><div><h2 id="subscriptionModalTitle">Subscription</h2><span id="subscriptionModalSub">-</span></div><button id="closeSubscriptionModal" class="icon-close" type="button">×</button></div>
+      <div id="subscriptionPreview"></div>
+      <div class="modal-actions">
+        <button id="generateRenewalInvoiceBtn" class="primary-btn" type="button">Generate Renewal Invoice</button>
+        <button id="freezeSubscriptionBtn" class="ghost-btn danger-action" type="button">Freeze</button>
+        <button id="unfreezeSubscriptionBtn" class="ghost-btn" type="button">Unfreeze</button>
+        <button id="cancelSubscriptionBtn" class="ghost-btn danger-action" type="button">Cancel</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="subscriptionCreateModal" class="modal-backdrop" hidden>
+    <div class="modal-card wide-modal">
+      <div class="modal-head"><div><h2>Create Subscription</h2><span>Pilih completed project dan billing plan maintenance.</span></div><button id="closeSubscriptionCreateModal" class="icon-close" type="button">×</button></div>
+      <form id="subscriptionCreateForm" class="form-grid admin-form-grid">
+        <label class="full">Completed Project
+          <select id="subscriptionProjectSelect" required></select>
+        </label>
+        <label>Plan
+          <select id="subscriptionPlanSelect">
+            <option value="RH Basic Maintenance" data-monthly="129">RH Basic Maintenance — RM129/bulan</option>
+            <option value="RH Business Maintenance" data-monthly="149">RH Business Maintenance — RM149/bulan</option>
+            <option value="RH Pro Maintenance" data-monthly="199">RH Pro Maintenance — RM199/bulan</option>
+          </select>
+        </label>
+        <label>Billing Cycle
+          <select id="subscriptionCycleSelect">
+            <option value="monthly">Monthly</option>
+            <option value="six_months">6 Months</option>
+            <option value="yearly">Yearly</option>
+          </select>
+        </label>
+        <label>Cycle Amount (selepas diskaun)
+          <input id="subscriptionCycleAmount" type="number" min="0" step="1" required>
+        </label>
+        <label>Discount
+          <input id="subscriptionDiscount" type="number" min="0" step="1" value="0">
+        </label>
+        <label>Start Date
+          <input id="subscriptionStartDate" type="date" required>
+        </label>
+        <label>Notes
+          <textarea id="subscriptionNotes" rows="3" placeholder="Contoh: Maintenance bermula selepas website live."></textarea>
+        </label>
+        <div class="form-actions full"><button type="button" id="cancelSubscriptionCreateBtn" class="ghost-btn">Cancel</button><button type="submit" class="primary-btn">Create Subscription</button></div>
+      </form>
+    </div>
+  </section>
+
+  <section id="subscriptionPaymentModal" class="modal-backdrop" hidden>
+    <div class="modal-card">
+      <div class="modal-head"><div><h2>Mark Renewal Paid</h2><span id="subscriptionPaymentSub">-</span></div><button id="closeSubscriptionPaymentModal" class="icon-close" type="button">×</button></div>
+      <form id="subscriptionPaymentForm" class="form-grid admin-form-grid">
+        <input id="subscriptionInvoiceId" type="hidden">
+        <label>Payment Method
+          <select id="subscriptionPaymentMethod"><option>Bank Transfer</option><option>Cash</option><option>Online Payment</option></select>
+        </label>
+        <label>Reference No
+          <input id="subscriptionPaymentReference" placeholder="Ref bank / resit" required>
+        </label>
+        <div class="form-actions full"><button type="button" id="cancelSubscriptionPaymentBtn" class="ghost-btn">Cancel</button><button type="submit" class="primary-btn">Mark Paid</button></div>
+      </form>
+    </div>
+  </section>
+
+  <script src="../supabase-config.js"></script>
+  <script src="assets/admin.js"></script>
+  <script src="assets/subscriptions.js"></script>
+</body>
+</html>

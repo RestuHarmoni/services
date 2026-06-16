@@ -1,0 +1,21 @@
+/* RH Services v1.3 Subscription & Renewal Engine */
+.subscription-stat-grid{grid-template-columns:repeat(6,1fr)}
+.subscription-table{min-width:980px}
+.subscription-summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+.subscription-status-card{padding:14px;border:1px solid rgba(148,163,184,.16);background:rgba(15,23,42,.38);border-radius:16px}
+.subscription-status-card span{display:block;color:#94a3b8;font-size:12px;text-transform:uppercase;letter-spacing:.06em;font-weight:900}
+.subscription-status-card strong{display:block;margin-top:6px;font-size:18px;white-space:pre-wrap}
+.subscription-status-card.full{grid-column:1/-1}
+.status-pill.due_soon{background:rgba(245,158,11,.14);color:#fde68a}
+.status-pill.overdue{background:rgba(249,115,22,.16);color:#fed7aa}
+.status-pill.expired{background:rgba(220,38,38,.16);color:#fecaca}
+.status-pill.suspended{background:rgba(100,116,139,.22);color:#e2e8f0}
+.status-pill.cancelled{background:rgba(148,163,184,.14);color:#cbd5e1}
+.status-pill.paid{background:rgba(22,163,74,.16);color:#bbf7d0}
+.status-pill.sent,.status-pill.draft{background:rgba(37,99,235,.16);color:#bfdbfe}
+.renewal-list{display:grid;gap:10px;margin-top:12px}
+.renewal-item{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:12px;border:1px solid rgba(148,163,184,.16);background:rgba(15,23,42,.38);border-radius:16px}
+.renewal-item strong{display:block}.renewal-item span{display:block;color:#94a3b8;font-size:12px;margin-top:4px}
+.danger-action{border-color:rgba(220,38,38,.45)!important;color:#fecaca!important}
+@media(max-width:1180px){.subscription-stat-grid{grid-template-columns:repeat(3,1fr)}.subscription-summary-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.subscription-stat-grid,.subscription-summary-grid{grid-template-columns:1fr}.renewal-item{grid-template-columns:1fr}.renewal-item .table-actions{justify-content:stretch}.renewal-item button{width:100%}}
