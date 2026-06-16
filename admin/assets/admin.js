@@ -1629,6 +1629,7 @@ const RHAdmin = (() => {
   /* RH Admin Article Module V1.0 - Full Build */
   let articlesCache = [];
   let currentArticle = null;
+  let articlePreviewImageDataUrl = null;
   function slugifyArticle(s){
     return String(s||'').toLowerCase().trim()
       .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
@@ -1637,6 +1638,61 @@ const RHAdmin = (() => {
   function articleUrl(slug){ return location.origin + '/blog/' + encodeURIComponent(slug) + '.html'; }
   function articleStatusLabel(st){ const v=String(st||'draft').toLowerCase(); return ({draft:'Draft',published:'Published',archived:'Archived',deleted:'Deleted'})[v] || v; }
   function articleStatusClass(st){ return String(st||'draft').toLowerCase().replace(/[^a-z0-9_-]/g,''); }
+  function getArticleFormSnapshot(){
+    const title=String(qs('#articleTitle')?.value||'').trim() || 'Tajuk artikel';
+    const slug=slugifyArticle(qs('#articleSlug')?.value || title);
+    const metaDesc=String(qs('#articleMetaDescription')?.value||'').trim();
+    const content=String(qs('#articleContent')?.value||'').trim();
+    return {
+      title,
+      slug,
+      category:String(qs('#articleCategory')?.value||'Website').trim() || 'Website',
+      status:String(qs('#articleStatus')?.value||'draft').toLowerCase(),
+      author:String(qs('#articleAuthor')?.value||'RH Admin').trim() || 'RH Admin',
+      metaTitle:String(qs('#articleMetaTitle')?.value||'').trim() || title,
+      metaDescription:metaDesc || String(content||'').replace(/[#*_>`]/g,'').slice(0,155) || 'Ringkasan artikel akan keluar di sini.',
+      focusKeyword:String(qs('#articleFocusKeyword')?.value||'').trim(),
+      cover:articlePreviewImageDataUrl || String(qs('#articleCoverImage')?.value||'').trim() || '../assets/rh-logo.png',
+      content
+    };
+  }
+  function articlePreviewHtml(text){
+    const raw=String(text||'').trim();
+    if(!raw) return '<p>Isi artikel akan keluar di sini.</p>';
+    return raw.split(/\n{2,}/).map(block=>{
+      const b=block.trim();
+      if(!b) return '';
+      if(/^###\s+/.test(b)) return '<h4>'+esc(b.replace(/^###\s+/,''))+'</h4>';
+      if(/^##\s+/.test(b)) return '<h3>'+esc(b.replace(/^##\s+/,''))+'</h3>';
+      if(/^#\s+/.test(b)) return '<h2>'+esc(b.replace(/^#\s+/,''))+'</h2>';
+      if(/^[-*]\s+/m.test(b)){
+        const items=b.split(/\n/).filter(Boolean).map(line=>'<li>'+esc(line.replace(/^[-*]\s+/,''))+'</li>').join('');
+        return '<ul>'+items+'</ul>';
+      }
+      return '<p>'+esc(b).replace(/\n/g,'<br>')+'</p>';
+    }).join('');
+  }
+  function renderArticleLivePreview(){
+    const d=getArticleFormSnapshot();
+    const setText=(id,val)=>{const el=qs(id); if(el) el.textContent=val;};
+    const setImg=(id,val)=>{const el=qs(id); if(el) el.src=val || '../assets/rh-logo.png';};
+    setText('#articleSlugPreview','/blog/'+d.slug+'.html');
+    setImg('#articleCoverPreview',d.cover);
+    setImg('#previewCardImage',d.cover); setImg('#previewSocialImage',d.cover); setImg('#previewFullImage',d.cover);
+    setText('#previewCardCategory',d.category); setText('#previewFullCategory',d.category);
+    setText('#previewCardTitle',d.title); setText('#previewFullTitle',d.title); setText('#previewSocialTitle',d.metaTitle);
+    setText('#previewCardExcerpt',d.metaDescription); setText('#previewSocialDesc',d.metaDescription);
+    setText('#previewCardMeta',`${articleStatusLabel(d.status)} • ${d.author}`);
+    setText('#previewFullMeta',`${articleStatusLabel(d.status)} • ${d.author}${d.focusKeyword?' • Focus: '+d.focusKeyword:''}`);
+    const full=qs('#previewFullContent'); if(full) full.innerHTML=articlePreviewHtml(d.content);
+  }
+  function readArticlePreviewFile(file){
+    articlePreviewImageDataUrl=null;
+    if(!file){ renderArticleLivePreview(); return; }
+    const reader=new FileReader();
+    reader.onload=()=>{ articlePreviewImageDataUrl=String(reader.result||''); renderArticleLivePreview(); };
+    reader.readAsDataURL(file);
+  }
   async function ensureArticleBucket(client){
     try{ await client.storage.getBucket('blog-images'); }catch{}
   }
@@ -1766,9 +1822,11 @@ const RHAdmin = (() => {
     const feat=qs('#articleFeatured'); if(feat) feat.checked=!!(currentArticle?.is_featured || currentArticle?.featured);
     const pub=qs('#articlePublishedAt'); if(pub){ const d=currentArticle?.published_at ? new Date(currentArticle.published_at) : null; pub.value=d && !isNaN(d) ? new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16) : ''; }
     const file=qs('#articleCoverFile'); if(file) file.value='';
+    articlePreviewImageDataUrl=null;
     modal.hidden=false;
+    setTimeout(renderArticleLivePreview,0);
   }
-  function closeArticleModal(){ const modal=qs('#articleModal'); if(modal) modal.hidden=true; currentArticle=null; }
+  function closeArticleModal(){ const modal=qs('#articleModal'); if(modal) modal.hidden=true; currentArticle=null; articlePreviewImageDataUrl=null; }
   async function saveArticle(forceStatus){
     const client=await getClient(); if(!client) return;
     const title=String(qs('#articleTitle')?.value||'').trim();
@@ -1896,9 +1954,11 @@ const RHAdmin = (() => {
     const aForm=qs('#articleForm'); if(aForm) aForm.addEventListener('submit',e=>{e.preventDefault();saveArticle();});
     const aDraft=qs('#saveArticleDraftBtn'); if(aDraft) aDraft.onclick=()=>saveArticle('draft');
     const aPublish=qs('#publishArticleBtn'); if(aPublish) aPublish.onclick=()=>saveArticle('published');
-    const aPreview=qs('#previewArticleBtn'); if(aPreview) aPreview.onclick=()=>{const slug=slugifyArticle(qs('#articleSlug')?.value || qs('#articleTitle')?.value || currentArticle?.slug || ''); if(slug) window.open(articleUrl(slug),'_blank','noopener');};
-    const aTitle=qs('#articleTitle'); if(aTitle) aTitle.addEventListener('input',()=>{const slugEl=qs('#articleSlug'); if(slugEl && !currentArticle && !slugEl.value.trim()) slugEl.value=slugifyArticle(aTitle.value);});
-    const aFile=qs('#articleCoverFile'); if(aFile) aFile.addEventListener('change',()=>{const f=aFile.files?.[0]; const img=qs('#articleCoverImage'); if(f && img && !img.value) img.placeholder='Gambar akan di-upload dan URL disimpan semasa Save/Publish';});
+    const aPreview=qs('#previewArticleBtn'); if(aPreview) aPreview.onclick=()=>{renderArticleLivePreview(); qs('#articlePreviewPanel')?.scrollIntoView({behavior:'smooth',block:'start'});};
+    const aPreviewRefresh=qs('#refreshArticlePreviewBtn'); if(aPreviewRefresh) aPreviewRefresh.onclick=renderArticleLivePreview;
+    const aTitle=qs('#articleTitle'); if(aTitle) aTitle.addEventListener('input',()=>{const slugEl=qs('#articleSlug'); if(slugEl && !currentArticle && !slugEl.value.trim()) slugEl.value=slugifyArticle(aTitle.value); renderArticleLivePreview();});
+    ['#articleSlug','#articleCategory','#articleStatus','#articleFocusKeyword','#articleAuthor','#articleMetaTitle','#articleMetaDescription','#articleCoverImage','#articleContent','#articlePublishedAt'].forEach(sel=>{const el=qs(sel); if(el){ el.addEventListener('input',renderArticleLivePreview); el.addEventListener('change',renderArticleLivePreview); }});
+    const aFile=qs('#articleCoverFile'); if(aFile) aFile.addEventListener('change',()=>{const f=aFile.files?.[0]; const img=qs('#articleCoverImage'); if(f && img && !img.value) img.placeholder='Gambar akan di-upload dan URL disimpan semasa Save/Publish'; readArticlePreviewFile(f);});
 
     const qRefresh=qs('#refreshQuotationsBtn'); if(qRefresh) qRefresh.onclick=loadQuotationsPage;
     const qSearch=qs('#quotationSearch'); if(qSearch) qSearch.oninput=renderQuotationsTable;
