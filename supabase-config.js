@@ -3,7 +3,7 @@
    Semua module live perlu guna window.RHGetSupabaseClient() supaya GoTrueClient tidak dicipta berulang kali. */
 window.RH_SUPABASE_CONFIG = {
   url: "https://xyiqrjiozrxcqhifyfzw.supabase.co",
-  anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5aXFyamlvenJ4Y3FoaWZ5Znp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MTM4NDEsImV4cCI6MjA5NjE4OTg0MX0.SF7L_FUaLps8c1LtwLhVcwhCbJiVD6USpEFM53Se68w"
+  anonKey: "sb_publishable_SKmoaAwiMvWEzW8OIF4OMA_WusAmQiE"
 };
 
 (function(){
