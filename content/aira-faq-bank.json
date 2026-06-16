@@ -1,5 +1,5 @@
 {
-  "version": "v11.0-package-template-linking",
+  "version": "v11.1-rh-basic-plan-alignment",
   "quickActions": [
     "Dapatkan Cadangan Website",
     "Harga Pakej RH",
@@ -23,7 +23,7 @@
         "bayaran",
         "berapa"
       ],
-      "answer": "<strong>Pakej rasmi RH:</strong><br><br>📦 <strong>RH Starter</strong><br>RM1299 + maintenance RM129/bulan<br>Sesuai untuk website profile syarikat dan bisnes baru.<br><a class=\"rh-aira-link\" href=\"/pakej/rh-starter/\" target=\"_blank\" rel=\"noopener\">Lihat template RH Starter</a><br><br>📦 <strong>RH Growth</strong><br>RM1999 + maintenance RM179/bulan<br>Sesuai untuk servis, produk, rental, event, blog dan galeri.<br><a class=\"rh-aira-link\" href=\"/pakej/rh-growth/\" target=\"_blank\" rel=\"noopener\">Lihat template RH Growth</a><br><br>📦 <strong>RH Ecosystem</strong><br>RM2999 + maintenance RM249/bulan<br>Sesuai untuk company profile + service website / subdomain.<br><a class=\"rh-aira-link\" href=\"/pakej/rh-ecosystem/\" target=\"_blank\" rel=\"noopener\">Lihat template RH Ecosystem</a>"
+      "answer": "<strong>Pakej rasmi RH:</strong><br><br>📦 <strong>RH Basic</strong><br>RM799 + maintenance RM79/bulan<br>Sesuai untuk personal web, landing page ringkas dan industri kecil yang mahu mula online dengan bajet rendah.<br><a class=\"rh-aira-link\" href=\"/pakej/rh-basic/\" target=\"_blank\" rel=\"noopener\">Lihat template RH Basic</a><br><br>📦 <strong>RH Starter</strong><br>RM1299 + maintenance RM129/bulan<br>Sesuai untuk website profile syarikat dan bisnes baru.<br><a class=\"rh-aira-link\" href=\"/pakej/rh-starter/\" target=\"_blank\" rel=\"noopener\">Lihat template RH Starter</a><br><br>📦 <strong>RH Growth</strong><br>RM1999 + maintenance RM179/bulan<br>Sesuai untuk servis, produk, rental, event, blog dan galeri.<br><a class=\"rh-aira-link\" href=\"/pakej/rh-growth/\" target=\"_blank\" rel=\"noopener\">Lihat template RH Growth</a><br><br>📦 <strong>RH Ecosystem</strong><br>RM2999 + maintenance RM249/bulan<br>Sesuai untuk company profile + service website / subdomain.<br><a class=\"rh-aira-link\" href=\"/pakej/rh-ecosystem/\" target=\"_blank\" rel=\"noopener\">Lihat template RH Ecosystem</a>"
     },
     {
       "topic": "tempoh",
@@ -100,7 +100,7 @@
         "template",
         "sample"
       ],
-      "answer": "Boleh. Anda boleh lihat detail template untuk setiap pakej rasmi RH:<br><br>• <a class=\"rh-aira-link\" href=\"/pakej/rh-starter/\" target=\"_blank\" rel=\"noopener\">Template RH Starter</a><br>• <a class=\"rh-aira-link\" href=\"/pakej/rh-growth/\" target=\"_blank\" rel=\"noopener\">Template RH Growth</a><br>• <a class=\"rh-aira-link\" href=\"/pakej/rh-ecosystem/\" target=\"_blank\" rel=\"noopener\">Template RH Ecosystem</a><br><br>Aira juga boleh cadangkan pakej paling sesuai selepas beberapa soalan ringkas."
+      "answer": "Kami susun contoh website mengikut keperluan bisnes seperti Personal Web, Aircond, Plumbing, Elektrik, Homestay, Kereta Sewa, Event, Produk Online, Corporate dan Company Profile. Pakej rasmi yang digunakan ialah RH Basic, RH Starter, RH Growth dan RH Ecosystem."
     },
     {
       "topic": "bayaran",

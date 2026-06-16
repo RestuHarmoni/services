@@ -1,10 +1,10 @@
 {
-  "version": "v11.0-package-template-linking",
+  "version": "v11.1-rh-basic-plan-alignment",
   "assistantName": "Aira",
   "positioning": "AI Website Consultant",
   "intro": [
     "Hai 👋 Saya <strong>Aira</strong>, AI Website Consultant RH.",
-    "Saya akan bantu cadangkan pakej rasmi <strong>RH Starter</strong>, <strong>RH Growth</strong> atau <strong>RH Ecosystem</strong> mengikut keperluan bisnes anda."
+    "Saya akan bantu cadangkan pakej rasmi <strong>RH Basic</strong>, <strong>RH Starter</strong>, <strong>RH Growth</strong> atau <strong>RH Ecosystem</strong> mengikut keperluan bisnes anda."
   ],
   "steps": [
     {
@@ -226,6 +226,7 @@
       "type": "choice",
       "required": true,
       "options": [
+        "RM799 (RH Basic)",
         "RM1299 (RH Starter)",
         "RM1999 (RH Growth)",
         "RM2999+ (RH Ecosystem)",
@@ -263,6 +264,28 @@
     }
   ],
   "packages": {
+    "RH Basic": {
+      "price": "RM799",
+      "maintenance": "RM79/bulan",
+      "templateCount": 4,
+      "bestFor": [
+        "Personal web",
+        "Bisnes kecil",
+        "Industri kecil",
+        "Landing page ringkas",
+        "Profil asas"
+      ],
+      "features": [
+        "1-page / basic website",
+        "Mobile responsive",
+        "Section servis ringkas",
+        "Contact / WhatsApp CTA",
+        "SEO asas",
+        "Google Maps optional",
+        "Lead capture basic"
+      ],
+      "templateUrl": "/pakej/rh-basic/"
+    },
     "RH Starter": {
       "price": "RM1299",
       "maintenance": "RM129/bulan",
@@ -349,7 +372,7 @@
       "RH_Custom_Project"
     ],
     "plannedTemplateCount": 40,
-    "note": "Pakej rasmi RH ialah RH Starter, RH Growth dan RH Ecosystem. Kod template lama dikekalkan sebagai internal demo code supaya tidak memecahkan demo sedia ada."
+    "note": "Pakej rasmi RH ialah RH Basic, RH Starter, RH Growth dan RH Ecosystem. Kod template lama dikekalkan sebagai internal demo code supaya tidak memecahkan demo sedia ada."
   },
   "serviceRecommendations": {
     "Servis Aircond": {
@@ -423,30 +446,30 @@
       ]
     },
     "Personal Brand": {
-      "recommendedPackage": "RH Starter",
+      "recommendedPackage": "RH Basic",
       "recommendedTemplate": "RH_Basic_Classic",
-      "templateUiConcept": "Starter Personal",
-      "templateSlot": "rh_starter-08",
+      "templateUiConcept": "Basic Personal / Simple Website",
+      "templateSlot": "rh_basic-01",
       "priorityObjective": [
         "Dapatkan lebih banyak pertanyaan pelanggan",
         "Paparkan servis & portfolio"
       ]
     },
     "NGO / Persatuan": {
-      "recommendedPackage": "RH Starter",
+      "recommendedPackage": "RH Basic",
       "recommendedTemplate": "RH_Basic_Classic",
-      "templateUiConcept": "Starter Organisation",
-      "templateSlot": "rh_starter-09",
+      "templateUiConcept": "Basic Personal / Simple Website",
+      "templateSlot": "rh_basic-01",
       "priorityObjective": [
         "Dapatkan lebih banyak pertanyaan pelanggan",
         "Paparkan servis & portfolio"
       ]
     },
     "Servis Kecil Lain": {
-      "recommendedPackage": "RH Starter",
+      "recommendedPackage": "RH Basic",
       "recommendedTemplate": "RH_Basic_Modern",
-      "templateUiConcept": "Starter General Service",
-      "templateSlot": "rh_starter-10",
+      "templateUiConcept": "Basic Personal / Simple Website",
+      "templateSlot": "rh_basic-01",
       "priorityObjective": [
         "Dapatkan lebih banyak pertanyaan pelanggan",
         "Paparkan servis & portfolio"
