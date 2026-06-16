@@ -1,0 +1,254 @@
+{
+  "version": "v12.0-aira-v3-sales-consultant-live-base",
+  "assistantName": "Aira",
+  "positioning": "AI Website Sales Consultant",
+  "intro": [
+    "👋 Hai, saya <strong>Aira</strong>.",
+    "Saya boleh bantu cadangkan website yang sesuai untuk bisnes anda dalam masa kurang 1 minit."
+  ],
+  "steps": [
+    {
+      "key": "business_type",
+      "question": "Apakah jenis bisnes anda?",
+      "type": "choice",
+      "required": true,
+      "options": [
+        "Servis",
+        "Produk",
+        "Restoran",
+        "Event",
+        "Hartanah",
+        "Company Profile",
+        "E-commerce",
+        "Custom System",
+        "Lain-lain"
+      ]
+    },
+    {
+      "key": "domain_status",
+      "question": "Adakah anda sudah mempunyai domain?",
+      "type": "choice",
+      "required": false,
+      "options": [
+        "Ya",
+        "Belum",
+        "Tidak Pasti"
+      ]
+    },
+    {
+      "key": "hosting_status",
+      "question": "Adakah anda sudah mempunyai hosting?",
+      "type": "choice",
+      "required": false,
+      "options": [
+        "Ya",
+        "Belum",
+        "Tidak Pasti"
+      ]
+    },
+    {
+      "key": "objective",
+      "question": "Apakah objektif utama website anda?",
+      "type": "choice",
+      "required": true,
+      "options": [
+        "Dapatkan Lead",
+        "Profil Syarikat",
+        "Jual Produk",
+        "Booking",
+        "SEO Google",
+        "Sistem / Portal Custom"
+      ]
+    },
+    {
+      "key": "budget",
+      "question": "Budget anggaran?",
+      "type": "choice",
+      "required": true,
+      "options": [
+        "RM799 (RH Basic)",
+        "RM1,999 (RH Growth)",
+        "RM2,999 (RH Ecosystem)",
+        "RM3,000+ (RH Enterprise)",
+        "Tidak Pasti"
+      ]
+    },
+    {
+      "key": "timeline",
+      "question": "Bila anda mahu website mula siap atau dilancarkan?",
+      "type": "choice",
+      "required": true,
+      "options": [
+        "Segera",
+        "1–2 minggu",
+        "Dalam 1 bulan",
+        "Belum pasti"
+      ]
+    },
+    {
+      "key": "name",
+      "question": "Boleh saya tahu nama anda?",
+      "type": "input",
+      "input": true,
+      "placeholder": "Contoh: Ahmad",
+      "required": true
+    },
+    {
+      "key": "phone",
+      "question": "Nombor WhatsApp untuk team kami hubungi?",
+      "type": "input",
+      "input": true,
+      "placeholder": "Contoh: 0123456789",
+      "required": true,
+      "validation": "phone"
+    }
+  ],
+  "packages": {
+    "RH Basic": {
+      "price": "RM799",
+      "maintenance": "RM79/bulan",
+      "templateCount": 1,
+      "bestFor": [
+        "Personal website",
+        "Bisnes kecil",
+        "Profil ringkas",
+        "Landing page asas"
+      ],
+      "features": [
+        "Website 1–3 halaman",
+        "Mobile responsive",
+        "Contact/WhatsApp CTA",
+        "SEO asas",
+        "Struktur profile ringkas"
+      ],
+      "templateUrl": "/pakej/rh-basic/"
+    },
+    "RH Growth": {
+      "price": "RM1999",
+      "maintenance": "RM129/bulan",
+      "templateCount": 10,
+      "bestFor": [
+        "Bisnes servis",
+        "Lead generation",
+        "Portfolio",
+        "SEO asas"
+      ],
+      "features": [
+        "Semua RH Basic",
+        "Multi-page website",
+        "Service section",
+        "Blog / Artikel",
+        "Portfolio / Gallery",
+        "Lead capture",
+        "Aira assistant basic"
+      ],
+      "templateUrl": "/pakej/rh-growth/"
+    },
+    "RH Ecosystem": {
+      "price": "RM2999",
+      "maintenance": "RM249/bulan",
+      "templateCount": 10,
+      "bestFor": [
+        "Bisnes yang mahu sistem lengkap",
+        "AI Chatbot",
+        "Blog CMS",
+        "Dashboard",
+        "Lead Management"
+      ],
+      "features": [
+        "Semua RH Growth",
+        "AI Chatbot Aira",
+        "Blog CMS",
+        "Admin Dashboard",
+        "Lead Management",
+        "Quotation/Invoice ready",
+        "Multi-section business website"
+      ],
+      "templateUrl": "/pakej/rh-ecosystem/"
+    },
+    "RH Enterprise": {
+      "price": "Custom",
+      "maintenance": "Ikut scope",
+      "templateCount": 0,
+      "bestFor": [
+        "Portal custom",
+        "Multi branch",
+        "Automation",
+        "CRM/ERP ringkas",
+        "Integrasi sistem"
+      ],
+      "features": [
+        "Custom scope",
+        "System dashboard",
+        "Workflow automation",
+        "Advanced integration",
+        "Dedicated quotation"
+      ],
+      "templateUrl": "/pakej/"
+    }
+  },
+  "serviceRecommendations": {
+    "Servis": {
+      "recommendedPackage": "RH Growth",
+      "priorityObjective": [
+        "Dapatkan Lead",
+        "SEO Google",
+        "Booking"
+      ]
+    },
+    "Produk": {
+      "recommendedPackage": "RH Growth",
+      "priorityObjective": [
+        "Jual Produk",
+        "Dapatkan Lead"
+      ]
+    },
+    "Restoran": {
+      "recommendedPackage": "RH Growth",
+      "priorityObjective": [
+        "Booking",
+        "Profil Syarikat",
+        "Dapatkan Lead"
+      ]
+    },
+    "Event": {
+      "recommendedPackage": "RH Ecosystem",
+      "priorityObjective": [
+        "Booking",
+        "Dapatkan Lead",
+        "Profil Syarikat"
+      ]
+    },
+    "Hartanah": {
+      "recommendedPackage": "RH Growth",
+      "priorityObjective": [
+        "Dapatkan Lead",
+        "Profil Syarikat"
+      ]
+    },
+    "Company Profile": {
+      "recommendedPackage": "RH Basic",
+      "priorityObjective": [
+        "Profil Syarikat"
+      ]
+    },
+    "E-commerce": {
+      "recommendedPackage": "RH Ecosystem",
+      "priorityObjective": [
+        "Jual Produk"
+      ]
+    },
+    "Custom System": {
+      "recommendedPackage": "RH Enterprise",
+      "priorityObjective": [
+        "Sistem / Portal Custom"
+      ]
+    },
+    "Lain-lain": {
+      "recommendedPackage": "RH Basic",
+      "priorityObjective": [
+        "Profil Syarikat"
+      ]
+    }
+  }
+}

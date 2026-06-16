@@ -1,0 +1,373 @@
+:root{--bg:#0f172a;--bg2:#111827;--panel:#1e293b;--panel2:#172033;--line:#334155;--text:#f8fafc;--muted:#94a3b8;--blue:#2563eb;--cyan:#38bdf8;--green:#16a34a;--orange:#f59e0b;--red:#dc2626;--purple:#7c3aed;--shadow:0 24px 80px rgba(0,0,0,.28)}*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,rgba(37,99,235,.22),transparent 32%),var(--bg);color:var(--text)}a{text-decoration:none;color:inherit}.auth-page{min-height:100vh;display:grid;place-items:center;padding:24px}.login-shell{width:min(460px,100%)}.login-card{background:linear-gradient(180deg,rgba(30,41,59,.96),rgba(15,23,42,.98));border:1px solid var(--line);border-radius:28px;padding:30px;box-shadow:var(--shadow)}.login-brand{display:flex;align-items:center;gap:12px;margin-bottom:28px}.login-brand img,.side-brand img{width:46px;height:46px;object-fit:contain}.login-brand strong,.side-brand span{font-weight:950;letter-spacing:-.03em}.login-brand span,.side-brand small{display:block;color:var(--muted);font-size:12px}.login-card h1{margin:0 0 8px;font-size:34px;letter-spacing:-.06em}.login-card p{margin:0 0 22px;color:var(--muted);line-height:1.7}.form-stack{display:grid;gap:14px}.form-stack label{font-size:13px;font-weight:800;color:#cbd5e1;display:grid;gap:8px}.form-stack input{width:100%;border:1px solid var(--line);background:#0b1220;color:var(--text);border-radius:16px;padding:14px;font-size:15px;outline:none}.form-stack input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(56,189,248,.16)}.primary-btn,.ghost-btn,.icon-btn{border:0;border-radius:16px;font-weight:950;cursor:pointer}.primary-btn{background:linear-gradient(135deg,var(--blue),var(--cyan));color:white;padding:14px 16px}.ghost-btn,.icon-btn{background:#0b1220;color:var(--text);border:1px solid var(--line);padding:11px 14px}.form-message{min-height:24px;margin-top:14px;color:#fca5a5;font-weight:800}.login-note{margin-top:18px;padding:12px 14px;border-radius:16px;background:rgba(37,99,235,.12);border:1px solid rgba(37,99,235,.25);color:#bfdbfe;font-size:13px}.admin-page{display:grid;grid-template-columns:280px 1fr;min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;background:rgba(17,24,39,.96);border-right:1px solid var(--line);padding:20px 16px;overflow:auto}.side-brand{display:flex;align-items:center;gap:12px;padding:6px 8px 22px}.side-nav{display:grid;gap:5px}.side-nav a{display:flex;gap:10px;align-items:center;padding:11px 12px;border-radius:14px;color:#cbd5e1;font-weight:850}.side-nav a:hover,.side-nav a.active{background:rgba(37,99,235,.18);color:#fff}.nav-label{padding:17px 12px 6px;color:#64748b;font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:950}.admin-main{min-width:0}.topbar{position:sticky;top:0;z-index:4;background:rgba(15,23,42,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);min-height:82px;padding:18px 28px;display:flex;align-items:center;gap:16px;justify-content:space-between}.topbar h1{margin:0;font-size:28px;letter-spacing:-.05em}.topbar p{margin:4px 0 0;color:var(--muted)}.top-actions{display:flex;align-items:center;gap:10px}.staff-badge{padding:10px 12px;background:rgba(22,163,74,.14);color:#bbf7d0;border:1px solid rgba(22,163,74,.28);border-radius:999px;font-size:13px;font-weight:950}.icon-btn{display:none}.content{padding:28px}.stat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}.stat-card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 16px 50px rgba(0,0,0,.12)}.stat-card span{display:block;color:var(--muted);font-weight:800;font-size:13px}.stat-card strong{display:block;font-size:30px;margin:8px 0 4px;letter-spacing:-.05em}.stat-card small{color:#64748b}.dashboard-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:16px;margin-top:16px}.panel{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:0 16px 50px rgba(0,0,0,.12);min-width:0}.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:14px}.panel-head h2{margin:0;font-size:18px;letter-spacing:-.03em}.panel-head span{color:var(--muted);font-size:13px}.table-list{display:grid;gap:10px}.lead-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:12px;border:1px solid rgba(148,163,184,.18);background:rgba(15,23,42,.38);border-radius:16px}.lead-row strong{display:block}.lead-row span{display:block;color:var(--muted);font-size:13px;margin-top:3px}.status-pill{border-radius:999px;padding:6px 9px;font-size:12px;font-weight:950;background:rgba(37,99,235,.16);color:#bfdbfe}.activity-list{display:grid;gap:10px}.activity-item{padding:12px;border-left:3px solid var(--blue);background:rgba(15,23,42,.38);border-radius:12px;color:#cbd5e1}.empty-state{padding:24px;text-align:center;border:1px dashed rgba(148,163,184,.35);border-radius:18px;color:var(--muted)}.donut-wrap{display:grid;place-items:center;min-height:250px}canvas{width:100%;max-width:100%}@media(max-width:1180px){.stat-grid{grid-template-columns:repeat(3,1fr)}.dashboard-grid{grid-template-columns:1fr}}@media(max-width:760px){.admin-page{grid-template-columns:1fr}.sidebar{position:fixed;z-index:10;transform:translateX(-105%);transition:.22s ease;width:286px}.sidebar.open{transform:translateX(0)}.icon-btn{display:inline-flex}.topbar{padding:14px 16px}.topbar h1{font-size:22px}.top-actions{margin-left:auto}.staff-badge{display:none}.content{padding:16px}.stat-grid{grid-template-columns:repeat(2,1fr)}.stat-card strong{font-size:25px}}@media(max-width:480px){.stat-grid{grid-template-columns:1fr}.topbar{align-items:flex-start}.top-actions{display:grid;gap:8px}.ghost-btn{padding:9px 11px}}
+/* RH Admin V1 Phase 1 - Leads Management */
+.section-panel{margin-top:16px}.lead-stat-grid{grid-template-columns:repeat(4,1fr)}.stacked-head{align-items:flex-start}.toolbar{display:flex;gap:10px;flex-wrap:wrap}.search-input,.select-input,.textarea-input{border:1px solid var(--line);background:#0b1220;color:var(--text);border-radius:14px;padding:11px 12px;outline:none}.search-input{min-width:260px}.select-input{min-width:160px}.responsive-table-wrap{width:100%;overflow:auto}.data-table{width:100%;border-collapse:separate;border-spacing:0 10px;min-width:860px}.data-table th{text-align:left;color:#94a3b8;font-size:12px;text-transform:uppercase;letter-spacing:.08em;padding:0 12px}.data-table td{background:rgba(15,23,42,.42);border-top:1px solid rgba(148,163,184,.16);border-bottom:1px solid rgba(148,163,184,.16);padding:12px;color:#e2e8f0;vertical-align:middle}.data-table td:first-child{border-left:1px solid rgba(148,163,184,.16);border-radius:16px 0 0 16px}.data-table td:last-child{border-right:1px solid rgba(148,163,184,.16);border-radius:0 16px 16px 0}.small-muted{display:block;color:var(--muted);font-size:12px;margin-top:3px}.table-actions{display:flex;gap:8px;flex-wrap:wrap}.mini-btn{border:1px solid var(--line);background:#0b1220;color:#f8fafc;border-radius:12px;padding:8px 10px;font-weight:900;cursor:pointer;font-size:12px}.mini-btn.primary{border-color:rgba(37,99,235,.45);background:rgba(37,99,235,.2);color:#bfdbfe}.mini-btn.danger{border-color:rgba(220,38,38,.45);background:rgba(220,38,38,.14);color:#fecaca}.status-pill.new{background:rgba(37,99,235,.16);color:#bfdbfe}.status-pill.contacted{background:rgba(245,158,11,.14);color:#fde68a}.status-pill.qualified{background:rgba(124,58,237,.16);color:#ddd6fe}.status-pill.closed{background:rgba(22,163,74,.16);color:#bbf7d0}.status-pill.lost{background:rgba(220,38,38,.16);color:#fecaca}.modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,.72);backdrop-filter:blur(10px);z-index:30;display:grid;place-items:center;padding:18px}.modal-card{width:min(780px,100%);max-height:88vh;overflow:auto;background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:26px;padding:20px;box-shadow:var(--shadow)}.modal-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:16px}.modal-head h2{margin:0;font-size:22px}.modal-head span{color:var(--muted);font-size:13px}.icon-close{border:1px solid var(--line);background:#0b1220;color:#fff;border-radius:999px;width:38px;height:38px;cursor:pointer;font-size:22px}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.detail-item{padding:12px;border:1px solid rgba(148,163,184,.16);background:rgba(15,23,42,.38);border-radius:16px}.detail-item.full{grid-column:1/-1}.detail-item span{display:block;color:#94a3b8;font-size:12px;text-transform:uppercase;letter-spacing:.06em;font-weight:900}.detail-item strong{display:block;margin-top:6px;white-space:pre-wrap}.modal-actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:16px;margin-top:16px}@media(max-width:760px){.lead-stat-grid{grid-template-columns:repeat(2,1fr)}.toolbar{width:100%}.search-input,.select-input{width:100%;min-width:0}.detail-grid{grid-template-columns:1fr}.modal-actions{justify-content:stretch}.modal-actions button{width:100%}}
+
+.modal-backdrop[hidden]{display:none!important}
+
+.answer-list{display:grid;gap:10px;margin-top:10px}.answer-item{padding:10px;border:1px solid rgba(148,163,184,.14);border-radius:12px;background:rgba(2,6,23,.2)}.answer-item b{display:block;color:#f8fafc;font-size:13px}.answer-item p{margin:5px 0 0;color:#cbd5e1;font-size:14px;line-height:1.5}
+
+/* RH Admin V1 - Prospects Module */
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.form-grid label{display:grid;gap:8px;color:#cbd5e1;font-weight:850;font-size:13px}.form-grid input,.form-grid select,.form-grid textarea{border:1px solid var(--line);background:#0b1220;color:var(--text);border-radius:14px;padding:12px;outline:none;font:inherit}.form-grid input:focus,.form-grid select:focus,.form-grid textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(56,189,248,.16)}.form-grid .full{grid-column:1/-1}.form-actions{display:flex;justify-content:flex-end}.wide-modal{width:min(980px,100%)}.status-pill.new_prospect{background:rgba(37,99,235,.16);color:#bfdbfe}.status-pill.data_review{background:rgba(14,165,233,.16);color:#bae6fd}.status-pill.proposal_sent{background:rgba(245,158,11,.14);color:#fde68a}.status-pill.negotiation{background:rgba(124,58,237,.16);color:#ddd6fe}.status-pill.won{background:rgba(22,163,74,.16);color:#bbf7d0}.status-pill.lost{background:rgba(220,38,38,.16);color:#fecaca}@media(max-width:760px){.form-grid{grid-template-columns:1fr}.form-actions .primary-btn{width:100%}}
+
+.form-actions .ghost-btn{margin-right:10px}.modal-card .form-grid{margin-top:4px}
+
+.warning-text{color:#fbbf24!important}.danger-action{border-color:rgba(220,38,38,.45)!important;color:#fecaca!important}.status-pill.converted{background:rgba(22,163,74,.16);color:#bbf7d0}.status-pill.archived{background:rgba(100,116,139,.18);color:#cbd5e1}
+
+/* RH Admin V1.4 - Prospect Sales Pipeline Engine */
+.prospect-stat-grid{grid-template-columns:repeat(7,1fr)}
+.tab-row{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.tab-btn{border:1px solid var(--line);background:#0b1220;color:#cbd5e1;border-radius:999px;padding:9px 12px;font-weight:950;cursor:pointer;font-size:12px}
+.tab-btn.active{background:rgba(37,99,235,.2);border-color:rgba(37,99,235,.48);color:#bfdbfe}
+.timeline-list{display:grid;gap:12px;margin-top:10px}
+.timeline-item{position:relative;padding:12px 12px 12px 16px;border:1px solid rgba(148,163,184,.16);border-left:3px solid var(--blue);border-radius:14px;background:rgba(2,6,23,.22)}
+.timeline-item b{display:block;color:#f8fafc}.timeline-item small{display:block;color:#94a3b8;margin-top:2px}.timeline-item p{margin:7px 0 0;color:#cbd5e1;line-height:1.5}
+@media(max-width:1180px){.prospect-stat-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.prospect-stat-grid{grid-template-columns:repeat(2,1fr)}.tab-row{display:grid;grid-template-columns:1fr 1fr}.tab-btn{width:100%}}
+@media(max-width:480px){.prospect-stat-grid{grid-template-columns:1fr}.tab-row{grid-template-columns:1fr}}
+
+
+/* RH Admin V1.5 - Quotation Module */
+.quote-stat-grid{grid-template-columns:repeat(6,1fr)}
+.status-pill.draft{background:rgba(100,116,139,.18);color:#cbd5e1}.status-pill.sent{background:rgba(37,99,235,.16);color:#bfdbfe}.status-pill.accepted{background:rgba(22,163,74,.16);color:#bbf7d0}.status-pill.rejected{background:rgba(220,38,38,.16);color:#fecaca}.status-pill.expired{background:rgba(245,158,11,.14);color:#fde68a}
+.quotation-preview{background:#f8fafc;color:#0f172a;border-radius:20px;padding:28px;line-height:1.55}.quote-preview-card{width:min(1040px,100%)}
+.quote-head{display:flex;justify-content:space-between;gap:20px;border-bottom:2px solid #e2e8f0;padding-bottom:18px;margin-bottom:18px}.quote-head img{width:54px;height:54px;object-fit:contain}.quote-head h2{margin:0;color:#0f172a}.quote-head p{margin:4px 0;color:#475569}.quote-meta{text-align:right}.quote-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}.quote-box{border:1px solid #e2e8f0;border-radius:16px;padding:14px;background:#fff}.quote-box span{display:block;color:#64748b;font-size:12px;text-transform:uppercase;font-weight:900;letter-spacing:.06em}.quote-box strong{display:block;margin-top:6px;color:#0f172a}.quote-table{width:100%;border-collapse:collapse;margin:18px 0;background:#fff;border-radius:16px;overflow:hidden}.quote-table th{background:#0f172a;color:white;text-align:left;padding:12px}.quote-table td{border-bottom:1px solid #e2e8f0;padding:12px;color:#0f172a}.quote-total{margin-left:auto;width:min(360px,100%);display:grid;gap:8px}.quote-total div{display:flex;justify-content:space-between;border-bottom:1px solid #e2e8f0;padding:8px 0}.quote-total .grand{font-size:20px;font-weight:950;color:#0f172a;border-bottom:0}.quote-footer{margin-top:24px;color:#475569;font-size:13px;border-top:1px solid #e2e8f0;padding-top:14px}
+@media(max-width:1180px){.quote-stat-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.quote-stat-grid{grid-template-columns:repeat(2,1fr)}.quote-head,.quote-grid{grid-template-columns:1fr;display:grid}.quote-meta{text-align:left}.quotation-preview{padding:18px}.quote-table{font-size:13px}}
+@media print{body *{visibility:hidden}.quotation-preview,.quotation-preview *{visibility:visible}.quotation-preview{position:absolute;left:0;top:0;width:100%;border-radius:0;background:#fff}.modal-actions,.modal-head,.sidebar,.topbar{display:none!important}}
+
+/* RH Admin Quotation V1.0.2 */
+.quote-document{position:relative;overflow:hidden}.quote-watermark{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%) rotate(-30deg);font-size:96px;font-weight:1000;letter-spacing:.08em;pointer-events:none;z-index:0;text-transform:uppercase;white-space:nowrap}.quote-watermark.accepted{color:rgba(22,163,74,.10)}.quote-watermark.rejected{color:rgba(220,38,38,.10)}.quote-head,.quote-grid,.quote-table,.quote-total,.quote-signature-grid,.quote-footer{position:relative;z-index:1}.quote-signature-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:34px;border-top:1px solid #e2e8f0;padding-top:24px}.quote-signature-grid>div{min-height:130px;border:1px solid #e2e8f0;border-radius:16px;background:#fff;padding:16px;color:#0f172a}.quote-signature-grid strong{display:block;text-transform:uppercase;letter-spacing:.06em;color:#64748b;font-size:12px;margin-bottom:12px}.quote-signature-grid span{display:block;color:#0f172a;line-height:1.65}.quote-signature-grid em{display:block;border-top:1px solid #94a3b8;margin-top:38px;width:78%;font-style:normal}.quote-footer strong{color:#0f172a}.quote-preview-card .modal-actions{position:sticky;bottom:0;background:#1e293b;padding-top:14px}
+@media print{body *{visibility:hidden!important}.quotation-preview,.quotation-preview *{visibility:visible!important}.quotation-preview{position:absolute!important;left:0;top:0;width:100%!important;background:#fff!important;padding:0!important;border-radius:0!important}.quote-document{padding:18mm!important;page-break-inside:auto}.modal-actions,.modal-head,.sidebar,.topbar{display:none!important}.quote-watermark{font-size:86px!important}.quote-table{page-break-inside:auto}.quote-table tr{page-break-inside:avoid;page-break-after:auto}}
+@media(max-width:760px){.quote-signature-grid{grid-template-columns:1fr}.quote-watermark{font-size:48px}}
+
+/* RH Admin Quotation V1.0.3 - PDF full-page print fix */
+@media print{
+  @page{size:A4 portrait;margin:12mm;}
+  html,body{background:#fff!important;height:auto!important;min-height:0!important;overflow:visible!important;}
+  body{margin:0!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+  body *{visibility:hidden!important;}
+  .modal-backdrop,
+  .modal-card,
+  .quotation-preview,
+  .quotation-preview *{visibility:visible!important;}
+  .sidebar,.topbar,.modal-head,.modal-actions,.ghost-btn,.primary-btn,.icon-btn{display:none!important;}
+  .modal-backdrop{position:static!important;inset:auto!important;display:block!important;background:#fff!important;backdrop-filter:none!important;padding:0!important;overflow:visible!important;}
+  .modal-card,.quote-preview-card{position:static!important;width:100%!important;max-width:none!important;max-height:none!important;overflow:visible!important;background:#fff!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:0!important;}
+  .quotation-preview{position:static!important;width:100%!important;max-width:none!important;overflow:visible!important;background:#fff!important;border-radius:0!important;padding:0!important;color:#0f172a!important;}
+  .quote-document{position:relative!important;width:100%!important;min-height:auto!important;overflow:visible!important;padding:0!important;background:#fff!important;page-break-inside:auto!important;break-inside:auto!important;}
+  .quote-head,.quote-grid,.quote-table,.quote-total,.quote-signature-grid,.quote-footer{position:relative!important;z-index:2!important;}
+  .quote-head{break-after:avoid!important;page-break-after:avoid!important;}
+  .quote-box,.quote-total,.quote-signature-grid,.quote-footer{break-inside:avoid!important;page-break-inside:avoid!important;}
+  .quote-table{width:100%!important;table-layout:fixed!important;border-collapse:collapse!important;overflow:visible!important;page-break-inside:auto!important;break-inside:auto!important;}
+  .quote-table thead{display:table-header-group!important;}
+  .quote-table tr{page-break-inside:avoid!important;break-inside:avoid!important;}
+  .quote-table th,.quote-table td{padding:9px 10px!important;word-break:normal!important;overflow-wrap:break-word!important;}
+  .quote-table th:nth-child(1),.quote-table td:nth-child(1){width:52%!important;}
+  .quote-table th:nth-child(2),.quote-table td:nth-child(2){width:10%!important;text-align:center!important;}
+  .quote-table th:nth-child(3),.quote-table td:nth-child(3){width:18%!important;white-space:nowrap!important;}
+  .quote-table th:nth-child(4),.quote-table td:nth-child(4){width:20%!important;white-space:nowrap!important;}
+  .quote-total{width:48%!important;margin-left:auto!important;page-break-before:avoid!important;break-before:avoid!important;}
+  .quote-total div{gap:14px!important;}
+  .quote-total strong{white-space:nowrap!important;min-width:110px!important;text-align:right!important;}
+  .quote-signature-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:14px!important;margin-top:18px!important;padding-top:16px!important;}
+  .quote-signature-grid>div{min-height:96px!important;padding:12px!important;}
+  .quote-footer{margin-top:16px!important;padding-top:12px!important;}
+  .quote-watermark{position:fixed!important;left:50%!important;top:50%!important;z-index:1!important;font-size:76px!important;}
+}
+
+/* RH Admin Quotation V1.0.4 - Single Source Quotation Template */
+.quotation-preview{
+  background:#e5e7eb;
+  padding:22px;
+}
+.quotation-preview .quote-document{
+  width:min(794px,100%);
+  margin:0 auto;
+  background:#fff;
+  color:#0f172a;
+  padding:34px 40px;
+  border-radius:18px;
+  box-shadow:0 18px 50px rgba(2,6,23,.16);
+  box-sizing:border-box;
+}
+.quote-document.single-source-template{background:#fff;}
+.quote-head h2{font-size:22px;line-height:1.12;}
+.quote-meta h2{font-size:24px;}
+.quote-box{min-height:auto;}
+.quote-table{font-size:14px;}
+.quote-total{font-size:14px;}
+.quote-signature-grid>div{min-height:96px;}
+#rhPrintRoot{display:none;}
+
+@media print{
+  @page{size:A4 portrait;margin:10mm;}
+  html,body{background:#fff!important;margin:0!important;padding:0!important;width:auto!important;height:auto!important;overflow:visible!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+  body.rh-printing-quotation > *:not(#rhPrintRoot){display:none!important;visibility:hidden!important;}
+  body.rh-printing-quotation #rhPrintRoot,
+  body.rh-printing-quotation #rhPrintRoot *{display:block!important;visibility:visible!important;}
+  body.rh-printing-quotation #rhPrintRoot{position:static!important;width:100%!important;margin:0!important;padding:0!important;background:#fff!important;color:#0f172a!important;}
+  body.rh-printing-quotation #rhPrintRoot .quotation-print-shell{display:block!important;width:100%!important;margin:0!important;padding:0!important;background:#fff!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-document{
+    position:relative!important;
+    width:190mm!important;
+    max-width:190mm!important;
+    min-height:0!important;
+    margin:0 auto!important;
+    padding:0!important;
+    background:#fff!important;
+    color:#0f172a!important;
+    border-radius:0!important;
+    box-shadow:none!important;
+    overflow:visible!important;
+    box-sizing:border-box!important;
+    font-size:9.6pt!important;
+    line-height:1.28!important;
+    page-break-inside:auto!important;
+    break-inside:auto!important;
+  }
+  body.rh-printing-quotation #rhPrintRoot .quote-watermark{position:fixed!important;left:50%!important;top:52%!important;transform:translate(-50%,-50%) rotate(-30deg)!important;font-size:64pt!important;letter-spacing:.08em!important;z-index:0!important;opacity:1!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-head,
+  body.rh-printing-quotation #rhPrintRoot .quote-grid,
+  body.rh-printing-quotation #rhPrintRoot .quote-table,
+  body.rh-printing-quotation #rhPrintRoot .quote-total,
+  body.rh-printing-quotation #rhPrintRoot .quote-signature-grid,
+  body.rh-printing-quotation #rhPrintRoot .quote-footer{position:relative!important;z-index:2!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-head{display:flex!important;justify-content:space-between!important;align-items:flex-start!important;gap:10mm!important;border-bottom:1px solid #dbe4f0!important;padding-bottom:6mm!important;margin-bottom:5mm!important;break-after:avoid!important;page-break-after:avoid!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-head img{width:15mm!important;height:15mm!important;object-fit:contain!important;display:block!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-head h2{margin:0!important;font-size:18pt!important;line-height:1.05!important;color:#0f172a!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-head p{margin:1.5mm 0 0!important;font-size:10pt!important;color:#475569!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-head>div:first-child{display:flex!important;gap:4mm!important;align-items:center!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-meta{text-align:right!important;min-width:42mm!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-meta h2{font-size:17pt!important;margin:0 0 2mm!important;line-height:1.1!important;color:#0f172a!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-meta p{font-size:9.5pt!important;margin:1mm 0!important;color:#475569!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:4mm!important;margin:0 0 5mm!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-box{display:block!important;border:1px solid #dbe4f0!important;border-radius:10px!important;background:#fff!important;padding:4mm!important;break-inside:avoid!important;page-break-inside:avoid!important;min-height:28mm!important;box-sizing:border-box!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-box span{display:block!important;color:#64748b!important;text-transform:uppercase!important;font-weight:900!important;letter-spacing:.06em!important;font-size:8pt!important;margin-bottom:2mm!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-box strong{display:block!important;color:#0f172a!important;font-size:10pt!important;margin:0 0 2mm!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-box p{display:block!important;color:#0f172a!important;font-size:9.2pt!important;line-height:1.35!important;margin:0!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-table{display:table!important;width:100%!important;table-layout:fixed!important;border-collapse:collapse!important;background:#fff!important;border-radius:0!important;overflow:visible!important;margin:0 0 4mm!important;font-size:8.8pt!important;break-inside:auto!important;page-break-inside:auto!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-table thead{display:table-header-group!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-table tbody{display:table-row-group!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-table tr{display:table-row!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-table th,
+  body.rh-printing-quotation #rhPrintRoot .quote-table td{display:table-cell!important;border-bottom:1px solid #e2e8f0!important;padding:2.3mm 2.6mm!important;color:#0f172a!important;vertical-align:middle!important;line-height:1.25!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-table th{background:#0f172a!important;color:#fff!important;font-weight:900!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-table th:nth-child(1),body.rh-printing-quotation #rhPrintRoot .quote-table td:nth-child(1){width:54%!important;text-align:left!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-table th:nth-child(2),body.rh-printing-quotation #rhPrintRoot .quote-table td:nth-child(2){width:10%!important;text-align:center!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-table th:nth-child(3),body.rh-printing-quotation #rhPrintRoot .quote-table td:nth-child(3){width:18%!important;text-align:right!important;white-space:nowrap!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-table th:nth-child(4),body.rh-printing-quotation #rhPrintRoot .quote-table td:nth-child(4){width:18%!important;text-align:right!important;white-space:nowrap!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-total{display:grid!important;width:64mm!important;margin:0 0 4mm auto!important;gap:0!important;font-size:9.5pt!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-total div{display:flex!important;justify-content:space-between!important;gap:8mm!important;border-bottom:1px solid #e2e8f0!important;padding:1.7mm 0!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-total .grand{font-size:13pt!important;font-weight:950!important;border-bottom:0!important;padding-top:2.5mm!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-total strong{white-space:nowrap!important;text-align:right!important;min-width:24mm!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-signature-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:5mm!important;margin-top:4mm!important;border-top:1px solid #e2e8f0!important;padding-top:4mm!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-signature-grid>div{display:block!important;min-height:26mm!important;border:1px solid #dbe4f0!important;border-radius:10px!important;background:#fff!important;padding:3.5mm!important;color:#0f172a!important;box-sizing:border-box!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-signature-grid strong{display:block!important;text-transform:uppercase!important;letter-spacing:.06em!important;color:#64748b!important;font-size:7.7pt!important;margin-bottom:2.5mm!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-signature-grid span{display:block!important;font-size:9pt!important;line-height:1.35!important;color:#0f172a!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-signature-grid em{display:block!important;border-top:1px solid #94a3b8!important;margin-top:8mm!important;width:78%!important;font-style:normal!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-footer{display:block!important;margin-top:4mm!important;border-top:1px solid #e2e8f0!important;padding-top:3mm!important;color:#475569!important;font-size:8.4pt!important;line-height:1.28!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+  body.rh-printing-quotation #rhPrintRoot .quote-footer strong{color:#0f172a!important;font-size:8.8pt!important;}
+}
+
+/* RH Admin Invoice Module V1.0 */
+.invoice-stat-grid{grid-template-columns:repeat(6,1fr)}
+.status-pill.partial_paid{background:rgba(245,158,11,.14);color:#fde68a}.status-pill.paid{background:rgba(22,163,74,.16);color:#bbf7d0}.status-pill.overdue{background:rgba(220,38,38,.16);color:#fecaca}.status-pill.cancelled{background:rgba(100,116,139,.18);color:#cbd5e1}
+.invoice-document .quote-total .grand:last-child{color:#0f172a}.invoice-timeline-print{position:relative;z-index:2;margin-top:14px;border-top:1px solid #e2e8f0;padding-top:12px;color:#475569;font-size:13px;line-height:1.45}.invoice-timeline-print strong{display:block;color:#0f172a;margin-bottom:6px}.invoice-timeline-print p{margin:4px 0}
+@media(max-width:1180px){.invoice-stat-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.invoice-stat-grid{grid-template-columns:repeat(2,1fr)}}
+@media print{
+  body.rh-printing-quotation #rhPrintRoot .invoice-timeline-print{display:block!important;margin-top:3mm!important;border-top:1px solid #e2e8f0!important;padding-top:2.5mm!important;color:#475569!important;font-size:8pt!important;line-height:1.22!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+  body.rh-printing-quotation #rhPrintRoot .invoice-timeline-print strong{display:block!important;color:#0f172a!important;margin-bottom:1mm!important;font-size:8.2pt!important;}
+  body.rh-printing-quotation #rhPrintRoot .invoice-timeline-print p{display:block!important;margin:0.8mm 0!important;}
+}
+
+/* RH Admin Invoice Module V1.1.1 - Billing Form UX Enhancement */
+.field-note{display:block;color:#64748b;font-size:11px;font-weight:700;margin-top:4px;line-height:1.35}
+.form-grid input[readonly], .form-grid input.calc-field{background:rgba(15,23,42,.72);color:#cbd5e1;border-color:rgba(148,163,184,.25);cursor:not-allowed}
+.form-grid input.highlight-deposit{color:#bbf7d0;border-color:rgba(22,163,74,.42);box-shadow:0 0 0 1px rgba(22,163,74,.12) inset}
+.form-grid input.highlight-balance{color:#fde68a;border-color:rgba(245,158,11,.42);box-shadow:0 0 0 1px rgba(245,158,11,.12) inset}
+
+
+/* RH Admin Invoice Module V1.1.3 - Financial & Single Page Print Engine Fix */
+@media print{
+  @page{size:A4 portrait;margin:7mm!important;}
+  body.rh-printing-quotation #rhPrintRoot .invoice-document{
+    width:196mm!important;
+    max-width:196mm!important;
+    font-size:8.2pt!important;
+    line-height:1.14!important;
+    transform:none!important;
+  }
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-head{
+    padding-bottom:3mm!important;
+    margin-bottom:3mm!important;
+    gap:5mm!important;
+  }
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-head img{width:12mm!important;height:12mm!important;}
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-head h2{font-size:14pt!important;}
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-head p{font-size:8pt!important;margin-top:0.8mm!important;}
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-meta h2{font-size:13.5pt!important;margin-bottom:1mm!important;}
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-meta p{font-size:7.8pt!important;margin:0.5mm 0!important;}
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-grid{gap:3mm!important;margin:0 0 3mm!important;}
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-box{
+    padding:2.6mm!important;
+    min-height:20mm!important;
+    border-radius:7px!important;
+  }
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-box span{font-size:6.8pt!important;margin-bottom:1mm!important;}
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-box strong{font-size:8.4pt!important;margin-bottom:1mm!important;}
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-box p{font-size:7.4pt!important;line-height:1.16!important;}
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-table{
+    margin:0 0 2.2mm!important;
+    font-size:7.2pt!important;
+  }
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-table th,
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-table td{
+    padding:1.35mm 2mm!important;
+    line-height:1.1!important;
+  }
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-total{
+    width:61mm!important;
+    margin:0 0 2.4mm auto!important;
+    font-size:7.6pt!important;
+  }
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-total div{
+    padding:0.85mm 0!important;
+    gap:5mm!important;
+  }
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-total .grand{
+    font-size:10pt!important;
+    padding-top:1.2mm!important;
+  }
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-total strong{min-width:20mm!important;}
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-signature-grid{
+    gap:4mm!important;
+    margin-top:2.4mm!important;
+    padding-top:2.4mm!important;
+  }
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-signature-grid>div{
+    min-height:19mm!important;
+    padding:2.4mm!important;
+    border-radius:7px!important;
+  }
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-signature-grid strong{font-size:6.6pt!important;margin-bottom:1mm!important;}
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-signature-grid span{font-size:7.4pt!important;line-height:1.2!important;}
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-signature-grid em{margin-top:5mm!important;}
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .invoice-timeline-print{
+    display:none!important;
+  }
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-footer{
+    margin-top:2.4mm!important;
+    padding-top:2mm!important;
+    font-size:6.9pt!important;
+    line-height:1.15!important;
+  }
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-footer strong{font-size:7.2pt!important;}
+  body.rh-printing-quotation #rhPrintRoot .invoice-document .quote-watermark{font-size:52pt!important;top:52%!important;}
+}
+
+/* RH Admin Invoice Module V1.1.4 - Modal Action Bar Fix */
+#invoiceModal .modal-card.quote-preview-card{
+  display:flex;
+  flex-direction:column;
+  max-height:88vh;
+  overflow:auto;
+}
+#invoiceModal #invoicePreview.quotation-preview{
+  overflow:visible;
+  padding-bottom:28px;
+}
+#invoiceModal .modal-actions{
+  position:static !important;
+  bottom:auto !important;
+  z-index:auto !important;
+  background:transparent !important;
+  border-top:1px solid var(--line);
+  margin-top:18px;
+  padding:18px 0 0;
+  box-shadow:none !important;
+}
+#invoiceModal .invoice-document{
+  margin-bottom:0;
+}
+@media(max-width:760px){
+  #invoiceModal .modal-actions{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+  #invoiceModal .modal-actions button{
+    width:100%;
+  }
+}
+@media print{
+  #invoiceModal .modal-actions,
+  #invoiceModal .modal-head,
+  #invoiceModal .icon-close{
+    display:none !important;
+  }
+}
+
+
+/* RH Admin Project Module V1.0 */
+.project-stat-grid{grid-template-columns:repeat(8,minmax(140px,1fr));}
+.status-pill.new_project,.status-pill.onboarding{background:rgba(59,130,246,.22);color:#bfdbfe;}
+.status-pill.content_collection{background:rgba(14,165,233,.22);color:#bae6fd;}
+.status-pill.design{background:rgba(168,85,247,.22);color:#e9d5ff;}
+.status-pill.development{background:rgba(245,158,11,.22);color:#fde68a;}
+.status-pill.review{background:rgba(236,72,153,.22);color:#fbcfe8;}
+.status-pill.delivery{background:rgba(20,184,166,.22);color:#ccfbf1;}
+.status-pill.completed{background:rgba(34,197,94,.22);color:#bbf7d0;}
+.status-pill.on_hold{background:rgba(148,163,184,.22);color:#e2e8f0;}
+.status-pill.cancelled{background:rgba(239,68,68,.22);color:#fecaca;}
+.timeline-item{border-left:4px solid #2563eb;background:rgba(15,23,42,.45);border-radius:18px;margin:12px 0;padding:16px 18px;}
+.timeline-item strong{display:block;color:#fff;font-size:18px;}
+.timeline-item span{color:#9fb2cf;display:block;margin-top:4px;}
+.timeline-item p{margin:10px 0 0;color:#cbd5e1;}
+@media(max-width:1200px){.project-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+
+
+/* Payment Module V1.0.1 */
+.payment-history{margin:18px 0 8px;border:1px solid rgba(148,163,184,.22);border-radius:18px;padding:16px;background:rgba(15,23,42,.04);color:#0f172a}
+.payment-history>strong{display:block;text-transform:uppercase;letter-spacing:.08em;color:#64748b;margin-bottom:10px}
+.payment-history-row{display:grid;grid-template-columns:130px 120px 1fr auto auto;gap:10px;align-items:center;border-top:1px solid rgba(148,163,184,.22);padding:9px 0}
+.payment-history-row:first-of-type{border-top:0}
+.payment-history-row small{color:#64748b;text-transform:capitalize}.payment-history-row em{font-style:normal;color:#334155}.payment-history-row a{color:#2563eb;font-weight:800;text-decoration:none}
+@media(max-width:760px){.payment-history-row{grid-template-columns:1fr;gap:4px}}
+@media print{.payment-history{display:none!important}}
+
+/* Project Module V1.0 Full Build */
+.project-progress{height:12px;background:rgba(15,23,42,.75);border:1px solid rgba(148,163,184,.18);border-radius:999px;overflow:hidden;margin:0 0 16px}
+.project-progress span{display:block;height:100%;background:linear-gradient(90deg,#2563eb,#38bdf8);border-radius:999px}
+.project-task-list{display:grid;gap:10px;margin-top:10px}
+.project-task-row{display:flex;gap:12px;align-items:flex-start;border:1px solid rgba(148,163,184,.18);background:rgba(15,23,42,.38);border-radius:16px;padding:12px;cursor:pointer}
+.project-task-row input{margin-top:4px;transform:scale(1.15);accent-color:#2563eb}
+.project-task-row b{display:block;color:#f8fafc;font-size:15px}
+.project-task-row small{display:block;color:#94a3b8;margin-top:3px}
+.status-pill.new_project,.status-pill.onboarding{background:rgba(37,99,235,.18);color:#bfdbfe}.status-pill.content_collection{background:rgba(14,165,233,.16);color:#bae6fd}.status-pill.design{background:rgba(168,85,247,.16);color:#e9d5ff}.status-pill.development{background:rgba(245,158,11,.16);color:#fde68a}.status-pill.review{background:rgba(124,58,237,.18);color:#ddd6fe}.status-pill.delivery{background:rgba(20,184,166,.16);color:#ccfbf1}.status-pill.completed{background:rgba(22,163,74,.16);color:#bbf7d0}.status-pill.on_hold{background:rgba(100,116,139,.2);color:#e2e8f0}.status-pill.cancelled{background:rgba(220,38,38,.16);color:#fecaca}
+
+.project-progress-meta{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:10px 0 18px;color:#cbd5e1;font-size:14px}.project-progress-meta strong{color:#f8fafc}.project-progress-meta span{color:#93c5fd}
+
+
+/* Project Module V1.2 - Department & Production Engine */
+.department-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:12px}
+.department-card{border:1px solid rgba(148,163,184,.22);background:rgba(15,23,42,.35);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.department-card span{display:block;color:#93a4bd;text-transform:uppercase;font-weight:900;letter-spacing:.08em;font-size:.78rem}
+.department-card strong{display:block;color:#f8fafc;font-size:1.05rem;margin-top:4px}
+.department-card small{color:#9fb0c8}
+.dept-progress{height:8px;border-radius:99px;background:rgba(15,23,42,.75);overflow:hidden;border:1px solid rgba(148,163,184,.18)}
+.dept-progress span{display:block;height:100%;background:linear-gradient(90deg,#2f74ff,#36c5f0);border-radius:99px}
+.dept-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.dept-actions .mini-btn{padding:8px 12px;font-size:.85rem}
+@media(max-width:720px){.department-grid{grid-template-columns:1fr}.dept-actions .mini-btn{flex:1}}
+
+/* RH Admin Article Module V1.0 - Full Build */
+.article-stat-grid{grid-template-columns:repeat(6,1fr)}
+.article-modal-card{width:min(1080px,100%)}
+.article-form .content-label{display:grid;gap:8px;margin-top:14px;color:#cbd5e1;font-weight:850;font-size:13px}
+.article-form textarea{width:100%;border:1px solid var(--line);background:#0b1220;color:var(--text);border-radius:16px;padding:14px;outline:none;font:inherit;line-height:1.55;resize:vertical}
+.article-form textarea:focus,.article-form input:focus,.article-form select:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(56,189,248,.12)}
+.check-row{display:flex!important;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:14px;background:#0b1220;min-height:48px}
+.check-row input{width:auto!important;margin:0;accent-color:var(--blue)}
+.status-pill.draft{background:rgba(100,116,139,.18);color:#cbd5e1}.status-pill.published{background:rgba(22,163,74,.16);color:#bbf7d0}.status-pill.archived{background:rgba(245,158,11,.14);color:#fde68a}.status-pill.deleted{background:rgba(220,38,38,.16);color:#fecaca}
+@media(max-width:1180px){.article-stat-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.article-stat-grid{grid-template-columns:repeat(2,1fr)}}

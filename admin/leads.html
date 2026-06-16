@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Leads | RH Admin V1</title>
+  <link rel="stylesheet" href="assets/admin.css">
+</head>
+<body class="admin-page">
+  <aside class="sidebar" id="sidebar">
+    <a class="side-brand" href="dashboard.html">
+      <img src="../assets/rh-logo.png" alt="RH">
+      <span>RH Admin<br><small>Command Center</small></span>
+    </a>
+    <nav class="side-nav">
+      <a href="dashboard.html">🏠 Dashboard</a>
+      <div class="nav-label">Sales</div>
+      <a class="active" href="leads.html">📥 Leads</a>
+      <a href="prospects.html">👥 Prospects</a>
+      <a href="quotations.html">📄 Quotations</a>
+      <a href="invoices.html">🧾 Invoices</a>
+      
+      <div class="nav-label">Delivery</div>
+      <a href="projects.html">🚀 Projects</a>
+      <div class="nav-label">Content</div>
+      <a href="articles.html">📝 Articles</a>
+      <a href="aira-knowledge.html">🤖 Aira Knowledge</a>
+      <div class="nav-label">System</div>
+      <a href="storage.html">📁 Storage</a>
+      <a href="reports.html">📊 Reports</a>
+      <a href="settings.html">⚙️ Settings</a>
+      <a href="staff.html">🔐 Staff</a>
+    </nav>
+  </aside>
+  <div class="admin-main">
+    <header class="topbar">
+      <button id="menuBtn" class="icon-btn">☰</button>
+      <div>
+        <h1>Leads</h1>
+        <p>Lead yang masuk dari Aira dan public website.</p>
+      </div>
+      <div class="top-actions">
+        <span id="staffBadge" class="staff-badge">Loading...</span>
+        <button id="refreshLeadsBtn" class="ghost-btn">Refresh</button>
+        <button id="logoutBtn" class="ghost-btn">Logout</button>
+      </div>
+    </header>
+    <main class="content">
+      <section class="stat-grid lead-stat-grid">
+        <article class="stat-card"><span>Total Leads</span><strong id="leadCountTotal">0</strong><small>Semua rekod</small></article>
+        <article class="stat-card"><span>New</span><strong id="leadCountNew">0</strong><small>Belum dihubungi</small></article>
+        <article class="stat-card"><span>Contacted</span><strong id="leadCountContacted">0</strong><small>Sudah follow up</small></article>
+        <article class="stat-card"><span>Qualified</span><strong id="leadCountQualified">0</strong><small>Sesuai jadi prospect</small></article>
+        <article class="stat-card"><span>Converted</span><strong id="leadCountConverted">0</strong><small>Sudah jadi prospect</small></article>
+      </section>
+
+      <section class="panel section-panel">
+        <div class="panel-head stacked-head">
+          <div>
+            <h2>Lead Inbox</h2>
+            <span>Semak, tukar status dan convert lead kepada prospect.</span>
+          </div>
+          <div class="toolbar">
+            <input id="leadSearch" class="search-input" placeholder="Cari nama, telefon, bisnes...">
+            <select id="leadStatusFilter" class="select-input">
+              <option value="">Semua status</option>
+              <option value="new">New</option>
+              <option value="contacted">Contacted</option>
+              <option value="qualified">Qualified</option>
+              <option value="converted">Converted</option>
+              <option value="archived">Archived</option>
+              <option value="closed">Closed</option>
+              <option value="lost">Lost</option>
+            </select>
+          </div>
+        </div>
+        <div class="responsive-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Nama</th><th>Telefon</th><th>Bisnes</th><th>Pakej</th><th>Status</th><th>Tarikh</th><th>Action</th></tr></thead>
+            <tbody id="leadsTableBody"><tr><td colspan="7"><div class="empty-state">Memuatkan leads...</div></td></tr></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="leadModal" class="modal-backdrop" hidden>
+    <section class="modal-card">
+      <div class="modal-head">
+        <div><h2 id="leadModalTitle">Lead Detail</h2><span id="leadModalSub">-</span></div>
+        <button class="icon-close" data-close-modal>×</button>
+      </div>
+      <div id="leadDetailContent" class="detail-grid"></div>
+      <div class="modal-actions">
+        <button id="editLeadBtn" class="ghost-btn">Edit Lead</button>
+        <button id="markContactedBtn" class="ghost-btn">Mark Contacted</button>
+        <button id="markQualifiedBtn" class="ghost-btn">Mark Qualified</button>
+        <button id="convertProspectBtn" class="primary-btn">Convert To Prospect</button>
+        <button id="deleteLeadBtn" class="ghost-btn danger-action">Delete</button>
+      </div>
+    </section>
+  </div>
+
+  <div id="leadEditModal" class="modal-backdrop" hidden>
+    <section class="modal-card wide-modal">
+      <div class="modal-head">
+        <div><h2>Edit Lead</h2><span>Kemaskini data lead sebelum convert ke prospect.</span></div>
+        <button class="icon-close" data-close-lead-edit>×</button>
+      </div>
+      <form id="leadEditForm" class="form-grid">
+        <input type="hidden" id="editLeadId">
+        <label>Nama<input id="editLeadName" placeholder="Nama client"></label>
+        <label>Telefon<input id="editLeadPhone" placeholder="0123456789"></label>
+        <label>Email<input id="editLeadEmail" placeholder="email@domain.com"></label>
+        <label>Syarikat<input id="editLeadCompany" placeholder="Nama syarikat"></label>
+        <label>Jenis Bisnes<input id="editLeadBusiness" placeholder="Servis Aircond"></label>
+        <label>Objektif<input id="editLeadObjective" placeholder="Dapatkan lebih banyak pelanggan"></label>
+        <label>Budget<input id="editLeadBudget" placeholder="RM1999 (RH Growth)"></label>
+        <label>Timeline<input id="editLeadTimeline" placeholder="1-2 minggu"></label>
+        <label>Pakej Cadangan<input id="editLeadPackage" placeholder="RH Growth"></label>
+        <label>Lead Score<input id="editLeadScore" type="number" min="0" max="100" placeholder="88"></label>
+        <label>Temperature<input id="editLeadTemperature" placeholder="HOT / WARM / COLD"></label>
+        <label>Status
+          <select id="editLeadStatus">
+            <option value="new">New</option>
+            <option value="contacted">Contacted</option>
+            <option value="qualified">Qualified</option>
+            <option value="converted">Converted</option>
+            <option value="archived">Archived</option>
+            <option value="lost">Lost</option>
+          </select>
+        </label>
+        <label>Domain<input id="editLeadDomain" placeholder="Belum ada domain"></label>
+        <label>Website / Hosting<input id="editLeadWebsite" placeholder="Ada website / perlu hosting"></label>
+        <label class="full">Notes<textarea id="editLeadNotes" rows="5" placeholder="Nota follow up"></textarea></label>
+        <div class="form-actions full">
+          <button type="button" class="ghost-btn" data-close-lead-edit>Cancel</button>
+          <button type="submit" class="primary-btn">Save Changes</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+
+  <script src="../supabase-config.js"></script>
+  <script src="assets/admin.js"></script>
+</body>
+</html>

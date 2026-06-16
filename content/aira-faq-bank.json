@@ -1,0 +1,101 @@
+{
+  "version": "v12.0-aira-v3-sales-consultant-live-base",
+  "quickActions": [
+    "📦 Lihat Pakej",
+    "💰 Semak Harga",
+    "🖥️ Lihat Demo Website",
+    "💬 Dapatkan Cadangan"
+  ],
+  "faq": [
+    {
+      "topic": "harga",
+      "triggers": [
+        "harga",
+        "kos",
+        "price",
+        "pakej",
+        "package",
+        "bayaran",
+        "berapa",
+        "lihat pakej",
+        "semak harga"
+      ],
+      "answer": "<strong>Pakej rasmi RH:</strong><br><br>🥉 <strong>RH Basic</strong><br>RM799 + maintenance RM79/bulan<br>Sesuai untuk personal web, bisnes kecil dan profile ringkas.<br><a class=\"rh-aira-link\" href=\"/pakej/rh-basic/\" target=\"_blank\" rel=\"noopener\">Lihat RH Basic</a><br><br>🥈 <strong>RH Growth</strong><br>RM1999 + maintenance RM129/bulan<br>Sesuai untuk bisnes servis, portfolio, blog dan lead generation.<br><a class=\"rh-aira-link\" href=\"/pakej/rh-growth/\" target=\"_blank\" rel=\"noopener\">Lihat RH Growth</a><br><br>🥇 <strong>RH Ecosystem</strong><br>RM2999 + maintenance RM249/bulan<br>Sesuai untuk AI Chatbot, Blog CMS, Dashboard dan Lead Management.<br><a class=\"rh-aira-link\" href=\"/pakej/rh-ecosystem/\" target=\"_blank\" rel=\"noopener\">Lihat RH Ecosystem</a><br><br>🏢 <strong>RH Enterprise</strong><br>Custom quotation untuk sistem/portal khas."
+    },
+    {
+      "topic": "demo",
+      "triggers": [
+        "demo",
+        "contoh",
+        "template",
+        "lihat demo",
+        "website contoh"
+      ],
+      "answer": "Boleh. Anda boleh lihat contoh dan pakej website RH di halaman pakej rasmi:<br><br><a class=\"rh-aira-link\" href=\"/pakej/\" target=\"_blank\" rel=\"noopener\">Lihat pakej & demo website RH</a>"
+    },
+    {
+      "topic": "tempoh",
+      "triggers": [
+        "lama",
+        "siap",
+        "tempoh",
+        "berapa hari",
+        "duration",
+        "ready"
+      ],
+      "answer": "Kebanyakan website boleh siap dalam <strong>3–7 hari bekerja</strong> selepas bahan lengkap diterima. Projek custom mungkin mengambil masa lebih lama."
+    },
+    {
+      "topic": "domain",
+      "triggers": [
+        "domain",
+        ".com",
+        ".my",
+        "nama website"
+      ],
+      "answer": "Domain boleh disediakan atau dibantu setup. Jika anda belum ada domain, Aira akan rekodkan supaya team RH boleh cadangkan pilihan yang sesuai."
+    },
+    {
+      "topic": "hosting",
+      "triggers": [
+        "hosting",
+        "server",
+        "online",
+        "publish"
+      ],
+      "answer": "Ya, RH boleh bantu setup hosting dan publish website. Jika anda sudah ada hosting sendiri, team RH boleh semak dahulu kesesuaiannya."
+    },
+    {
+      "topic": "seo",
+      "triggers": [
+        "seo",
+        "google",
+        "ranking",
+        "search",
+        "carian"
+      ],
+      "answer": "Website disediakan dengan <strong>SEO asas</strong>: meta title, meta description, struktur heading, sitemap dan mobile responsive. Artikel blog boleh ditambah untuk SEO berterusan."
+    },
+    {
+      "topic": "maintenance",
+      "triggers": [
+        "maintenance",
+        "support",
+        "bulanan",
+        "update",
+        "kemaskini"
+      ],
+      "answer": "Maintenance bergantung pakej: RH Basic RM79/bulan, RH Growth RM129/bulan, RH Ecosystem RM249/bulan. Ia meliputi sokongan asas dan kemaskini yang dipersetujui."
+    },
+    {
+      "topic": "facebook",
+      "triggers": [
+        "facebook",
+        "fb",
+        "page",
+        "website atau facebook"
+      ],
+      "answer": "Facebook Page sesuai untuk engagement, tetapi website lebih kuat sebagai portfolio rasmi, SEO Google dan pusat lead capture. Yang terbaik ialah gunakan kedua-duanya bersama."
+    }
+  ]
+}

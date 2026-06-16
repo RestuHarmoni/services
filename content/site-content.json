@@ -1,0 +1,23 @@
+{
+  "promo": {
+    "enabled": true,
+    "title": "🔥 Promo Website — 35% OFF Semua Pakej",
+    "subtitle": "RH Starter RM1299 • RH Growth RM1999 ⭐ Popular • RH Ecosystem RM2999 — promo tamat dalam 42 jam.",
+    "cta": "Lihat Pakej Promo",
+    "hours": 42
+  },
+  "hero": {
+    "headline": "Website Profesional Untuk Bisnes Anda",
+    "subheadline": "Bina website yang nampak kemas, mudah difahami pelanggan dan terus bawa pertanyaan ke WhatsApp.",
+    "ctaPrimary": "Tanya Aira",
+    "ctaSecondary": "Lihat Contoh Website"
+  },
+  "showcase": {
+    "title": "Website Untuk Pelbagai Jenis Bisnes",
+    "subtitle": "Lihat contoh website yang disusun lengkap dengan servis, gambar, testimoni dan butang WhatsApp."
+  },
+  "contact": {
+    "phone": "",
+    "email": "sales@restuharmoni.com"
+  }
+}
