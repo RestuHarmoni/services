@@ -2,8 +2,8 @@
    Centralized Supabase browser client.
    Semua module live perlu guna window.RHGetSupabaseClient() supaya GoTrueClient tidak dicipta berulang kali. */
 window.RH_SUPABASE_CONFIG = {
-  url: "https://fbdkvsktfhufvporjnpt.supabase.co",
-  anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZiZGt2c2t0Zmh1ZnZwb3JqbnB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEyNDIwNDksImV4cCI6MjA5NjgxODA0OX0.WUFEsvh6PXYLSfbeICcdWirBqaseVRFtZLNo_iOA0dQ"
+  url: "https://xyiqrjiozrxcqhifyfzw.supabase.co",
+  anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5aXFyamlvenJ4Y3FoaWZ5Znp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MTM4NDEsImV4cCI6MjA5NjE4OTg0MX0.SF7L_FUaLps8c1LtwLhVcwhCbJiVD6USpEFM53Se68w"
 };
 
 (function(){
