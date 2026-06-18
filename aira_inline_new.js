@@ -6,19 +6,19 @@
   const clone=o=>JSON.parse(JSON.stringify(o||{}));
   const now=()=>new Date().toISOString();
   const statusOf=o=>o?.is_deleted?'deleted':(o?.status||'published');
-  let currentQ={version:'v1.4.0-aira-knowledge-qa-recovery',steps:[],packages:{}};
-  let currentF={version:'v1.4.0-aira-knowledge-qa-recovery',faq:[]};
+  let currentQ={version:'v1.5.5-aira-5-package-quotation-sync',steps:[],packages:{}};
+  let currentF={version:'v1.5.5-aira-5-package-quotation-sync',faq:[]};
   let source='local';
   let editCtx=null;
 
-  const OFFICIAL_Q={version:'v1.4.0-aira-knowledge-qa-recovery',assistantName:'Aira',positioning:'AI Website Consultant',intro:['👋 Hai, saya <strong>Aira</strong>.','Saya akan tanya beberapa soalan ringkas untuk cadangkan pakej website RH yang paling sesuai.'],steps:[
+  const OFFICIAL_Q={version:'v1.5.5-aira-5-package-quotation-sync',assistantName:'Aira',positioning:'AI Website Consultant',intro:['👋 Hai, saya <strong>Aira</strong>.','Saya akan tanya beberapa soalan ringkas untuk cadangkan pakej website RH yang paling sesuai.'],steps:[
     {key:'business_type',question:'Apakah jenis bisnes anda?',type:'choice',required:true,status:'published',options:['Servis','Produk','Restoran / F&B','Event / Rental','Hartanah','Homestay / Hotel','Kereta Sewa','Klinik / Profesional','Kontraktor / Renovasi','Company Profile','E-commerce / Katalog','Custom System / Portal','Lain-lain']},
     {key:'domain_status',question:'Adakah anda sudah mempunyai domain?',type:'choice',required:false,status:'published',options:['Ya, sudah ada domain','Belum ada domain','Tidak pasti / perlu semak']},
     {key:'hosting_status',question:'Adakah anda sudah mempunyai hosting?',type:'choice',required:false,status:'published',options:['Ya, sudah ada hosting','Belum ada hosting','Tidak pasti / perlu semak']},
     {key:'website_status',question:'Adakah anda sudah ada website sekarang?',type:'choice',required:false,status:'published',options:['Belum ada website','Ada, tetapi mahu upgrade','Ada landing page sahaja','Tidak pasti']},
     {key:'objective',question:'Apakah objektif utama website anda?',type:'choice',required:true,status:'published',options:['Dapatkan Lead','Profil Syarikat','Jual Produk / Katalog','Booking / Tempahan','SEO Google','Dashboard / Sistem','Ecosystem Digital Lengkap']},
     {key:'feature_need',question:'Fungsi apa yang anda paling perlukan?',type:'choice',required:false,status:'published',options:['Website basic + WhatsApp','AI Chatbot Aira','Blog / Artikel SEO','Service / Product Listing','Dashboard Basic','Payment / Invoice','Client Portal / Sistem Custom','Belum pasti']},
-    {key:'budget',question:'Budget anggaran anda?',type:'choice',required:true,status:'published',options:['RM799 (RH Basic)','RM1999 (RH Growth)','RM2999 (RH Ecosystem)','RM3000+ (RH Enterprise)','Tidak Pasti']},
+    {key:'budget',question:'Budget anggaran anda?',type:'choice',required:true,status:'published',options:['RM799 (RH Basic)','RM1299 (RH Starter)','RM1999 (RH Growth)','RM2999 (RH Ecosystem)','RM3000+ (RH Enterprise)','Tidak Pasti']},
     {key:'timeline',question:'Bila anda mahu website mula siap atau dilancarkan?',type:'choice',required:true,status:'published',options:['Segera','1–2 minggu','Dalam 1 bulan','Belum pasti']},
     {key:'content_ready',question:'Bahan seperti logo, gambar dan teks sudah ada?',type:'choice',required:false,status:'published',options:['Sudah lengkap','Ada sebahagian','Belum ada','Perlu bantuan susun content']},
     {key:'name',question:'Boleh saya tahu nama anda?',type:'input',input:true,required:true,status:'published',placeholder:'Contoh: Ahmad'},
@@ -26,12 +26,14 @@
     {key:'email',question:'Email untuk proposal / quotation?',type:'input',input:true,required:false,status:'published',placeholder:'Contoh: nama@email.com',validation:'email'}
   ],packages:{
     'RH Basic':{price:'RM799',maintenance:'RM79/bulan',bestFor:['Bisnes kecil','Personal brand','Profil ringkas','Baru mula online'],features:['Website asas / one-page','Mobile responsive','WhatsApp CTA','Lead form ringkas','SEO asas','Struktur Google-ready'],templateUrl:'/pakej/rh-basic/'},
+    'RH Starter':{price:'RM1299',maintenance:'RM129/bulan',bestFor:['PMKS','Kontraktor','Konsultan','Company profile','Servis tempatan'],features:['Website company profile','Halaman servis penting','Mobile responsive','AI Chatbot Aira','Lead Capture System','Basic dashboard','SEO asas','Google-friendly structure'],templateUrl:'/pakej/rh-starter/'},
     'RH Growth':{price:'RM1999',maintenance:'RM129/bulan',bestFor:['Bisnes servis','Lead generation','Portfolio','Blog SEO','Listing servis / produk'],features:['Multi-page website','AI Chatbot Aira','Lead Capture System','Service / Product Listing','Blog / Artikel','Portfolio / Gallery','SEO asas'],templateUrl:'/pakej/rh-growth/'},
     'RH Ecosystem':{price:'RM2999',maintenance:'RM249/bulan',bestFor:['Syarikat berkembang','Multi servis','Admin dashboard','Sales funnel','Ecosystem digital'],features:['Company profile + service website','Advanced AI Chatbot','Blog CMS','Dashboard Basic','Lead Management Ready','Analytics-ready structure','Multi Website Structure'],templateUrl:'/pakej/rh-ecosystem/'},
     'RH Enterprise':{price:'Custom',maintenance:'Custom',bestFor:['Portal','CRM','Custom system','Multi-branch','Automation'],features:['Custom quotation','Portal / dashboard','Automation flow','Integration planning','Advanced workflow','Custom scope'],templateUrl:'/#aira-popup'}
   }};
-  const OFFICIAL_F={version:'v1.4.0-aira-knowledge-qa-recovery',quickActions:['harga','pakej','domain','hosting','maintenance','tempoh siap'],faq:[
-    {topic:'Harga pakej',status:'published',triggers:['harga','pakej','berapa kos'],answer:'Kami ada 4 pilihan utama:<br><br><strong>RH Basic</strong> — RM799 + maintenance RM79/bulan<br><strong>RH Growth</strong> — RM1999 + maintenance RM129/bulan<br><strong>RH Ecosystem</strong> — RM2999 + maintenance RM249/bulan<br><strong>RH Enterprise</strong> — Custom quotation.'},
+  const OFFICIAL_F={version:'v1.5.5-aira-5-package-quotation-sync',quickActions:['harga','pakej','domain','hosting','maintenance','tempoh siap'],faq:[
+    {topic:'Harga pakej',status:'published',triggers:['harga','pakej','berapa kos'],answer:'Kami ada 5 pilihan utama:<br><br><strong>RH Basic</strong> — RM799 + maintenance RM79/bulan<br><strong>RH Starter</strong> — RM1299 + maintenance RM129/bulan<br><strong>RH Growth</strong> — RM1999 + maintenance RM129/bulan<br><strong>RH Ecosystem</strong> — RM2999 + maintenance RM249/bulan<br><strong>RH Enterprise / Custom</strong> — Custom quotation.'},
+    {topic:'Starter',status:'published',triggers:['starter','rm1299','1299','profile','company profile','pmks'],answer:'<strong>RH Starter RM1299</strong> sesuai untuk PMKS atau syarikat servis yang perlukan website profile lebih kemas, halaman servis, Aira lead capture dan struktur SEO asas. Maintenance RM129/bulan.'},
     {topic:'Maintenance',status:'published',triggers:['maintenance','bulanan','support'],answer:'Maintenance merangkumi pemantauan website, SSL, backup asas, bug fix minor dan support mengikut pakej.'},
     {topic:'Domain dan hosting',status:'published',triggers:['domain','hosting','server'],answer:'Jika sudah ada domain/hosting, kami boleh semak dahulu. Jika belum ada, RH boleh bantu susun domain, hosting dan setup teknikal.'},
     {topic:'Tempoh siap',status:'published',triggers:['berapa lama','tempoh siap','siap bila'],answer:'Tempoh biasa ialah 3–14 hari bekerja bergantung kepada pakej, content dan kelulusan client.'}
@@ -41,8 +43,8 @@
     currentQ.steps=Array.isArray(currentQ.steps)?currentQ.steps:[];
     currentQ.packages=currentQ.packages&&typeof currentQ.packages==='object'?currentQ.packages:{};
     currentF.faq=Array.isArray(currentF.faq)?currentF.faq:[];
-    if(!currentQ.version) currentQ.version='v1.4.0-aira-knowledge-qa-recovery';
-    if(!currentF.version) currentF.version='v1.4.0-aira-knowledge-qa-recovery';
+    if(!currentQ.version) currentQ.version='v1.5.5-aira-5-package-quotation-sync';
+    if(!currentF.version) currentF.version='v1.5.5-aira-5-package-quotation-sync';
   }
   function setMsg(msg,type='info'){
     const el=$('#airaStatus'); if(!el)return;
@@ -87,7 +89,7 @@
   }
   async function publishCurrent(){
     try{
-      normalize(); currentQ.version='v1.4.0-aira-knowledge-qa-recovery'; currentF.version='v1.4.0-aira-knowledge-qa-recovery';
+      normalize(); currentQ.version='v1.5.5-aira-5-package-quotation-sync'; currentF.version='v1.5.5-aira-5-package-quotation-sync';
       const res=await window.RH_AIRA_DATA_SERVICE.publishAll(currentQ,currentF);
       source=res.mode||source; render(); setMsg(res.ok?'Perubahan Aira Knowledge berjaya publish.':'Gagal publish: '+(res.error||'Unknown error'),res.ok?'success':'danger');
     }catch(err){ setMsg('Gagal publish: '+err.message,'danger'); }
