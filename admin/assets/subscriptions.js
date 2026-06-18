@@ -41,6 +41,7 @@ const RHSubscriptions = (() => {
 
   const RH_PACKAGE_PLANS = {
     basic: { packageName:'RH Basic', planName:'RH Basic Maintenance', monthly:79 },
+    starter: { packageName:'RH Starter', planName:'RH Starter Maintenance', monthly:129 },
     growth: { packageName:'RH Growth', planName:'RH Growth Maintenance', monthly:129 },
     ecosystem: { packageName:'RH Ecosystem', planName:'RH Ecosystem Maintenance', monthly:249 },
     enterprise: { packageName:'RH Enterprise', planName:'RH Enterprise Maintenance', monthly:0 }
@@ -49,6 +50,7 @@ const RHSubscriptions = (() => {
     const p=String(value||'').toLowerCase();
     if(p.includes('enterprise') || p.includes('custom')) return 'enterprise';
     if(p.includes('ecosystem') || p.includes('2999') || p.includes('2,999')) return 'ecosystem';
+    if(p.includes('starter') || p.includes('1299') || p.includes('1,299')) return 'starter';
     if(p.includes('growth') || p.includes('1999') || p.includes('1,999')) return 'growth';
     if(p.includes('basic') || p.includes('799')) return 'basic';
     return 'basic';

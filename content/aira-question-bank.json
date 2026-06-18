@@ -1,5 +1,5 @@
 {
-  "version": "v1.3.8-aira-knowledge-bank-sales-question-flow",
+  "version": "v1.5.5-aira-5-package-quotation-sync",
   "assistantName": "Aira",
   "positioning": "AI Website Consultant",
   "intro": [
@@ -100,6 +100,7 @@
       "required": true,
       "options": [
         "RM799 (RH Basic)",
+        "RM1299 (RH Starter)",
         "RM1999 (RH Growth)",
         "RM2999 (RH Ecosystem)",
         "RM3000+ (RH Enterprise)",
@@ -176,6 +177,28 @@
         "Struktur Google-ready"
       ],
       "templateUrl": "/pakej/rh-basic/"
+    },
+    "RH Starter": {
+      "price": "RM1299",
+      "maintenance": "RM129/bulan",
+      "bestFor": [
+        "PMKS",
+        "Kontraktor",
+        "Konsultan",
+        "Company profile",
+        "Servis tempatan"
+      ],
+      "features": [
+        "Website company profile",
+        "Halaman servis penting",
+        "Mobile responsive",
+        "AI Chatbot Aira",
+        "Lead Capture System",
+        "Basic dashboard",
+        "SEO asas",
+        "Google-friendly structure"
+      ],
+      "templateUrl": "/pakej/rh-starter/"
     },
     "RH Growth": {
       "price": "RM1999",
@@ -275,6 +298,16 @@
       "Dashboard / Sistem",
       "Client Portal / Sistem Custom",
       "Custom System / Portal"
+    ],
+    "starter": [
+      "RM1299",
+      "Starter",
+      "Company Profile",
+      "Profil Syarikat",
+      "PMKS",
+      "Kontraktor",
+      "Konsultan",
+      "Basic dashboard"
     ]
   }
 }

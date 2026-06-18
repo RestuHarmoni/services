@@ -1,5 +1,5 @@
 {
-  "version": "v1.3.8-aira-knowledge-bank-sales-question-flow",
+  "version": "v1.5.5-aira-5-package-quotation-sync",
   "quickActions": [
     "Dapatkan Cadangan",
     "Harga Pakej RH",
@@ -23,7 +23,7 @@
         "berapa",
         "lihat pakej"
       ],
-      "answer": "Kami ada 4 pilihan utama:<br><br><strong>RH Basic</strong> — RM799 + maintenance RM79/bulan<br><strong>RH Growth</strong> — RM1999 + maintenance RM129/bulan<br><strong>RH Ecosystem</strong> — RM2999 + maintenance RM249/bulan<br><strong>RH Enterprise</strong> — Custom quotation.<br><br>Aira boleh cadangkan pakej berdasarkan jenis bisnes, domain, hosting, objektif dan budget anda."
+      "answer": "Kami ada 5 pilihan utama:<br><br><strong>RH Basic</strong> — RM799 + maintenance RM79/bulan<br><strong>RH Starter</strong> — RM1299 + maintenance RM129/bulan<br><strong>RH Growth</strong> — RM1999 + maintenance RM129/bulan<br><strong>RH Ecosystem</strong> — RM2999 + maintenance RM249/bulan<br><strong>RH Enterprise / Custom</strong> — Custom quotation.<br><br>Aira boleh cadangkan pakej berdasarkan jenis bisnes, domain, hosting, objektif, budget dan keperluan sistem anda."
     },
     {
       "topic": "basic",
@@ -36,6 +36,18 @@
         "personal"
       ],
       "answer": "<strong>RH Basic RM799</strong> sesuai untuk bisnes kecil, personal brand atau profil ringkas yang mahu mula ada website rasmi. Maintenance RM79/bulan."
+    },
+    {
+      "topic": "starter",
+      "triggers": [
+        "starter",
+        "rm1299",
+        "1299",
+        "profile",
+        "company profile",
+        "pmks"
+      ],
+      "answer": "<strong>RH Starter RM1299</strong> sesuai untuk PMKS atau syarikat servis yang perlukan website profile lebih kemas, halaman servis, Aira lead capture dan struktur SEO asas. Maintenance RM129/bulan."
     },
     {
       "topic": "growth",
@@ -84,7 +96,7 @@
         "perbezaan",
         "mana sesuai"
       ],
-      "answer": "Secara ringkas: <strong>RH Basic</strong> untuk mula online, <strong>RH Growth</strong> untuk lead + content + listing, <strong>RH Ecosystem</strong> untuk website lengkap dengan dashboard dan funnel, manakala <strong>Enterprise</strong> untuk sistem custom."
+      "answer": "Secara ringkas: <strong>RH Basic</strong> untuk mula online, <strong>RH Starter</strong> untuk profile syarikat yang lebih kemas, <strong>RH Growth</strong> untuk lead + content + listing, <strong>RH Ecosystem</strong> untuk website lengkap dengan dashboard dan funnel, manakala <strong>Enterprise</strong> untuk sistem custom."
     },
     {
       "topic": "tempoh",
@@ -153,7 +165,7 @@
         "update website",
         "bulanan"
       ],
-      "answer": "Maintenance bergantung kepada pakej: RH Basic RM79/bulan, RH Growth RM129/bulan dan RH Ecosystem RM249/bulan. Ia meliputi pemantauan asas, support dan kemaskini kecil mengikut pakej."
+      "answer": "Maintenance bergantung kepada pakej: RH Basic RM79/bulan, RH Starter RM129/bulan, RH Growth RM129/bulan dan RH Ecosystem RM249/bulan. Enterprise pula custom mengikut scope."
     },
     {
       "topic": "payment",
