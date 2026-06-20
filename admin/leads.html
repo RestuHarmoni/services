@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Leads | RH Admin V1</title>
-  <link rel="stylesheet" href="assets/admin.css">
-  <link rel="manifest" href="../manifest.json">
+  <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#0f172a">
+  <link rel="stylesheet" href="assets/admin.css">
 </head>
 <body class="admin-page">
   <aside class="sidebar" id="sidebar">
@@ -50,28 +50,20 @@
       </div>
     </header>
     <main class="content">
+
+      <section id="rhPushPanel" class="rh-push-panel">
+        <strong>🔔 Lead Phone Notification</strong>
+        <button id="enablePushBtn" class="primary-btn" type="button">Aktifkan Push</button>
+        <button id="testPushBtn" class="ghost-btn" type="button">Test Notification</button>
+        <span id="rhPushStatus" class="rh-push-status">Aktifkan sekali di phone/PWA. Reminder akan keluar setiap 5 minit selagi lead belum jadi prospek.</span>
+      </section>
+
       <section class="stat-grid lead-stat-grid">
         <article class="stat-card"><span>Total Leads</span><strong id="leadCountTotal">0</strong><small>Semua rekod</small></article>
         <article class="stat-card"><span>New</span><strong id="leadCountNew">0</strong><small>Belum dihubungi</small></article>
         <article class="stat-card"><span>Contacted</span><strong id="leadCountContacted">0</strong><small>Sudah follow up</small></article>
         <article class="stat-card"><span>Qualified</span><strong id="leadCountQualified">0</strong><small>Sesuai jadi prospect</small></article>
         <article class="stat-card"><span>Converted</span><strong id="leadCountConverted">0</strong><small>Sudah jadi prospect</small></article>
-      </section>
-
-
-
-      <section class="panel section-panel" id="pushNotificationPanel">
-        <div class="panel-head stacked-head">
-          <div>
-            <h2>Lead Phone Notification</h2>
-            <span>Aktifkan push untuk terima alert lead baru di telefon/browser.</span>
-          </div>
-          <div class="toolbar">
-            <button id="enablePushBtn" class="primary-btn" type="button">Aktifkan Push</button>
-            <button id="testPushBtn" class="ghost-btn" type="button">Test Notification</button>
-          </div>
-        </div>
-        <div id="pushStatus" class="empty-state">Status: belum disemak.</div>
       </section>
 
       <section class="panel section-panel">
@@ -163,6 +155,7 @@
 
 
   <script src="../supabase-config.js"></script>
+  <script src="../push-config.js"></script>
   <script src="assets/admin.js"></script>
 </body>
 </html>

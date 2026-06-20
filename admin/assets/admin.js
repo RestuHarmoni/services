@@ -49,238 +49,6 @@ const RHAdmin = (() => {
     }
     return Array.isArray(json) ? json : (json?[json]:[]);
   }
-
-  function setPushStatus(msg, isError=false){
-    const el=qs('#pushStatus');
-    if(el){ el.textContent=msg; el.classList.toggle('warning-text', !!isError); }
-  }
-  function getPushDebug(){
-    return {
-      secure: window.isSecureContext || location.hostname === 'localhost',
-      notificationApi: 'Notification' in window,
-      notificationPermission: ('Notification' in window) ? Notification.permission : 'not-supported',
-      serviceWorker: 'serviceWorker' in navigator,
-      pushManager: 'PushManager' in window,
-      standalone: window.matchMedia && window.matchMedia('(display-mode: standalone)').matches,
-      localEnabled: localStorage.getItem('RH_PUSH_LOCAL_ENABLED') === '1'
-    };
-  }
-  function pushDebugText(prefix='Status'){
-    const d=getPushDebug();
-    return `${prefix}: secure=${d.secure ? 'yes':'no'} | notification=${d.notificationApi ? d.notificationPermission:'not-supported'} | serviceWorker=${d.serviceWorker ? 'yes':'no'} | pushManager=${d.pushManager ? 'yes':'no'} | enabled=${d.localEnabled ? 'yes':'no'}`;
-  }
-  async function registerRhServiceWorker(){
-    if(!window.isSecureContext && location.hostname !== 'localhost') throw new Error('Notification hanya berfungsi di HTTPS. Pastikan buka https://services.restuharmoni.com/admin/dashboard.html');
-    if(!('serviceWorker' in navigator)) throw new Error('Browser ini tidak menyokong Service Worker/PWA. Guna Chrome/Edge Android atau desktop. iPhone perlu install PWA dahulu.');
-    const reg = await navigator.serviceWorker.register('/sw.js', {scope:'/'});
-    await navigator.serviceWorker.ready;
-    if(reg.waiting) reg.waiting.postMessage({type:'SKIP_WAITING'});
-    return reg;
-  }
-  async function initPwaRegistration(){
-    if(!('serviceWorker' in navigator)) return;
-    try{ await registerRhServiceWorker(); }catch(e){ console.warn('PWA registration gagal:', e); }
-  }
-  function urlBase64ToUint8Array(base64String){
-    const padding='='.repeat((4-base64String.length%4)%4);
-    const base64=(base64String+padding).replace(/-/g,'+').replace(/_/g,'/');
-    const rawData=atob(base64);
-    return Uint8Array.from([...rawData].map(ch=>ch.charCodeAt(0)));
-  }
-  function getVapidPublicKey(){
-    return window.RH_VAPID_PUBLIC_KEY || localStorage.getItem('RH_VAPID_PUBLIC_KEY') || '';
-  }
-  async function requestNotificationPermission(){
-    if(!('Notification' in window)) throw new Error('Browser ini tidak menyokong Notification API. Nota: Chrome iPhone tidak support web push biasa. Guna Android Chrome/Edge atau install PWA di iPhone Safari.');
-    if(Notification.permission === 'denied') throw new Error('Notification untuk domain ini sedang BLOCK. Buka Site Settings > Notifications > Allow untuk services.restuharmoni.com.');
-    const permission = Notification.permission === 'granted' ? 'granted' : await Notification.requestPermission();
-    if(permission !== 'granted') throw new Error('Permission notification belum dibenarkan. Tekan Allow bila browser minta kebenaran.');
-    return permission;
-  }
-  async function showBrowserNotification(title, options={}){
-    await requestNotificationPermission();
-    const reg = await registerRhServiceWorker();
-    const finalOptions = {
-      icon:'/assets/rh-logo.png',
-      badge:'/assets/rh-logo.png',
-      requireInteraction:false,
-      ...options
-    };
-    try{
-      await reg.showNotification(title, finalOptions);
-      return 'service-worker';
-    }catch(swErr){
-      console.warn('showNotification melalui service worker gagal, cuba fallback Notification():', swErr);
-      if('Notification' in window){
-        const n = new Notification(title, finalOptions);
-        n.onclick = () => { window.focus(); if(finalOptions.data?.url) location.href = finalOptions.data.url; };
-        return 'window-notification';
-      }
-      throw swErr;
-    }
-  }
-  async function enablePushNotifications(){
-    try{
-      setPushStatus('Menyemak permission notification...');
-      await requestNotificationPermission();
-      const reg=await registerRhServiceWorker();
-      localStorage.setItem('RH_PUSH_LOCAL_ENABLED','1');
-      startLeadPollingFallback();
-      setPushStatus(pushDebugText('Notification aktif. Listener lead + polling fallback ON. Sekarang tekan Test Notification'));
-      const vapidKey=getVapidPublicKey();
-      if(!vapidKey){
-        return;
-      }
-      if(!('PushManager' in window)) throw new Error('Browser ini tidak menyokong Push API untuk server push. Local notification masih aktif semasa dashboard terbuka.');
-      const sub=await reg.pushManager.subscribe({userVisibleOnly:true, applicationServerKey:urlBase64ToUint8Array(vapidKey)});
-      const session=getSession()||{};
-      const payload={
-        endpoint:sub.endpoint,
-        subscription:sub.toJSON(),
-        staff_id:session.staff_id||null,
-        user_agent:navigator.userAgent,
-        status:'active',
-        updated_at:new Date().toISOString()
-      };
-      try{
-        const client=await getClient();
-        if(client){
-          const {error}=await client.from('push_subscriptions').upsert(payload,{onConflict:'endpoint'});
-          if(error) throw error;
-        }else{
-          await supabaseRestInsert('push_subscriptions', payload);
-        }
-        setPushStatus('Push server aktif. Device ini sudah didaftarkan untuk lead alert. ' + pushDebugText('Debug'));
-      }catch(dbErr){
-        console.warn(dbErr);
-        setPushStatus('Notification aktif, tetapi gagal simpan subscription ke Supabase. Jalankan SQL push_subscriptions dahulu. ' + pushDebugText('Debug'), true);
-      }
-    }catch(e){
-      setPushStatus((e.message || 'Gagal aktifkan push notification.') + ' | ' + pushDebugText('Debug'), true);
-      alert(e.message || 'Gagal aktifkan push notification.');
-    }
-  }
-  async function testPushNotification(){
-    try{
-      setPushStatus('Menghantar test notification...');
-      localStorage.setItem('RH_PUSH_LOCAL_ENABLED','1');
-      startLeadPollingFallback();
-      const method = await showBrowserNotification('🔔 Test Notification RH Services', {
-        body:'Noti aktif. Jika ini muncul, phone/browser notification sudah berfungsi.',
-        data:{url:'/admin/leads.html'},
-        tag:'rh-test-lead-' + Date.now()
-      });
-      setPushStatus(`Test notification dihantar (${method}). Jika masih tidak nampak, notification domain/browser sedang block atau device tidak support. ${pushDebugText('Debug')}`);
-    }catch(e){
-      setPushStatus((e.message || 'Gagal hantar test notification.') + ' | ' + pushDebugText('Debug'), true);
-      alert(e.message || 'Gagal hantar test notification.');
-    }
-  }
-
-  function isPushEnabledLocally(){
-    return localStorage.getItem('RH_PUSH_LOCAL_ENABLED') === '1' && ('Notification' in window) && Notification.permission === 'granted';
-  }
-  function leadTitle(row){
-    return row?.name || row?.full_name || row?.customer_name || 'Lead Baru';
-  }
-  function leadBody(row){
-    const name=leadTitle(row);
-    const business=row?.business_type || row?.business || row?.company || 'RH Services';
-    const phone=row?.phone || row?.whatsapp || row?.contact || '';
-    return phone ? `${name} - ${business} • ${phone}` : `${name} - ${business}`;
-  }
-  async function showLeadLocalNotification(row){
-    if(!isPushEnabledLocally()) return;
-    try{
-      await showBrowserNotification('🚀 Lead Baru Masuk', {
-        body:leadBody(row),
-        data:{url:'/admin/leads.html'},
-        tag:`rh-lead-${row?.id || Date.now()}`
-      });
-    }catch(e){ console.warn('Lead notification gagal:', e); }
-  }
-
-  let leadPollTimer = null;
-  let leadPollLastCreatedAt = localStorage.getItem('RH_PUSH_LAST_LEAD_CREATED_AT') || '';
-  async function fetchLatestLeadForNotification(){
-    const client=await getClient();
-    if(client){
-      const {data,error}=await client.from('leads').select('*').order('created_at',{ascending:false}).limit(1);
-      if(error) throw error;
-      return (data && data[0]) || null;
-    }
-    const cfg=getSupabaseRestConfig();
-    const res=await fetch(`${cfg.url}/rest/v1/leads?select=*&order=created_at.desc&limit=1`,{
-      headers:{apikey:cfg.anonKey, Authorization:`Bearer ${cfg.anonKey}`}
-    });
-    if(!res.ok) throw new Error(`Gagal semak latest lead (${res.status})`);
-    const data=await res.json();
-    return (data && data[0]) || null;
-  }
-  async function checkLatestLeadByPolling(isBaseline=false){
-    if(!isPushEnabledLocally()) return;
-    const latest=await fetchLatestLeadForNotification();
-    if(!latest || !latest.created_at) return;
-    if(!leadPollLastCreatedAt){
-      leadPollLastCreatedAt=latest.created_at;
-      localStorage.setItem('RH_PUSH_LAST_LEAD_CREATED_AT', leadPollLastCreatedAt);
-      return;
-    }
-    if(String(latest.created_at) > String(leadPollLastCreatedAt)){
-      leadPollLastCreatedAt=latest.created_at;
-      localStorage.setItem('RH_PUSH_LAST_LEAD_CREATED_AT', leadPollLastCreatedAt);
-      if(!isBaseline){
-        await showLeadLocalNotification(latest);
-        if(qs('#leadsTableBody')) loadLeadsPage();
-        if(qs('#totalLeads')) loadDashboard();
-      }
-    }
-  }
-  function startLeadPollingFallback(){
-    if(leadPollTimer || !qs('#pushNotificationPanel')) return;
-    checkLatestLeadByPolling(true).catch(err=>console.warn('Lead baseline polling gagal:', err));
-    leadPollTimer=setInterval(()=>{
-      if(document.hidden) return;
-      checkLatestLeadByPolling(false).catch(err=>console.warn('Lead polling notification gagal:', err));
-    }, 10000);
-    window.addEventListener('beforeunload',()=>{ try{ clearInterval(leadPollTimer); }catch{} });
-  }
-
-  async function initLeadRealtimeNotifications(){
-    if(!qs('#pushNotificationPanel')) return;
-    try{
-      if(!('Notification' in window)){
-        setPushStatus('Browser ini tidak support Notification API. Guna Android Chrome/Edge atau install PWA di Safari iPhone.', true);
-      }else if(Notification.permission === 'denied'){
-        setPushStatus('Notification domain ini sedang BLOCK. Buka browser Site Settings > Notifications > Allow.', true);
-      }else if(Notification.permission === 'granted' && isPushEnabledLocally()){
-        setPushStatus('Notification aktif. Tekan Test Notification untuk semak bunyi/pop-up. ' + pushDebugText('Debug'));
-      }else if(Notification.permission === 'granted'){
-        setPushStatus('Notification sudah dibenarkan. Klik Aktifkan Push untuk hidupkan alert lead. ' + pushDebugText('Debug'));
-      }else{
-        setPushStatus('Klik Aktifkan Push, kemudian pilih Allow bila browser tanya permission. ' + pushDebugText('Debug'));
-      }
-      const client=await getClient();
-      startLeadPollingFallback();
-      if(!client || typeof client.channel !== 'function'){
-        if(isPushEnabledLocally()) setPushStatus('Notification aktif + polling fallback ON. Nota: realtime Supabase tidak tersedia, sistem akan semak lead setiap 10 saat semasa dashboard terbuka. ' + pushDebugText('Debug'));
-        return;
-      }
-      const channel=client.channel('rh-admin-new-leads-notification')
-        .on('postgres_changes', {event:'INSERT', schema:'public', table:'leads'}, payload => {
-          showLeadLocalNotification(payload.new);
-          if(qs('#leadsTableBody')) loadLeadsPage();
-          if(qs('#totalLeads')) loadDashboard();
-        })
-        .subscribe(status => {
-          if(status === 'SUBSCRIBED' && isPushEnabledLocally()){
-            setPushStatus('Notification aktif + live lead listener bersambung + polling fallback ON. ' + pushDebugText('Debug'));
-          }
-        });
-      window.addEventListener('beforeunload', () => { try{ client.removeChannel(channel); }catch{} });
-    }catch(e){ console.warn('Realtime notification init gagal:', e); }
-  }
-
   async function sha256(text){
     const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
     return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
@@ -2380,6 +2148,168 @@ const RHAdmin = (() => {
     await loadStoragePage();
   }
 
+
+
+  // RH Lead Notification System v1.0
+  const RH_PUSH_REMINDER_MS = 5 * 60 * 1000;
+  const RH_PUSH_LAST_SEEN_KEY = 'rh_lead_push_last_seen_created_at_v1';
+  const RH_PUSH_REPEAT_KEY = 'rh_lead_push_repeat_map_v1';
+
+  function pushConfig(){ return window.RH_PUSH_CONFIG || {}; }
+  function updateNotiStatus(msg, type='info'){
+    const el=qs('#rhPushStatus');
+    if(el){ el.textContent=msg; el.dataset.type=type; }
+  }
+  function leadIsUnconverted(lead){
+    const st=normalizeStatus(lead && lead.status);
+    return !!lead && !isDeleted(lead) && !['converted','archived','closed','lost','deleted'].includes(st);
+  }
+  function leadTitle(lead){ return `${lead?.name || 'Lead baru'}${lead?.business_type ? ' - '+lead.business_type : ''}`; }
+  function leadBody(lead){ return `${lead?.phone || '-'} • ${lead?.recommended_package || lead?.budget || 'Semak lead sekarang'}`; }
+  async function registerServiceWorker(){
+    if(!('serviceWorker' in navigator)) throw new Error('Browser tidak support Service Worker.');
+    return await navigator.serviceWorker.register('/sw.js', {scope:'/'});
+  }
+  function urlBase64ToUint8Array(base64String){
+    const padding='='.repeat((4-base64String.length%4)%4);
+    const base64=(base64String+padding).replace(/-/g,'+').replace(/_/g,'/');
+    const rawData=atob(base64);
+    return Uint8Array.from([...rawData].map(ch=>ch.charCodeAt(0)));
+  }
+  async function requestPushPermission(){
+    if(!('Notification' in window)) throw new Error('Browser ini tidak support Notification.');
+    let perm=Notification.permission;
+    if(perm==='default') perm=await Notification.requestPermission();
+    if(perm!=='granted') throw new Error('Notification belum dibenarkan. Semak setting browser/phone.');
+    return perm;
+  }
+  async function savePushSubscription(subscription){
+    const client=await getClient(); if(!client) throw new Error('Supabase client tidak dijumpai.');
+    const s=getSession()||{};
+    const payload={
+      endpoint:subscription.endpoint,
+      subscription_json:subscription.toJSON(),
+      staff_id:s.staff_id||null,
+      device_label:navigator.userAgent || 'browser',
+      user_agent:navigator.userAgent || null,
+      active:true,
+      updated_at:new Date().toISOString()
+    };
+    const {error}=await client.from('push_subscriptions').upsert(payload,{onConflict:'endpoint'});
+    if(error) throw error;
+  }
+  async function activatePush(){
+    try{
+      updateNotiStatus('Mengaktifkan notification...');
+      await requestPushPermission();
+      const reg=await registerServiceWorker();
+      const cfg=pushConfig();
+      let sub=await reg.pushManager?.getSubscription?.();
+      if(cfg.publicKey && reg.pushManager){
+        if(!sub){
+          sub=await reg.pushManager.subscribe({userVisibleOnly:true, applicationServerKey:urlBase64ToUint8Array(cfg.publicKey)});
+        }
+        await savePushSubscription(sub);
+        updateNotiStatus('Push aktif. Device sudah disimpan dalam Supabase.', 'success');
+      }else{
+        updateNotiStatus('Notification aktif untuk popup/test. Masukkan VAPID public key untuk push semasa browser tutup.', 'warn');
+      }
+      await showLeadNotification({name:'RH Notification Aktif', phone:'Test berjaya', business_type:'Dashboard'}, true);
+    }catch(err){
+      console.error('[RH PUSH ACTIVATE]', err);
+      updateNotiStatus(err.message || 'Gagal aktifkan notification.', 'error');
+      alert(err.message || 'Gagal aktifkan notification.');
+    }
+  }
+  async function showLeadNotification(lead, isTest=false){
+    await requestPushPermission();
+    const title=isTest ? '🔔 RH Test Notification' : '🚨 Lead Belum Jadi Prospek';
+    const body=isTest ? 'Notification phone/browser berjaya aktif.' : `${leadTitle(lead)}\n${leadBody(lead)}`;
+    const url='/admin/leads.html';
+    try{
+      const reg=await navigator.serviceWorker?.ready;
+      if(reg && reg.showNotification){
+        await reg.showNotification(title,{body,icon:'/assets/rh-logo.png',badge:'/assets/rh-logo.png',tag:`rh-lead-${lead?.id||'test'}`,renotify:true,requireInteraction:true,data:{url,lead_id:lead?.id||null}});
+      }else{
+        new Notification(title,{body,icon:'/assets/rh-logo.png',tag:`rh-lead-${lead?.id||'test'}`,requireInteraction:true});
+      }
+    }catch(e){
+      new Notification(title,{body,icon:'/assets/rh-logo.png',tag:`rh-lead-${lead?.id||'test'}`,requireInteraction:true});
+    }
+    renderLeadPopup(lead, isTest);
+  }
+  function renderLeadPopup(lead, isTest=false){
+    let box=qs('#rhLeadPopup');
+    if(!box){
+      box=document.createElement('div'); box.id='rhLeadPopup'; box.className='rh-lead-popup';
+      document.body.appendChild(box);
+    }
+    box.innerHTML=`<div class="rh-lead-popup-card"><button class="rh-lead-popup-close" type="button">×</button><strong>${isTest?'🔔 Test Notification':'🚨 Lead Belum Jadi Prospek'}</strong><p>${esc(leadTitle(lead))}</p><small>${esc(leadBody(lead))}</small><div><a class="primary-btn" href="/admin/leads.html">Buka Leads</a></div></div>`;
+    box.hidden=false;
+    box.querySelector('.rh-lead-popup-close').onclick=()=>{box.hidden=true;};
+  }
+  async function testPushNotification(){
+    await showLeadNotification({id:'test', name:'Test Lead', phone:'0123456789', business_type:'Aircond', budget:'RM1,299'}, true);
+    updateNotiStatus('Test notification dihantar.', 'success');
+  }
+  function getRepeatMap(){ try{return JSON.parse(localStorage.getItem(RH_PUSH_REPEAT_KEY)||'{}')}catch{return{}} }
+  function setRepeatMap(map){ localStorage.setItem(RH_PUSH_REPEAT_KEY, JSON.stringify(map||{})); }
+  async function checkUnconvertedLeadReminders(){
+    try{
+      if(!('Notification' in window) || Notification.permission!=='granted') return;
+      const client=await getClient(); if(!client) return;
+      const {data,error}=await client.from('leads').select('*').order('created_at',{ascending:false}).limit(25);
+      if(error) return;
+      const rows=(data||[]).filter(leadIsUnconverted);
+      const repeat=getRepeatMap();
+      const now=Date.now();
+      let sent=0;
+      for(const lead of rows){
+        const key=String(lead.id);
+        const last=Number(repeat[key]||0);
+        if(now-last >= RH_PUSH_REMINDER_MS){
+          repeat[key]=now;
+          await showLeadNotification(lead, false);
+          sent++;
+          if(sent>=3) break;
+        }
+      }
+      setRepeatMap(repeat);
+      if(rows.length) updateNotiStatus(`${rows.length} lead belum jadi prospek. Reminder setiap 5 minit aktif.`, 'warn');
+    }catch(err){ console.warn('[RH PUSH REMINDER]', err); }
+  }
+  async function handleNewLeadRealtime(lead){
+    if(!leadIsUnconverted(lead)) return;
+    await showLeadNotification(lead, false);
+    const repeat=getRepeatMap(); repeat[String(lead.id)]=Date.now(); setRepeatMap(repeat);
+    try{ if(qs('#leadsTableBody')) await loadLeadsPage(); if(qs('#totalLeads')) await loadDashboard(); }catch{}
+  }
+  async function startLeadNotificationWatcher(){
+    if(!qs('#rhPushPanel') && !qs('#leadsTableBody') && !qs('#totalLeads')) return;
+    try{ await registerServiceWorker(); }catch(e){ console.warn('[RH SW]', e); }
+    const client=await getClient(); if(!client) return;
+    try{
+      const {data}=await client.from('leads').select('created_at').order('created_at',{ascending:false}).limit(1);
+      if(data && data[0] && !localStorage.getItem(RH_PUSH_LAST_SEEN_KEY)) localStorage.setItem(RH_PUSH_LAST_SEEN_KEY, data[0].created_at || new Date().toISOString());
+    }catch{}
+    try{
+      client.channel('rh-lead-notifications-v1')
+        .on('postgres_changes',{event:'INSERT',schema:'public',table:'leads'}, payload=>handleNewLeadRealtime(payload.new))
+        .subscribe();
+    }catch(e){ console.warn('[RH REALTIME]', e); }
+    setInterval(async()=>{
+      try{
+        const {data}=await client.from('leads').select('*').order('created_at',{ascending:false}).limit(10);
+        const lastSeen=localStorage.getItem(RH_PUSH_LAST_SEEN_KEY) || '';
+        const newest=(data||[]).filter(r=>String(r.created_at||'')>lastSeen).reverse();
+        for(const lead of newest) await handleNewLeadRealtime(lead);
+        if((data||[])[0]?.created_at) localStorage.setItem(RH_PUSH_LAST_SEEN_KEY,(data||[])[0].created_at);
+      }catch{}
+    }, 15000);
+    checkUnconvertedLeadReminders();
+    setInterval(checkUnconvertedLeadReminders, RH_PUSH_REMINDER_MS);
+  }
+
   function bind(){
     const form=qs('#loginForm'); if(form){ form.addEventListener('submit',(e)=>{e.preventDefault();e.stopPropagation();login(e);return false;}); form.setAttribute('onsubmit','return false'); }
     const loginBtn=qs('#loginButton') || qs('#loginForm button'); if(loginBtn){ loginBtn.setAttribute('type','button'); loginBtn.addEventListener('click',login); }
@@ -2395,8 +2325,6 @@ const RHAdmin = (() => {
     const search=qs('#leadSearch'); if(search) search.oninput=renderLeadsTable;
     const filter=qs('#leadStatusFilter'); if(filter) filter.onchange=renderLeadsTable;
     const refresh=qs('#refreshLeadsBtn'); if(refresh) refresh.onclick=loadLeadsPage;
-    const enablePush=qs('#enablePushBtn'); if(enablePush) enablePush.onclick=enablePushNotifications;
-    const testPush=qs('#testPushBtn'); if(testPush) testPush.onclick=testPushNotification;
     qsa('[data-close-modal]').forEach(btn=>btn.onclick=closeModal);
     const contacted=qs('#markContactedBtn'); if(contacted) contacted.onclick=()=>currentLead&&updateLeadStatus(currentLead.id,'contacted');
     const qualified=qs('#markQualifiedBtn'); if(qualified) qualified.onclick=()=>currentLead&&updateLeadStatus(currentLead.id,'qualified');
@@ -2532,7 +2460,7 @@ const RHAdmin = (() => {
       const stPage=e.target.closest('[data-storage-page]'); if(stPage) setStoragePage(stPage.dataset.storagePage);
     });
   }
-  function init(){initPwaRegistration(); bind(); const s=protect(); if(!s) return; initLeadRealtimeNotifications(); if(qs('#totalLeads')) loadDashboard(); if(qs('#leadsTableBody')) loadLeadsPage(); if(qs('#prospectsTableBody')) loadProspectsPage(); if(qs('#quotationsTableBody')) loadQuotationsPage(); if(qs('#invoicesTableBody')) loadInvoicesPage(); if(qs('#projectsTableBody')) loadProjectsPage(); if(qs('#articlesTableBody')) loadArticlesPage(); if(qs('#storageGrid')) loadStoragePage();}
+  function init(){bind(); const s=protect(); if(!s) return; startLeadNotificationWatcher(); if(qs('#totalLeads')) loadDashboard(); if(qs('#leadsTableBody')) loadLeadsPage(); if(qs('#prospectsTableBody')) loadProspectsPage(); if(qs('#quotationsTableBody')) loadQuotationsPage(); if(qs('#invoicesTableBody')) loadInvoicesPage(); if(qs('#projectsTableBody')) loadProjectsPage(); if(qs('#articlesTableBody')) loadArticlesPage(); if(qs('#storageGrid')) loadStoragePage();}
   return {init};
 })();
 document.addEventListener('DOMContentLoaded', RHAdmin.init);
