@@ -49,6 +49,89 @@ const RHAdmin = (() => {
     }
     return Array.isArray(json) ? json : (json?[json]:[]);
   }
+
+  function setPushStatus(msg, isError=false){
+    const el=qs('#pushStatus');
+    if(el){ el.textContent=msg; el.classList.toggle('warning-text', !!isError); }
+  }
+  async function registerRhServiceWorker(){
+    if(!('serviceWorker' in navigator)) throw new Error('Browser ini tidak menyokong Service Worker/PWA.');
+    return await navigator.serviceWorker.register('../sw.js', {scope:'../'});
+  }
+  async function initPwaRegistration(){
+    if(!('serviceWorker' in navigator)) return;
+    try{ await registerRhServiceWorker(); }catch(e){ console.warn('PWA registration gagal:', e); }
+  }
+  function urlBase64ToUint8Array(base64String){
+    const padding='='.repeat((4-base64String.length%4)%4);
+    const base64=(base64String+padding).replace(/-/g,'+').replace(/_/g,'/');
+    const rawData=atob(base64);
+    return Uint8Array.from([...rawData].map(ch=>ch.charCodeAt(0)));
+  }
+  function getVapidPublicKey(){
+    return window.RH_VAPID_PUBLIC_KEY || localStorage.getItem('RH_VAPID_PUBLIC_KEY') || '';
+  }
+  async function enablePushNotifications(){
+    try{
+      setPushStatus('Menyemak permission notification...');
+      if(!('Notification' in window)) throw new Error('Browser ini tidak menyokong Notification API.');
+      if(!('PushManager' in window)) throw new Error('Browser ini tidak menyokong Push API. Cuba Chrome/Edge Android atau desktop.');
+      const permission=await Notification.requestPermission();
+      if(permission!=='granted') throw new Error('Permission notification tidak dibenarkan. Sila allow notification untuk domain ini.');
+      const reg=await registerRhServiceWorker();
+      const vapidKey=getVapidPublicKey();
+      if(!vapidKey){
+        setPushStatus('Push browser sudah diizinkan. Untuk push sebenar dari server, isi RH_VAPID_PUBLIC_KEY dahulu. Test Notification masih boleh digunakan.');
+        return;
+      }
+      const sub=await reg.pushManager.subscribe({userVisibleOnly:true, applicationServerKey:urlBase64ToUint8Array(vapidKey)});
+      const session=getSession()||{};
+      const payload={
+        endpoint:sub.endpoint,
+        subscription:sub.toJSON(),
+        staff_id:session.staff_id||null,
+        user_agent:navigator.userAgent,
+        status:'active',
+        updated_at:new Date().toISOString()
+      };
+      try{
+        const client=await getClient();
+        if(client){
+          const {error}=await client.from('push_subscriptions').upsert(payload,{onConflict:'endpoint'});
+          if(error) throw error;
+        }else{
+          await supabaseRestInsert('push_subscriptions', payload);
+        }
+        setPushStatus('Push aktif. Device ini sudah didaftarkan untuk lead alert.');
+      }catch(dbErr){
+        console.warn(dbErr);
+        setPushStatus('Push browser aktif, tetapi gagal simpan subscription ke Supabase. Jalankan SQL push_subscriptions dahulu.', true);
+      }
+    }catch(e){
+      setPushStatus(e.message || 'Gagal aktifkan push notification.', true);
+      alert(e.message || 'Gagal aktifkan push notification.');
+    }
+  }
+  async function testPushNotification(){
+    try{
+      if(!('Notification' in window)) throw new Error('Browser ini tidak menyokong Notification API.');
+      const permission=Notification.permission==='granted' ? 'granted' : await Notification.requestPermission();
+      if(permission!=='granted') throw new Error('Permission notification tidak dibenarkan.');
+      const reg=await registerRhServiceWorker();
+      await reg.showNotification('🔔 Test Lead Baru', {
+        body:'Notification RH Services aktif. Klik untuk buka Lead Inbox.',
+        icon:'../assets/rh-logo.png',
+        badge:'../assets/rh-logo.png',
+        data:{url:'./leads.html'},
+        tag:'rh-test-lead'
+      });
+      setPushStatus('Test notification dihantar. Jika tidak nampak, semak setting notification browser/phone.');
+    }catch(e){
+      setPushStatus(e.message || 'Gagal hantar test notification.', true);
+      alert(e.message || 'Gagal hantar test notification.');
+    }
+  }
+
   async function sha256(text){
     const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
     return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
@@ -2163,6 +2246,8 @@ const RHAdmin = (() => {
     const search=qs('#leadSearch'); if(search) search.oninput=renderLeadsTable;
     const filter=qs('#leadStatusFilter'); if(filter) filter.onchange=renderLeadsTable;
     const refresh=qs('#refreshLeadsBtn'); if(refresh) refresh.onclick=loadLeadsPage;
+    const enablePush=qs('#enablePushBtn'); if(enablePush) enablePush.onclick=enablePushNotifications;
+    const testPush=qs('#testPushBtn'); if(testPush) testPush.onclick=testPushNotification;
     qsa('[data-close-modal]').forEach(btn=>btn.onclick=closeModal);
     const contacted=qs('#markContactedBtn'); if(contacted) contacted.onclick=()=>currentLead&&updateLeadStatus(currentLead.id,'contacted');
     const qualified=qs('#markQualifiedBtn'); if(qualified) qualified.onclick=()=>currentLead&&updateLeadStatus(currentLead.id,'qualified');
@@ -2298,7 +2383,7 @@ const RHAdmin = (() => {
       const stPage=e.target.closest('[data-storage-page]'); if(stPage) setStoragePage(stPage.dataset.storagePage);
     });
   }
-  function init(){bind(); const s=protect(); if(!s) return; if(qs('#totalLeads')) loadDashboard(); if(qs('#leadsTableBody')) loadLeadsPage(); if(qs('#prospectsTableBody')) loadProspectsPage(); if(qs('#quotationsTableBody')) loadQuotationsPage(); if(qs('#invoicesTableBody')) loadInvoicesPage(); if(qs('#projectsTableBody')) loadProjectsPage(); if(qs('#articlesTableBody')) loadArticlesPage(); if(qs('#storageGrid')) loadStoragePage();}
+  function init(){initPwaRegistration(); bind(); const s=protect(); if(!s) return; if(qs('#totalLeads')) loadDashboard(); if(qs('#leadsTableBody')) loadLeadsPage(); if(qs('#prospectsTableBody')) loadProspectsPage(); if(qs('#quotationsTableBody')) loadQuotationsPage(); if(qs('#invoicesTableBody')) loadInvoicesPage(); if(qs('#projectsTableBody')) loadProjectsPage(); if(qs('#articlesTableBody')) loadArticlesPage(); if(qs('#storageGrid')) loadStoragePage();}
   return {init};
 })();
 document.addEventListener('DOMContentLoaded', RHAdmin.init);

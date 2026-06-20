@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Dashboard | RH Admin V1</title>
   <link rel="stylesheet" href="assets/admin.css">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#0f172a">
 </head>
 <body class="admin-page">
   <aside class="sidebar" id="sidebar">
@@ -54,6 +56,22 @@
         <article class="stat-card"><span>Invoices</span><strong id="totalInvoices">0</strong><small>INV active</small></article>
         <article class="stat-card"><span>Articles</span><strong id="totalArticles">0</strong><small>Published blog</small></article>
         <article class="stat-card"><span>Paid Amount</span><strong id="paidAmount">RM0</strong><small>Receipt / invoice paid</small></article>
+      </section>
+
+
+
+      <section class="panel section-panel" id="pushNotificationPanel">
+        <div class="panel-head stacked-head">
+          <div>
+            <h2>Phone Notification</h2>
+            <span>Aktifkan PWA push di dashboard semasa untuk terima alert lead baru di telefon/browser.</span>
+          </div>
+          <div class="toolbar">
+            <button id="enablePushBtn" class="primary-btn" type="button">Aktifkan Push</button>
+            <button id="testPushBtn" class="ghost-btn" type="button">Test Notification</button>
+          </div>
+        </div>
+        <div id="pushStatus" class="empty-state">Status: belum disemak.</div>
       </section>
 
       <section class="dashboard-grid">
