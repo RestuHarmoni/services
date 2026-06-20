@@ -4,10 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Dashboard | RH Admin V1</title>
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#0f172a">
   <link rel="stylesheet" href="assets/admin.css">
-</head>
+<link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#071a2d"></head>
 <body class="admin-page">
   <aside class="sidebar" id="sidebar">
     <a class="side-brand" href="dashboard.html">
@@ -49,14 +47,6 @@
       </div>
     </header>
     <main class="content">
-
-      <section id="rhPushPanel" class="rh-push-panel">
-        <strong>🔔 Lead Phone Notification</strong>
-        <button id="enablePushBtn" class="primary-btn" type="button">Aktifkan Push</button>
-        <button id="testPushBtn" class="ghost-btn" type="button">Test Notification</button>
-        <span id="rhPushStatus" class="rh-push-status">Aktifkan sekali di phone/PWA. Reminder akan keluar setiap 5 minit selagi lead belum jadi prospek.</span>
-      </section>
-
       <section class="stat-grid">
         <article class="stat-card"><span>Total Leads</span><strong id="totalLeads">0</strong><small>Aira + public form</small></article>
         <article class="stat-card"><span>Prospects</span><strong id="totalProspects">0</strong><small>Manual / convert lead</small></article>
@@ -90,7 +80,6 @@
     </main>
   </div>
   <script src="../supabase-config.js"></script>
-  <script src="../push-config.js"></script>
-  <script src="assets/admin.js"></script>
+  <script src="assets/push-config.js"></script><script src="assets/lead-push.js"></script><script src="assets/admin.js"></script>
 </body>
 </html>
