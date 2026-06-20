@@ -1,12 +1,13 @@
 {
   "name": "Restu Harmoni Services Admin",
-  "short_name": "RH Services",
-  "start_url": "/admin/leads.html",
+  "short_name": "RH Admin",
+  "start_url": "/admin/dashboard.html",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#071a2d",
-  "theme_color": "#071a2d",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
   "icons": [
-    { "src": "/assets/rh-logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    {"src":"/assets/rh-logo.png","sizes":"192x192","type":"image/png"},
+    {"src":"/assets/rh-logo.png","sizes":"512x512","type":"image/png"}
   ]
 }

@@ -1,12 +1,11 @@
 {
-  "name": "Restu Harmoni Services Admin",
+  "name": "Restu Harmoni Digital Solutions",
   "short_name": "RH Services",
-  "start_url": "/admin/leads.html",
-  "scope": "/",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#071a2d",
   "theme_color": "#071a2d",
   "icons": [
-    { "src": "/assets/rh-logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "assets/rh-logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ]
 }
