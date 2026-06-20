@@ -79,9 +79,10 @@ const RHAdmin = (() => {
       const permission=await Notification.requestPermission();
       if(permission!=='granted') throw new Error('Permission notification tidak dibenarkan. Sila allow notification untuk domain ini.');
       const reg=await registerRhServiceWorker();
+      localStorage.setItem('RH_PUSH_LOCAL_ENABLED','1');
       const vapidKey=getVapidPublicKey();
       if(!vapidKey){
-        setPushStatus('Push browser sudah diizinkan. Untuk push sebenar dari server, isi RH_VAPID_PUBLIC_KEY dahulu. Test Notification masih boleh digunakan.');
+        setPushStatus('Notification aktif di device ini. Lead baru akan keluar noti semasa dashboard/PWA terbuka. Untuk noti walaupun app tutup, isi RH_VAPID_PUBLIC_KEY.');
         return;
       }
       const sub=await reg.pushManager.subscribe({userVisibleOnly:true, applicationServerKey:urlBase64ToUint8Array(vapidKey)});
@@ -118,6 +119,7 @@ const RHAdmin = (() => {
       const permission=Notification.permission==='granted' ? 'granted' : await Notification.requestPermission();
       if(permission!=='granted') throw new Error('Permission notification tidak dibenarkan.');
       const reg=await registerRhServiceWorker();
+      localStorage.setItem('RH_PUSH_LOCAL_ENABLED','1');
       await reg.showNotification('🔔 Test Lead Baru', {
         body:'Notification RH Services aktif. Klik untuk buka Lead Inbox.',
         icon:'../assets/rh-logo.png',
@@ -130,6 +132,60 @@ const RHAdmin = (() => {
       setPushStatus(e.message || 'Gagal hantar test notification.', true);
       alert(e.message || 'Gagal hantar test notification.');
     }
+  }
+
+  function isPushEnabledLocally(){
+    return localStorage.getItem('RH_PUSH_LOCAL_ENABLED') === '1' && Notification.permission === 'granted';
+  }
+  function leadTitle(row){
+    return row?.name || row?.full_name || row?.customer_name || 'Lead Baru';
+  }
+  function leadBody(row){
+    const name=leadTitle(row);
+    const business=row?.business_type || row?.business || row?.company || 'RH Services';
+    const phone=row?.phone || row?.whatsapp || row?.contact || '';
+    return phone ? `${name} - ${business} • ${phone}` : `${name} - ${business}`;
+  }
+  async function showLeadLocalNotification(row){
+    if(!isPushEnabledLocally()) return;
+    try{
+      const reg=await registerRhServiceWorker();
+      localStorage.setItem('RH_PUSH_LOCAL_ENABLED','1');
+      await reg.showNotification('🚀 Lead Baru Masuk', {
+        body:leadBody(row),
+        icon:'../assets/rh-logo.png',
+        badge:'../assets/rh-logo.png',
+        data:{url:'./leads.html'},
+        tag:`rh-lead-${row?.id || Date.now()}`
+      });
+    }catch(e){ console.warn('Lead notification gagal:', e); }
+  }
+  async function initLeadRealtimeNotifications(){
+    if(!qs('#pushNotificationPanel')) return;
+    try{
+      const enabled=localStorage.getItem('RH_PUSH_LOCAL_ENABLED') === '1';
+      if(Notification?.permission === 'granted' && enabled){
+        setPushStatus('Notification aktif di browser ini. Dashboard akan bunyi bila lead baru masuk semasa dashboard terbuka.');
+      }else if(Notification?.permission === 'granted'){
+        setPushStatus('Notification sudah dibenarkan. Klik Aktifkan Push untuk hidupkan alert lead.');
+      }else{
+        setPushStatus('Klik Aktifkan Push untuk benarkan notification.');
+      }
+      const client=await getClient();
+      if(!client || typeof client.channel !== 'function') return;
+      const channel=client.channel('rh-admin-new-leads-notification')
+        .on('postgres_changes', {event:'INSERT', schema:'public', table:'leads'}, payload => {
+          showLeadLocalNotification(payload.new);
+          if(qs('#leadsTableBody')) loadLeadsPage();
+          if(qs('#totalLeads')) loadDashboard();
+        })
+        .subscribe(status => {
+          if(status === 'SUBSCRIBED' && isPushEnabledLocally()){
+            setPushStatus('Notification aktif + live lead listener bersambung.');
+          }
+        });
+      window.addEventListener('beforeunload', () => { try{ client.removeChannel(channel); }catch{} });
+    }catch(e){ console.warn('Realtime notification init gagal:', e); }
   }
 
   async function sha256(text){
@@ -2383,7 +2439,7 @@ const RHAdmin = (() => {
       const stPage=e.target.closest('[data-storage-page]'); if(stPage) setStoragePage(stPage.dataset.storagePage);
     });
   }
-  function init(){initPwaRegistration(); bind(); const s=protect(); if(!s) return; if(qs('#totalLeads')) loadDashboard(); if(qs('#leadsTableBody')) loadLeadsPage(); if(qs('#prospectsTableBody')) loadProspectsPage(); if(qs('#quotationsTableBody')) loadQuotationsPage(); if(qs('#invoicesTableBody')) loadInvoicesPage(); if(qs('#projectsTableBody')) loadProjectsPage(); if(qs('#articlesTableBody')) loadArticlesPage(); if(qs('#storageGrid')) loadStoragePage();}
+  function init(){initPwaRegistration(); bind(); const s=protect(); if(!s) return; initLeadRealtimeNotifications(); if(qs('#totalLeads')) loadDashboard(); if(qs('#leadsTableBody')) loadLeadsPage(); if(qs('#prospectsTableBody')) loadProspectsPage(); if(qs('#quotationsTableBody')) loadQuotationsPage(); if(qs('#invoicesTableBody')) loadInvoicesPage(); if(qs('#projectsTableBody')) loadProjectsPage(); if(qs('#articlesTableBody')) loadArticlesPage(); if(qs('#storageGrid')) loadStoragePage();}
   return {init};
 })();
 document.addEventListener('DOMContentLoaded', RHAdmin.init);
