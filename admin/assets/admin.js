@@ -125,7 +125,8 @@ const RHAdmin = (() => {
       await requestNotificationPermission();
       const reg=await registerRhServiceWorker();
       localStorage.setItem('RH_PUSH_LOCAL_ENABLED','1');
-      setPushStatus(pushDebugText('Notification aktif. Sekarang tekan Test Notification'));
+      startLeadPollingFallback();
+      setPushStatus(pushDebugText('Notification aktif. Listener lead + polling fallback ON. Sekarang tekan Test Notification'));
       const vapidKey=getVapidPublicKey();
       if(!vapidKey){
         return;
@@ -163,6 +164,7 @@ const RHAdmin = (() => {
     try{
       setPushStatus('Menghantar test notification...');
       localStorage.setItem('RH_PUSH_LOCAL_ENABLED','1');
+      startLeadPollingFallback();
       const method = await showBrowserNotification('🔔 Test Notification RH Services', {
         body:'Noti aktif. Jika ini muncul, phone/browser notification sudah berfungsi.',
         data:{url:'/admin/leads.html'},
@@ -197,6 +199,53 @@ const RHAdmin = (() => {
       });
     }catch(e){ console.warn('Lead notification gagal:', e); }
   }
+
+  let leadPollTimer = null;
+  let leadPollLastCreatedAt = localStorage.getItem('RH_PUSH_LAST_LEAD_CREATED_AT') || '';
+  async function fetchLatestLeadForNotification(){
+    const client=await getClient();
+    if(client){
+      const {data,error}=await client.from('leads').select('*').order('created_at',{ascending:false}).limit(1);
+      if(error) throw error;
+      return (data && data[0]) || null;
+    }
+    const cfg=getSupabaseRestConfig();
+    const res=await fetch(`${cfg.url}/rest/v1/leads?select=*&order=created_at.desc&limit=1`,{
+      headers:{apikey:cfg.anonKey, Authorization:`Bearer ${cfg.anonKey}`}
+    });
+    if(!res.ok) throw new Error(`Gagal semak latest lead (${res.status})`);
+    const data=await res.json();
+    return (data && data[0]) || null;
+  }
+  async function checkLatestLeadByPolling(isBaseline=false){
+    if(!isPushEnabledLocally()) return;
+    const latest=await fetchLatestLeadForNotification();
+    if(!latest || !latest.created_at) return;
+    if(!leadPollLastCreatedAt){
+      leadPollLastCreatedAt=latest.created_at;
+      localStorage.setItem('RH_PUSH_LAST_LEAD_CREATED_AT', leadPollLastCreatedAt);
+      return;
+    }
+    if(String(latest.created_at) > String(leadPollLastCreatedAt)){
+      leadPollLastCreatedAt=latest.created_at;
+      localStorage.setItem('RH_PUSH_LAST_LEAD_CREATED_AT', leadPollLastCreatedAt);
+      if(!isBaseline){
+        await showLeadLocalNotification(latest);
+        if(qs('#leadsTableBody')) loadLeadsPage();
+        if(qs('#totalLeads')) loadDashboard();
+      }
+    }
+  }
+  function startLeadPollingFallback(){
+    if(leadPollTimer || !qs('#pushNotificationPanel')) return;
+    checkLatestLeadByPolling(true).catch(err=>console.warn('Lead baseline polling gagal:', err));
+    leadPollTimer=setInterval(()=>{
+      if(document.hidden) return;
+      checkLatestLeadByPolling(false).catch(err=>console.warn('Lead polling notification gagal:', err));
+    }, 10000);
+    window.addEventListener('beforeunload',()=>{ try{ clearInterval(leadPollTimer); }catch{} });
+  }
+
   async function initLeadRealtimeNotifications(){
     if(!qs('#pushNotificationPanel')) return;
     try{
@@ -212,7 +261,11 @@ const RHAdmin = (() => {
         setPushStatus('Klik Aktifkan Push, kemudian pilih Allow bila browser tanya permission. ' + pushDebugText('Debug'));
       }
       const client=await getClient();
-      if(!client || typeof client.channel !== 'function') return;
+      startLeadPollingFallback();
+      if(!client || typeof client.channel !== 'function'){
+        if(isPushEnabledLocally()) setPushStatus('Notification aktif + polling fallback ON. Nota: realtime Supabase tidak tersedia, sistem akan semak lead setiap 10 saat semasa dashboard terbuka. ' + pushDebugText('Debug'));
+        return;
+      }
       const channel=client.channel('rh-admin-new-leads-notification')
         .on('postgres_changes', {event:'INSERT', schema:'public', table:'leads'}, payload => {
           showLeadLocalNotification(payload.new);
@@ -221,7 +274,7 @@ const RHAdmin = (() => {
         })
         .subscribe(status => {
           if(status === 'SUBSCRIBED' && isPushEnabledLocally()){
-            setPushStatus('Notification aktif + live lead listener bersambung. ' + pushDebugText('Debug'));
+            setPushStatus('Notification aktif + live lead listener bersambung + polling fallback ON. ' + pushDebugText('Debug'));
           }
         });
       window.addEventListener('beforeunload', () => { try{ client.removeChannel(channel); }catch{} });
