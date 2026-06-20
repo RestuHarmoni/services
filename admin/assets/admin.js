@@ -54,9 +54,28 @@ const RHAdmin = (() => {
     const el=qs('#pushStatus');
     if(el){ el.textContent=msg; el.classList.toggle('warning-text', !!isError); }
   }
+  function getPushDebug(){
+    return {
+      secure: window.isSecureContext || location.hostname === 'localhost',
+      notificationApi: 'Notification' in window,
+      notificationPermission: ('Notification' in window) ? Notification.permission : 'not-supported',
+      serviceWorker: 'serviceWorker' in navigator,
+      pushManager: 'PushManager' in window,
+      standalone: window.matchMedia && window.matchMedia('(display-mode: standalone)').matches,
+      localEnabled: localStorage.getItem('RH_PUSH_LOCAL_ENABLED') === '1'
+    };
+  }
+  function pushDebugText(prefix='Status'){
+    const d=getPushDebug();
+    return `${prefix}: secure=${d.secure ? 'yes':'no'} | notification=${d.notificationApi ? d.notificationPermission:'not-supported'} | serviceWorker=${d.serviceWorker ? 'yes':'no'} | pushManager=${d.pushManager ? 'yes':'no'} | enabled=${d.localEnabled ? 'yes':'no'}`;
+  }
   async function registerRhServiceWorker(){
-    if(!('serviceWorker' in navigator)) throw new Error('Browser ini tidak menyokong Service Worker/PWA.');
-    return await navigator.serviceWorker.register('../sw.js', {scope:'../'});
+    if(!window.isSecureContext && location.hostname !== 'localhost') throw new Error('Notification hanya berfungsi di HTTPS. Pastikan buka https://services.restuharmoni.com/admin/dashboard.html');
+    if(!('serviceWorker' in navigator)) throw new Error('Browser ini tidak menyokong Service Worker/PWA. Guna Chrome/Edge Android atau desktop. iPhone perlu install PWA dahulu.');
+    const reg = await navigator.serviceWorker.register('/sw.js', {scope:'/'});
+    await navigator.serviceWorker.ready;
+    if(reg.waiting) reg.waiting.postMessage({type:'SKIP_WAITING'});
+    return reg;
   }
   async function initPwaRegistration(){
     if(!('serviceWorker' in navigator)) return;
@@ -71,20 +90,47 @@ const RHAdmin = (() => {
   function getVapidPublicKey(){
     return window.RH_VAPID_PUBLIC_KEY || localStorage.getItem('RH_VAPID_PUBLIC_KEY') || '';
   }
+  async function requestNotificationPermission(){
+    if(!('Notification' in window)) throw new Error('Browser ini tidak menyokong Notification API. Nota: Chrome iPhone tidak support web push biasa. Guna Android Chrome/Edge atau install PWA di iPhone Safari.');
+    if(Notification.permission === 'denied') throw new Error('Notification untuk domain ini sedang BLOCK. Buka Site Settings > Notifications > Allow untuk services.restuharmoni.com.');
+    const permission = Notification.permission === 'granted' ? 'granted' : await Notification.requestPermission();
+    if(permission !== 'granted') throw new Error('Permission notification belum dibenarkan. Tekan Allow bila browser minta kebenaran.');
+    return permission;
+  }
+  async function showBrowserNotification(title, options={}){
+    await requestNotificationPermission();
+    const reg = await registerRhServiceWorker();
+    const finalOptions = {
+      icon:'/assets/rh-logo.png',
+      badge:'/assets/rh-logo.png',
+      requireInteraction:false,
+      ...options
+    };
+    try{
+      await reg.showNotification(title, finalOptions);
+      return 'service-worker';
+    }catch(swErr){
+      console.warn('showNotification melalui service worker gagal, cuba fallback Notification():', swErr);
+      if('Notification' in window){
+        const n = new Notification(title, finalOptions);
+        n.onclick = () => { window.focus(); if(finalOptions.data?.url) location.href = finalOptions.data.url; };
+        return 'window-notification';
+      }
+      throw swErr;
+    }
+  }
   async function enablePushNotifications(){
     try{
       setPushStatus('Menyemak permission notification...');
-      if(!('Notification' in window)) throw new Error('Browser ini tidak menyokong Notification API.');
-      if(!('PushManager' in window)) throw new Error('Browser ini tidak menyokong Push API. Cuba Chrome/Edge Android atau desktop.');
-      const permission=await Notification.requestPermission();
-      if(permission!=='granted') throw new Error('Permission notification tidak dibenarkan. Sila allow notification untuk domain ini.');
+      await requestNotificationPermission();
       const reg=await registerRhServiceWorker();
       localStorage.setItem('RH_PUSH_LOCAL_ENABLED','1');
+      setPushStatus(pushDebugText('Notification aktif. Sekarang tekan Test Notification'));
       const vapidKey=getVapidPublicKey();
       if(!vapidKey){
-        setPushStatus('Notification aktif di device ini. Lead baru akan keluar noti semasa dashboard/PWA terbuka. Untuk noti walaupun app tutup, isi RH_VAPID_PUBLIC_KEY.');
         return;
       }
+      if(!('PushManager' in window)) throw new Error('Browser ini tidak menyokong Push API untuk server push. Local notification masih aktif semasa dashboard terbuka.');
       const sub=await reg.pushManager.subscribe({userVisibleOnly:true, applicationServerKey:urlBase64ToUint8Array(vapidKey)});
       const session=getSession()||{};
       const payload={
@@ -103,39 +149,34 @@ const RHAdmin = (() => {
         }else{
           await supabaseRestInsert('push_subscriptions', payload);
         }
-        setPushStatus('Push aktif. Device ini sudah didaftarkan untuk lead alert.');
+        setPushStatus('Push server aktif. Device ini sudah didaftarkan untuk lead alert. ' + pushDebugText('Debug'));
       }catch(dbErr){
         console.warn(dbErr);
-        setPushStatus('Push browser aktif, tetapi gagal simpan subscription ke Supabase. Jalankan SQL push_subscriptions dahulu.', true);
+        setPushStatus('Notification aktif, tetapi gagal simpan subscription ke Supabase. Jalankan SQL push_subscriptions dahulu. ' + pushDebugText('Debug'), true);
       }
     }catch(e){
-      setPushStatus(e.message || 'Gagal aktifkan push notification.', true);
+      setPushStatus((e.message || 'Gagal aktifkan push notification.') + ' | ' + pushDebugText('Debug'), true);
       alert(e.message || 'Gagal aktifkan push notification.');
     }
   }
   async function testPushNotification(){
     try{
-      if(!('Notification' in window)) throw new Error('Browser ini tidak menyokong Notification API.');
-      const permission=Notification.permission==='granted' ? 'granted' : await Notification.requestPermission();
-      if(permission!=='granted') throw new Error('Permission notification tidak dibenarkan.');
-      const reg=await registerRhServiceWorker();
+      setPushStatus('Menghantar test notification...');
       localStorage.setItem('RH_PUSH_LOCAL_ENABLED','1');
-      await reg.showNotification('🔔 Test Lead Baru', {
-        body:'Notification RH Services aktif. Klik untuk buka Lead Inbox.',
-        icon:'../assets/rh-logo.png',
-        badge:'../assets/rh-logo.png',
-        data:{url:'./leads.html'},
-        tag:'rh-test-lead'
+      const method = await showBrowserNotification('🔔 Test Notification RH Services', {
+        body:'Noti aktif. Jika ini muncul, phone/browser notification sudah berfungsi.',
+        data:{url:'/admin/leads.html'},
+        tag:'rh-test-lead-' + Date.now()
       });
-      setPushStatus('Test notification dihantar. Jika tidak nampak, semak setting notification browser/phone.');
+      setPushStatus(`Test notification dihantar (${method}). Jika masih tidak nampak, notification domain/browser sedang block atau device tidak support. ${pushDebugText('Debug')}`);
     }catch(e){
-      setPushStatus(e.message || 'Gagal hantar test notification.', true);
+      setPushStatus((e.message || 'Gagal hantar test notification.') + ' | ' + pushDebugText('Debug'), true);
       alert(e.message || 'Gagal hantar test notification.');
     }
   }
 
   function isPushEnabledLocally(){
-    return localStorage.getItem('RH_PUSH_LOCAL_ENABLED') === '1' && Notification.permission === 'granted';
+    return localStorage.getItem('RH_PUSH_LOCAL_ENABLED') === '1' && ('Notification' in window) && Notification.permission === 'granted';
   }
   function leadTitle(row){
     return row?.name || row?.full_name || row?.customer_name || 'Lead Baru';
@@ -149,13 +190,9 @@ const RHAdmin = (() => {
   async function showLeadLocalNotification(row){
     if(!isPushEnabledLocally()) return;
     try{
-      const reg=await registerRhServiceWorker();
-      localStorage.setItem('RH_PUSH_LOCAL_ENABLED','1');
-      await reg.showNotification('🚀 Lead Baru Masuk', {
+      await showBrowserNotification('🚀 Lead Baru Masuk', {
         body:leadBody(row),
-        icon:'../assets/rh-logo.png',
-        badge:'../assets/rh-logo.png',
-        data:{url:'./leads.html'},
+        data:{url:'/admin/leads.html'},
         tag:`rh-lead-${row?.id || Date.now()}`
       });
     }catch(e){ console.warn('Lead notification gagal:', e); }
@@ -163,13 +200,16 @@ const RHAdmin = (() => {
   async function initLeadRealtimeNotifications(){
     if(!qs('#pushNotificationPanel')) return;
     try{
-      const enabled=localStorage.getItem('RH_PUSH_LOCAL_ENABLED') === '1';
-      if(Notification?.permission === 'granted' && enabled){
-        setPushStatus('Notification aktif di browser ini. Dashboard akan bunyi bila lead baru masuk semasa dashboard terbuka.');
-      }else if(Notification?.permission === 'granted'){
-        setPushStatus('Notification sudah dibenarkan. Klik Aktifkan Push untuk hidupkan alert lead.');
+      if(!('Notification' in window)){
+        setPushStatus('Browser ini tidak support Notification API. Guna Android Chrome/Edge atau install PWA di Safari iPhone.', true);
+      }else if(Notification.permission === 'denied'){
+        setPushStatus('Notification domain ini sedang BLOCK. Buka browser Site Settings > Notifications > Allow.', true);
+      }else if(Notification.permission === 'granted' && isPushEnabledLocally()){
+        setPushStatus('Notification aktif. Tekan Test Notification untuk semak bunyi/pop-up. ' + pushDebugText('Debug'));
+      }else if(Notification.permission === 'granted'){
+        setPushStatus('Notification sudah dibenarkan. Klik Aktifkan Push untuk hidupkan alert lead. ' + pushDebugText('Debug'));
       }else{
-        setPushStatus('Klik Aktifkan Push untuk benarkan notification.');
+        setPushStatus('Klik Aktifkan Push, kemudian pilih Allow bila browser tanya permission. ' + pushDebugText('Debug'));
       }
       const client=await getClient();
       if(!client || typeof client.channel !== 'function') return;
@@ -181,7 +221,7 @@ const RHAdmin = (() => {
         })
         .subscribe(status => {
           if(status === 'SUBSCRIBED' && isPushEnabledLocally()){
-            setPushStatus('Notification aktif + live lead listener bersambung.');
+            setPushStatus('Notification aktif + live lead listener bersambung. ' + pushDebugText('Debug'));
           }
         });
       window.addEventListener('beforeunload', () => { try{ client.removeChannel(channel); }catch{} });
