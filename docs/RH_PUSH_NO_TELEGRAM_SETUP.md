@@ -25,7 +25,7 @@ Salin `Public Key` ke:
 
 ```js
 window.RH_PUSH_CONFIG = {
-  vapidPublicKey: 'PUBLIC_KEY_DI_SINI'
+  vapidPublicKey: 'BH2-Ruc4z1daSYb82e1gbSZ29i1NLejYrtl90lUwvuGvyMz2x63pmnAbwS2U0GaH-h3bGiFaUcyEXV9nL87qPto'
 }
 ```
 
@@ -40,9 +40,9 @@ supabase functions deploy lead-push-reminder
 Set secrets:
 
 ```bash
-supabase secrets set VAPID_SUBJECT=mailto:admin@restuharmoni.com
-supabase secrets set VAPID_PUBLIC_KEY="PUBLIC_KEY_DI_SINI"
-supabase secrets set VAPID_PRIVATE_KEY="PRIVATE_KEY_DI_SINI"
+supabase secrets set VAPID_SUBJECT="mailto:restuharmoni@gmail.com"
+supabase secrets set VAPID_PUBLIC_KEY="BH2-Ruc4z1daSYb82e1gbSZ29i1NLejYrtl90lUwvuGvyMz2x63pmnAbwS2U0GaH-h3bGiFaUcyEXV9nL87qPto"
+supabase secrets set VAPID_PRIVATE_KEY="PRIVATE_KEY_DARI_GENERATOR_ANDA"
 ```
 
 `SUPABASE_URL` dan `SUPABASE_SERVICE_ROLE_KEY` biasanya tersedia di Edge Functions. Jika tidak, set juga:
@@ -98,3 +98,15 @@ Dalam SQL migration ada template trigger yang dikomen. Isi Vault secret dahulu k
 
 ## Nota penting iPhone
 Untuk iPhone, Web Push biasanya perlu PWA dipasang ke Home Screen dahulu dan permission notification diberi dari PWA itu.
+
+
+## Update 20 Jun — Public Key sudah dimasukkan
+Fail `admin/assets/push-config.js` sudah diisi dengan VAPID Public Key.
+
+Untuk keselamatan, VAPID Private Key **tidak dimasukkan** ke mana-mana fail frontend/ZIP. Masukkan Private Key sebagai Supabase Secret sahaja.
+
+Gunakan subject tanpa bracket/space:
+
+```bash
+supabase secrets set VAPID_SUBJECT="mailto:restuharmoni@gmail.com"
+```

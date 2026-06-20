@@ -1,7 +1,8 @@
 /* RH Lead Phone Push v1 - no Telegram.
-   Replace this value after generating VAPID keys. See docs/RH_PUSH_NO_TELEGRAM_SETUP.md */
+   VAPID public key configured for services.restuharmoni.com.
+   Do not place VAPID private key in frontend files. */
 window.RH_PUSH_CONFIG = {
-  vapidPublicKey: 'PASTE_VAPID_PUBLIC_KEY_HERE',
+  vapidPublicKey: 'BH2-Ruc4z1daSYb82e1gbSZ29i1NLejYrtl90lUwvuGvyMz2x63pmnAbwS2U0GaH-h3bGiFaUcyEXV9nL87qPto',
   subscriptionTable: 'push_subscriptions',
   edgeFunctionName: 'send-lead-push'
 };
