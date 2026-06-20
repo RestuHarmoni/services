@@ -1,4 +1,4 @@
-const RH_VERSION = 'v1-admin-project-module-v1.2-department-production-engine';
+const RH_VERSION = 'v1-admin-level2-notifications-20260620';
 const RH_CACHE_NAME = `services-restu-harmoni-${RH_VERSION}`;
 const RH_CRITICAL_EXTENSIONS = ['.html', '.js', '.css', '.json', '.webmanifest'];
 const RH_NETWORK_FIRST_PATHS = ['/content/', '/engine/'];
@@ -68,3 +68,34 @@ self.addEventListener('fetch', event => {
 });
 
 // project-full-v1
+
+
+self.addEventListener('push', event => {
+  let payload = {};
+  try { payload = event.data ? event.data.json() : {}; } catch { payload = { title: 'Lead Baru', body: event.data ? event.data.text() : '' }; }
+  const title = payload.title || '🔔 Lead Baru Masuk';
+  const options = {
+    body: payload.body || 'Ada lead baru dalam RH Services Dashboard.',
+    icon: payload.icon || '/assets/rh-logo.png',
+    badge: payload.badge || '/assets/rh-logo.png',
+    tag: payload.tag || 'rh-new-lead',
+    data: payload.data || { url: '/admin/leads.html' }
+  };
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+  const targetUrl = (event.notification.data && event.notification.data.url) || '/admin/leads.html';
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then(windowClients => {
+      for (const client of windowClients) {
+        if ('focus' in client && client.url.includes('/admin/')) {
+          client.navigate(targetUrl);
+          return client.focus();
+        }
+      }
+      if (clients.openWindow) return clients.openWindow(targetUrl);
+    })
+  );
+});
