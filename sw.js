@@ -1,4 +1,4 @@
-const RH_VERSION = 'v1-admin-level2-notifications-hotfix2-20260620';
+const RH_VERSION = 'v1-admin-level2-notifications-hotfix3-polling-20260620';
 const RH_CACHE_NAME = `services-restu-harmoni-${RH_VERSION}`;
 const RH_CRITICAL_EXTENSIONS = ['.html', '.js', '.css', '.json', '.webmanifest'];
 const RH_NETWORK_FIRST_PATHS = ['/content/', '/engine/'];
